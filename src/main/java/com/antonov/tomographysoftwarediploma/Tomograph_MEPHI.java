@@ -3,7 +3,6 @@ package com.antonov.tomographysoftwarediploma;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -23,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -35,22 +35,24 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     private final ResourceBundle bundle = ResourceBundle.getBundle(
             "bundle_Rus");
     private final Set<String> bundleKeySet = bundle.keySet();
-    private final Toolkit toolkit;
     private BufferedImage imgBuf;
     private BufferedImage sinogramImage;
     private BufferedImage reconstructImage;
     private BufferedImage reconstructColorImage;
     private BufferedImage scaleReconstructImage; // для DensityViewer
-    private ArrayList<BufferedImage> arrayReconstructedImage = new ArrayList<BufferedImage>();
-    public static final Map<String, BufferedImage> models = new HashMap<String, BufferedImage>();
+    private List<BufferedImage> arrayReconstructedImage = new ArrayList<>();
+    public static final Map<String, BufferedImage> models = new HashMap<>();
+    public static final List<String> modelNames = new ArrayList<>();
     ImageTransformator sinogramCreator = new ImageTransformator();
     String nameOfProjData;
 
     public Tomograph_MEPHI() {
         initComponents();
 
-        toolkit = this.getToolkit();
         loadSampleImages();
+        fillModelNames();
+        initModelList();
+
     }
 
     private void loadSampleImages() {
@@ -62,26 +64,74 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 //        System.out.println(path);
         try {
 //            for (File image : new File(new File(".").getCanonicalPath() +"\\resources\\internalImages").listFiles()) {
-            for(File image : new File(pathToImages).listFiles()){
+            for (File image : new File(pathToImages).listFiles()) {
 
                 if (image.exists() && image.isFile()) {
-                   String imageNameWithoutExt = (image.getName().split("\\."))[0];
+                    String imageNameWithoutExt = (image.getName().split("\\."))[0];
                     if (bundleKeySet.contains(imageNameWithoutExt)) {
                         BufferedImage input = ImageIO.read(image);
                         if (input.getType() != 13) {
                             input = op.filter(input, null);
                         }
                         models.put(bundle.getString(imageNameWithoutExt), input);
+
                     }
                 }
             }
-            
+
         } catch (IOException ex) {
             System.out.println(ex);
         }
     }
 
-    @SuppressWarnings("unchecked")
+    private void fillModelNames() {
+        if (!models.isEmpty()) {
+
+            for (String name : models.keySet()) {
+                modelNames.add(name);
+            }
+        }
+    }
+
+    private void initModelList() {
+
+        modelList.setModel(new javax.swing.AbstractListModel() {
+
+            @Override
+            public int getSize() {
+                return modelNames.size();
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return modelNames.get(i);
+            }
+        });
+
+        modelList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+
+            @Override
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                if (evt.getValueIsAdjusting()) {
+                    String model = (String) modelList.getSelectedValue();
+                    imgBuf = models.get(model);
+                    ImageIcon icon = new ImageIcon(imgBuf);
+                    displayImageDetails(imgBuf);
+                    labelImage1.setIcon(icon);
+                    labelImage2.setIcon(null);
+                    buttonSaveSinogram.setEnabled(false);
+                    buttonSaveReconstruct.setEnabled(false);
+                    buttonConverse.setEnabled(true);
+                    buttonReconstruct.setEnabled(false);
+                    coloring.setEnabled(false);
+                    coloring.setSelected(false);
+                    colorPanel.setVisible(false);
+                    buttonDensityViewer.setEnabled(false);
+                }
+            }
+        });
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -583,23 +633,8 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
             modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Модель"));
 
-            modelList.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {"Твел с деффектом", "Твел без деффекта", "Сложная структура"};
-                public int getSize() { return strings.length; }
-                public Object getElementAt(int i) { return strings[i]; }
-            });
             modelList.setFocusable(false);
-            modelList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-                public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                    modelListValueChanged(evt);
-                }
-            });
             jScrollPane4.setViewportView(modelList);
-            modelList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-                public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                    modelListValueChanged(evt);
-                }
-            });
 
             javax.swing.GroupLayout modelPanelLayout = new javax.swing.GroupLayout(modelPanel);
             modelPanel.setLayout(modelPanelLayout);
@@ -1712,27 +1747,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_labelimage3MouseClicked
 
-    private void modelListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_modelListValueChanged
-        // TODO add your handling code here:
-        if ((evt.getValueIsAdjusting())) {
-            String model = (String) modelList.getSelectedValue();
-            imgBuf = models.get(model);
-            ImageIcon icon = new ImageIcon(imgBuf);
-            displayImageDetails(imgBuf);
-            labelImage1.setIcon(icon);
-            labelImage2.setIcon(null);
-            buttonSaveSinogram.setEnabled(false);
-            buttonSaveReconstruct.setEnabled(false);
-            buttonConverse.setEnabled(true);
-            buttonReconstruct.setEnabled(false);
-            coloring.setEnabled(false);
-            coloring.setSelected(false);
-            colorPanel.setVisible(false);
-            buttonDensityViewer.setEnabled(false);
-
-        }
-    }//GEN-LAST:event_modelListValueChanged
-
     private void buttonDensityViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerActionPerformed
 //        try {
         densityViewer.setVisible(true);
@@ -2090,6 +2104,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     }
 
     public void displayImageDetails(BufferedImage img) {
-        // jLabel1.setText("Размер изображения "+img.getWidth()+" * "+img.getHeight());
+         jLabel1.setText("Размер изображения "+img.getWidth()+" * "+img.getHeight());
     }
 }
