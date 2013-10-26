@@ -1,30 +1,14 @@
 package com.antonov.tomographysoftwarediploma;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.Transparency;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
-import java.awt.image.ColorModel;
-import java.awt.image.ComponentColorModel;
-import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
-import java.awt.image.DataBufferUShort;
-import java.awt.image.IndexColorModel;
-import java.awt.image.PixelInterleavedSampleModel;
-import java.awt.image.Raster;
-import java.awt.image.SampleModel;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -35,26 +19,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
-import javax.swing.Icon;
+import java.util.ResourceBundle;
+import java.util.Set;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.DefaultXYDataset;
 
 public class Tomograph_MEPHI extends javax.swing.JFrame {
 
+    private final ResourceBundle bundle = ResourceBundle.getBundle(
+            "bundle_Rus");
+    private final Set<String> bundleKeySet = bundle.keySet();
     private final Toolkit toolkit;
     private BufferedImage imgBuf;
     private BufferedImage sinogramImage;
@@ -62,15 +42,43 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     private BufferedImage reconstructColorImage;
     private BufferedImage scaleReconstructImage; // для DensityViewer
     private ArrayList<BufferedImage> arrayReconstructedImage = new ArrayList<BufferedImage>();
-    public static final HashMap<String, BufferedImage> models = new HashMap<String, BufferedImage>();
+    public static final Map<String, BufferedImage> models = new HashMap<String, BufferedImage>();
     ImageTransformator sinogramCreator = new ImageTransformator();
     String nameOfProjData;
-//    private BufferedImage windowedImage;
 
-//    public double projection[][];
     public Tomograph_MEPHI() {
         initComponents();
+
         toolkit = this.getToolkit();
+        loadSampleImages();
+    }
+
+    private void loadSampleImages() {
+        ColorSpace grayColorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+        ColorConvertOp op = new ColorConvertOp(grayColorSpace, null);
+
+        String pathCurrentDir = System.getProperty("user.dir");
+        String pathToImages = "d:\\NetbeansProjects\\TomographySoftwareDiploma\\target\\resources\\internalImages";
+//        System.out.println(path);
+        try {
+//            for (File image : new File(new File(".").getCanonicalPath() +"\\resources\\internalImages").listFiles()) {
+            for(File image : new File(pathToImages).listFiles()){
+
+                if (image.exists() && image.isFile()) {
+                   String imageNameWithoutExt = (image.getName().split("\\."))[0];
+                    if (bundleKeySet.contains(imageNameWithoutExt)) {
+                        BufferedImage input = ImageIO.read(image);
+                        if (input.getType() != 13) {
+                            input = op.filter(input, null);
+                        }
+                        models.put(bundle.getString(imageNameWithoutExt), input);
+                    }
+                }
+            }
+            
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -432,12 +440,12 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             dialogNameAsker.getContentPane().setLayout(dialogNameAskerLayout);
             dialogNameAskerLayout.setHorizontalGroup(
                 dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dialogNameAskerLayout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
                     .addGap(128, 128, 128)
                     .addComponent(buttonOkSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(buttonCanselSetName)
-                    .addContainerGap())
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
                     .addContainerGap(30, Short.MAX_VALUE)
                     .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,9 +487,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             densityViewer.setTitle("Анализатор плотности");
             densityViewer.setAlwaysOnTop(true);
             densityViewer.setLocationByPlatform(true);
-            densityViewer.setMaximumSize(new java.awt.Dimension(950, 550));
             densityViewer.setMinimumSize(new java.awt.Dimension(950, 550));
-            densityViewer.setPreferredSize(new java.awt.Dimension(950, 550));
             densityViewer.setResizable(false);
 
             jPanel3.setMaximumSize(new java.awt.Dimension(475, 404));
@@ -564,8 +570,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
             densityViewer.setLocationRelativeTo(null);
 
-            densityViewer.getAccessibleContext().setAccessibleName("Анализатор плотности");
-
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             setTitle("Томографический комплекс 1.0 НИЯУ МИФИ");
             setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -576,18 +580,8 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             jTabbedPane1.setDoubleBuffered(true);
 
             Model.setMinimumSize(new java.awt.Dimension(800, 600));
-            Model.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ModelMouseClicked(evt);
-                }
-            });
 
             modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Модель"));
-            modelPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    modelPanelMouseClicked(evt);
-                }
-            });
 
             modelList.setModel(new javax.swing.AbstractListModel() {
                 String[] strings = {"Твел с деффектом", "Твел без деффекта", "Сложная структура"};
@@ -733,11 +727,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
             filterGroup.add(filterShepplogan);
             filterShepplogan.setText("shepplogan");
-            filterShepplogan.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    filterShepploganActionPerformed(evt);
-                }
-            });
 
             filterGroup.add(filterHamming);
             filterHamming.setText("hamming");
@@ -996,31 +985,16 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
             scansTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             scansTomograph.setText("700");
-            scansTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    scansTomographActionPerformed(evt);
-                }
-            });
 
             jLabel2.setText("Шаг поворота, град");
 
             stepSizeTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             stepSizeTomograph.setText("1");
-            stepSizeTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    stepSizeTomographActionPerformed(evt);
-                }
-            });
 
             jLabel3.setText("Шаг протяжки, мм");
 
             jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             jTextField3.setText("5");
-            jTextField3.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jTextField3ActionPerformed(evt);
-                }
-            });
 
             jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
             jLabel4.setText("Начальные условия");
@@ -1296,14 +1270,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             pack();
         }// </editor-fold>//GEN-END:initComponents
 
-    private void scansTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scansTomographActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_scansTomographActionPerformed
-
-    private void stepSizeTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepSizeTomographActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stepSizeTomographActionPerformed
-
     private void buttonSaveReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructTomographActionPerformed
         // TODO add your handling code here:
         if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
@@ -1356,10 +1322,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonOpenProjDataActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         // TODO add your handling code here:
         buttonSaveReconstructTomograph.setEnabled(false);
@@ -1367,10 +1329,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         dialogNameAsker.setVisible(true);
 
     }//GEN-LAST:event_buttonStartActionPerformed
-
-    private void ModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModelMouseClicked
 
     private void coloringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloringActionPerformed
         // TODO add your handling code here:
@@ -1382,10 +1340,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             labelImage2.setIcon(icon2);
         }
     }//GEN-LAST:event_coloringActionPerformed
-
-    private void filterShepploganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterShepploganActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filterShepploganActionPerformed
 
     private void filteringModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filteringModelActionPerformed
         // TODO add your handling code here:
@@ -1411,7 +1365,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
             ImageIcon icon = (ImageIcon) labelImage2.getIcon();
             BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-
 
             String name = saveFileChooser.getSelectedFile().getAbsolutePath();
             String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
@@ -1489,7 +1442,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     private void buttonConverseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConverseActionPerformed
 
         // TODO add your handling code here:
-
         //        int height = imgBuf.getHeight();
         //        int width = imgBuf.getWidth();
         //
@@ -1518,7 +1470,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                 }
             });
             threadCreateSinogram.start();	//Запуск потока
-
 
         } else {
             JOptionPane.showMessageDialog(this, "Введены некорректные данные", "Ошибка", 0);
@@ -1561,7 +1512,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
                 //                        File outputfile = new File("saved.png");
                 //                        ImageIO.write(windowedImage, "png", outputfile);
-
                 ImageIcon icon = new ImageIcon(imgBuf);
                 labelImage1.setIcon(icon);
                 displayImageDetails(imgBuf);
@@ -1581,10 +1531,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_buttonOpenFileActionPerformed
-
-    private void modelPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modelPanelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_modelPanelMouseClicked
 
     private void buttonProjDataOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataOpenFileActionPerformed
         // TODO add your handling code here:
@@ -1685,7 +1631,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                         labelimage3.setIcon(icon);
 
                         //------------Dealing with Slider
-
                         sliderImage.setMaximum(arrayReconstructedImage.size() - 1);
                         sliderImage.setMinorTickSpacing(1);
                         sliderImage.setPaintTicks(true);
@@ -1703,7 +1648,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Установите параметры фильтрации", "Внимание", 1);
             }
-
 
         }
     }//GEN-LAST:event_buttonOkFilterTomographActionPerformed
@@ -1839,9 +1783,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             densityGraphPane.validate();
         }
 
-
 //        densityGraphPane.setLayout(new java.awt.BorderLayout());
-
 
     }//GEN-LAST:event_densitySliderStateChanged
 
@@ -1953,69 +1895,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
 
-    public static void main(String args[]) {
-
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-                UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-                //      UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tomograph_MEPHI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tomograph_MEPHI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tomograph_MEPHI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tomograph_MEPHI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        //</editor-fold>
-
-        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-        ColorConvertOp op = new ColorConvertOp(cs, null);
-
-        try {
-            BufferedImage input = ImageIO.read(Tomograph_MEPHI.class.getResource("/Images/твел с деффектом.jpg"));
-            if (input.getType() != 13) {
-                input = op.filter(input, null);
-            }
-            models.put("Твел с деффектом", input);
-            input = ImageIO.read(Tomograph_MEPHI.class.getResource("/Images/твел без деффекта.jpg"));
-            if (input.getType() != 13) {
-                input = op.filter(input, null);
-            }
-            models.put("Твел без деффекта", input);
-            input = ImageIO.read(Tomograph_MEPHI.class.getResource("/Images/сложная структура.jpg"));
-            if (input.getType() != 13) {
-                input = op.filter(input, null);
-            }
-            models.put("Сложная структура", input);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Tomograph_MEPHI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                Tomograph_MEPHI frame = new Tomograph_MEPHI();
-                
-                frame.setVisible(true);
-                frame.setExtendedState(frame.MAXIMIZED_BOTH);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;
     private javax.swing.JPanel Model;
@@ -2038,9 +1917,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     private javax.swing.JButton buttonSaveSinogram;
     private javax.swing.JButton buttonStart;
     private javax.swing.JRadioButton color1;
-    private javax.swing.JRadioButton color10;
-    private javax.swing.JRadioButton color11;
-    private javax.swing.JRadioButton color12;
     private javax.swing.JRadioButton color1Tomograph;
     private javax.swing.JRadioButton color2;
     private javax.swing.JRadioButton color2Tomograph;
@@ -2048,16 +1924,9 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     private javax.swing.JRadioButton color3Tomograph;
     private javax.swing.JRadioButton color4;
     private javax.swing.JRadioButton color4Tomograph;
-    private javax.swing.JRadioButton color5;
-    private javax.swing.JRadioButton color6;
-    private javax.swing.JRadioButton color7;
-    private javax.swing.JRadioButton color8;
-    private javax.swing.JRadioButton color9;
     private javax.swing.ButtonGroup colorGroup;
     private javax.swing.ButtonGroup colorGroupTomograph;
     private javax.swing.JPanel colorPanel;
-    private javax.swing.JPanel colorPanel1;
-    private javax.swing.JPanel colorPanel2;
     private javax.swing.JPanel colorPanelTomograph;
     private javax.swing.JCheckBox coloring;
     private javax.swing.JCheckBox coloringTomograph;

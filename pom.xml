@@ -13,7 +13,71 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <build>
+        <plugins>
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-dependency-plugin</artifactId> 
+                <configuration> 
+                    <outputDirectory>${project.build.directory}/lib/</outputDirectory> 
+                    <overWriteReleases>false</overWriteReleases> 
+                    <overWriteSnapshots>false</overWriteSnapshots> 
+                    <overWriteIfNewer>true</overWriteIfNewer>
+                </configuration> 
+                <executions> 
+                    <execution> 
+                        <id>copy-dependencies</id> 
+                        <phase>package</phase> 
+                        <goals> 
+                            <goal>copy-dependencies</goal> 
+                        </goals> 
+                    </execution> 
+                </executions> 
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathLayoutType>simple</classpathLayoutType>
+                            <mainClass>com.antonov.tomographysoftwarediploma.impl.AppLaunch</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Version>${buildNumber}</Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+    <artifactId>maven-resources-plugin</artifactId>
+    <version>2.5</version>
+    <executions>
+        <execution>
+            <id>copy-resources</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>${basedir}/target/resources/internalImages</outputDirectory>
+                <resources>          
+                    <resource>
+                        <directory>src/non-packaged-resources/internalImages</directory>
+                        <filtering>true</filtering>
+<!--                        <includes>
+                            <include>**/*.properties</include>
+                        </includes>-->
+                    </resource>
+                </resources>              
+            </configuration>            
+        </execution>
+    </executions>
+</plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>jfree</groupId>
