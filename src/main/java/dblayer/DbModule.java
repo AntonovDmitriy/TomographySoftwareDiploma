@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma;
+package dblayer;
 
+import com.antonov.tomographysoftwarediploma.forms.TomographPane;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -111,7 +112,7 @@ public class DbModule {
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(Tomograph_MEPHI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -165,7 +166,7 @@ public class DbModule {
 
 
         } catch (SQLException ex) {
-            Logger.getLogger(Tomograph_MEPHI.class
+            Logger.getLogger(TomographPane.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
 

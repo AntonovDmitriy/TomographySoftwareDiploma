@@ -5,15 +5,8 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
-import com.antonov.tomographysoftwarediploma.Tomograph_MEPHI;
-import static com.antonov.tomographysoftwarediploma.Tomograph_MEPHI.models;
-import java.awt.color.ColorSpace;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorConvertOp;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import com.antonov.tomographysoftwarediploma.forms.TomographPane;
+import java.awt.Frame;
 import javax.swing.UIManager;
 
 /**
@@ -24,25 +17,22 @@ public class AppLaunch {
 
     public static void main(String[] args) {
 
+//        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+//        ColorConvertOp op = new ColorConvertOp(cs, null);
+        TomographPane view = new TomographPane();
+        initViewParameters(view);
+        view.setVisible(true);
+
+    }
+
+    private static void initViewParameters(Frame frame) {
+
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
-        } catch (InstantiationException ex) {
-            System.out.println(ex);
-        } catch (IllegalAccessException ex) {
-            System.out.println(ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             System.out.println(ex);
         }
-        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-        ColorConvertOp op = new ColorConvertOp(cs, null);
-
-        Tomograph_MEPHI frame = new Tomograph_MEPHI();
-
-        frame.setVisible(true);
-        frame.setExtendedState(frame.MAXIMIZED_BOTH);
-
+        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 }

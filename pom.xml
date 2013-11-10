@@ -52,30 +52,46 @@
                 </configuration>
             </plugin>
             <plugin>
-    <artifactId>maven-resources-plugin</artifactId>
-    <version>2.5</version>
-    <executions>
-        <execution>
-            <id>copy-resources</id>
-            <phase>validate</phase>
-            <goals>
-                <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-                <outputDirectory>${basedir}/target/resources/internalImages</outputDirectory>
-                <resources>          
-                    <resource>
-                        <directory>src/non-packaged-resources/internalImages</directory>
-                        <filtering>true</filtering>
-<!--                        <includes>
-                            <include>**/*.properties</include>
-                        </includes>-->
-                    </resource>
-                </resources>              
-            </configuration>            
-        </execution>
-    </executions>
-</plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>copy_internal_images</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/resources/internalImages</outputDirectory>
+                            <resources>          
+                                <resource>
+                                    <directory>src/non-packaged-resources/internalImages</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>
+                    <execution>
+                        <id>copy-config</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/conf</outputDirectory>
+                            <resources>          
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>bundle_Rus.properties</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

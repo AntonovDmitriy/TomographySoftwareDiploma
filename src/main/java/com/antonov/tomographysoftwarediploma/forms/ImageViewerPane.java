@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma;
+package com.antonov.tomographysoftwarediploma.forms;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
  *
  * @author Antonov
  */
-public class ImageViewer extends javax.swing.JFrame {
+public class ImageViewerPane extends javax.swing.JFrame {
 
     /**
      * Creates new form ImageViewer
      */
-    public ImageViewer() {
+    public ImageViewerPane() {
         initComponents();
     }
 
@@ -88,20 +88,20 @@ public class ImageViewer extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ImageViewerPane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ImageViewerPane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ImageViewerPane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ImageViewerPane.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ImageViewer().setVisible(true);
+                new ImageViewerPane().setVisible(true);
                 
             }
         });

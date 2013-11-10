@@ -1,5 +1,10 @@
-package com.antonov.tomographysoftwarediploma;
+package com.antonov.tomographysoftwarediploma.forms;
 
+import dblayer.DbModule;
+import com.antonov.tomographysoftwarediploma.DensityAnalizator;
+import com.antonov.tomographysoftwarediploma.ImageTransformator;
+import com.antonov.tomographysoftwarediploma.LUTFunctions;
+import com.antonov.tomographysoftwarediploma.Utils;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -30,8 +35,9 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Tomograph_MEPHI extends javax.swing.JFrame {
+public class TomographPane extends javax.swing.JFrame {
 
+    private Map<String, BufferedImage> models = new HashMap<>();
     private final ResourceBundle bundle = ResourceBundle.getBundle(
             "bundle_Rus");
     private final Set<String> bundleKeySet = bundle.keySet();
@@ -41,12 +47,11 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     private BufferedImage reconstructColorImage;
     private BufferedImage scaleReconstructImage; // для DensityViewer
     private List<BufferedImage> arrayReconstructedImage = new ArrayList<>();
-    public static final Map<String, BufferedImage> models = new HashMap<>();
     public static final List<String> modelNames = new ArrayList<>();
     ImageTransformator sinogramCreator = new ImageTransformator();
     String nameOfProjData;
 
-    public Tomograph_MEPHI() {
+    public TomographPane() {
         initComponents();
 
         loadSampleImages();
@@ -116,7 +121,6 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     String model = (String) modelList.getSelectedValue();
                     imgBuf = models.get(model);
                     ImageIcon icon = new ImageIcon(imgBuf);
-                    displayImageDetails(imgBuf);
                     labelImage1.setIcon(icon);
                     labelImage2.setIcon(null);
                     buttonSaveSinogram.setEnabled(false);
@@ -134,6 +138,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         dialogProgressBar = new javax.swing.JDialog();
         jLabel11 = new javax.swing.JLabel();
@@ -185,15 +190,9 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         buttonConverse = new javax.swing.JButton();
         Image2 = new javax.swing.JScrollPane();
         labelImage2 = new javax.swing.JLabel();
-        scansModel = new javax.swing.JTextField();
-        labelDetectors = new javax.swing.JLabel();
-        stepsize = new javax.swing.JTextField();
-        labelStepsize = new javax.swing.JLabel();
         buttonReconstruct = new javax.swing.JButton();
         buttonSaveReconstruct = new javax.swing.JButton();
         buttonSaveSinogram = new javax.swing.JButton();
-        labelReconstructSize = new javax.swing.JLabel();
-        reconstructSize = new javax.swing.JTextField();
         filterActionPanel = new javax.swing.JPanel();
         filteringModel = new javax.swing.JCheckBox();
         filterPanel = new javax.swing.JPanel();
@@ -210,6 +209,13 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         color4 = new javax.swing.JRadioButton();
         color3 = new javax.swing.JRadioButton();
         buttonDensityViewer = new javax.swing.JButton();
+        ParamModellingPane = new javax.swing.JPanel();
+        labelDetectors = new javax.swing.JLabel();
+        scansModel = new javax.swing.JTextField();
+        labelStepsize = new javax.swing.JLabel();
+        stepsize = new javax.swing.JTextField();
+        labelReconstructSize = new javax.swing.JLabel();
+        reconstructSize = new javax.swing.JTextField();
         Tomograph = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         scansTomograph = new javax.swing.JTextField();
@@ -630,8 +636,10 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             jTabbedPane1.setDoubleBuffered(true);
 
             Model.setMinimumSize(new java.awt.Dimension(800, 600));
+            Model.setLayout(new java.awt.GridBagLayout());
 
-            modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Модель"));
+            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("bundle_Rus"); // NOI18N
+            modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LIST_MODEL_TITLE"))); // NOI18N
 
             modelList.setFocusable(false);
             jScrollPane4.setViewportView(modelList);
@@ -642,7 +650,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                 modelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(modelPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                     .addContainerGap())
             );
             modelPanelLayout.setVerticalGroup(
@@ -653,6 +661,15 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     .addContainerGap())
             );
 
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            Model.add(modelPanel, gridBagConstraints);
+
             buttonOpenFile.setText("Открыть файл");
             buttonOpenFile.setFocusPainted(false);
             buttonOpenFile.addActionListener(new java.awt.event.ActionListener() {
@@ -660,6 +677,11 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     buttonOpenFileActionPerformed(evt);
                 }
             });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            Model.add(buttonOpenFile, gridBagConstraints);
 
             labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             labelImage1.setAutoscrolls(true);
@@ -670,6 +692,20 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             });
             image1.setViewportView(labelImage1);
 
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 13;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridwidth = 6;
+            gridBagConstraints.gridheight = 10;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.ipadx = 477;
+            gridBagConstraints.ipady = 517;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.weightx = 1.0;
+            gridBagConstraints.weighty = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 0);
+            Model.add(image1, gridBagConstraints);
+
             buttonConverse.setText("Синограмма");
             buttonConverse.setDefaultCapable(false);
             buttonConverse.setEnabled(false);
@@ -679,6 +715,12 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     buttonConverseActionPerformed(evt);
                 }
             });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 13;
+            gridBagConstraints.gridy = 17;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
+            Model.add(buttonConverse, gridBagConstraints);
 
             labelImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             labelImage2.setAutoscrolls(true);
@@ -689,28 +731,19 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
             });
             Image2.setViewportView(labelImage2);
 
-            scansModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            scansModel.setText("400");
-            scansModel.setToolTipText("");
-            scansModel.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void keyTyped(java.awt.event.KeyEvent evt) {
-                    scansModelKeyTyped(evt);
-                }
-            });
-
-            labelDetectors.setText("Число сканирований");
-
-            stepsize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            stepsize.setText("1");
-            stepsize.setToolTipText("");
-            stepsize.setAutoscrolls(false);
-            stepsize.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void keyTyped(java.awt.event.KeyEvent evt) {
-                    stepsizeKeyTyped(evt);
-                }
-            });
-
-            labelStepsize.setText("<html>Шаг сканирования,<br>        град");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 19;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.gridheight = 10;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.ipadx = 477;
+            gridBagConstraints.ipady = 517;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.weightx = 1.0;
+            gridBagConstraints.weighty = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 37);
+            Model.add(Image2, gridBagConstraints);
 
             buttonReconstruct.setText("Реконструкция");
             buttonReconstruct.setDefaultCapable(false);
@@ -721,6 +754,13 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     buttonReconstructActionPerformed(evt);
                 }
             });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 14;
+            gridBagConstraints.gridy = 17;
+            gridBagConstraints.gridwidth = 3;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(18, 10, 0, 0);
+            Model.add(buttonReconstruct, gridBagConstraints);
 
             buttonSaveReconstruct.setText("<html> Сохранить<br> реконструкцию");
             buttonSaveReconstruct.setActionCommand("Сохранить<br> реконструкцию");
@@ -731,6 +771,11 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     buttonSaveReconstructActionPerformed(evt);
                 }
             });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            Model.add(buttonSaveReconstruct, gridBagConstraints);
 
             buttonSaveSinogram.setText("<html> Сохранить<br> синограмму");
             buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
@@ -741,13 +786,11 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     buttonSaveSinogramActionPerformed(evt);
                 }
             });
-
-            labelReconstructSize.setText("Размер реконструкции");
-
-            reconstructSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            reconstructSize.setText("400");
-            reconstructSize.setToolTipText("");
-            reconstructSize.setAutoscrolls(false);
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            Model.add(buttonSaveSinogram, gridBagConstraints);
 
             filteringModel.setText("Фильтрация");
             filteringModel.setFocusPainted(false);
@@ -832,6 +875,16 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
 
             filterPanel.setVisible(false);
 
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 9;
+            gridBagConstraints.gridwidth = 9;
+            gridBagConstraints.gridheight = 11;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(18, 10, 0, 0);
+            Model.add(filterActionPanel, gridBagConstraints);
+            filterActionPanel.setVisible(false);
+
             coloring.setText("Цветовой фильтр");
             coloring.setEnabled(false);
             coloring.setFocusPainted(false);
@@ -840,6 +893,14 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     coloringActionPerformed(evt);
                 }
             });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 13;
+            gridBagConstraints.gridy = 19;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.gridheight = 12;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(2, 18, 7, 0);
+            Model.add(coloring, gridBagConstraints);
 
             colorPanel.setMaximumSize(new java.awt.Dimension(236, 25));
             colorPanel.setMinimumSize(new java.awt.Dimension(236, 23));
@@ -907,6 +968,16 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE))
             );
 
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 19;
+            gridBagConstraints.gridy = 17;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.ipadx = 60;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
+            Model.add(colorPanel, gridBagConstraints);
+            colorPanel.setVisible(false);
+
             buttonDensityViewer.setText("Анализатор плотности");
             buttonDensityViewer.setEnabled(false);
             buttonDensityViewer.setFocusPainted(false);
@@ -915,104 +986,95 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                     buttonDensityViewerActionPerformed(evt);
                 }
             });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 17;
+            gridBagConstraints.gridy = 17;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(18, 10, 0, 0);
+            Model.add(buttonDensityViewer, gridBagConstraints);
 
-            javax.swing.GroupLayout ModelLayout = new javax.swing.GroupLayout(Model);
-            Model.setLayout(ModelLayout);
-            ModelLayout.setHorizontalGroup(
-                ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ModelLayout.createSequentialGroup()
-                    .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(ModelLayout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(buttonOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonSaveSinogram)
-                                .addComponent(buttonSaveReconstruct)))
-                        .addGroup(ModelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(filterActionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(ModelLayout.createSequentialGroup()
-                                        .addComponent(labelStepsize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(stepsize, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(ModelLayout.createSequentialGroup()
-                                        .addComponent(labelDetectors)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(scansModel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(ModelLayout.createSequentialGroup()
-                                        .addComponent(labelReconstructSize)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                                        .addComponent(reconstructSize, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(ModelLayout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addComponent(modelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(18, 18, 18)
-                    .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(ModelLayout.createSequentialGroup()
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(image1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(ModelLayout.createSequentialGroup()
-                                    .addComponent(buttonConverse)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buttonReconstruct)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buttonDensityViewer)))
-                            .addGap(18, 18, 18)
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Image2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(colorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(coloring))
-                    .addGap(0, 37, Short.MAX_VALUE))
-            );
-            ModelLayout.setVerticalGroup(
-                ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ModelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(ModelLayout.createSequentialGroup()
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(image1)
-                                .addComponent(Image2))
-                            .addGap(18, 18, 18)
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(buttonReconstruct)
-                                    .addComponent(buttonConverse)
-                                    .addComponent(buttonDensityViewer))
-                                .addComponent(colorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(coloring))
-                        .addGroup(ModelLayout.createSequentialGroup()
-                            .addComponent(modelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonOpenFile)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonSaveSinogram, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonSaveReconstruct, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(ModelLayout.createSequentialGroup()
-                                    .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(labelDetectors)
-                                        .addComponent(scansModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(ModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(labelStepsize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(stepsize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(labelReconstructSize))
-                                .addComponent(reconstructSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(filterActionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 8, Short.MAX_VALUE)))
-                    .addContainerGap())
-            );
+            ParamModellingPane.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
+            ParamModellingPane.setLayout(new java.awt.GridBagLayout());
 
-            filterActionPanel.setVisible(false);
-            colorPanel.setVisible(false);
+            labelDetectors.setText("Число сканирований");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            ParamModellingPane.add(labelDetectors, gridBagConstraints);
+
+            scansModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            scansModel.setText("400");
+            scansModel.setToolTipText("");
+            scansModel.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    scansModelKeyTyped(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 2;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.ipadx = 55;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            ParamModellingPane.add(scansModel, gridBagConstraints);
+
+            labelStepsize.setText("<html>Шаг сканирования,<br>        град");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            ParamModellingPane.add(labelStepsize, gridBagConstraints);
+
+            stepsize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            stepsize.setText("1");
+            stepsize.setToolTipText("");
+            stepsize.setAutoscrolls(false);
+            stepsize.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    stepsizeKeyTyped(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 2;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.ipadx = 55;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            ParamModellingPane.add(stepsize, gridBagConstraints);
+
+            labelReconstructSize.setText("Размер реконструкции");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+            ParamModellingPane.add(labelReconstructSize, gridBagConstraints);
+
+            reconstructSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            reconstructSize.setText("400");
+            reconstructSize.setToolTipText("");
+            reconstructSize.setAutoscrolls(false);
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 2;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.ipadx = 55;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            ParamModellingPane.add(reconstructSize, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 5;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            Model.add(ParamModellingPane, gridBagConstraints);
 
             jTabbedPane1.addTab("Модель", Model);
 
@@ -1350,9 +1412,9 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
                 model.addRow(data);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Tomograph_MEPHI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Tomograph_MEPHI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_buttonOpenProjDataActionPerformed
@@ -1465,7 +1527,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && labelImage2.getIcon() != null) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    ImageViewer viewer = new ImageViewer();
+                    ImageViewerPane viewer = new ImageViewerPane();
                     viewer.setVisible(true);
                     viewer.image.setIcon(labelImage2.getIcon());
                 }
@@ -1516,7 +1578,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && labelImage1.getIcon() != null) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    ImageViewer viewer = new ImageViewer();
+                    ImageViewerPane viewer = new ImageViewerPane();
                     viewer.setVisible(true);
                     viewer.image.setIcon(labelImage1.getIcon());
 
@@ -1738,7 +1800,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && labelimage3.getIcon() != null) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    ImageViewer viewer = new ImageViewer();
+                    ImageViewerPane viewer = new ImageViewerPane();
                     viewer.setVisible(true);
                     viewer.image.setIcon(labelimage3.getIcon());
                 }
@@ -1912,6 +1974,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;
     private javax.swing.JPanel Model;
+    private javax.swing.JPanel ParamModellingPane;
     private javax.swing.JPanel Tomograph;
     private javax.swing.JButton buttonCanselSetName;
     private javax.swing.JButton buttonConverse;
@@ -2099,7 +2162,7 @@ public class Tomograph_MEPHI extends javax.swing.JFrame {
         try {
             ImageIO.write(image, format, file);
         } catch (IOException ex) {
-            Logger.getLogger(Tomograph_MEPHI.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TomographPaneetName()).log(Level.SEVERE, null, ex);
         }
     }
 
