@@ -1,0 +1,10 @@
+2013-11-10 21:29:14 INFO  AppLaunch:25 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-10 21:29:14 INFO  AppLaunch:30 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-10 21:29:33 INFO  AppLaunch:25 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-10 21:29:33 INFO  AppLaunch:30 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-10 21:34:34 INFO  AppLaunch:25 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-10 21:34:34 TRACE Tomograph:31 - Successfully loading config file conf/tomograph.conf
+2013-11-10 21:34:34 INFO  AppLaunch:30 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-10 21:35:08 INFO  AppLaunch:25 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-10 21:35:08 TRACE Tomograph:31 - Successfully loading config file conf/tomograph.conf
+2013-11-10 21:35:08 INFO  AppLaunch:30 - =======Stop TomographySoftware 1.0.0 application=======

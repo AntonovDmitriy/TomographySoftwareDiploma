@@ -9,28 +9,32 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Antonov
  */
 public class Tomograph {
+
+    private Logger logger = Logger.getLogger(Tomograph.class.getName());
     private static final String TOMOGRAPH_CONF_PATH = "conf/tomograph.conf";
     private Properties tomographProperty = new Properties();
-    public ModellingModule modellingModule = new ModellingModule();
+
+    public ModellingModule modellingModule;
 
     public Tomograph() {
         initTomographProperty();
+        this.modellingModule = new ModellingModule(tomographProperty);
     }
 
     private void initTomographProperty() {
         try (InputStream is = new FileInputStream(TOMOGRAPH_CONF_PATH)) {
             tomographProperty.load(is);
-            System.out.println(tomographProperty.getProperty("PATH_MODELLING_IMAGES"));
+            logger.trace("Successfully loading config file " + TOMOGRAPH_CONF_PATH);
+
         } catch (IOException ex) {
-            Logger.getLogger(Tomograph.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("Can't load configuration file " + TOMOGRAPH_CONF_PATH, ex);
         }
     }
 

@@ -65,7 +65,7 @@
                             <outputDirectory>${basedir}/target/resources/internalImages</outputDirectory>
                             <resources>          
                                 <resource>
-                                    <directory>${basedir}/resources/internalImages</directory>
+                                    <directory>src/non-packaged-resources/internalImages</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>              
@@ -81,8 +81,11 @@
                             <outputDirectory>${basedir}/target/conf</outputDirectory>
                             <resources>          
                                 <resource>
-                                    <directory>${basedir}/conf</directory>
+                                    <directory>src/main/resources</directory>
                                     <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>bundle_Rus.properties</exclude>
+                                    </excludes>
                                 </resource>
                             </resources>              
                         </configuration>            
@@ -116,6 +119,16 @@
             <groupId>com.jtattoo</groupId>
             <artifactId>JTattoo</artifactId>
             <version>1.6.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
         </dependency>
     </dependencies>
 </project>

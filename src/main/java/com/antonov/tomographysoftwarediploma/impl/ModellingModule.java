@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.util.Map;
 class ModellingModule {
 
     //Map for storage images for modelling
+    private Properties tomographProperty;
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>();
 
     public void setImageSamplesMap(Map<String, BufferedImage> map) {
@@ -28,8 +30,12 @@ class ModellingModule {
         return this.imageSamplesMapWithNames;
     }
 
-    public ModellingModule() {
-
+    public ModellingModule(Properties p) {
+        if (p != null) {
+            this.tomographProperty = p;
+        } else {
+            
+        }
         initSamplesMapImage();
     }
 
@@ -37,7 +43,7 @@ class ModellingModule {
 
         ColorSpace grayColorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
         ColorConvertOp op = new ColorConvertOp(grayColorSpace, null);
-        
+
     }
 
 }
