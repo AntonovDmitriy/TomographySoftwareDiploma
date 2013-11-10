@@ -19,9 +19,13 @@ public class AppLaunch {
 
 //        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
 //        ColorConvertOp op = new ColorConvertOp(cs, null);
-        TomographPane view = new TomographPane();
-        initViewParameters(view);
-        view.setVisible(true);
+//        System.out.println(System.getProperty("user.dir"));
+        
+        Tomograph model = new Tomograph();
+//        TomographPane view = new TomographPane();
+//        initViewParameters(view);
+//        view.setVisible(true);
+        
 
     }
 

@@ -65,7 +65,7 @@
                             <outputDirectory>${basedir}/target/resources/internalImages</outputDirectory>
                             <resources>          
                                 <resource>
-                                    <directory>src/non-packaged-resources/internalImages</directory>
+                                    <directory>${basedir}/resources/internalImages</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>              
@@ -81,11 +81,8 @@
                             <outputDirectory>${basedir}/target/conf</outputDirectory>
                             <resources>          
                                 <resource>
-                                    <directory>src/main/resources</directory>
+                                    <directory>${basedir}/conf</directory>
                                     <filtering>true</filtering>
-                                    <excludes>
-                                        <exclude>bundle_Rus.properties</exclude>
-                                    </excludes>
                                 </resource>
                             </resources>              
                         </configuration>            
