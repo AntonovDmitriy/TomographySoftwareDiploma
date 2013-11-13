@@ -61,15 +61,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     public TomographPane() {
         initComponents();
-        
-        this.addWindowListener(new WindowAdapter(){
-                public void windowClosing(WindowEvent e){
-                    int i=JOptionPane.showConfirmDialog(null, bundle.getString("CONFIRMATION_EXIT"),"",JOptionPane.YES_NO_OPTION);
-                    if(i==0)
-                        logger.info("=======Stop TomographySoftware 1.0.0 application=======");
-                        System.exit(0);//cierra aplicacion
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int i = JOptionPane.showConfirmDialog(null, bundle.getString("CONFIRMATION_EXIT"), "", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    logger.info("=======Stop TomographySoftware 1.0.0 application=======");
+                    System.exit(0);//cierra aplicacion
                 }
-            });
+            }
+        });
     }
 
     @Override
@@ -149,7 +150,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         colorPanel.setVisible(false);
         buttonDensityViewer.setEnabled(false);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -195,20 +196,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         colorGroupTomograph = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Model = new javax.swing.JPanel();
+        image1 = new javax.swing.JScrollPane();
+        labelImage1 = new javax.swing.JLabel();
+        Image2 = new javax.swing.JScrollPane();
+        labelImage2 = new javax.swing.JLabel();
+        paneControl = new javax.swing.JPanel();
         modelPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         modelList = new javax.swing.JList();
-        buttonOpenFile = new javax.swing.JButton();
-        image1 = new javax.swing.JScrollPane();
-        labelImage1 = new javax.swing.JLabel();
-        buttonConverse = new javax.swing.JButton();
-        Image2 = new javax.swing.JScrollPane();
-        labelImage2 = new javax.swing.JLabel();
-        buttonReconstruct = new javax.swing.JButton();
-        buttonSaveReconstruct = new javax.swing.JButton();
-        buttonSaveSinogram = new javax.swing.JButton();
-        filterActionPanel = new javax.swing.JPanel();
-        filteringModel = new javax.swing.JCheckBox();
         filterPanel = new javax.swing.JPanel();
         filterRamp = new javax.swing.JRadioButton();
         filterShepplogan = new javax.swing.JRadioButton();
@@ -216,13 +211,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         filterHann = new javax.swing.JRadioButton();
         filterCosine = new javax.swing.JRadioButton();
         filterBlackman = new javax.swing.JRadioButton();
-        coloring = new javax.swing.JCheckBox();
-        colorPanel = new javax.swing.JPanel();
-        color1 = new javax.swing.JRadioButton();
-        color2 = new javax.swing.JRadioButton();
-        color4 = new javax.swing.JRadioButton();
-        color3 = new javax.swing.JRadioButton();
-        buttonDensityViewer = new javax.swing.JButton();
+        buttonSaveReconstruct = new javax.swing.JButton();
+        buttonOpenFile = new javax.swing.JButton();
         ParamModellingPane = new javax.swing.JPanel();
         labelDetectors = new javax.swing.JLabel();
         scansModel = new javax.swing.JTextField();
@@ -230,6 +220,17 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         stepsize = new javax.swing.JTextField();
         labelReconstructSize = new javax.swing.JLabel();
         reconstructSize = new javax.swing.JTextField();
+        filteringModel = new javax.swing.JCheckBox();
+        buttonSaveSinogram = new javax.swing.JButton();
+        buttonConverse = new javax.swing.JButton();
+        buttonDensityViewer = new javax.swing.JButton();
+        buttonReconstruct = new javax.swing.JButton();
+        colorPanel = new javax.swing.JPanel();
+        color1 = new javax.swing.JRadioButton();
+        color2 = new javax.swing.JRadioButton();
+        color4 = new javax.swing.JRadioButton();
+        color3 = new javax.swing.JRadioButton();
+        coloring = new javax.swing.JCheckBox();
         Tomograph = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         scansTomograph = new javax.swing.JTextField();
@@ -652,6 +653,50 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             Model.setMinimumSize(new java.awt.Dimension(800, 600));
             Model.setLayout(new java.awt.GridBagLayout());
 
+            labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            labelImage1.setAutoscrolls(true);
+            labelImage1.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    labelImage1MouseClicked(evt);
+                }
+            });
+            image1.setViewportView(labelImage1);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipadx = 477;
+            gridBagConstraints.ipady = 517;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.weightx = 1.0;
+            gridBagConstraints.weighty = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+            Model.add(image1, gridBagConstraints);
+
+            labelImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            labelImage2.setAutoscrolls(true);
+            labelImage2.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    labelImage2MouseClicked(evt);
+                }
+            });
+            Image2.setViewportView(labelImage2);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 2;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipadx = 477;
+            gridBagConstraints.ipady = 517;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.weightx = 1.0;
+            gridBagConstraints.weighty = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            Model.add(Image2, gridBagConstraints);
+
+            paneControl.setLayout(new java.awt.GridBagLayout());
+
             java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("bundle_Rus"); // NOI18N
             modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LIST_MODEL_TITLE"))); // NOI18N
 
@@ -664,7 +709,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 modelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(modelPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addContainerGap())
             );
             modelPanelLayout.setVerticalGroup(
@@ -679,102 +724,74 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
             gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            Model.add(modelPanel, gridBagConstraints);
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            paneControl.add(modelPanel, gridBagConstraints);
 
-            buttonOpenFile.setText("Открыть файл");
-            buttonOpenFile.setFocusPainted(false);
-            buttonOpenFile.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonOpenFileActionPerformed(evt);
-                }
-            });
+            filterPanel.setLayout(new java.awt.GridBagLayout());
+
+            filterGroup.add(filterRamp);
+            filterRamp.setText("ramp");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            filterPanel.add(filterRamp, gridBagConstraints);
+
+            filterGroup.add(filterShepplogan);
+            filterShepplogan.setText("shepplogan");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            Model.add(buttonOpenFile, gridBagConstraints);
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            filterPanel.add(filterShepplogan, gridBagConstraints);
 
-            labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelImage1.setAutoscrolls(true);
-            labelImage1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    labelImage1MouseClicked(evt);
-                }
-            });
-            image1.setViewportView(labelImage1);
+            filterGroup.add(filterHamming);
+            filterHamming.setText("hamming");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            filterPanel.add(filterHamming, gridBagConstraints);
+
+            filterGroup.add(filterHann);
+            filterHann.setText("hann");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            filterPanel.add(filterHann, gridBagConstraints);
+
+            filterGroup.add(filterCosine);
+            filterCosine.setText("cosine");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            filterPanel.add(filterCosine, gridBagConstraints);
+
+            filterGroup.add(filterBlackman);
+            filterBlackman.setText("blackman");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 5;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            filterPanel.add(filterBlackman, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 13;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridwidth = 6;
-            gridBagConstraints.gridheight = 10;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.ipadx = 477;
-            gridBagConstraints.ipady = 517;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 0);
-            Model.add(image1, gridBagConstraints);
-
-            buttonConverse.setText("Синограмма");
-            buttonConverse.setDefaultCapable(false);
-            buttonConverse.setEnabled(false);
-            buttonConverse.setFocusPainted(false);
-            buttonConverse.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonConverseActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 13;
-            gridBagConstraints.gridy = 17;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
-            Model.add(buttonConverse, gridBagConstraints);
-
-            labelImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelImage2.setAutoscrolls(true);
-            labelImage2.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    labelImage2MouseClicked(evt);
-                }
-            });
-            Image2.setViewportView(labelImage2);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 19;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.gridheight = 10;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.ipadx = 477;
-            gridBagConstraints.ipady = 517;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 37);
-            Model.add(Image2, gridBagConstraints);
-
-            buttonReconstruct.setText("Реконструкция");
-            buttonReconstruct.setDefaultCapable(false);
-            buttonReconstruct.setEnabled(false);
-            buttonReconstruct.setFocusPainted(false);
-            buttonReconstruct.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonReconstructActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 14;
-            gridBagConstraints.gridy = 17;
-            gridBagConstraints.gridwidth = 3;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(18, 10, 0, 0);
-            Model.add(buttonReconstruct, gridBagConstraints);
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 6;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+            paneControl.add(filterPanel, gridBagConstraints);
+            filterPanel.setVisible(false);
 
             buttonSaveReconstruct.setText("<html> Сохранить<br> реконструкцию");
             buttonSaveReconstruct.setActionCommand("Сохранить<br> реконструкцию");
@@ -786,226 +803,25 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            Model.add(buttonSaveReconstruct, gridBagConstraints);
-
-            buttonSaveSinogram.setText("<html> Сохранить<br> синограмму");
-            buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveSinogram.setEnabled(false);
-            buttonSaveSinogram.setFocusPainted(false);
-            buttonSaveSinogram.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonSaveSinogramActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            Model.add(buttonSaveSinogram, gridBagConstraints);
+            paneControl.add(buttonSaveReconstruct, gridBagConstraints);
 
-            filteringModel.setText("Фильтрация");
-            filteringModel.setFocusPainted(false);
-            filteringModel.addActionListener(new java.awt.event.ActionListener() {
+            buttonOpenFile.setText("Открыть файл");
+            buttonOpenFile.setFocusPainted(false);
+            buttonOpenFile.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    filteringModelActionPerformed(evt);
+                    buttonOpenFileActionPerformed(evt);
                 }
             });
-
-            filterGroup.add(filterRamp);
-            filterRamp.setText("ramp");
-
-            filterGroup.add(filterShepplogan);
-            filterShepplogan.setText("shepplogan");
-
-            filterGroup.add(filterHamming);
-            filterHamming.setText("hamming");
-
-            filterGroup.add(filterHann);
-            filterHann.setText("hann");
-
-            filterGroup.add(filterCosine);
-            filterCosine.setText("cosine");
-
-            filterGroup.add(filterBlackman);
-            filterBlackman.setText("blackman");
-
-            javax.swing.GroupLayout filterPanelLayout = new javax.swing.GroupLayout(filterPanel);
-            filterPanel.setLayout(filterPanelLayout);
-            filterPanelLayout.setHorizontalGroup(
-                filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(filterPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(filterHann)
-                        .addComponent(filterRamp)
-                        .addComponent(filterShepplogan)
-                        .addComponent(filterHamming)
-                        .addComponent(filterBlackman)
-                        .addComponent(filterCosine))
-                    .addContainerGap(95, Short.MAX_VALUE))
-            );
-            filterPanelLayout.setVerticalGroup(
-                filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filterPanelLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filterRamp)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterShepplogan)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterHamming)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterHann)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterCosine)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterBlackman)
-                    .addContainerGap())
-            );
-
-            javax.swing.GroupLayout filterActionPanelLayout = new javax.swing.GroupLayout(filterActionPanel);
-            filterActionPanel.setLayout(filterActionPanelLayout);
-            filterActionPanelLayout.setHorizontalGroup(
-                filterActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(filterActionPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(filteringModel)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(filterActionPanelLayout.createSequentialGroup()
-                    .addComponent(filterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE))
-            );
-            filterActionPanelLayout.setVerticalGroup(
-                filterActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(filterActionPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(filteringModel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(filterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-
-            filterPanel.setVisible(false);
-
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 9;
-            gridBagConstraints.gridwidth = 9;
-            gridBagConstraints.gridheight = 11;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(18, 10, 0, 0);
-            Model.add(filterActionPanel, gridBagConstraints);
-            filterActionPanel.setVisible(false);
-
-            coloring.setText("Цветовой фильтр");
-            coloring.setEnabled(false);
-            coloring.setFocusPainted(false);
-            coloring.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    coloringActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 13;
-            gridBagConstraints.gridy = 19;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.gridheight = 12;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(2, 18, 7, 0);
-            Model.add(coloring, gridBagConstraints);
-
-            colorPanel.setMaximumSize(new java.awt.Dimension(236, 25));
-            colorPanel.setMinimumSize(new java.awt.Dimension(236, 23));
-            colorPanel.setPreferredSize(new java.awt.Dimension(236, 23));
-
-            colorGroup.add(color1);
-            color1.setText("color1");
-            color1.setFocusPainted(false);
-            color1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color1ActionPerformed(evt);
-                }
-            });
-
-            colorGroup.add(color2);
-            color2.setText("color2");
-            color2.setFocusPainted(false);
-            color2.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color2ActionPerformed(evt);
-                }
-            });
-
-            colorGroup.add(color4);
-            color4.setText("color4");
-            color4.setFocusable(false);
-            color4.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color4ActionPerformed(evt);
-                }
-            });
-
-            colorGroup.add(color3);
-            color3.setText("color3");
-            color3.setFocusPainted(false);
-            color3.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color3ActionPerformed(evt);
-                }
-            });
-
-            javax.swing.GroupLayout colorPanelLayout = new javax.swing.GroupLayout(colorPanel);
-            colorPanel.setLayout(colorPanelLayout);
-            colorPanelLayout.setHorizontalGroup(
-                colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(colorPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(color1)
-                    .addGap(2, 2, 2)
-                    .addComponent(color2)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(color3)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(color4)
-                    .addContainerGap(69, Short.MAX_VALUE))
-            );
-            colorPanelLayout.setVerticalGroup(
-                colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(colorPanelLayout.createSequentialGroup()
-                    .addGroup(colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(color1)
-                        .addComponent(color2)
-                        .addComponent(color3)
-                        .addComponent(color4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(0, 0, Short.MAX_VALUE))
-            );
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 19;
-            gridBagConstraints.gridy = 17;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.ipadx = 60;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
-            Model.add(colorPanel, gridBagConstraints);
-            colorPanel.setVisible(false);
-
-            buttonDensityViewer.setText("Анализатор плотности");
-            buttonDensityViewer.setEnabled(false);
-            buttonDensityViewer.setFocusPainted(false);
-            buttonDensityViewer.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonDensityViewerActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 17;
-            gridBagConstraints.gridy = 17;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(18, 10, 0, 0);
-            Model.add(buttonDensityViewer, gridBagConstraints);
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(buttonOpenFile, gridBagConstraints);
 
             ParamModellingPane.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
             ParamModellingPane.setLayout(new java.awt.GridBagLayout());
@@ -1085,10 +901,184 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.gridwidth = 3;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(ParamModellingPane, gridBagConstraints);
+
+            filteringModel.setText("Фильтрация");
+            filteringModel.setFocusPainted(false);
+            filteringModel.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    filteringModelActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 6;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(filteringModel, gridBagConstraints);
+
+            buttonSaveSinogram.setText("<html> Сохранить<br> синограмму");
+            buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
+            buttonSaveSinogram.setEnabled(false);
+            buttonSaveSinogram.setFocusPainted(false);
+            buttonSaveSinogram.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonSaveSinogramActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(buttonSaveSinogram, gridBagConstraints);
+
+            buttonConverse.setText("Синограмма");
+            buttonConverse.setDefaultCapable(false);
+            buttonConverse.setEnabled(false);
+            buttonConverse.setFocusPainted(false);
+            buttonConverse.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonConverseActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(buttonConverse, gridBagConstraints);
+
+            buttonDensityViewer.setText("Анализатор плотности");
+            buttonDensityViewer.setEnabled(false);
+            buttonDensityViewer.setFocusPainted(false);
+            buttonDensityViewer.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonDensityViewerActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
             gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            Model.add(ParamModellingPane, gridBagConstraints);
+            paneControl.add(buttonDensityViewer, gridBagConstraints);
+
+            buttonReconstruct.setText("Реконструкция");
+            buttonReconstruct.setDefaultCapable(false);
+            buttonReconstruct.setEnabled(false);
+            buttonReconstruct.setFocusPainted(false);
+            buttonReconstruct.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonReconstructActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(buttonReconstruct, gridBagConstraints);
+
+            colorPanel.setLayout(new java.awt.GridBagLayout());
+
+            colorGroup.add(color1);
+            color1.setText("color1");
+            color1.setFocusPainted(false);
+            color1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    color1ActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            colorPanel.add(color1, gridBagConstraints);
+
+            colorGroup.add(color2);
+            color2.setText("color2");
+            color2.setFocusPainted(false);
+            color2.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    color2ActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            colorPanel.add(color2, gridBagConstraints);
+
+            colorGroup.add(color4);
+            color4.setText("color4");
+            color4.setFocusable(false);
+            color4.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    color4ActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            colorPanel.add(color4, gridBagConstraints);
+
+            colorGroup.add(color3);
+            color3.setText("color3");
+            color3.setFocusPainted(false);
+            color3.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    color3ActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            colorPanel.add(color3, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 7;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(colorPanel, gridBagConstraints);
+            colorPanel.setVisible(false);
+
+            coloring.setText("Цветовой фильтр");
+            coloring.setEnabled(false);
+            coloring.setFocusPainted(false);
+            coloring.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    coloringActionPerformed(evt);
+                }
+            });
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 7;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneControl.add(coloring, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.weighty = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+            Model.add(paneControl, gridBagConstraints);
 
             jTabbedPane1.addTab("Модель", Model);
 
@@ -1471,20 +1461,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         }
     }//GEN-LAST:event_buttonSaveSinogramActionPerformed
 
-    private void buttonSaveReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructActionPerformed
-
-        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-            ImageIcon icon = (ImageIcon) labelImage2.getIcon();
-            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-
-            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-            saveFile(bi, name, filterImageDesc);
-
-        }
-
-    }//GEN-LAST:event_buttonSaveReconstructActionPerformed
-
     private void buttonReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReconstructActionPerformed
 
         dialogProgressBar.setVisible(true);
@@ -1524,18 +1500,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     }//GEN-LAST:event_buttonReconstructActionPerformed
 
-    private void stepsizeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stepsizeKeyTyped
-        // TODO add your handling code here:
-        buttonSaveReconstruct.setEnabled(false);
-        buttonReconstruct.setEnabled(false);
-    }//GEN-LAST:event_stepsizeKeyTyped
-
-    private void scansModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_scansModelKeyTyped
-        // TODO add your handling code here:
-        buttonSaveReconstruct.setEnabled(false);
-        buttonReconstruct.setEnabled(false);
-    }//GEN-LAST:event_scansModelKeyTyped
-
     private void labelImage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImage2MouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2 && labelImage2.getIcon() != null) {
@@ -1574,7 +1538,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     labelImage2.setIcon(icon2);
                     buttonReconstruct.setEnabled(true);
                     buttonSaveSinogram.setEnabled(true);
-                    filterActionPanel.setVisible(true);
+//                    filterActionPanel.setVisible(true);
                     progressBar.setIndeterminate(false);
                     dialogProgressBar.setVisible(false);
                     buttonDensityViewer.setEnabled(false);
@@ -1609,8 +1573,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             File file = openFileChooser.getSelectedFile();
 
 //            try {
-                //                    BufferedImage sinoimg;
-
+            //                    BufferedImage sinoimg;
 //                imgBuf = ImageIO.read(file);
 //                Image gray = new BufferedImage(imgBuf.getWidth(), imgBuf.getHeight(),
 //                        BufferedImage.TYPE_BYTE_GRAY);
@@ -1626,15 +1589,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 //                ImageIcon icon = new ImageIcon(imgBuf);
 //                labelImage1.setIcon(icon);
 //                displayImageDetails(imgBuf);
-                buttonSaveSinogram.setEnabled(false);
-                buttonSaveReconstruct.setEnabled(false);
-                buttonConverse.setEnabled(true);
-                buttonReconstruct.setEnabled(false);
-                labelImage2.setIcon(null);
-                coloring.setEnabled(false);
-                coloring.setSelected(false);
-                colorPanel.setVisible(false);
-                buttonDensityViewer.setEnabled(false);
+            buttonSaveSinogram.setEnabled(false);
+            buttonSaveReconstruct.setEnabled(false);
+            buttonConverse.setEnabled(true);
+            buttonReconstruct.setEnabled(false);
+            labelImage2.setIcon(null);
+            coloring.setEnabled(false);
+            coloring.setSelected(false);
+            colorPanel.setVisible(false);
+            buttonDensityViewer.setEnabled(false);
 //            } catch (IOException e1) {
 //                // TODO Auto-generated catch block
 //                e1.printStackTrace();
@@ -1877,42 +1840,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     }//GEN-LAST:event_densitySliderStateChanged
 
-    private void color3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color3ActionPerformed
-        // TODO add your handling code here:
-        if (color3.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.red_blue_saw_2());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color3ActionPerformed
-
-    private void color4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color4ActionPerformed
-        // TODO add your handling code here:
-        if (color4.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.invGray());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color4ActionPerformed
-
-    private void color2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color2ActionPerformed
-        // TODO add your handling code here:
-        if (color2.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.green_blue_saw_2());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color2ActionPerformed
-
-    private void color1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1ActionPerformed
-        // TODO add your handling code here:
-        if (color1.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.sin_rbg());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color1ActionPerformed
-
     private void coloringTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloringTomographActionPerformed
         // TODO add your handling code here:
         if (coloringTomograph.isSelected()) {
@@ -1985,6 +1912,67 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
 
+    private void stepsizeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stepsizeKeyTyped
+        // TODO add your handling code here:
+        buttonSaveReconstruct.setEnabled(false);
+        buttonReconstruct.setEnabled(false);
+    }//GEN-LAST:event_stepsizeKeyTyped
+
+    private void scansModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_scansModelKeyTyped
+        // TODO add your handling code here:
+        buttonSaveReconstruct.setEnabled(false);
+        buttonReconstruct.setEnabled(false);
+    }//GEN-LAST:event_scansModelKeyTyped
+
+    private void buttonSaveReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructActionPerformed
+
+        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
+            ImageIcon icon = (ImageIcon) labelImage2.getIcon();
+            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
+
+            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
+            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
+            saveFile(bi, name, filterImageDesc);
+
+        }
+    }//GEN-LAST:event_buttonSaveReconstructActionPerformed
+
+    private void color3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color3ActionPerformed
+        // TODO add your handling code here:
+        if (color3.isSelected()) {
+            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.red_blue_saw_2());
+            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
+            labelImage2.setIcon(icon2);
+        }
+    }//GEN-LAST:event_color3ActionPerformed
+
+    private void color4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color4ActionPerformed
+        // TODO add your handling code here:
+        if (color4.isSelected()) {
+            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.invGray());
+            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
+            labelImage2.setIcon(icon2);
+        }
+    }//GEN-LAST:event_color4ActionPerformed
+
+    private void color2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color2ActionPerformed
+        // TODO add your handling code here:
+        if (color2.isSelected()) {
+            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.green_blue_saw_2());
+            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
+            labelImage2.setIcon(icon2);
+        }
+    }//GEN-LAST:event_color2ActionPerformed
+
+    private void color1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1ActionPerformed
+        // TODO add your handling code here:
+        if (color1.isSelected()) {
+            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.sin_rbg());
+            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
+            labelImage2.setIcon(icon2);
+        }
+    }//GEN-LAST:event_color1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;
     private javax.swing.JPanel Model;
@@ -2028,7 +2016,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JDialog dialogNameAsker;
     private javax.swing.JDialog dialogProgressBar;
     private javax.swing.JDialog dialogProjDataChooser;
-    private javax.swing.JPanel filterActionPanel;
     private javax.swing.JRadioButton filterBlackManTomograph;
     private javax.swing.JRadioButton filterBlackman;
     private javax.swing.JRadioButton filterCosine;
@@ -2077,6 +2064,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JPanel modelPanel;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JTextField outputImgSizeTomograph;
+    private javax.swing.JPanel paneControl;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JTextField reconstructSize;
     private javax.swing.JFileChooser saveFileChooser;

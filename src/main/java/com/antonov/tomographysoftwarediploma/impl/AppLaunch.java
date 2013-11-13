@@ -36,7 +36,7 @@ public class AppLaunch {
         view.setModellingController(mc);
         view.setHardwareController(hc);
         model.prepareViews();
-        initViewParameters((Frame) view);
+//        initViewParameters((Frame) view);
         ((Frame) view).setVisible(true);
 
     }

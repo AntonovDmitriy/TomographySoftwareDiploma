@@ -358,3 +358,233 @@
 2013-11-14 01:16:36 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
 2013-11-14 01:16:36 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
 2013-11-14 01:16:47 INFO  TomographPane:70 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-14 01:37:37 INFO  AppLaunch:28 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-14 01:37:37 INFO  Tomograph:48 - Successfully loading config file conf/tomograph.conf
+2013-11-14 01:37:37 INFO  ModellingModule:62 - Path to the internal images is resources/internalImages
+2013-11-14 01:37:37 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-11-14 01:37:37 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:37:37 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:37:37 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-11-14 01:37:37 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-11-14 01:37:37 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:37:37 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:37:37 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-11-14 01:37:37 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-11-14 01:37:37 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:37:38 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:37:38 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-11-14 01:37:56 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:37:56 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:37:56 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:37:56 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:37:56 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:37:56 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:37:56 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:37:57 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:37:57 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:37:57 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:37:57 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:37:57 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:37:58 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:37:58 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:37:58 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:37:58 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:37:58 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:37:58 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:37:58 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:37:58 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:37:59 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:37:59 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:37:59 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:37:59 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:00 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:38:00 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:00 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:00 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:00 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:38:00 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:00 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:00 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:01 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:38:01 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:01 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:01 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:09 INFO  TomographPane:69 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-14 01:38:34 INFO  AppLaunch:28 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-14 01:38:34 INFO  Tomograph:48 - Successfully loading config file conf/tomograph.conf
+2013-11-14 01:38:34 INFO  ModellingModule:62 - Path to the internal images is resources/internalImages
+2013-11-14 01:38:34 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-11-14 01:38:34 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:38:34 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:38:34 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-11-14 01:38:34 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-11-14 01:38:34 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:38:34 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:38:34 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-11-14 01:38:34 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-11-14 01:38:35 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:38:35 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:38:35 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-11-14 01:38:40 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:38:40 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:40 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:40 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:40 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:38:40 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:40 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:40 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:41 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:38:41 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:41 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:41 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:38:41 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:38:41 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:38:41 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:38:41 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:25 INFO  TomographPane:69 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-14 01:39:33 INFO  AppLaunch:28 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-14 01:39:33 INFO  Tomograph:48 - Successfully loading config file conf/tomograph.conf
+2013-11-14 01:39:33 INFO  ModellingModule:62 - Path to the internal images is resources/internalImages
+2013-11-14 01:39:33 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-11-14 01:39:33 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:39:33 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:39:33 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-11-14 01:39:33 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-11-14 01:39:33 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:39:33 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:39:33 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-11-14 01:39:33 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-11-14 01:39:33 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:39:33 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:39:33 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-11-14 01:39:38 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:39:38 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:38 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:38 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:38 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:39:38 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:38 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:38 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:43 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:39:43 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:43 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:43 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:45 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:39:45 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:45 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:45 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:45 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:39:45 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:45 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:45 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:46 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:39:46 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:46 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:46 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:46 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:39:46 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:46 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:46 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:47 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:39:47 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:47 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:47 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:47 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:39:47 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:47 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:47 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:47 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:39:47 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:47 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:47 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:48 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:39:48 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:48 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:48 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:39:48 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:39:48 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:39:48 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:39:48 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:41:28 INFO  AppLaunch:28 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-14 01:41:28 INFO  Tomograph:48 - Successfully loading config file conf/tomograph.conf
+2013-11-14 01:41:28 INFO  ModellingModule:62 - Path to the internal images is resources/internalImages
+2013-11-14 01:41:28 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-11-14 01:41:28 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:41:29 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:41:29 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-11-14 01:41:29 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-11-14 01:41:29 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:41:29 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:41:29 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-11-14 01:41:29 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-11-14 01:41:29 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:41:29 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:41:29 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-11-14 01:41:34 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:41:34 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:41:34 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:41:34 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:41:35 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:41:35 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:41:35 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:41:35 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:41:36 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:41:36 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:41:36 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:41:36 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:41:36 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:41:36 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:41:36 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:41:36 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:42:31 INFO  AppLaunch:28 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-14 01:42:31 INFO  Tomograph:48 - Successfully loading config file conf/tomograph.conf
+2013-11-14 01:42:31 INFO  ModellingModule:62 - Path to the internal images is resources/internalImages
+2013-11-14 01:42:31 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-11-14 01:42:31 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:42:31 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:42:31 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-11-14 01:42:31 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-11-14 01:42:31 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:42:31 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:42:31 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-11-14 01:42:31 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-11-14 01:42:31 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 01:42:31 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 01:42:31 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-11-14 01:42:46 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:42:46 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:42:46 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:42:46 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:42:47 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:42:47 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:42:47 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:42:47 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:42:52 INFO  ModellingModule:95 - Current modelling image changes on With_deffect
+2013-11-14 01:42:52 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:42:52 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:42:52 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:42:53 INFO  ModellingModule:95 - Current modelling image changes on Without_deffect
+2013-11-14 01:42:53 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:42:53 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:42:53 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:42:54 INFO  ModellingModule:95 - Current modelling image changes on Сложная структура
+2013-11-14 01:42:54 INFO  ModellingModule:97 - Current modelling image changes on display
+2013-11-14 01:42:54 INFO  ModellingModule:99 - Result modelling is clear
+2013-11-14 01:42:54 INFO  ModellingModule:101 - Modelling controls are disabled
+2013-11-14 01:44:00 INFO  TomographPane:69 - =======Stop TomographySoftware 1.0.0 application=======
+2013-11-14 02:18:02 INFO  AppLaunch:28 - =======Start TomographySoftware 1.0.0 application=======
+2013-11-14 02:18:02 INFO  Tomograph:48 - Successfully loading config file conf/tomograph.conf
+2013-11-14 02:18:02 INFO  ModellingModule:62 - Path to the internal images is resources/internalImages
+2013-11-14 02:18:02 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-11-14 02:18:03 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 02:18:03 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 02:18:03 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-11-14 02:18:03 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-11-14 02:18:03 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 02:18:03 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 02:18:03 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-11-14 02:18:03 TRACE ModellingModule:67 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-11-14 02:18:03 TRACE ModellingModule:69 - File successfully has been read 
+2013-11-14 02:18:03 TRACE ModellingModule:73 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-11-14 02:18:03 TRACE ModellingModule:76 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-11-14 02:18:50 INFO  TomographPane:69 - =======Stop TomographySoftware 1.0.0 application=======
