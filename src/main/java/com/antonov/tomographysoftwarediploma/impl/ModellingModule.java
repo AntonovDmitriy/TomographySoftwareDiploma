@@ -8,9 +8,14 @@ package com.antonov.tomographysoftwarediploma.impl;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import javax.imageio.ImageIO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -18,10 +23,16 @@ import java.util.Properties;
  */
 class ModellingModule {
 
-    //Map for storage images for modelling
+    ModellingModuleController controller;
+    private static Logger logger = LoggerFactory.getLogger(ModellingModule.class);
     private Properties tomographProperty;
-    private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>();
-
+    private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
+    private BufferedImage currentModellingImage;
+    
+    public void setController(ModellingModuleController controller){
+        this.controller = controller;
+    }
+    
     public void setImageSamplesMap(Map<String, BufferedImage> map) {
         this.imageSamplesMapWithNames = map;
     }
@@ -33,10 +44,11 @@ class ModellingModule {
     public ModellingModule(Properties p) {
         if (p != null) {
             this.tomographProperty = p;
+            initSamplesMapImage();
         } else {
-            
+            logger.warn("Properties file is null");
         }
-        initSamplesMapImage();
+
     }
 
     private void initSamplesMapImage() {
@@ -44,6 +56,52 @@ class ModellingModule {
         ColorSpace grayColorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
         ColorConvertOp op = new ColorConvertOp(grayColorSpace, null);
 
+        if (tomographProperty.getProperty("PATH_MODELLING_IMAGES") != null && !tomographProperty.getProperty("PATH_MODELLING_IMAGES").isEmpty()) {
+            try {
+                String pathToImages = tomographProperty.getProperty("PATH_MODELLING_IMAGES");
+                logger.info("Path to the internal images is " + pathToImages);
+
+                for (File imageFile : new File(pathToImages).listFiles()) {
+
+                    if (imageFile.exists() && imageFile.isFile()) {
+                        logger.trace("Reading image file " + imageFile.getAbsolutePath());
+                        BufferedImage image = ImageIO.read(imageFile);
+                        logger.trace("File successfully has been read ");
+                        String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];
+                        if (image.getType() != 13) {
+                            image = op.filter(image, null);
+                            logger.trace("Type of image is TYPE_BYTE_INDEXED. Trying to make it gray");
+                        }
+                        imageSamplesMapWithNames.put(imageNameWithoutExt, image);
+                        logger.trace("Image file " + imageFile.getAbsolutePath() + " was been successufully added");
+                    } else {
+                        logger.info(imageFile.getAbsolutePath() + " is not file ");
+                    }
+                }
+            } catch (IOException ex) {
+                logger.warn("Error during downloading internal images ", ex);
+            }
+        } else {
+            logger.warn("Path for internal images for modelling is empty or null");
+        }
     }
 
+    public void prepareView(){
+        controller.setModellingImages(imageSamplesMapWithNames);
+    }
+    
+    public void setCurrentModellingImageByName(String image){
+        currentModellingImage = imageSamplesMapWithNames.get(image);
+        logger.info("Current modelling image changes on " + image);
+        controller.setViewCurrentModellingImage(currentModellingImage);
+        logger.info("Current modelling image changes on display");
+        controller.clearResultModelling();
+        logger.info("Result modelling is clear");
+        controller.disableModellingControls();
+        logger.info("Modelling controls are disabled");
+    }
+    
+    public BufferedImage getCurrentModellingImage(){
+        return currentModellingImage;
+    }
 }

@@ -7,8 +7,11 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.forms.TomographPane;
 import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.UIManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -18,27 +21,37 @@ public class AppLaunch {
 
     public static void main(String[] args) {
 
-        Logger logger = Logger.getLogger(AppLaunch.class.getName());
+        Logger logger = LoggerFactory.getLogger(AppLaunch.class);
 //        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
 //        ColorConvertOp op = new ColorConvertOp(cs, null);
 //        System.out.println(System.getProperty("user.dir"));
         logger.info("=======Start TomographySoftware 1.0.0 application=======");
         Tomograph model = new Tomograph();
-//        TomographPane view = new TomographPane();
-//        initViewParameters(view);
-//        view.setVisible(true);
-        logger.info("=======Stop TomographySoftware 1.0.0 application=======");
+        initLookAndFeel();
+        ITomographView view = new TomographPane();
+        ModellingModuleController mc = new ModellingModuleController(model, view);
+        HardwareModuleController hc = new HardwareModuleController(model, view);
+        model.setModellingController(mc);
+        model.setHardwareController(hc);
+        view.setModellingController(mc);
+        view.setHardwareController(hc);
+        model.prepareViews();
+        initViewParameters((Frame) view);
+        ((Frame) view).setVisible(true);
 
     }
 
     private static void initViewParameters(Frame frame) {
 
+        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+    }
+
+    private static void initLookAndFeel() {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             System.out.println(ex);
         }
-        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 }

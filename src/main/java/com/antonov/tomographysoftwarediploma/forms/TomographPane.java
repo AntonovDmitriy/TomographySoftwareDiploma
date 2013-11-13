@@ -5,18 +5,22 @@ import com.antonov.tomographysoftwarediploma.DensityAnalizator;
 import com.antonov.tomographysoftwarediploma.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.LUTFunctions;
 import com.antonov.tomographysoftwarediploma.Utils;
+import com.antonov.tomographysoftwarediploma.impl.Controller;
+import com.antonov.tomographysoftwarediploma.impl.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.impl.ITomographView;
+import com.antonov.tomographysoftwarediploma.impl.ModellingModuleController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.color.ColorSpace;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -34,67 +38,64 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class TomographPane extends javax.swing.JFrame {
+public class TomographPane extends javax.swing.JFrame implements ITomographView {
 
-    private Map<String, BufferedImage> models = new HashMap<>();
+    private static Logger logger = LoggerFactory.getLogger(TomographPane.class);
+    ModellingModuleController modellingModuleController;
+    HardwareModuleController hardwareModuleController;
     private final ResourceBundle bundle = ResourceBundle.getBundle(
             "bundle_Rus");
-    private final Set<String> bundleKeySet = bundle.keySet();
-    private BufferedImage imgBuf;
+
+    public static final List<String> modelNames = new ArrayList<>(); // For modelling images names
     private BufferedImage sinogramImage;
     private BufferedImage reconstructImage;
     private BufferedImage reconstructColorImage;
     private BufferedImage scaleReconstructImage; // для DensityViewer
     private List<BufferedImage> arrayReconstructedImage = new ArrayList<>();
-    public static final List<String> modelNames = new ArrayList<>();
+
     ImageTransformator sinogramCreator = new ImageTransformator();
     String nameOfProjData;
 
     public TomographPane() {
         initComponents();
-
-        loadSampleImages();
-        fillModelNames();
-        initModelList();
-
-    }
-
-    private void loadSampleImages() {
-        ColorSpace grayColorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-        ColorConvertOp op = new ColorConvertOp(grayColorSpace, null);
-
-        String pathCurrentDir = System.getProperty("user.dir");
-        String pathToImages = "d:\\NetbeansProjects\\TomographySoftwareDiploma\\target\\resources\\internalImages";
-//        System.out.println(path);
-        try {
-//            for (File image : new File(new File(".").getCanonicalPath() +"\\resources\\internalImages").listFiles()) {
-            for (File image : new File(pathToImages).listFiles()) {
-
-                if (image.exists() && image.isFile()) {
-                    String imageNameWithoutExt = (image.getName().split("\\."))[0];
-                    if (bundleKeySet.contains(imageNameWithoutExt)) {
-                        BufferedImage input = ImageIO.read(image);
-                        if (input.getType() != 13) {
-                            input = op.filter(input, null);
-                        }
-                        models.put(bundle.getString(imageNameWithoutExt), input);
-
-                    }
+        
+        this.addWindowListener(new WindowAdapter(){
+                public void windowClosing(WindowEvent e){
+                    int i=JOptionPane.showConfirmDialog(null, bundle.getString("CONFIRMATION_EXIT"),"",JOptionPane.YES_NO_OPTION);
+                    if(i==0)
+                        logger.info("=======Stop TomographySoftware 1.0.0 application=======");
+                        System.exit(0);//cierra aplicacion
                 }
-            }
-
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+            });
     }
 
-    private void fillModelNames() {
-        if (!models.isEmpty()) {
+    @Override
+    public void setModellingController(ModellingModuleController controller) {
+        this.modellingModuleController = controller;
+    }
 
-            for (String name : models.keySet()) {
+    @Override
+    public void setHardwareController(HardwareModuleController controller) {
+        this.hardwareModuleController = controller;
+    }
+
+    @Override
+    public void setModellingImages(Map<String, BufferedImage> imageSamplesMapWithNames) {
+        fillModelNames(imageSamplesMapWithNames);
+        initModelList();
+    }
+
+    private void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames) {
+        if (!imageSamplesMapWithNames.isEmpty()) {
+
+            for (String name : imageSamplesMapWithNames.keySet()) {
                 modelNames.add(name);
             }
+        } else {
+            logger.warn("Map of modelling images is empty ");
         }
     }
 
@@ -119,23 +120,36 @@ public class TomographPane extends javax.swing.JFrame {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 if (evt.getValueIsAdjusting()) {
                     String model = (String) modelList.getSelectedValue();
-                    imgBuf = models.get(model);
-                    ImageIcon icon = new ImageIcon(imgBuf);
-                    labelImage1.setIcon(icon);
-                    labelImage2.setIcon(null);
-                    buttonSaveSinogram.setEnabled(false);
-                    buttonSaveReconstruct.setEnabled(false);
-                    buttonConverse.setEnabled(true);
-                    buttonReconstruct.setEnabled(false);
-                    coloring.setEnabled(false);
-                    coloring.setSelected(false);
-                    colorPanel.setVisible(false);
-                    buttonDensityViewer.setEnabled(false);
+                    modellingModuleController.setModelCurrentModellingImageByName(model);
                 }
             }
         });
     }
 
+    @Override
+    public void setCurrentModellingImage(BufferedImage image) {
+        ImageIcon icon = new ImageIcon(image);
+        labelImage1.setIcon(icon);
+    }
+
+    @Override
+    public void clearResultModelling() {
+        labelImage2.setIcon(null);
+    }
+
+    @Override
+    public void disableModellingControls() {
+
+        buttonSaveSinogram.setEnabled(false);
+        buttonSaveReconstruct.setEnabled(false);
+        buttonConverse.setEnabled(true);
+        buttonReconstruct.setEnabled(false);
+        coloring.setEnabled(false);
+        coloring.setSelected(false);
+        colorPanel.setVisible(false);
+        buttonDensityViewer.setEnabled(false);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -626,7 +640,7 @@ public class TomographPane extends javax.swing.JFrame {
 
             densityViewer.setLocationRelativeTo(null);
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
             setTitle("Томографический комплекс 1.0 НИЯУ МИФИ");
             setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
             setMinimumSize(new java.awt.Dimension(1250, 700));
@@ -1412,9 +1426,9 @@ public class TomographPane extends javax.swing.JFrame {
                 model.addRow(data);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_buttonOpenProjDataActionPerformed
@@ -1554,7 +1568,7 @@ public class TomographPane extends javax.swing.JFrame {
                 public void run() //Этот метод будет выполняться в побочном потоке
                 {
                     sinogramCreator.setScanParameters(Integer.parseInt(scansModel.getText()), Integer.parseInt(stepsize.getText()));
-                    sinogramCreator.setImage(imgBuf);
+//                    sinogramCreator.setImage(imgBuf);
                     sinogramImage = sinogramCreator.createSinogram();
                     ImageIcon icon2 = new ImageIcon(sinogramImage);
                     labelImage2.setIcon(icon2);
@@ -1594,24 +1608,24 @@ public class TomographPane extends javax.swing.JFrame {
         if (returnValue == 0) {
             File file = openFileChooser.getSelectedFile();
 
-            try {
+//            try {
                 //                    BufferedImage sinoimg;
 
-                imgBuf = ImageIO.read(file);
-                Image gray = new BufferedImage(imgBuf.getWidth(), imgBuf.getHeight(),
-                        BufferedImage.TYPE_BYTE_GRAY);
-
-                if (imgBuf.getType() != 13) {
-                    ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-                    ColorConvertOp op = new ColorConvertOp(cs, null);
-                    imgBuf = op.filter(imgBuf, null);
-                }
-
-                //                        File outputfile = new File("saved.png");
-                //                        ImageIO.write(windowedImage, "png", outputfile);
-                ImageIcon icon = new ImageIcon(imgBuf);
-                labelImage1.setIcon(icon);
-                displayImageDetails(imgBuf);
+//                imgBuf = ImageIO.read(file);
+//                Image gray = new BufferedImage(imgBuf.getWidth(), imgBuf.getHeight(),
+//                        BufferedImage.TYPE_BYTE_GRAY);
+//
+//                if (imgBuf.getType() != 13) {
+//                    ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+//                    ColorConvertOp op = new ColorConvertOp(cs, null);
+//                    imgBuf = op.filter(imgBuf, null);
+//                }
+//
+//                //                        File outputfile = new File("saved.png");
+//                //                        ImageIO.write(windowedImage, "png", outputfile);
+//                ImageIcon icon = new ImageIcon(imgBuf);
+//                labelImage1.setIcon(icon);
+//                displayImageDetails(imgBuf);
                 buttonSaveSinogram.setEnabled(false);
                 buttonSaveReconstruct.setEnabled(false);
                 buttonConverse.setEnabled(true);
@@ -1621,10 +1635,10 @@ public class TomographPane extends javax.swing.JFrame {
                 coloring.setSelected(false);
                 colorPanel.setVisible(false);
                 buttonDensityViewer.setEnabled(false);
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+//            } catch (IOException e1) {
+//                // TODO Auto-generated catch block
+//                e1.printStackTrace();
+//            }
         }
 
     }//GEN-LAST:event_buttonOpenFileActionPerformed
@@ -2167,6 +2181,6 @@ public class TomographPane extends javax.swing.JFrame {
     }
 
     public void displayImageDetails(BufferedImage img) {
-         jLabel1.setText("Размер изображения "+img.getWidth()+" * "+img.getHeight());
+        jLabel1.setText("Размер изображения " + img.getWidth() + " * " + img.getHeight());
     }
 }

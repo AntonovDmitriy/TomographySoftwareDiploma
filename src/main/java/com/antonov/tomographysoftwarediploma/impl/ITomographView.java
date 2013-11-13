@@ -1,0 +1,29 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.antonov.tomographysoftwarediploma.impl;
+
+import java.awt.image.BufferedImage;
+import java.util.Map;
+
+/**
+ *
+ * @author Antonov
+ */
+public interface ITomographView {
+
+    public void setModellingController(ModellingModuleController controller);
+
+    public void setHardwareController(HardwareModuleController controller);
+
+    public void setModellingImages(Map<String, BufferedImage> imageSamplesMapWithNames);
+
+    public void setCurrentModellingImage(BufferedImage image);
+
+    public void clearResultModelling();
+
+    public void disableModellingControls();
+
+}
