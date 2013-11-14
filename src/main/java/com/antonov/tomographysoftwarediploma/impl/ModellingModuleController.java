@@ -6,6 +6,7 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -38,6 +39,10 @@ public class ModellingModuleController extends Controller {
         super.tomograph.modellingModule.setCurrentModellingImageByName(image);
     }
 
+    public void getAndSetFileModellingImage(File file){
+        super.tomograph.modellingModule.getAndSetFileModellingImage(file);
+    }
+    
 //    public BufferedImage getMCurrentModellingImage(){
 //        return super.tomograph.modellingModuleController.getCurrentModellingImage();
 //    }

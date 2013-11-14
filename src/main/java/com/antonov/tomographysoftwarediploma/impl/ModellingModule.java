@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
 import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +29,11 @@ class ModellingModule {
     private Properties tomographProperty;
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
     private BufferedImage currentModellingImage;
-    
-    public void setController(ModellingModuleController controller){
+
+    public void setController(ModellingModuleController controller) {
         this.controller = controller;
     }
-    
+
     public void setImageSamplesMap(Map<String, BufferedImage> map) {
         this.imageSamplesMapWithNames = map;
     }
@@ -86,13 +87,17 @@ class ModellingModule {
         }
     }
 
-    public void prepareView(){
+    public void prepareView() {
         controller.setModellingImages(imageSamplesMapWithNames);
     }
-    
-    public void setCurrentModellingImageByName(String image){
+
+    public void setCurrentModellingImageByName(String image) {
         currentModellingImage = imageSamplesMapWithNames.get(image);
         logger.info("Current modelling image changes on " + image);
+        setCurrentModellingImage();
+    }
+
+    private void setCurrentModellingImage() {
         controller.setViewCurrentModellingImage(currentModellingImage);
         logger.info("Current modelling image changes on display");
         controller.clearResultModelling();
@@ -100,8 +105,20 @@ class ModellingModule {
         controller.disableModellingControls();
         logger.info("Modelling controls are disabled");
     }
-    
-    public BufferedImage getCurrentModellingImage(){
-        return currentModellingImage;
+
+    public void getAndSetFileModellingImage(File file) {
+        try {
+            BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
+            logger.info(file.getAbsolutePath() + " is successfully opened");
+            ImageTransformer.prepareImage(image);
+            logger.info(file.getAbsolutePath() + " is prepared");
+            currentModellingImage = image;
+            logger.info("Current modelling image changes on " + file.getName());
+            setCurrentModellingImage();
+        } catch (IOException ex) {
+            logger.error("Error during openinig image "+ ex);
+        }
+        
+        
     }
 }

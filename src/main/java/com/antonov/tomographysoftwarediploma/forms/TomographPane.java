@@ -13,6 +13,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.color.ColorSpace;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -71,6 +73,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
+
+        initButtons();
     }
 
     @Override
@@ -151,6 +155,20 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonDensityViewer.setEnabled(false);
     }
 
+    private void initButtons() {
+
+        buttonOpenFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (openFileChooser.showOpenDialog(TomographPane.this) == 0) {
+                    File file = openFileChooser.getSelectedFile();
+                    modellingModuleController.getAndSetFileModellingImage(file);
+                }
+            }
+        });
+
+        
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -1568,42 +1586,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenFileActionPerformed
 
-        int returnValue = openFileChooser.showOpenDialog(this);
-        if (returnValue == 0) {
-            File file = openFileChooser.getSelectedFile();
-
-//            try {
-            //                    BufferedImage sinoimg;
-//                imgBuf = ImageIO.read(file);
-//                Image gray = new BufferedImage(imgBuf.getWidth(), imgBuf.getHeight(),
-//                        BufferedImage.TYPE_BYTE_GRAY);
-//
-//                if (imgBuf.getType() != 13) {
-//                    ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-//                    ColorConvertOp op = new ColorConvertOp(cs, null);
-//                    imgBuf = op.filter(imgBuf, null);
-//                }
-//
-//                //                        File outputfile = new File("saved.png");
-//                //                        ImageIO.write(windowedImage, "png", outputfile);
-//                ImageIcon icon = new ImageIcon(imgBuf);
-//                labelImage1.setIcon(icon);
-//                displayImageDetails(imgBuf);
-            buttonSaveSinogram.setEnabled(false);
-            buttonSaveReconstruct.setEnabled(false);
-            buttonConverse.setEnabled(true);
-            buttonReconstruct.setEnabled(false);
-            labelImage2.setIcon(null);
-            coloring.setEnabled(false);
-            coloring.setSelected(false);
-            colorPanel.setVisible(false);
-            buttonDensityViewer.setEnabled(false);
-//            } catch (IOException e1) {
-//                // TODO Auto-generated catch block
-//                e1.printStackTrace();
-//            }
-        }
-
     }//GEN-LAST:event_buttonOpenFileActionPerformed
 
     private void buttonProjDataOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataOpenFileActionPerformed
@@ -1973,6 +1955,100 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         }
     }//GEN-LAST:event_color1ActionPerformed
 
+    class ImageFilter extends javax.swing.filechooser.FileFilter {
+
+        @Override
+        public boolean accept(File f) {
+            if (f.isDirectory()) {
+                return true;
+            }
+            String name = f.getName();
+            if (name.matches(".*((.jpg)|(.gif)|(.png)|(.bmp))")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String getDescription() {
+            return "Image files (*.jpg, *.gif, *.png, *.bmp)";
+        }
+    }
+
+    class FileNameExtensionFilter extends javax.swing.filechooser.FileFilter {
+
+        private String extenName;
+        private String exten;
+
+        FileNameExtensionFilter(String extenName, String exten) {
+            this.extenName = extenName;
+            this.exten = exten;
+        }
+
+        @Override
+        public boolean accept(File f) {
+            if (f.isDirectory()) {
+                return true;
+            }
+            String name = f.getName();
+            if (name.matches(".*(" + exten + ")")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String getDescription() {
+            return extenName;
+        }
+    }
+
+    public boolean checkScanParameters() {
+        boolean checkflag = false;
+
+        try {
+
+            Integer.parseInt(scansModel.getText());
+            Integer.parseInt(stepsize.getText());
+        } catch (NumberFormatException e) {
+            return checkflag;
+        }
+        checkflag = true;
+        return checkflag;
+    }
+
+    public void saveFile(BufferedImage image, String name, String filterImageDesc) {
+
+        String format = "";
+        if (filterImageDesc.equals("JPEG File")) {
+            String ext = ".jpeg";
+            name = name + ext;
+            format = "jpeg";
+        } else if (filterImageDesc.equals("PNG File")) {
+            String ext = ".png";
+            name = name + ext;
+            format = "PNG";
+        } else if (filterImageDesc.equals("BMP File")) {
+            String ext = ".bmp";
+            name = name + ext;
+            format = "BMP";
+        } else if (filterImageDesc.equals("All Files")) {
+            format = "";
+        }
+        File file = new File(name);
+        try {
+            ImageIO.write(image, format, file);
+        } catch (IOException ex) {
+//            Logger.getLogger(TomographPaneetName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void displayImageDetails(BufferedImage img) {
+        jLabel1.setText("Размер изображения " + img.getWidth() + " * " + img.getHeight());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;
     private javax.swing.JPanel Model;
@@ -2078,97 +2154,4 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JTextField textFielsName;
     // End of variables declaration//GEN-END:variables
 
-    class ImageFilter extends javax.swing.filechooser.FileFilter {
-
-        @Override
-        public boolean accept(File f) {
-            if (f.isDirectory()) {
-                return true;
-            }
-            String name = f.getName();
-            if (name.matches(".*((.jpg)|(.gif)|(.png)|(.bmp))")) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public String getDescription() {
-            return "Image files (*.jpg, *.gif, *.png, *.bmp)";
-        }
-    }
-
-    class FileNameExtensionFilter extends javax.swing.filechooser.FileFilter {
-
-        private String extenName;
-        private String exten;
-
-        FileNameExtensionFilter(String extenName, String exten) {
-            this.extenName = extenName;
-            this.exten = exten;
-        }
-
-        @Override
-        public boolean accept(File f) {
-            if (f.isDirectory()) {
-                return true;
-            }
-            String name = f.getName();
-            if (name.matches(".*(" + exten + ")")) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public String getDescription() {
-            return extenName;
-        }
-    }
-
-    public boolean checkScanParameters() {
-        boolean checkflag = false;
-
-        try {
-
-            Integer.parseInt(scansModel.getText());
-            Integer.parseInt(stepsize.getText());
-        } catch (NumberFormatException e) {
-            return checkflag;
-        }
-        checkflag = true;
-        return checkflag;
-    }
-
-    public void saveFile(BufferedImage image, String name, String filterImageDesc) {
-
-        String format = "";
-        if (filterImageDesc.equals("JPEG File")) {
-            String ext = ".jpeg";
-            name = name + ext;
-            format = "jpeg";
-        } else if (filterImageDesc.equals("PNG File")) {
-            String ext = ".png";
-            name = name + ext;
-            format = "PNG";
-        } else if (filterImageDesc.equals("BMP File")) {
-            String ext = ".bmp";
-            name = name + ext;
-            format = "BMP";
-        } else if (filterImageDesc.equals("All Files")) {
-            format = "";
-        }
-        File file = new File(name);
-        try {
-            ImageIO.write(image, format, file);
-        } catch (IOException ex) {
-//            Logger.getLogger(TomographPaneetName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void displayImageDetails(BufferedImage img) {
-        jLabel1.setText("Размер изображения " + img.getWidth() + " * " + img.getHeight());
-    }
 }
