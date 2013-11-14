@@ -9,6 +9,8 @@ import java.awt.Image;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -16,13 +18,12 @@ import java.awt.image.ColorConvertOp;
  */
 public class ImageTransformer {
 
-//    public static BufferedImage makeImageGray(BufferedImage image){
-//        //                Image gray = new BufferedImage(imgBuf.getWidth(), imgBuf.getHeight(),
-////                        BufferedImage.TYPE_BYTE_GRAY);
-//    }
+    private static Logger logger = LoggerFactory.getLogger(Tomograph.class);
+
     public static BufferedImage prepareImage(BufferedImage image) {
 
         if (image.getType() != 13) {
+            logger.trace("Type of image is TYPE_BYTE_INDEXED. Trying to make it gray");
             ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
             ColorConvertOp op = new ColorConvertOp(cs, null);
             image = op.filter(image, null);

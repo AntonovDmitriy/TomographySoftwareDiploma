@@ -54,9 +54,6 @@ class ModellingModule {
 
     private void initSamplesMapImage() {
 
-        ColorSpace grayColorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-        ColorConvertOp op = new ColorConvertOp(grayColorSpace, null);
-
         if (tomographProperty.getProperty("PATH_MODELLING_IMAGES") != null && !tomographProperty.getProperty("PATH_MODELLING_IMAGES").isEmpty()) {
             try {
                 String pathToImages = tomographProperty.getProperty("PATH_MODELLING_IMAGES");
@@ -66,13 +63,10 @@ class ModellingModule {
 
                     if (imageFile.exists() && imageFile.isFile()) {
                         logger.trace("Reading image file " + imageFile.getAbsolutePath());
-                        BufferedImage image = ImageIO.read(imageFile);
+                        BufferedImage image = ReaderWriterData.getImageFromFileSystem(imageFile);
                         logger.trace("File successfully has been read ");
                         String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];
-                        if (image.getType() != 13) {
-                            image = op.filter(image, null);
-                            logger.trace("Type of image is TYPE_BYTE_INDEXED. Trying to make it gray");
-                        }
+                        ImageTransformer.prepareImage(image);
                         imageSamplesMapWithNames.put(imageNameWithoutExt, image);
                         logger.trace("Image file " + imageFile.getAbsolutePath() + " was been successufully added");
                     } else {

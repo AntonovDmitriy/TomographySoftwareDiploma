@@ -17,8 +17,6 @@ import javax.imageio.ImageIO;
 public class ReaderWriterData {
 
     public static BufferedImage getImageFromFileSystem(File file) throws IOException {
-
         return ImageIO.read(file);
-
     }
 }
