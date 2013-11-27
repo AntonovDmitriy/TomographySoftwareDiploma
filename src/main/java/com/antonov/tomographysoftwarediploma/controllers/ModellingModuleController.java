@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.impl;
+package com.antonov.tomographysoftwarediploma.controllers;
 
+import com.antonov.tomographysoftwarediploma.impl.ITomographView;
+import com.antonov.tomographysoftwarediploma.impl.Tomograph;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.Map;
 
@@ -23,19 +26,8 @@ public class ModellingModuleController extends Controller {
         super.view.setModellingImages(imageSamplesMapWithNames);
     }
 
-    public void setViewCurrentModellingImage(BufferedImage image) {
-        super.view.setCurrentModellingImage(image);
-    }
-
-    public void clearResultModelling() {
-        super.view.clearResultModelling();
-    }
-
-    public void disableModellingControls() {
-        super.view.disableModellingControls();
-    }
-
     public void setModelCurrentModellingImageByName(String image) {
+        
         super.tomograph.modellingModule.setCurrentModellingImageByName(image);
     }
 
@@ -43,7 +35,8 @@ public class ModellingModuleController extends Controller {
         super.tomograph.modellingModule.getAndSetFileModellingImage(file);
     }
     
-//    public BufferedImage getMCurrentModellingImage(){
-//        return super.tomograph.modellingModuleController.getCurrentModellingImage();
-//    }
+    @Override
+    public void setPropertyChangeListener(PropertyChangeListener p) {
+        super.tomograph.modellingModule.addPropertyChangeListener(p);
+    }
 }

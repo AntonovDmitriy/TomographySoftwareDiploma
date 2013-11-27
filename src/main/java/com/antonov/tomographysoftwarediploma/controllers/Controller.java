@@ -3,21 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.antonov.tomographysoftwarediploma.controllers;
 
-package com.antonov.tomographysoftwarediploma.impl;
+import com.antonov.tomographysoftwarediploma.impl.ITomographView;
+import com.antonov.tomographysoftwarediploma.impl.Tomograph;
+import java.beans.PropertyChangeListener;
 
 /**
  *
  * @author Antonov
  */
-public class Controller {
+public abstract class Controller {
 
     protected Tomograph tomograph;
     protected ITomographView view;
-    
+
     public Controller(Tomograph tomograph, ITomographView view) {
         this.tomograph = tomograph;
         this.view = view;
     }
-    
+
+    public void exitApplication() {
+        tomograph.exitApplication();
+    }
+
+    public abstract void setPropertyChangeListener(PropertyChangeListener p);
+
 }

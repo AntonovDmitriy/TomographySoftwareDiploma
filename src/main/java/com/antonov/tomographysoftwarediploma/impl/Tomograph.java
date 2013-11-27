@@ -5,6 +5,8 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author Antonov
  */
 public class Tomograph {
+
     private static Logger logger = LoggerFactory.getLogger(Tomograph.class);
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
@@ -31,12 +34,10 @@ public class Tomograph {
         this.modellingModule = new ModellingModule(tomographProperty);
     }
 
-
     public void setModellingController(ModellingModuleController controller) {
         this.modellingModuleController = controller;
         this.modellingModule.setController(controller);
     }
-
 
     public void setHardwareController(HardwareModuleController controller) {
         this.hardwareModuleController = controller;
@@ -52,9 +53,13 @@ public class Tomograph {
         }
     }
 
-
     public void prepareViews() {
         modellingModule.prepareView();
     }
-    
+
+    public void exitApplication() {
+        logger.info("=======Stop TomographySoftware 1.0.0 application=======");
+        System.exit(0);//cierra aplicacion
+    }
+
 }

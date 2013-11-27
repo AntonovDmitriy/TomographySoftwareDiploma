@@ -5,10 +5,10 @@ import com.antonov.tomographysoftwarediploma.DensityAnalizator;
 import com.antonov.tomographysoftwarediploma.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.LUTFunctions;
 import com.antonov.tomographysoftwarediploma.Utils;
-import com.antonov.tomographysoftwarediploma.impl.Controller;
-import com.antonov.tomographysoftwarediploma.impl.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.controllers.Controller;
+import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
-import com.antonov.tomographysoftwarediploma.impl.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -19,6 +19,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -39,6 +41,9 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +57,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             "bundle_Rus");
 
     public static final List<String> modelNames = new ArrayList<>(); // For modelling images names
+    
+    
     private BufferedImage sinogramImage;
     private BufferedImage reconstructImage;
     private BufferedImage reconstructColorImage;
@@ -68,8 +75,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             public void windowClosing(WindowEvent e) {
                 int i = JOptionPane.showConfirmDialog(null, bundle.getString("CONFIRMATION_EXIT"), "", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    logger.info("=======Stop TomographySoftware 1.0.0 application=======");
-                    System.exit(0);//cierra aplicacion
+                    modellingModuleController.exitApplication();
                 }
             }
         });
@@ -132,12 +138,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     }
 
     @Override
-    public void setCurrentModellingImage(BufferedImage image) {
-        ImageIcon icon = new ImageIcon(image);
-        labelImage1.setIcon(icon);
-    }
-
-    @Override
     public void clearResultModelling() {
         labelImage2.setIcon(null);
     }
@@ -155,6 +155,35 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonDensityViewer.setEnabled(false);
     }
 
+    @Override
+    public void setCurrentModellingImage(BufferedImage image) {
+        ImageIcon icon = new ImageIcon(image);
+        labelImage1.setIcon(icon);
+    }
+
+    @Override
+    public void initListeners() {
+
+        PropertyChangeListener currentImageModellingListener = new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                switch (evt.getPropertyName()) {
+                    case "currentImageModelling":
+                        setCurrentModellingImage((BufferedImage) evt.getNewValue());
+                        break;
+                    case "clearResultModelling":
+                        clearResultModelling();
+                        break;
+                    case "disableModellingControls":
+                        disableModellingControls();
+                        break;
+                }
+            }
+        };
+        modellingModuleController.setPropertyChangeListener(currentImageModellingListener);
+    }
+
     private void initButtons() {
 
         buttonOpenFile.addActionListener(new ActionListener() {
@@ -167,6 +196,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
 
+    }
+    
+    private void initParametersModelling(){
+        
         
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -230,7 +263,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         filterCosine = new javax.swing.JRadioButton();
         filterBlackman = new javax.swing.JRadioButton();
         buttonSaveReconstruct = new javax.swing.JButton();
-        buttonOpenFile = new javax.swing.JButton();
         ParamModellingPane = new javax.swing.JPanel();
         labelDetectors = new javax.swing.JLabel();
         scansModel = new javax.swing.JTextField();
@@ -249,6 +281,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         color4 = new javax.swing.JRadioButton();
         color3 = new javax.swing.JRadioButton();
         coloring = new javax.swing.JCheckBox();
+        toolbarSourceImage = new javax.swing.JToolBar();
+        buttonOpenFile = new javax.swing.JButton();
+        toolbarModellingImage = new javax.swing.JToolBar();
         Tomograph = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         scansTomograph = new javax.swing.JTextField();
@@ -682,7 +717,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridy = 1;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.ipadx = 477;
             gridBagConstraints.ipady = 517;
@@ -703,7 +738,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 2;
-            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridy = 1;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.ipadx = 477;
             gridBagConstraints.ipady = 517;
@@ -826,20 +861,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonSaveReconstruct, gridBagConstraints);
-
-            buttonOpenFile.setText("Открыть файл");
-            buttonOpenFile.setFocusPainted(false);
-            buttonOpenFile.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonOpenFileActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(buttonOpenFile, gridBagConstraints);
 
             ParamModellingPane.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
             ParamModellingPane.setLayout(new java.awt.GridBagLayout());
@@ -1092,11 +1113,30 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridheight = 2;
             gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weighty = 1.0;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
             Model.add(paneControl, gridBagConstraints);
+
+            toolbarSourceImage.setRollover(true);
+
+            buttonOpenFile.setIcon(UIManager.getIcon("FileView.floppyDriveIcon"));
+            buttonOpenFile.setFocusPainted(false);
+            buttonOpenFile.setFocusable(false);
+            buttonOpenFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            buttonOpenFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            toolbarSourceImage.add(buttonOpenFile);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            Model.add(toolbarSourceImage, gridBagConstraints);
+
+            toolbarModellingImage.setRollover(true);
+            Model.add(toolbarModellingImage, new java.awt.GridBagConstraints());
 
             jTabbedPane1.addTab("Модель", Model);
 
@@ -1583,10 +1623,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         }
     }//GEN-LAST:event_labelImage1MouseClicked
-
-    private void buttonOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenFileActionPerformed
-
-    }//GEN-LAST:event_buttonOpenFileActionPerformed
 
     private void buttonProjDataOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataOpenFileActionPerformed
         // TODO add your handling code here:
@@ -2152,6 +2188,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JTable tableProjData;
     private javax.swing.JTextField textFielsDescription;
     private javax.swing.JTextField textFielsName;
+    private javax.swing.JToolBar toolbarModellingImage;
+    private javax.swing.JToolBar toolbarSourceImage;
     // End of variables declaration//GEN-END:variables
 
 }

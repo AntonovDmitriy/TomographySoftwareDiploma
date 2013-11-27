@@ -5,9 +5,12 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,6 +18,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import javax.imageio.ImageIO;
+import javax.swing.event.ChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +26,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Antonov
  */
-class ModellingModule {
+public class ModellingModule {
 
     ModellingModuleController controller;
     private static Logger logger = LoggerFactory.getLogger(ModellingModule.class);
@@ -30,12 +34,29 @@ class ModellingModule {
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
     private BufferedImage currentModellingImage;
 
+    public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+    
+    //Parameters of modelling
+    int scans;
+    int stepSize;
+
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
+        
     }
 
     public void setImageSamplesMap(Map<String, BufferedImage> map) {
         this.imageSamplesMapWithNames = map;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    protected void firePropertyChange(String propertyName, Object oldValue,
+            Object newValue) {
+        propertyChangeSupport.firePropertyChange(propertyName, oldValue,
+                newValue);
     }
 
     public Map<String, BufferedImage> getImageSampleMap() {
@@ -91,12 +112,12 @@ class ModellingModule {
         setCurrentModellingImage();
     }
 
-    private void setCurrentModellingImage() {
-        controller.setViewCurrentModellingImage(currentModellingImage);
+    public void setCurrentModellingImage() {
+        firePropertyChange("currentImageModelling", null, currentModellingImage);
         logger.info("Current modelling image changes on display");
-        controller.clearResultModelling();
+        firePropertyChange("clearResultModelling", controller, scans);
         logger.info("Result modelling is clear");
-        controller.disableModellingControls();
+        firePropertyChange("disableModellingControls", null, null);
         logger.info("Modelling controls are disabled");
     }
 
@@ -110,9 +131,7 @@ class ModellingModule {
             logger.info("Current modelling image changes on " + file.getName());
             setCurrentModellingImage();
         } catch (IOException ex) {
-            logger.error("Error during openinig image "+ ex);
+            logger.error("Error during openinig image " + ex);
         }
-        
-        
     }
 }

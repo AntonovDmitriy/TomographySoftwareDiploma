@@ -5,6 +5,8 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import com.antonov.tomographysoftwarediploma.forms.TomographPane;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
@@ -22,21 +24,20 @@ public class AppLaunch {
     public static void main(String[] args) {
 
         Logger logger = LoggerFactory.getLogger(AppLaunch.class);
-//        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-//        ColorConvertOp op = new ColorConvertOp(cs, null);
-//        System.out.println(System.getProperty("user.dir"));
+        
         logger.info("=======Start TomographySoftware 1.0.0 application=======");
         Tomograph model = new Tomograph();
         initLookAndFeel();
         ITomographView view = new TomographPane();
         ModellingModuleController mc = new ModellingModuleController(model, view);
         HardwareModuleController hc = new HardwareModuleController(model, view);
+        
         model.setModellingController(mc);
         model.setHardwareController(hc);
         view.setModellingController(mc);
         view.setHardwareController(hc);
+        view.initListeners();
         model.prepareViews();
-//        initViewParameters((Frame) view);
         ((Frame) view).setVisible(true);
 
     }
@@ -47,11 +48,11 @@ public class AppLaunch {
     }
 
     private static void initLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            System.out.println(ex);
+//        try {
+//            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+//            UIManager.setLookAndFeel("javax.swing.plaf.n");
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            System.out.println(ex);
         }
-    }
+//    }
 }

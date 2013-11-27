@@ -5,6 +5,8 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
@@ -26,4 +28,5 @@ public interface ITomographView {
 
     public void disableModellingControls();
 
+    public void initListeners();
 }
