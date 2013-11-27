@@ -718,9 +718,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 477;
-            gridBagConstraints.ipady = 517;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.weighty = 1.0;
@@ -739,9 +737,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 2;
             gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 477;
-            gridBagConstraints.ipady = 517;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.weighty = 1.0;
@@ -1122,7 +1118,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             toolbarSourceImage.setRollover(true);
 
-            buttonOpenFile.setIcon(UIManager.getIcon("FileView.floppyDriveIcon"));
+            buttonOpenFile.setIcon(UIManager.getIcon("FileView.directoryIcon"));
             buttonOpenFile.setFocusPainted(false);
             buttonOpenFile.setFocusable(false);
             buttonOpenFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
