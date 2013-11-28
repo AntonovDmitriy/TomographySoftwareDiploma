@@ -45,7 +45,7 @@ public class ModellingModuleController extends Controller {
             super.tomograph.modellingModule.setScans(scans);
         } catch (NumberFormatException ex) {
             logger.warn("Error parsing value of scans", ex);
-            JOptionPane.showMessageDialog(comp, bundle.getString("ERROR_PARSE_SCANS") + " "+ scansString +" " + ex.getMessage(), bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(comp, bundle.getString("ERROR_PARSE_SCANS") + " " + scansString + " " + ex.getMessage(), bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -53,10 +53,10 @@ public class ModellingModuleController extends Controller {
     public void setStepSize(String stepSizeString, Component comp) {
         try {
             int stepSize = checkAndGetInt(stepSizeString);
-        super.tomograph.modellingModule.setStepSize(stepSize);
+            super.tomograph.modellingModule.setStepSize(stepSize);
         } catch (NumberFormatException ex) {
             logger.warn("Error parsing value of scans", ex);
-            JOptionPane.showMessageDialog(comp, bundle.getString("ERROR_PARSE_STEPSIZE") + " "+ stepSizeString +" " + ex.getMessage(), bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(comp, bundle.getString("ERROR_PARSE_STEPSIZE") + " " + stepSizeString + " " + ex.getMessage(), bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -72,8 +72,10 @@ public class ModellingModuleController extends Controller {
         }
         return scans;
     }
-    
-    public void createSinogram(){
+
+    public void createSinogram(String scans, String stepSize) {
+
+        //!!!!!!!!!!!!!!!!!!!CHECKING PARAMETERS MODELLING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         super.tomograph.modellingModule.createSinogram();
     }
 }

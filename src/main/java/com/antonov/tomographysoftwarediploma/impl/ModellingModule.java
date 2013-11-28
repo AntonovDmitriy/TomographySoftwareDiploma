@@ -5,6 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformer;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.image.BufferedImage;
@@ -29,7 +30,8 @@ public class ModellingModule {
     private Properties tomographProperty;
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
     private BufferedImage currentModellingImage;
-
+    private BufferedImage sinogramImage;
+    
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
     //Parameters of modelling
@@ -120,6 +122,13 @@ public class ModellingModule {
         logger.info("Modelling controls are disabled");
     }
 
+    public void setSinogramImage(BufferedImage image){
+         BufferedImage oldSinogramImage = this.sinogramImage;
+         this.sinogramImage = image;
+         firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
+         logger.trace("Sinogram image is changed");
+    }
+    
     public void getAndSetFileModellingImage(File file) {
         try {
             BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
@@ -172,6 +181,13 @@ public class ModellingModule {
     public void createSinogram(){
         logger.trace("Sinogram creating is starting");
          firePropertyChange("startSinogramm", null, null);
+         ImageTransformator transformer = new ImageTransformator();
+         transformer.setScanParameters(scans, stepSize);
+         BufferedImage sinogram = transformer.createSinogram();
+         setSinogramImage(sinogram);
+         firePropertyChange("enableReconControls", null, null);
+         logger.trace("Recon controls are enabled");
+         firePropertyChange("stopSinogramm", null, null);
         logger.trace("Sinogram createing is finishing");
     }
 }

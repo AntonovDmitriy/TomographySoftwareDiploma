@@ -24,9 +24,13 @@ public interface ITomographView {
 
     public void setCurrentModellingImage(BufferedImage image);
 
+    public void setSinogramImage(BufferedImage image);
+    
     public void clearResultModelling();
 
     public void disableModellingControls();
 
+    public void enableReconControls();
+    
     public void initListeners();
 }

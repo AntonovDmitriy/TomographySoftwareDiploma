@@ -151,9 +151,22 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     }
 
     @Override
+    public void enableReconControls() {
+        buttonReconstruct.setEnabled(true);
+        buttonSaveSinogram.setEnabled(true);
+        buttonDensityViewer.setEnabled(false);
+    }
+
+    @Override
     public void setCurrentModellingImage(BufferedImage image) {
         ImageIcon icon = new ImageIcon(image);
         labelImage1.setIcon(icon);
+    }
+
+    @Override
+    public void setSinogramImage(BufferedImage image) {
+        ImageIcon icon = new ImageIcon(image);
+        labelImage2.setIcon(icon);
     }
 
     @Override
@@ -173,6 +186,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "disableModellingControls":
                         disableModellingControls();
                         break;
+                    case "enableReconControls":
+                        enableReconControls();
+                        break;
                     case "scans":
                         edScansModel.setText(((Integer) evt.getNewValue()).toString());
                         break;
@@ -181,6 +197,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         break;
                     case "startSinogramm":
                         startCalculating();
+                        break;
+                    case "stopSinogramm":
+                        stopCalculating();
+                        break;
+                    case "setSinogramImage":
+                        setSinogramImage((BufferedImage) evt.getNewValue());
                         break;
                 }
             }
@@ -192,6 +214,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         dialogProgressBar.setVisible(true);
         progressBar.setIndeterminate(true);
+    }
+
+    private void stopCalculating() {
+        progressBar.setIndeterminate(false);
+        dialogProgressBar.setVisible(false);
     }
 
     private void initButtons() {
@@ -209,7 +236,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSinogram.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modellingModuleController.createSinogram();
+                modellingModuleController.createSinogram(edScansModel.getText(), edStepsizeModel.getText());
             }
         });
     }
@@ -951,11 +978,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonSinogram.setDefaultCapable(false);
             buttonSinogram.setEnabled(false);
             buttonSinogram.setFocusPainted(false);
-            buttonSinogram.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonSinogramActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
@@ -1661,22 +1683,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         }
     }//GEN-LAST:event_labelImage2MouseClicked
-
-    private void buttonSinogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSinogramActionPerformed
-
-        sinogramCreator.setScanParameters(Integer.parseInt(edScansModel.getText()), Integer.parseInt(edStepsizeModel.getText()));
-        sinogramImage = sinogramCreator.createSinogram();
-        ImageIcon icon2 = new ImageIcon(sinogramImage);
-        labelImage2.setIcon(icon2);
-        buttonReconstruct.setEnabled(true);
-        buttonSaveSinogram.setEnabled(true);
-//                    filterActionPanel.setVisible(true);
-        progressBar.setIndeterminate(false);
-        dialogProgressBar.setVisible(false);
-        buttonDensityViewer.setEnabled(false);
-
-
-    }//GEN-LAST:event_buttonSinogramActionPerformed
 
     private void labelImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImage1MouseClicked
         // TODO add your handling code here:
