@@ -263,13 +263,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         filterCosine = new javax.swing.JRadioButton();
         filterBlackman = new javax.swing.JRadioButton();
         buttonSaveReconstruct = new javax.swing.JButton();
-        ParamModellingPane = new javax.swing.JPanel();
+        paneParamModelling = new javax.swing.JPanel();
         labelDetectors = new javax.swing.JLabel();
         scansModel = new javax.swing.JTextField();
         labelStepsize = new javax.swing.JLabel();
         stepsize = new javax.swing.JTextField();
-        labelReconstructSize = new javax.swing.JLabel();
-        reconstructSize = new javax.swing.JTextField();
         filteringModel = new javax.swing.JCheckBox();
         buttonSaveSinogram = new javax.swing.JButton();
         buttonConverse = new javax.swing.JButton();
@@ -281,6 +279,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         color4 = new javax.swing.JRadioButton();
         color3 = new javax.swing.JRadioButton();
         coloring = new javax.swing.JCheckBox();
+        paneParamReconstruct = new javax.swing.JPanel();
+        labelReconstructSize = new javax.swing.JLabel();
+        reconstructSize = new javax.swing.JTextField();
         toolbarSourceImage = new javax.swing.JToolBar();
         buttonOpenFile = new javax.swing.JButton();
         toolbarModellingImage = new javax.swing.JToolBar();
@@ -697,13 +698,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
             setTitle("Томографический комплекс 1.0 НИЯУ МИФИ");
             setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-            setMinimumSize(new java.awt.Dimension(1250, 700));
 
             jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
             jTabbedPane1.setToolTipText("");
             jTabbedPane1.setDoubleBuffered(true);
 
-            Model.setMinimumSize(new java.awt.Dimension(800, 600));
             Model.setLayout(new java.awt.GridBagLayout());
 
             labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -774,7 +773,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.gridy = 0;
             gridBagConstraints.gridwidth = 2;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneControl.add(modelPanel, gridBagConstraints);
 
@@ -836,7 +835,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 6;
+            gridBagConstraints.gridy = 7;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
             paneControl.add(filterPanel, gridBagConstraints);
@@ -858,16 +857,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonSaveReconstruct, gridBagConstraints);
 
-            ParamModellingPane.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
-            ParamModellingPane.setLayout(new java.awt.GridBagLayout());
+            paneParamModelling.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
+            paneParamModelling.setLayout(new java.awt.GridBagLayout());
 
-            labelDetectors.setText("Число сканирований");
+            labelDetectors.setText(bundle.getString("LABEL_SCANS")); // NOI18N
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            ParamModellingPane.add(labelDetectors, gridBagConstraints);
+            paneParamModelling.add(labelDetectors, gridBagConstraints);
 
             scansModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             scansModel.setText("400");
@@ -878,22 +877,20 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 2;
+            gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.ipadx = 55;
+            gridBagConstraints.ipadx = 30;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            ParamModellingPane.add(scansModel, gridBagConstraints);
+            paneParamModelling.add(scansModel, gridBagConstraints);
 
-            labelStepsize.setText("<html>Шаг сканирования,<br>        град");
+            labelStepsize.setText(bundle.getString("LABEL_STEPSIZE")); // NOI18N
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            ParamModellingPane.add(labelStepsize, gridBagConstraints);
+            paneParamModelling.add(labelStepsize, gridBagConstraints);
 
             stepsize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             stepsize.setText("1");
@@ -905,42 +902,22 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 2;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.ipadx = 55;
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipadx = 30;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            ParamModellingPane.add(stepsize, gridBagConstraints);
-
-            labelReconstructSize.setText("Размер реконструкции");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-            ParamModellingPane.add(labelReconstructSize, gridBagConstraints);
-
-            reconstructSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            reconstructSize.setText("400");
-            reconstructSize.setToolTipText("");
-            reconstructSize.setAutoscrolls(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 2;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.ipadx = 55;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            ParamModellingPane.add(reconstructSize, gridBagConstraints);
+            paneParamModelling.add(stepsize, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
-            gridBagConstraints.gridwidth = 3;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(ParamModellingPane, gridBagConstraints);
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            paneControl.add(paneParamModelling, gridBagConstraints);
 
             filteringModel.setText("Фильтрация");
             filteringModel.setFocusPainted(false);
@@ -951,7 +928,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 6;
+            gridBagConstraints.gridy = 7;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(filteringModel, gridBagConstraints);
@@ -983,7 +960,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
+            gridBagConstraints.gridy = 5;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonConverse, gridBagConstraints);
@@ -998,7 +975,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 5;
+            gridBagConstraints.gridy = 6;
             gridBagConstraints.gridwidth = 2;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
@@ -1015,7 +992,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 4;
+            gridBagConstraints.gridy = 5;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonReconstruct, gridBagConstraints);
@@ -1085,7 +1062,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 7;
+            gridBagConstraints.gridy = 8;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(colorPanel, gridBagConstraints);
@@ -1101,17 +1078,50 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 7;
+            gridBagConstraints.gridy = 8;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(coloring, gridBagConstraints);
+
+            paneParamReconstruct.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
+            paneParamReconstruct.setLayout(new java.awt.GridBagLayout());
+
+            labelReconstructSize.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+            paneParamReconstruct.add(labelReconstructSize, gridBagConstraints);
+
+            reconstructSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            reconstructSize.setText("400");
+            reconstructSize.setToolTipText("");
+            reconstructSize.setAutoscrolls(false);
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipadx = 30;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            paneParamReconstruct.add(reconstructSize, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            paneControl.add(paneParamReconstruct, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
             gridBagConstraints.gridheight = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.weighty = 1.0;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
             Model.add(paneControl, gridBagConstraints);
@@ -1338,12 +1348,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         .addComponent(coloringTomograph)
                         .addComponent(buttonDensityViewerTomograph)
                         .addComponent(colorPanelTomograph, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(69, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(TomographLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TomographLayout.createSequentialGroup()
                         .addGap(562, 562, 562)
                         .addComponent(buttonDensityViewer1)
-                        .addContainerGap(563, Short.MAX_VALUE)))
+                        .addContainerGap(504, Short.MAX_VALUE)))
             );
             TomographLayout.setVerticalGroup(
                 TomographLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1388,7 +1398,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(buttonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(21, 21, 21)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                     .addComponent(sliderImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(12, 12, 12))
@@ -1396,30 +1406,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     .addGroup(TomographLayout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(buttonDensityViewer1)
-                        .addContainerGap(301, Short.MAX_VALUE)))
+                        .addContainerGap(403, Short.MAX_VALUE)))
             );
 
             colorPanelTomograph.setVisible(false);
 
             jTabbedPane1.addTab("Томограф", Tomograph);
 
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jTabbedPane1)
-                    .addContainerGap())
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
-                    .addContainerGap())
-            );
-
+            getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
             jTabbedPane1.getAccessibleContext().setAccessibleName("Модель");
 
             pack();
@@ -2084,7 +2078,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;
     private javax.swing.JPanel Model;
-    private javax.swing.JPanel ParamModellingPane;
     private javax.swing.JPanel Tomograph;
     private javax.swing.JButton buttonCanselSetName;
     private javax.swing.JButton buttonConverse;
@@ -2173,6 +2166,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JTextField outputImgSizeTomograph;
     private javax.swing.JPanel paneControl;
+    private javax.swing.JPanel paneParamModelling;
+    private javax.swing.JPanel paneParamReconstruct;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JTextField reconstructSize;
     private javax.swing.JFileChooser saveFileChooser;
