@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.antonov.tomographysoftwarediploma.impl;
+package com.antonov.tomographysoftwarediploma.viewSwing;
 
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;

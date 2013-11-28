@@ -5,6 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformer;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
@@ -170,7 +171,7 @@ public class ModellingModule {
     
     public void createSinogram(){
         logger.trace("Sinogram creating is starting");
-        
+         firePropertyChange("startSinogramm", null, null);
         logger.trace("Sinogram createing is finishing");
     }
 }

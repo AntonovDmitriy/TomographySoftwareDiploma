@@ -7,7 +7,7 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
-import com.antonov.tomographysoftwarediploma.forms.TomographPane;
+import com.antonov.tomographysoftwarediploma.viewSwing.TomographPane;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;

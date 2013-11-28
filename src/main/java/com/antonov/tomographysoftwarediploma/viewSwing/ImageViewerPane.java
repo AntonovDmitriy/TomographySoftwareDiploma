@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.forms;
+package com.antonov.tomographysoftwarediploma.viewSwing;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;

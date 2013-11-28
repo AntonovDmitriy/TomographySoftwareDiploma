@@ -1,11 +1,7 @@
 package com.antonov.tomographysoftwarediploma;
 
-import dblayer.DbModule;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
@@ -13,24 +9,14 @@ import java.awt.image.ColorConvertOp;
 import java.awt.image.ColorModel;
 import java.awt.image.ComponentColorModel;
 import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
 import java.awt.image.DataBufferUShort;
 import java.awt.image.IndexColorModel;
 import java.awt.image.PixelInterleavedSampleModel;
 import java.awt.image.Raster;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
 
 public class ImageTransformator {
 
