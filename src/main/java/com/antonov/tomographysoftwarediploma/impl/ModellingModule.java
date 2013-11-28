@@ -35,14 +35,14 @@ public class ModellingModule {
     private BufferedImage currentModellingImage;
 
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    
+
     //Parameters of modelling
-    int scans;
-    int stepSize;
+    private Integer scans;
+    private Integer stepSize;
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
-        
+
     }
 
     public void setImageSamplesMap(Map<String, BufferedImage> map) {
@@ -67,6 +67,7 @@ public class ModellingModule {
         if (p != null) {
             this.tomographProperty = p;
             initSamplesMapImage();
+            initParamModelling();
         } else {
             logger.warn("Properties file is null");
         }
@@ -104,6 +105,8 @@ public class ModellingModule {
 
     public void prepareView() {
         controller.setModellingImages(imageSamplesMapWithNames);
+        firePropertyChange("scans", null, scans);
+        firePropertyChange("stepsize", null, stepSize);
     }
 
     public void setCurrentModellingImageByName(String image) {
@@ -132,6 +135,21 @@ public class ModellingModule {
             setCurrentModellingImage();
         } catch (IOException ex) {
             logger.error("Error during openinig image " + ex);
+        }
+    }
+
+    private void initParamModelling() {
+        logger.info("Reading initial modelling parameters");
+        try {
+            scans = Integer.parseInt(tomographProperty.getProperty("SCANS"));
+        } catch (NumberFormatException ex) {
+            logger.warn("Error reading initial parameter SCANS", ex);
+        }
+
+        try {
+            stepSize = Integer.parseInt(tomographProperty.getProperty("STEPSIZE"));
+        } catch (NumberFormatException ex) {
+            logger.warn("Error reading initial parameter STEPSIZE", ex);
         }
     }
 }
