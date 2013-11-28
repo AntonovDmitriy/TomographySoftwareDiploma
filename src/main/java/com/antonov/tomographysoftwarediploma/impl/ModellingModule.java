@@ -142,14 +142,17 @@ public class ModellingModule {
         logger.info("Reading initial modelling parameters");
         try {
             scans = Integer.parseInt(tomographProperty.getProperty("SCANS"));
+            logger.info("scans = " + scans);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter SCANS", ex);
         }
 
         try {
             stepSize = Integer.parseInt(tomographProperty.getProperty("STEPSIZE"));
+            logger.info("stepsize = " + stepSize);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter STEPSIZE", ex);
         }
+        logger.info("Initial modelling parameters have been read");
     }
 }
