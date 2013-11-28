@@ -6,9 +6,7 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
-import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorConvertOp;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
@@ -16,9 +14,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import javax.imageio.ImageIO;
-import javax.swing.event.ChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,7 +113,7 @@ public class ModellingModule {
     public void setCurrentModellingImage() {
         firePropertyChange("currentImageModelling", null, currentModellingImage);
         logger.info("Current modelling image changes on display");
-        firePropertyChange("clearResultModelling", controller, scans);
+        firePropertyChange("clearResultModelling",null, null);
         logger.info("Result modelling is clear");
         firePropertyChange("disableModellingControls", null, null);
         logger.info("Modelling controls are disabled");
@@ -154,5 +149,28 @@ public class ModellingModule {
             logger.warn("Error reading initial parameter STEPSIZE", ex);
         }
         logger.info("Initial modelling parameters have been read");
+    }
+
+    public void setScans(int scans) {
+        Integer oldScans = this.scans;
+        this.scans = scans;
+        logger.trace("Value of scans now is " + scans + ". Old value was " + oldScans);
+        firePropertyChange("setScansModel", oldScans, this.scans);
+
+    }
+
+    public void setStepSize(int stepSize) {
+        Integer oldStepSize = this.stepSize;
+        this.stepSize = stepSize;
+        logger.trace("Value of stepSize now is " + stepSize + ". Old value was " + oldStepSize);
+        firePropertyChange("setStepSizeModel", oldStepSize, this.stepSize);
+        firePropertyChange("clearResultModelling",null, null);
+        logger.info("Result modelling is clear");
+    }
+    
+    public void createSinogram(){
+        logger.trace("Sinogram creating is starting");
+        
+        logger.trace("Sinogram createing is finishing");
     }
 }
