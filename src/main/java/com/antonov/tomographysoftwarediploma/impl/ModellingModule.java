@@ -5,7 +5,6 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
-import com.antonov.tomographysoftwarediploma.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformer;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.image.BufferedImage;
@@ -16,8 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +25,7 @@ import org.slf4j.LoggerFactory;
 public class ModellingModule {
 
     ModellingModuleController controller;
-    private static Logger logger = LoggerFactory.getLogger(ModellingModule.class);
+    private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
     private Properties tomographProperty;
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
     private BufferedImage currentModellingImage;
@@ -182,11 +179,6 @@ public class ModellingModule {
     
     public void createSinogram(){
         logger.trace("Sinogram creating is starting");
-        try {
-            ImageIO.write(currentModellingImage, "jpeg", new File("C://1.jpeg"));
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(ModellingModule.class.getName()).log(Level.SEVERE, null, ex);
-        }
          firePropertyChange("startSinogramm", null, null);
          BufferedImage sinogram = ImageTransformer.createSinogram(currentModellingImage,scans,stepSize);
          setSinogramImage(sinogram);

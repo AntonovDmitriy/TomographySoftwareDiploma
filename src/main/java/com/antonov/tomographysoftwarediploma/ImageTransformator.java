@@ -30,9 +30,6 @@ public class ImageTransformator {
     public double pixels[][]; // 2-D array store pixel values
 
 
-
-
-
     public void setReconstructParameters(int outputImgSize, boolean filtering, String filterName) {
         this.outputImgSize = outputImgSize;
         this.filtering = filtering;
