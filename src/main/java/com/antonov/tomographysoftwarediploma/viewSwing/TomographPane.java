@@ -8,6 +8,7 @@ import com.antonov.tomographysoftwarediploma.Utils;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.impl.AppLaunch;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -36,8 +37,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +66,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     String nameOfProjData;
 
     public TomographPane() {
-        initComponents();
 
+        initComponents();
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -214,6 +218,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         dialogProgressBar.setVisible(true);
         progressBar.setIndeterminate(true);
+
     }
 
     private void stopCalculating() {
@@ -236,7 +241,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSinogram.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modellingModuleController.createSinogram(edScansModel.getText(), edStepsizeModel.getText());
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        modellingModuleController.createSinogram(edScansModel.getText(), edStepsizeModel.getText());
+                    }
+                }).start();
             }
         });
     }
@@ -763,6 +774,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
             setTitle("Томографический комплекс 1.0 НИЯУ МИФИ");
             setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            setPreferredSize(new java.awt.Dimension(1000, 600));
 
             jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
             jTabbedPane1.setToolTipText("");

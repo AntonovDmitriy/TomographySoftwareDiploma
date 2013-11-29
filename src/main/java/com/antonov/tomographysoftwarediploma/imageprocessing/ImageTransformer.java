@@ -31,4 +31,11 @@ public class ImageTransformer {
 
         return image;
     }
+
+    public static BufferedImage createSinogram(BufferedImage initialImage, int views, int stepSize) {
+        
+        SinogramCreator sinogramCreator = new SinogramCreator();
+        
+    }
+
 }

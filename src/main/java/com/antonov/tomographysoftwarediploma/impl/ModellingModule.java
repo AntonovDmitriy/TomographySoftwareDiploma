@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,7 +88,7 @@ public class ModellingModule {
                         BufferedImage image = ReaderWriterData.getImageFromFileSystem(imageFile);
                         logger.trace("File successfully has been read ");
                         String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];
-                        ImageTransformer.prepareImage(image);
+                        image = ImageTransformer.prepareImage(image);
                         imageSamplesMapWithNames.put(imageNameWithoutExt, image);
                         logger.trace("Image file " + imageFile.getAbsolutePath() + " was been successufully added");
                     } else {
@@ -133,9 +135,9 @@ public class ModellingModule {
         try {
             BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
             logger.info(file.getAbsolutePath() + " is successfully opened");
-            ImageTransformer.prepareImage(image);
+            BufferedImage imagePrepared = ImageTransformer.prepareImage(image);
             logger.info(file.getAbsolutePath() + " is prepared");
-            currentModellingImage = image;
+            currentModellingImage = imagePrepared;
             logger.info("Current modelling image changes on " + file.getName());
             setCurrentModellingImage();
         } catch (IOException ex) {
@@ -180,10 +182,13 @@ public class ModellingModule {
     
     public void createSinogram(){
         logger.trace("Sinogram creating is starting");
+        try {
+            ImageIO.write(currentModellingImage, "jpeg", new File("C://1.jpeg"));
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(ModellingModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
          firePropertyChange("startSinogramm", null, null);
-         ImageTransformator transformer = new ImageTransformator();
-         transformer.setScanParameters(scans, stepSize);
-         BufferedImage sinogram = transformer.createSinogram();
+         BufferedImage sinogram = ImageTransformer.createSinogram(currentModellingImage,scans,stepSize);
          setSinogramImage(sinogram);
          firePropertyChange("enableReconControls", null, null);
          logger.trace("Recon controls are enabled");

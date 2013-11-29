@@ -12,8 +12,11 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +31,11 @@ public class AppLaunch {
     public static void main(String[] args) {
 
         logger.info("=======Start TomographySoftware 1.0.0 application=======");
+
         Tomograph model = new Tomograph();
-        initLookAndFeel();
         ITomographView view = new TomographPane();
+//        initLookAndFeel(view);
+
         ModellingModuleController mc = new ModellingModuleController(model, view);
         HardwareModuleController hc = new HardwareModuleController(model, view);
 
@@ -40,7 +45,8 @@ public class AppLaunch {
         view.setHardwareController(hc);
         view.initListeners();
         model.prepareViews();
-        ((Frame) view).setVisible(true);
+        startView(view);
+
 
     }
 
@@ -49,19 +55,30 @@ public class AppLaunch {
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 
-    private static void initLookAndFeel() {
-        try {
-//            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+    private static void startView(final ITomographView view) {
+        SwingUtilities.invokeLater(new Runnable() {
 
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            @Override
+            public void run() {
+                try {
+//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
+//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
+//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
+//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
+//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
+                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
+                    SwingUtilities.updateComponentTreeUI((Frame) view);
+                    ((Frame) view).setVisible(true);
+                } catch (UnsupportedLookAndFeelException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException ex) {
+                    java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.error("Error occured when starting LAF", ex);
-        }
-
+        });
     }
 }
