@@ -5060,3 +5060,70 @@ java.lang.NumberFormatException: Rest of devision 180 on 7 is not 0
 2013-11-30 21:00:07 TRACE ModellingModule:190 - Recon controls are enabled
 2013-11-30 21:00:07 TRACE ModellingModule:192 - Sinogram createing is finishing
 2013-11-30 21:00:39 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-01 01:30:42 TRACE ModellingModule:185 - Sinogram creating is starting
+2013-12-01 01:30:42 TRACE TomographImageTransformer:36 - scans value is correct 400
+2013-12-01 01:30:42 TRACE TomographImageTransformer:40 - stepSize value is correct 1
+2013-12-01 01:30:42 TRACE TomographImageTransformer:46 - sourceImage is correct 
+2013-12-01 01:30:43 TRACE ModellingModule:131 - Sinogram image is changed
+2013-12-01 01:30:43 TRACE ModellingModule:190 - Recon controls are enabled
+2013-12-01 01:30:43 TRACE ModellingModule:192 - Sinogram createing is finishing
+2013-12-01 01:30:56 INFO  ModellingModule:114 - Current modelling image changes on Without_deffect
+2013-12-01 01:30:56 INFO  ModellingModule:120 - Current modelling image changes on display
+2013-12-01 01:30:56 INFO  ModellingModule:122 - Result modelling is clear
+2013-12-01 01:30:56 INFO  ModellingModule:124 - Modelling controls are disabled
+2013-12-01 01:30:57 INFO  ModellingModule:114 - Current modelling image changes on Сложная структура
+2013-12-01 01:30:57 INFO  ModellingModule:120 - Current modelling image changes on display
+2013-12-01 01:30:57 INFO  ModellingModule:122 - Result modelling is clear
+2013-12-01 01:30:57 INFO  ModellingModule:124 - Modelling controls are disabled
+2013-12-01 01:30:58 TRACE ModellingModule:169 - Value of scans now is 400. Old value was 400
+2013-12-01 01:30:58 TRACE ModellingModule:185 - Sinogram creating is starting
+2013-12-01 01:30:58 TRACE TomographImageTransformer:36 - scans value is correct 400
+2013-12-01 01:30:58 TRACE TomographImageTransformer:40 - stepSize value is correct 1
+2013-12-01 01:30:58 TRACE TomographImageTransformer:46 - sourceImage is correct 
+2013-12-01 01:31:00 TRACE ModellingModule:131 - Sinogram image is changed
+2013-12-01 01:31:00 TRACE ModellingModule:190 - Recon controls are enabled
+2013-12-01 01:31:00 TRACE ModellingModule:192 - Sinogram createing is finishing
+2013-12-01 01:31:05 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-01 03:17:52 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-01 03:17:53 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-01 03:17:53 INFO  ModellingModule:82 - Path to the internal images is resources/internalImages
+2013-12-01 03:17:53 TRACE ModellingModule:87 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-01 03:17:53 TRACE ModellingModule:89 - File successfully has been read 
+2013-12-01 03:17:53 TRACE Tomograph:26 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-01 03:17:53 TRACE ModellingModule:93 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-01 03:17:53 TRACE ModellingModule:87 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-01 03:17:53 TRACE ModellingModule:89 - File successfully has been read 
+2013-12-01 03:17:53 TRACE Tomograph:26 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-01 03:17:53 TRACE ModellingModule:93 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-01 03:17:53 TRACE ModellingModule:87 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-01 03:17:53 TRACE ModellingModule:89 - File successfully has been read 
+2013-12-01 03:17:53 TRACE Tomograph:26 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-01 03:17:54 TRACE ModellingModule:93 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-01 03:17:54 INFO  ModellingModule:149 - Reading initial modelling parameters
+2013-12-01 03:17:54 INFO  ModellingModule:152 - scans = 400
+2013-12-01 03:17:54 INFO  ModellingModule:159 - stepsize = 1
+2013-12-01 03:17:54 INFO  ModellingModule:163 - Initial modelling parameters have been read
+2013-12-01 03:18:10 INFO  ModellingModule:114 - Current modelling image changes on With_deffect
+2013-12-01 03:18:10 INFO  ModellingModule:120 - Current modelling image changes on display
+2013-12-01 03:18:10 INFO  ModellingModule:122 - Result modelling is clear
+2013-12-01 03:18:10 INFO  ModellingModule:124 - Modelling controls are disabled
+2013-12-01 03:18:12 INFO  ModellingModule:114 - Current modelling image changes on Сложная структура
+2013-12-01 03:18:12 INFO  ModellingModule:120 - Current modelling image changes on display
+2013-12-01 03:18:12 INFO  ModellingModule:122 - Result modelling is clear
+2013-12-01 03:18:12 INFO  ModellingModule:124 - Modelling controls are disabled
+2013-12-01 03:18:13 INFO  ModellingModule:114 - Current modelling image changes on Without_deffect
+2013-12-01 03:18:13 INFO  ModellingModule:120 - Current modelling image changes on display
+2013-12-01 03:18:13 INFO  ModellingModule:122 - Result modelling is clear
+2013-12-01 03:18:13 INFO  ModellingModule:124 - Modelling controls are disabled
+2013-12-01 03:18:13 INFO  ModellingModule:114 - Current modelling image changes on With_deffect
+2013-12-01 03:18:13 INFO  ModellingModule:120 - Current modelling image changes on display
+2013-12-01 03:18:13 INFO  ModellingModule:122 - Result modelling is clear
+2013-12-01 03:18:13 INFO  ModellingModule:124 - Modelling controls are disabled
+2013-12-01 03:18:24 TRACE ModellingModule:185 - Sinogram creating is starting
+2013-12-01 03:18:24 TRACE TomographImageTransformer:36 - scans value is correct 400
+2013-12-01 03:18:24 TRACE TomographImageTransformer:40 - stepSize value is correct 1
+2013-12-01 03:18:24 TRACE TomographImageTransformer:46 - sourceImage is correct 
+2013-12-01 03:18:26 TRACE ModellingModule:131 - Sinogram image is changed
+2013-12-01 03:18:26 TRACE ModellingModule:190 - Recon controls are enabled
+2013-12-01 03:18:26 TRACE ModellingModule:192 - Sinogram createing is finishing
+2013-12-01 03:19:09 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======

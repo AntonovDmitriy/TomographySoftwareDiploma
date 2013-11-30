@@ -9,6 +9,8 @@ import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12b
 import com.antonov.tomographysoftwarediploma.Utils;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -17,7 +19,7 @@ import java.awt.image.WritableRaster;
 public class SinogramCreator extends TomographImageTransformer{
     
      public double[][] projection;
-     
+     private static Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
 
 
     private void simulateProjectionData(double[][] pixInitialImage) {
@@ -136,9 +138,8 @@ public class SinogramCreator extends TomographImageTransformer{
 
         int gray;
 
-        double[][] pixInitialImage = Utils
-                .getDoubleArrayPixelsFromBufImg(sourceImage);
-
+        double[][] pixInitialImage = Utils.getDoubleArrayPixelsFromBufImg(sourceImage);
+        logger.trace("Array of pixel values of source image has been created");
         simulateProjectionData(pixInitialImage);
 
         projection = Utils.normalize2DArray(projection, 0, 1);

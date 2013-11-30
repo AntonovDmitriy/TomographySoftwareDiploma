@@ -58,18 +58,17 @@ public class Utils {
 
 		final int width = img.getWidth(null);
 		final int height = img.getHeight(null);
-		final double[][] pix = new double[width][height];
+		final double[][] result = new double[width][height];
 
 		if (img.getType() == 11) {
 			// TYPE_USHORT_GRAY Represents an unsigned short grayscale image,
 			// non-indexed).
 
-			DataBufferUShort db = (DataBufferUShort) img.getRaster()
-					.getDataBuffer();
-			short[] pixelarray = db.getData();
-			for (int x = 0; x < pix.length; x++) {
-				for (int y = 0; y < pix[0].length; y++) {
-					pix[x][y] = pixelarray[x + y * pix.length] & 0xFFFF;
+			DataBufferUShort db = (DataBufferUShort) img.getRaster().getDataBuffer();
+			short[] shortPixelArray = db.getData();
+			for (int x = 0; x < result.length; x++) {
+				for (int y = 0; y < result[0].length; y++) {
+					result[x][y] = shortPixelArray[x + y * result.length] & 0xFFFF;
 				}
 			}
 		} else if (img.getType() == 1) {
@@ -77,24 +76,24 @@ public class Utils {
 			// packed into integer pixels
 
 			DataBufferInt db = (DataBufferInt) img.getRaster().getDataBuffer();
-			int[] pixelarray = db.getData();
-			for (int x = 0; x < pix.length; x++) {
-				for (int y = 0; y < pix[0].length; y++) {
-					pix[x][y] = pixelarray[x + y * pix.length] & 0xFF;
+			int[] intPixelArray = db.getData();
+			for (int x = 0; x < result.length; x++) {
+				for (int y = 0; y < result[0].length; y++) {
+					result[x][y] = intPixelArray[x + y * result.length] & 0xFF;
 				}
 			}
 		} // else assume 8 bit
 		else {
 			DataBufferByte db = (DataBufferByte) img.getRaster()
 					.getDataBuffer();
-			byte[] pixelarray = db.getData();
-			for (int x = 0; x < pix.length; x++) {
-				for (int y = 0; y < pix[0].length; y++) {
-					pix[x][y] = pixelarray[x + y * pix.length] & 0xFF;
+			byte[] bytePixelArray = db.getData();
+			for (int x = 0; x < result.length; x++) {
+				for (int y = 0; y < result[0].length; y++) {
+					result[x][y] = bytePixelArray[x + y * result.length] & 0xFF;
 				}
 			}
 		}
-		return pix;
+		return result;
 	}
 	
     /**method to find the minimum value in a 2D array of doubles */
