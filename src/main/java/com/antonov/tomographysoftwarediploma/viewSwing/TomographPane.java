@@ -8,7 +8,6 @@ import com.antonov.tomographysoftwarediploma.Utils;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
-import com.antonov.tomographysoftwarediploma.impl.AppLaunch;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -37,11 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -208,10 +204,17 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "setSinogramImage":
                         setSinogramImage((BufferedImage) evt.getNewValue());
                         break;
+                    case "INTERNAL_ERROR":
+                        showInternalErrorMessage((String) evt.getNewValue());
+                        break;
+                    case "PARAMETER_VALUE_WARNING":
+                        showWarningMessage((String) evt.getNewValue());
+                        break;
                 }
             }
         };
         modellingModuleController.setPropertyChangeListener(currentImageModellingListener);
+        modellingModuleController.addPropertyChangeListener(currentImageModellingListener);
     }
 
     private void startCalculating() {
@@ -269,6 +272,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 modellingModuleController.setStepSize(edStepsizeModel.getText(), TomographPane.this);
             }
         });
+    }
+
+    private void showInternalErrorMessage(String messageError) {
+        stopCalculating();
+        JOptionPane.showMessageDialog(this, bundle.getString("INTERNAL_ERROR") + ". " + messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void showWarningMessage(String messageWarning) {
+        JOptionPane.showMessageDialog(this, messageWarning +". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
+
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

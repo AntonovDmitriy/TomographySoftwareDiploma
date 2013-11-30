@@ -22,6 +22,10 @@ public class ImageTransformator {
 
     public BufferedImage initialImage;
 
+        public int scans; // Amount of Detectors or Point of Sourses
+    public int stepsize; // Step of rotating in degree
+    int views;
+    
     // -----------Parameters of Reconstruction
     public double[][] projection;
     public int outputImgSize;

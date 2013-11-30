@@ -8,32 +8,17 @@ package com.antonov.tomographysoftwarediploma.imageprocessing;
 import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
 import com.antonov.tomographysoftwarediploma.Utils;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
 /**
  *
  * @author Antonov
  */
-public class SinogramCreator {
-
-    // ----------Parameters of Scanning-------------------------
-    public int scans; // Amount of Detectors or Point of Sourses
-    public int stepSize; // Step of rotating in degree
-    int views;
-
-    //---------------------Images-------------------------------
-    BufferedImage sourceImage;
-    BufferedImage sinogram;
-
-    //---------------------Other--------------------------------
-    boolean isDataModellingValid = false;
+public class SinogramCreator extends TomographImageTransformer{
     
-    public void setDataModelling(BufferedImage sourceImage, int scans, int stepSize) {
-        this.scans = scans;
-        this.stepSize = stepSize;
-        views = 180 / stepSize;
+     public double[][] projection;
+     
 
-        this.sourceImage = sourceImage;
-    }
 
     private void simulateProjectionData(double[][] pixInitialImage) {
 
@@ -55,7 +40,7 @@ public class SinogramCreator {
 
         int i = 0, phi;
 
-        for (phi = ang1; phi < ang2; phi = (int) (phi + stepsize), i++) {
+        for (phi = ang1; phi < ang2; phi = (int) (phi + stepSize), i++) {
             sintab[i] = Math.sin((double) phi * Math.PI / 180 - Math.PI / 2);
             costab[i] = Math.cos((double) phi * Math.PI / 180 - Math.PI / 2);
         }
@@ -73,7 +58,7 @@ public class SinogramCreator {
         double sang = Math.sqrt(2) / 2;
         boolean interrupt = false, fast = false;
 
-        for (phi = ang1; phi < ang2; phi = (int) (phi + stepsize)) {
+        for (phi = ang1; phi < ang2; phi = (int) (phi + stepSize)) {
             if (interrupt) {
                 break;
             }
@@ -152,7 +137,7 @@ public class SinogramCreator {
         int gray;
 
         double[][] pixInitialImage = Utils
-                .getDoubleArrayPixelsFromBufImg(initialImage);
+                .getDoubleArrayPixelsFromBufImg(sourceImage);
 
         simulateProjectionData(pixInitialImage);
 
@@ -185,4 +170,52 @@ public class SinogramCreator {
 
         return sinogramImage;
     }
+    
+        private static BufferedImage PerformWindowing(BufferedImage mBufferedImage) {
+
+        int[][] pixels = Utils.getIntArrayPixelsFromBufImg(mBufferedImage);
+        int iw = mBufferedImage.getWidth();
+        int ih = mBufferedImage.getHeight();
+        BufferedImage windowedImage;
+
+        int upperwinlvl;
+        int lowerwinlvl = 0;
+
+        if (mBufferedImage.getType() == 11) {
+            upperwinlvl = 2000;
+        } else {
+            upperwinlvl = 255;
+        }
+        int winwidth = upperwinlvl - lowerwinlvl;
+
+        if ((mBufferedImage.getType() == 11)
+                || (mBufferedImage.getType() == 10)) {
+            windowedImage = new BufferedImage(iw, ih,
+                    BufferedImage.TYPE_BYTE_GRAY);
+
+            WritableRaster wraster = windowedImage.getRaster();
+            for (int x = 0; x < iw; x++) {
+                for (int y = 0; y < ih; y++) {
+                    // int val = wraster.getSample(x, y, 0);
+                    int val = pixels[x][y];
+                    if (val <= lowerwinlvl) {
+                        wraster.setSample(x, y, 0, 0);
+                    } else if (val >= upperwinlvl) {
+                        wraster.setSample(x, y, 0, 255);
+                    } else {
+                        int newval = (val - lowerwinlvl) * 256 / winwidth;
+                        wraster.setSample(x, y, 0, newval);
+                    }
+                }
+            }
+        } else {
+            windowedImage = new BufferedImage(iw, ih,
+                    BufferedImage.TYPE_INT_RGB);
+            windowedImage.createGraphics()
+                    .drawImage(mBufferedImage, 0, 0, null);
+
+        }
+        return windowedImage;
+    }
 }
+

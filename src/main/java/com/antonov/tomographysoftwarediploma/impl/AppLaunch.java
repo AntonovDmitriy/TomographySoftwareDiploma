@@ -29,9 +29,8 @@ public class AppLaunch {
     private static Logger logger = LoggerFactory.getLogger(AppLaunch.class);
 
     public static void main(String[] args) {
-
-        logger.info("=======Start TomographySoftware 1.0.0 application=======");
-
+        
+        initLAF();
         Tomograph model = new Tomograph();
         ITomographView view = new TomographPane();
 //        initLookAndFeel(view);
@@ -45,8 +44,7 @@ public class AppLaunch {
         view.setHardwareController(hc);
         view.initListeners();
         model.prepareViews();
-        startView(view);
-
+        ((Frame) view).setVisible(true);
 
     }
 
@@ -55,30 +53,27 @@ public class AppLaunch {
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 
-    private static void startView(final ITomographView view) {
-        SwingUtilities.invokeLater(new Runnable() {
+    private static void initLAF() {
+        logger.info("=======Start TomographySoftware 1.0.0 application=======");
+        try {
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+////                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
+////                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
+////                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
+////                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
+//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
+//                    SwingUtilities.updateComponentTreeUI((Frame) view);
+        } catch (UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
 
-            @Override
-            public void run() {
-                try {
-//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
-//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
-//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
-//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
-//                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
-                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
-                    SwingUtilities.updateComponentTreeUI((Frame) view);
-                    ((Frame) view).setVisible(true);
-                } catch (UnsupportedLookAndFeelException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException ex) {
-                    java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AppLaunch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

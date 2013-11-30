@@ -5,8 +5,10 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
-import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformer;
+import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.imageprocessing.ImageWrongValueException;
+import com.antonov.tomographysoftwarediploma.imageprocessing.NumberWrongValueException;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +33,7 @@ public class ModellingModule {
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
     private BufferedImage currentModellingImage;
     private BufferedImage sinogramImage;
-    
+
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
     //Parameters of modelling
@@ -85,7 +88,7 @@ public class ModellingModule {
                         BufferedImage image = ReaderWriterData.getImageFromFileSystem(imageFile);
                         logger.trace("File successfully has been read ");
                         String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];
-                        image = ImageTransformer.prepareImage(image);
+                        image = ImageTransformerFacade.prepareImage(image);
                         imageSamplesMapWithNames.put(imageNameWithoutExt, image);
                         logger.trace("Image file " + imageFile.getAbsolutePath() + " was been successufully added");
                     } else {
@@ -115,24 +118,24 @@ public class ModellingModule {
     public void setCurrentModellingImage() {
         firePropertyChange("currentImageModelling", null, currentModellingImage);
         logger.info("Current modelling image changes on display");
-        firePropertyChange("clearResultModelling",null, null);
+        firePropertyChange("clearResultModelling", null, null);
         logger.info("Result modelling is clear");
         firePropertyChange("disableModellingControls", null, null);
         logger.info("Modelling controls are disabled");
     }
 
-    public void setSinogramImage(BufferedImage image){
-         BufferedImage oldSinogramImage = this.sinogramImage;
-         this.sinogramImage = image;
-         firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
-         logger.trace("Sinogram image is changed");
+    public void setSinogramImage(BufferedImage image) {
+        BufferedImage oldSinogramImage = this.sinogramImage;
+        this.sinogramImage = image;
+        firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
+        logger.trace("Sinogram image is changed");
     }
-    
+
     public void getAndSetFileModellingImage(File file) {
         try {
             BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
             logger.info(file.getAbsolutePath() + " is successfully opened");
-            BufferedImage imagePrepared = ImageTransformer.prepareImage(image);
+            BufferedImage imagePrepared = ImageTransformerFacade.prepareImage(image);
             logger.info(file.getAbsolutePath() + " is prepared");
             currentModellingImage = imagePrepared;
             logger.info("Current modelling image changes on " + file.getName());
@@ -173,18 +176,23 @@ public class ModellingModule {
         this.stepSize = stepSize;
         logger.trace("Value of stepSize now is " + stepSize + ". Old value was " + oldStepSize);
         firePropertyChange("setStepSizeModel", oldStepSize, this.stepSize);
-        firePropertyChange("clearResultModelling",null, null);
+        firePropertyChange("clearResultModelling", null, null);
         logger.info("Result modelling is clear");
     }
-    
-    public void createSinogram(){
-        logger.trace("Sinogram creating is starting");
-         firePropertyChange("startSinogramm", null, null);
-         BufferedImage sinogram = ImageTransformer.createSinogram(currentModellingImage,scans,stepSize);
-         setSinogramImage(sinogram);
-         firePropertyChange("enableReconControls", null, null);
-         logger.trace("Recon controls are enabled");
-         firePropertyChange("stopSinogramm", null, null);
-        logger.trace("Sinogram createing is finishing");
+
+    public void createSinogram() {
+        try {
+            logger.trace("Sinogram creating is starting");
+            firePropertyChange("startSinogramm", null, null);
+            BufferedImage sinogram = ImageTransformerFacade.createSinogram(currentModellingImage, scans, stepSize);
+            setSinogramImage(sinogram);
+            firePropertyChange("enableReconControls", null, null);
+            logger.trace("Recon controls are enabled");
+            firePropertyChange("stopSinogramm", null, null);
+            logger.trace("Sinogram createing is finishing");
+        } catch (Throwable ex) {
+            logger.error("Internal error during calculating sinogram ", ex);
+            firePropertyChange("INTERNAL_ERROR", null, "Internal error during calculating sinogram");
+        }
     }
 }

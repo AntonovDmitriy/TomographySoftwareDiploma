@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Antonov
  */
-public class ImageTransformer {
+public class ImageTransformerFacade {
 
     private static Logger logger = LoggerFactory.getLogger(Tomograph.class);
 
@@ -32,10 +32,12 @@ public class ImageTransformer {
         return image;
     }
 
-    public static BufferedImage createSinogram(BufferedImage initialImage, int views, int stepSize) {
+    public static BufferedImage createSinogram(BufferedImage initialImage, int views, int stepSize) throws NumberWrongValueException, ImageWrongValueException {
         
         SinogramCreator sinogramCreator = new SinogramCreator();
-        
+        sinogramCreator.setDataModelling(initialImage, views, stepSize);
+        BufferedImage sinogram = sinogramCreator.createSinogram();
+        return sinogram;
     }
 
 }
