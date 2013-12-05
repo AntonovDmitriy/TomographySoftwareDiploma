@@ -69,7 +69,7 @@ public class Utils {
         return result;
     }
 
-    public static double[][] getDoubleArrayPixelsFromBufImg(BufferedImage img) {
+    public static double[][] getDoubleRevertedArrayPixelsFromBufImg(BufferedImage img) {
 
         int width = img.getWidth(null);
         int height = img.getHeight(null);
@@ -111,9 +111,33 @@ public class Utils {
         return result;
     }
 
-    /**
-     * method to find the minimum value in a 2D array of doubles
-     */
+    public static double[][] fillZeroMatrix(double[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = 0.0;
+            }
+        }
+        return matrix;
+    }
+
+    public static double[] getRowOfFunctionIncrementalValues(String function, int startFunctionPositiveArgument, int endFunctionPositiveArgument, int stepSize) {
+        int amountElements = (int) (endFunctionPositiveArgument - startFunctionPositiveArgument) / stepSize;
+        double[] result = new double[amountElements];
+        int i = 0;
+
+        for (int argument = startFunctionPositiveArgument; argument < endFunctionPositiveArgument; argument = (int) (argument + stepSize), i++) {
+            switch (function) {
+                case "sin":
+                    result[i] = Math.sin((double) argument * Math.PI / 180 - Math.PI / 2);
+                    break;
+                case "cos":
+                    result[i] = Math.cos((double) argument * Math.PI / 180 - Math.PI / 2);
+                    break;
+            }
+        }
+        return result;
+    }
+
     public static double getMin(double data[][]) {
 
         double min = data[0][0];

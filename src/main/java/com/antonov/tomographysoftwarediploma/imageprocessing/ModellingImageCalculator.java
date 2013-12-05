@@ -14,12 +14,14 @@ import org.slf4j.LoggerFactory;
  *
  * @author Antonov
  */
-public class TomographImageTransformer {
+public class ModellingImageCalculator {
 
     // ----------Parameters of Scanning-------------------------
     public int scans; // Amount of Detectors or Point of Sourses
     public int stepSize; // Step of rotating in degree
     int views;
+    public static final int START_ROTATION_ANGLE = 0;
+    public static final int FINISH_ROTATION_ANGLE = 180;
 
     //---------------------Images-------------------------------
     BufferedImage sourceImage;
@@ -27,7 +29,7 @@ public class TomographImageTransformer {
 
     //---------------------Other--------------------------------
     boolean isDataModellingValid = false;
-    private static Logger logger = LoggerFactory.getLogger(TomographImageTransformer.class);
+    private static Logger logger = LoggerFactory.getLogger(ModellingImageCalculator.class);
 
     public static final int AREA_SCANNING_IN_DEGREES = 180;
 

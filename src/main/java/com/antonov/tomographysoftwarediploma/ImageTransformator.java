@@ -58,7 +58,7 @@ public class ImageTransformator {
         }
 
         double[][] pixInitialImage = Utils
-                .getDoubleArrayPixelsFromBufImg(imgBuf);
+                .getDoubleRevertedArrayPixelsFromBufImg(imgBuf);
         projection = simulateProjectionDataStatic(pixInitialImage, views, scans, stepSize);
 
         return projection;

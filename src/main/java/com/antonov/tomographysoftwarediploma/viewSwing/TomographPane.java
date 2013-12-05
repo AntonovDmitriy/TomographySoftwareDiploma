@@ -1913,7 +1913,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
         labelImageDensityViewer.setIcon(icon);
 
-        double[][] densitySourseArray = Utils.getDoubleArrayPixelsFromBufImg(reconstructImage);
+        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(reconstructImage);
         int initialLineSlise = densitySourseArray.length / 2;
         densitySlider.setMaximum(densitySourseArray.length - 1);
         densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
@@ -2018,7 +2018,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
         labelImageDensityViewer.setIcon(icon);
 
-        double[][] densitySourseArray = Utils.getDoubleArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
+        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
         int initialLineSlise = densitySourseArray.length / 2;
         densitySlider.setMaximum(densitySourseArray.length - 1);
         densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);

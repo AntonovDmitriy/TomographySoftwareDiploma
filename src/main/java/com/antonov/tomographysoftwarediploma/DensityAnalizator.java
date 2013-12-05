@@ -26,7 +26,7 @@ public class DensityAnalizator {
         
         
   //      BufferedImage inverseReconstructImage = ImageTransformator.getColorLutImage(densitySourse, LUTFunctions.invGray());
-        double[][] densitySourseArray = Utils.getDoubleArrayPixelsFromBufImg(densitySourse);
+        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(densitySourse);
         double[][] densityInverseArray = new double[densitySourseArray.length][densitySourseArray.length];
         for(int x = 0;x<densitySourseArray.length;x++){
             for(int y = 0;y<densitySourseArray.length;y++){

@@ -16,61 +16,41 @@ import org.slf4j.LoggerFactory;
  *
  * @author Antonov
  */
-public class SinogramCreator extends TomographImageTransformer{
-    
-     public double[][] projection;
-     private static Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
+public class SinogramCreator extends ModellingImageCalculator {
 
+    private static Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
 
-    private void simulateProjectionData(double[][] pixInitialImage) {
-
-        int ang1 = 0, ang2 = 180; // start and stop angles for projections
+    private double[][] generateProjectionData(double[][] pixInitialImage) {
 
         double val;
-        int x, y, Xcenter, Ycenter, S = 0;
-
-        int inputimgsize = pixInitialImage[0].length;
-        projection = new double[views][scans];
-        double[] sintab = new double[views];
-        double[] costab = new double[views];
-        // Zero matrix
-        for (int i = 0; i < projection.length; i++) {
-            for (int j = 0; j < projection[0].length; j++) {
-                projection[i][j] = 0.0;
-            }
-        }
-
-        int i = 0, phi;
-
-        for (phi = ang1; phi < ang2; phi = (int) (phi + stepSize), i++) {
-            sintab[i] = Math.sin((double) phi * Math.PI / 180 - Math.PI / 2);
-            costab[i] = Math.cos((double) phi * Math.PI / 180 - Math.PI / 2);
-        }
-
-        // Project each pixel in the image
-        Xcenter = inputimgsize / 2;
-        Ycenter = inputimgsize / 2;
-        i = 0;
-
-        double scale = inputimgsize * Math.sqrt(2) / scans;
-
+        int x, y,  S = 0;
         int N = 0;
         val = 0;
         double weight = 0;
         double sang = Math.sqrt(2) / 2;
-        boolean interrupt = false, fast = false;
+        boolean fast = false;
 
-        for (phi = ang1; phi < ang2; phi = (int) (phi + stepSize)) {
-            if (interrupt) {
-                break;
-            }
-            double a = -costab[i] / sintab[i];
+
+        double[][] projectionData = new double[views][scans];
+        Utils.fillZeroMatrix(projectionData);
+        double scaleImageToSinogramRatio = calculateImageToSinogramScaleRatio(pixInitialImage, this.scans);       
+        
+        double[] sintab = Utils.getRowOfFunctionIncrementalValues("sin", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
+        double[] costab = Utils.getRowOfFunctionIncrementalValues("cos", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
+
+        int view = 0;
+        int heightInitialImage = pixInitialImage[0].length;
+        int Xcenter = heightInitialImage / 2;
+        int Ycenter = heightInitialImage / 2;
+        for (int angle = START_ROTATION_ANGLE; angle < FINISH_ROTATION_ANGLE; angle = (int) (angle + stepSize)) {
+
+            double a = -costab[view] / sintab[view];
             double aa = 1 / a;
-            if (Math.abs(sintab[i]) > sang) {
+            if (Math.abs(sintab[view]) > sang) {
                 for (S = 0; S < scans; S++) {
-                    N = S - scans / 2; // System.out.print("N="+N+" ");
-                    double b = (N - costab[i] - sintab[i]) / sintab[i];
-                    b = b * scale;
+                    N = S - scans / 2;
+                    double b = (N - costab[view] - sintab[view]) / sintab[view];
+                    b = b * scaleImageToSinogramRatio;
 
                     for (x = -Xcenter; x < Xcenter; x++) {
                         if (fast == true) {
@@ -94,15 +74,15 @@ public class SinogramCreator extends TomographImageTransformer{
                             }
                         }
                     }
-                    projection[i][S] = val / Math.abs(sintab[i]);
+                    projectionData[view][S] = val / Math.abs(sintab[view]);
                     val = 0;
 
                 }
-            } else if (Math.abs(sintab[i]) <= sang) {
+            } else if (Math.abs(sintab[view]) <= sang) {
                 for (S = 0; S < scans; S++) {
                     N = S - scans / 2;
-                    double bb = (N - costab[i] - sintab[i]) / costab[i];
-                    bb = bb * scale;
+                    double bb = (N - costab[view] - sintab[view]) / costab[view];
+                    bb = bb * scaleImageToSinogramRatio;
                     for (y = -Ycenter; y < Ycenter; y++) {
                         if (fast == true) {
                             x = (int) Math.round(aa * y + bb);
@@ -123,13 +103,21 @@ public class SinogramCreator extends TomographImageTransformer{
                             }
                         }
                     }
-                    projection[i][S] = val / Math.abs(costab[i]);
+                    projectionData[view][S] = val / Math.abs(costab[view]);
                     val = 0;
 
                 }
             }
-            i++;
+            view++;
         }
+        return projectionData;
+    }
+
+    private double calculateImageToSinogramScaleRatio(double[][] imagePixArray, int scans) {
+
+        int heightInitialImage = imagePixArray[0].length;
+        double result = heightInitialImage * Math.sqrt(2) / scans;
+        return result;
     }
 
     public BufferedImage createSinogram() {
@@ -138,41 +126,41 @@ public class SinogramCreator extends TomographImageTransformer{
 
         int gray;
 
-        double[][] pixInitialImage = Utils.getDoubleArrayPixelsFromBufImg(sourceImage);
+        double[][] pixInitialImage = Utils.getDoubleRevertedArrayPixelsFromBufImg(sourceImage);
         logger.trace("Array of pixel values of source image has been created");
-        simulateProjectionData(pixInitialImage);
+        double[][] projectionData = generateProjectionData(pixInitialImage);
 
-        projection = Utils.normalize2DArray(projection, 0, 1);
+        projectionData = Utils.normalize2DArray(projectionData, 0, 1);
 
-        double min = Utils.getMin(projection);
+        double min = Utils.getMin(projectionData);
 
-        double max = Utils.getMax(projection);
+        double max = Utils.getMax(projectionData);
 
-        short[] pixelshortArray = new short[projection.length
-                * projection[0].length];
+        short[] pixelshortArray = new short[projectionData.length
+                * projectionData[0].length];
 
-        for (int x = 0; x < projection.length; x++) {
-            for (int y = 0; y < projection[0].length; y++) {
+        for (int x = 0; x < projectionData.length; x++) {
+            for (int y = 0; y < projectionData[0].length; y++) {
                 // rescale pixel values for 12-bit grayscale image??
                 if (max > min) {
-                    gray = (int) ((projection[x][y]) * 2000 / (max));
+                    gray = (int) ((projectionData[x][y]) * 2000 / (max));
                 } else {
-                    gray = (int) ((projection[x][y] - min) * 2000 / (max));
+                    gray = (int) ((projectionData[x][y] - min) * 2000 / (max));
                 }
-                pixelshortArray[y + x * projection[0].length] = (short) gray;
+                pixelshortArray[y + x * projectionData[0].length] = (short) gray;
 
             }
         }
 
-        sinogram = create12bitImage(projection[0].length, projection.length,
+        sinogram = create12bitImage(projectionData[0].length, projectionData.length,
                 pixelshortArray);
 
         sinogramImage = PerformWindowing(sinogram);
 
         return sinogramImage;
     }
-    
-        private static BufferedImage PerformWindowing(BufferedImage mBufferedImage) {
+
+    private static BufferedImage PerformWindowing(BufferedImage mBufferedImage) {
 
         int[][] pixels = Utils.getIntArrayPixelsFromBufImg(mBufferedImage);
         int iw = mBufferedImage.getWidth();
@@ -219,4 +207,3 @@ public class SinogramCreator extends TomographImageTransformer{
         return windowedImage;
     }
 }
-
