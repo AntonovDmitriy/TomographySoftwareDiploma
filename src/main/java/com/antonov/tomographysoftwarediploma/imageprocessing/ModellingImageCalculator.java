@@ -19,7 +19,7 @@ public class ModellingImageCalculator {
     // ----------Parameters of Scanning-------------------------
     public int scans; // Amount of Detectors or Point of Sourses
     public int stepSize; // Step of rotating in degree
-    int views;
+    int rotates;
     public static final int START_ROTATION_ANGLE = 0;
     public static final int FINISH_ROTATION_ANGLE = 180;
 
@@ -41,7 +41,7 @@ public class ModellingImageCalculator {
         checkStepSize(stepSize);
         logger.trace("stepSize value is correct " + stepSize);
         this.stepSize = stepSize;
-        this.views = AREA_SCANNING_IN_DEGREES / stepSize;
+        this.rotates = AREA_SCANNING_IN_DEGREES / stepSize;
         
         checkSourceImage(sourceImage);
         this.sourceImage = sourceImage;

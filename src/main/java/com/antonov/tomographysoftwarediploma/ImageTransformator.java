@@ -22,17 +22,16 @@ public class ImageTransformator {
 
     public BufferedImage initialImage;
 
-        public int scans; // Amount of Detectors or Point of Sourses
-    public int stepsize; // Step of rotating in degree
-    int views;
-    
+    public int scans = 400; // Amount of Detectors or Point of Sourses
+    public int stepsize = 1; // Step of rotating in degree
+    int views = 180;
+
     // -----------Parameters of Reconstruction
     public double[][] projection;
     public int outputImgSize;
     public boolean filtering;
     public String filterName;
     public double pixels[][]; // 2-D array store pixel values
-
 
     public void setReconstructParameters(int outputImgSize, boolean filtering, String filterName) {
         this.outputImgSize = outputImgSize;
@@ -45,8 +44,6 @@ public class ImageTransformator {
         this.filtering = false;
         this.filterName = null;
     }
-
-
 
     public static double[][] createProjectionData(BufferedImage imgBuf, int views, int scans, int stepSize) {
 
@@ -233,9 +230,6 @@ public class ImageTransformator {
             fprojection = projection; // без фильтрации
         }
 
-
-
-
         // Создадим таблицы sin и cos в радианах для каждого используемого угла от ang1 до ang2
         for (int phi = ang1; phi < ang2; phi = phi + stepsize) {
             sintab[i] = Math.sin((double) phi * Math.PI / 180);
@@ -267,12 +261,10 @@ public class ImageTransformator {
                 int x1 = x;
                 int y1 = y;
 
-
                 for (int phi = ang1; phi < ang2; phi = phi + stepsize) {
                     // pos = (x1 * sintab[i] - y1 * costab[i]);
                     pos = (-x1 * costab[i] + y1 * sintab[i]);
                     // System.out.print("pos= "+pos+" ");
-
 
                     if (interp == "nearest") {
 
@@ -370,7 +362,7 @@ public class ImageTransformator {
             double aa = 1 / a;
             if (Math.abs(sintab[i]) > sang) {
                 for (S = 0; S < scans; S++) {
-                    N = S - scans / 2; 
+                    N = S - scans / 2;
                     double b = (N - costab[i] - sintab[i]) / sintab[i];
                     b = b * scale;
 
@@ -647,10 +639,9 @@ public class ImageTransformator {
         double[][] fproj = new double[views][scans];
 
         if (Utils.isPow2(scans) == true) {
-            pscans = scans; 
-        } 
-        else {
-            int power = (int) ((Math.log(scans) / Math.log(2))) + 1; 
+            pscans = scans;
+        } else {
+            int power = (int) ((Math.log(scans) / Math.log(2))) + 1;
             pscans = (int) Math.pow(2, power);
             System.out.println("PSCANS: " + pscans);
         }
@@ -694,7 +685,6 @@ public class ImageTransformator {
     }
 
     public static BufferedImage getColorLutImage(BufferedImage image, short[][] colors) {
-
 
         byte[] reds = new byte[256];
         byte[] greens = new byte[256];

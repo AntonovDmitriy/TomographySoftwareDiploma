@@ -1,9 +1,19 @@
 package com.antonov.tomographysoftwarediploma;
 
+import java.awt.Point;
+import java.awt.Transparency;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
 import java.awt.image.DataBufferUShort;
+import java.awt.image.PixelInterleavedSampleModel;
+import java.awt.image.Raster;
+import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
 
 public class Utils {
 
@@ -127,11 +137,13 @@ public class Utils {
 
         for (int argument = startFunctionPositiveArgument; argument < endFunctionPositiveArgument; argument = (int) (argument + stepSize), i++) {
             switch (function) {
-                case "sin":
-                    result[i] = Math.sin((double) argument * Math.PI / 180 - Math.PI / 2);
+                case "-cos":
+//                    result[i] = Math.sin((double) argument * Math.PI / 180 - Math.PI / 2);
+                    result[i] = (-1) * Math.cos((double) argument * Math.PI / 180);
                     break;
-                case "cos":
-                    result[i] = Math.cos((double) argument * Math.PI / 180 - Math.PI / 2);
+                case "sin":
+//                    result[i] = Math.sin((double) argument * Math.PI / 180 - Math.PI / 2);
+                    result[i] = Math.sin((double) argument * Math.PI / 180);
                     break;
             }
         }
@@ -167,17 +179,10 @@ public class Utils {
     public static double[][] normalize2DArray(double data[][], double min, double max) {
 
         double datamax = getMax(data);
-
         double datamin = getMin(data);
-        //zero matrix
+
         if (datamin < 0) {
-            for (int i = 0; i < data.length; i++) {
-                for (int j = 0; j < data[0].length; j++) {
-                    if (data[i][j] < 0) {
-                        data[i][j] = 0;
-                    }
-                }
-            }
+            fillZeroMatrix(data);
         }
 
         datamin = 0;
@@ -189,6 +194,47 @@ public class Utils {
             }
         }
         return data;
+    }
+
+    public static short[] getShortRowFromProjectionData(double[][] projectionData) {
+
+        double min = Utils.getMin(projectionData);
+        double max = Utils.getMax(projectionData);
+        int gray;
+
+        short[] pixelshortArray = new short[projectionData.length
+                * projectionData[0].length];
+
+        for (int x = 0; x < projectionData.length; x++) {
+            for (int y = 0; y < projectionData[0].length; y++) {
+                // rescale pixel values for 12-bit grayscale image??
+                if (max > min) {
+                    gray = (int) ((projectionData[x][y]) * 2000 / (max));
+                } else {
+                    gray = (int) ((projectionData[x][y] - min) * 2000 / (max));
+                }
+                pixelshortArray[y + x * projectionData[0].length] = (short) gray;
+
+            }
+        }
+        return pixelshortArray;
+    }
+
+    public static BufferedImage create12bitImageFromShortProjectionData(int imageWidth,
+            int imageHeight, short data[]) {
+
+        DataBuffer dbuff = new DataBufferUShort((short[]) data, imageWidth);
+        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+        ColorModel cm = new ComponentColorModel(cs, new int[]{16}, false,
+                false, Transparency.OPAQUE, DataBuffer.TYPE_USHORT);
+        int[] band = {0};
+        SampleModel sm = new PixelInterleavedSampleModel(dbuff.getDataType(),
+                imageWidth, imageHeight, 1, imageWidth, band);
+        WritableRaster raster = Raster.createWritableRaster(sm, dbuff,
+                new Point(0, 0));
+
+        return new BufferedImage(cm, raster, false, null);
+
     }
 
     public static boolean isPow2(int value) {

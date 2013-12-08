@@ -7,6 +7,7 @@ package com.antonov.tomographysoftwarediploma.imageprocessing;
 
 import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
 import com.antonov.tomographysoftwarediploma.Utils;
+import static com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade.PerformWindowing;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import org.slf4j.Logger;
@@ -18,99 +19,94 @@ import org.slf4j.LoggerFactory;
  */
 public class SinogramCreator extends ModellingImageCalculator {
 
-    private static Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
+    public static final int REGIME_NEAREST_NEIGHBOUR_ITERPOLATION = 1;
+    public static final int REGIME_LINEAR_ITERPOLATION = 2;
 
-    private double[][] generateProjectionData(double[][] pixInitialImage) {
+    private static final Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
 
-        double val;
-        int x, y,  S = 0;
-        int N = 0;
-        val = 0;
-        double weight = 0;
-        double sang = Math.sqrt(2) / 2;
-        boolean fast = false;
+    private double[][] generateProjectionData(double[][] pixInitialImage, int regime) {
 
-
-        double[][] projectionData = new double[views][scans];
+        double[][] projectionData = new double[rotates][scans];
         Utils.fillZeroMatrix(projectionData);
-        double scaleImageToSinogramRatio = calculateImageToSinogramScaleRatio(pixInitialImage, this.scans);       
-        
-        double[] sintab = Utils.getRowOfFunctionIncrementalValues("sin", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
-        double[] costab = Utils.getRowOfFunctionIncrementalValues("cos", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
+        double scaleImageToSinogramRatio = calculateImageToSinogramScaleRatio(pixInitialImage, this.scans);
 
-        int view = 0;
+        double[] minusCosTab = Utils.getRowOfFunctionIncrementalValues("-cos", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
+        double[] sinTab = Utils.getRowOfFunctionIncrementalValues("sin", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
+
+        int rotate = 0;
         int heightInitialImage = pixInitialImage[0].length;
         int Xcenter = heightInitialImage / 2;
         int Ycenter = heightInitialImage / 2;
+
         for (int angle = START_ROTATION_ANGLE; angle < FINISH_ROTATION_ANGLE; angle = (int) (angle + stepSize)) {
 
-            double a = -costab[view] / sintab[view];
+            double a = -sinTab[rotate] / minusCosTab[rotate];
             double aa = 1 / a;
-            if (Math.abs(sintab[view]) > sang) {
-                for (S = 0; S < scans; S++) {
-                    N = S - scans / 2;
-                    double b = (N - costab[view] - sintab[view]) / sintab[view];
+            if (isAngleInFirstOrFourthSection(rotate, minusCosTab)) {
+                for (int scan = 0; scan < scans; scan++) {
+                    double valueOfGray = 0;
+                    int scanInGrid;
+                    scanInGrid = scan - scans / 2;
+                    double b = (scanInGrid - sinTab[rotate] - minusCosTab[rotate]) / minusCosTab[rotate];
                     b = b * scaleImageToSinogramRatio;
 
-                    for (x = -Xcenter; x < Xcenter; x++) {
-                        if (fast == true) {
-                            // just use nearest neighbour interpolation
-                            y = (int) Math.round(a * x + b);
-                            if (y >= -Xcenter && y < Xcenter) {
-                                val += pixInitialImage[(y + Ycenter)][(x + Xcenter)];
-                            }
-
-                        } else {
-                            // linear interpolation
-                            y = (int) Math.round(a * x + b);
-                            weight = Math.abs((a * x + b)
-                                    - Math.ceil(a * x + b));
-
-                            if (y >= -Xcenter && y + 1 < Xcenter) {
-                                val += (1 - weight)
-                                        * pixInitialImage[(y + Ycenter)][(x + Xcenter)]
-                                        + weight
-                                        * pixInitialImage[(y + Ycenter)][(x + Xcenter)];
-                            }
+                    for (int x = -Xcenter; x < Xcenter; x++) {
+                        if (regime == REGIME_NEAREST_NEIGHBOUR_ITERPOLATION) {
+                            valueOfGray = inteprolationNearestNeighbour(a, x, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
+                        } else if (regime == REGIME_LINEAR_ITERPOLATION) {
+                            valueOfGray = inteprolationLinear(a, x, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
                         }
                     }
-                    projectionData[view][S] = val / Math.abs(sintab[view]);
-                    val = 0;
-
+                    projectionData[rotate][scan] = valueOfGray / Math.abs(minusCosTab[rotate]);
                 }
-            } else if (Math.abs(sintab[view]) <= sang) {
-                for (S = 0; S < scans; S++) {
-                    N = S - scans / 2;
-                    double bb = (N - costab[view] - sintab[view]) / costab[view];
-                    bb = bb * scaleImageToSinogramRatio;
-                    for (y = -Ycenter; y < Ycenter; y++) {
-                        if (fast == true) {
-                            x = (int) Math.round(aa * y + bb);
-                            if (x >= -Xcenter && x < Xcenter) {
-                                val += pixInitialImage[(y + Ycenter)][(x + Xcenter)];
-                            }
-                        } else {
-
-                            x = (int) Math.round(aa * y + bb);
-                            weight = Math.abs((aa * y + bb)
-                                    - Math.ceil(aa * y + bb));
-
-                            if (x >= -Xcenter && x + 1 < Xcenter) {
-                                val += (1 - weight)
-                                        * pixInitialImage[(y + Ycenter)][(x + Xcenter)]
-                                        + weight
-                                        * pixInitialImage[(y + Ycenter)][(x + Xcenter)];
-                            }
+            } else {
+                for (int scan = 0; scan < scans; scan++) {
+                    double valueOfGray = 0;
+                    int scanInGrid;
+                    scanInGrid = scan - scans / 2;
+                    double b = (scanInGrid - sinTab[rotate] - minusCosTab[rotate]) / sinTab[rotate];
+                    b = b * scaleImageToSinogramRatio;
+                    for (int y = -Ycenter; y < Ycenter; y++) {
+                        if (regime == REGIME_NEAREST_NEIGHBOUR_ITERPOLATION) {
+                            valueOfGray = inteprolationNearestNeighbour(aa, y, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
+                        } else if (regime == REGIME_LINEAR_ITERPOLATION) {
+                            valueOfGray = inteprolationLinear(aa, y, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
                         }
                     }
-                    projectionData[view][S] = val / Math.abs(costab[view]);
-                    val = 0;
-
+                    projectionData[rotate][scan] = valueOfGray / Math.abs(sinTab[rotate]);
                 }
             }
-            view++;
+            rotate++;
         }
         return projectionData;
+    }
+
+    private double inteprolationNearestNeighbour(double a, int x, double b, int Xcenter, int Ycenter, double[][] pixInitialImage, double val) {
+
+        int y = (int) Math.round(a * x + b);
+        if (y >= -Xcenter && y < Xcenter) {
+            val += pixInitialImage[(y + Ycenter)][(x + Xcenter)];
+        }
+        return val;
+    }
+
+    private double inteprolationLinear(double a, int x, double b, int Xcenter, int Ycenter, double[][] pixInitialImage, double val) {
+        int y = (int) Math.round(a * x + b);
+        double weight = Math.abs((a * x + b)
+                - Math.ceil(a * x + b));
+
+        if (y >= -Xcenter && y + 1 < Xcenter) {
+            val += (1 - weight)
+                    * pixInitialImage[(y + Ycenter)][(x + Xcenter)]
+                    + weight
+                    * pixInitialImage[(y + Ycenter)][(x + Xcenter)];
+        }
+        return val;
+    }
+
+    boolean isAngleInFirstOrFourthSection(int view, double[] minusCosTab) {
+        double cosOf45Degrees = Math.sqrt(2) / 2;
+        return Math.abs(minusCosTab[view]) > cosOf45Degrees;
     }
 
     private double calculateImageToSinogramScaleRatio(double[][] imagePixArray, int scans) {
@@ -122,88 +118,19 @@ public class SinogramCreator extends ModellingImageCalculator {
 
     public BufferedImage createSinogram() {
         BufferedImage sinogram;
-        BufferedImage sinogramImage;
-
-        int gray;
 
         double[][] pixInitialImage = Utils.getDoubleRevertedArrayPixelsFromBufImg(sourceImage);
         logger.trace("Array of pixel values of source image has been created");
-        double[][] projectionData = generateProjectionData(pixInitialImage);
-
+        double[][] projectionData = generateProjectionData(pixInitialImage, REGIME_NEAREST_NEIGHBOUR_ITERPOLATION);
+        logger.trace("Projection data has been created");
         projectionData = Utils.normalize2DArray(projectionData, 0, 1);
-
-        double min = Utils.getMin(projectionData);
-
-        double max = Utils.getMax(projectionData);
-
-        short[] pixelshortArray = new short[projectionData.length
-                * projectionData[0].length];
-
-        for (int x = 0; x < projectionData.length; x++) {
-            for (int y = 0; y < projectionData[0].length; y++) {
-                // rescale pixel values for 12-bit grayscale image??
-                if (max > min) {
-                    gray = (int) ((projectionData[x][y]) * 2000 / (max));
-                } else {
-                    gray = (int) ((projectionData[x][y] - min) * 2000 / (max));
-                }
-                pixelshortArray[y + x * projectionData[0].length] = (short) gray;
-
-            }
-        }
-
-        sinogram = create12bitImage(projectionData[0].length, projectionData.length,
+        short[] pixelshortArray = Utils.getShortRowFromProjectionData(projectionData);
+        logger.trace("Short row projection data has been created");
+        sinogram = Utils.create12bitImageFromShortProjectionData(projectionData[0].length, projectionData.length,
                 pixelshortArray);
-
-        sinogramImage = PerformWindowing(sinogram);
-
-        return sinogramImage;
-    }
-
-    private static BufferedImage PerformWindowing(BufferedImage mBufferedImage) {
-
-        int[][] pixels = Utils.getIntArrayPixelsFromBufImg(mBufferedImage);
-        int iw = mBufferedImage.getWidth();
-        int ih = mBufferedImage.getHeight();
-        BufferedImage windowedImage;
-
-        int upperwinlvl;
-        int lowerwinlvl = 0;
-
-        if (mBufferedImage.getType() == 11) {
-            upperwinlvl = 2000;
-        } else {
-            upperwinlvl = 255;
-        }
-        int winwidth = upperwinlvl - lowerwinlvl;
-
-        if ((mBufferedImage.getType() == 11)
-                || (mBufferedImage.getType() == 10)) {
-            windowedImage = new BufferedImage(iw, ih,
-                    BufferedImage.TYPE_BYTE_GRAY);
-
-            WritableRaster wraster = windowedImage.getRaster();
-            for (int x = 0; x < iw; x++) {
-                for (int y = 0; y < ih; y++) {
-                    // int val = wraster.getSample(x, y, 0);
-                    int val = pixels[x][y];
-                    if (val <= lowerwinlvl) {
-                        wraster.setSample(x, y, 0, 0);
-                    } else if (val >= upperwinlvl) {
-                        wraster.setSample(x, y, 0, 255);
-                    } else {
-                        int newval = (val - lowerwinlvl) * 256 / winwidth;
-                        wraster.setSample(x, y, 0, newval);
-                    }
-                }
-            }
-        } else {
-            windowedImage = new BufferedImage(iw, ih,
-                    BufferedImage.TYPE_INT_RGB);
-            windowedImage.createGraphics()
-                    .drawImage(mBufferedImage, 0, 0, null);
-
-        }
-        return windowedImage;
+        logger.trace("Sinogram image is created");
+        sinogram = PerformWindowing(sinogram);
+        logger.trace("Sinogram inage has been performed for screaning");
+        return sinogram;
     }
 }
