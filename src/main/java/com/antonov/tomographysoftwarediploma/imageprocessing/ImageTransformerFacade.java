@@ -42,50 +42,56 @@ public class ImageTransformerFacade {
         return sinogram;
     }
 
-    public static BufferedImage PerformWindowing(BufferedImage mBufferedImage) {
+    public static BufferedImage PerformWindowing(BufferedImage image) {
 
-        int[][] pixels = Utils.getIntArrayPixelsFromBufImg(mBufferedImage);
-        int iw = mBufferedImage.getWidth();
-        int ih = mBufferedImage.getHeight();
-        BufferedImage windowedImage;
+        BufferedImage result;
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-        int upperwinlvl;
-        int lowerwinlvl = 0;
-
-        if (mBufferedImage.getType() == 11) {
-            upperwinlvl = 2000;
+        if ((image.getType() == 11) || (image.getType() == 10)) {
+            result = performGrayImage(image);
         } else {
-            upperwinlvl = 255;
+            result = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            result.createGraphics().drawImage(image, 0, 0, null);
         }
+        return result;
+    }
+
+    private static int getUpperLevel(BufferedImage image) {
+
+        int result;
+        if (image.getType() == 11) {
+            result = 2000;
+        } else {
+            result = 255;
+        }
+        return result;
+    }
+
+    private static BufferedImage performGrayImage(BufferedImage image) {
+
+        BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(),
+                BufferedImage.TYPE_BYTE_GRAY);
+        int upperwinlvl = getUpperLevel(image);
+        int lowerwinlvl = 0;
         int winwidth = upperwinlvl - lowerwinlvl;
 
-        if ((mBufferedImage.getType() == 11)
-                || (mBufferedImage.getType() == 10)) {
-            windowedImage = new BufferedImage(iw, ih,
-                    BufferedImage.TYPE_BYTE_GRAY);
+        int[][] pixels = Utils.getIntArrayPixelsFromBufImg(image);
 
-            WritableRaster wraster = windowedImage.getRaster();
-            for (int x = 0; x < iw; x++) {
-                for (int y = 0; y < ih; y++) {
-                    // int val = wraster.getSample(x, y, 0);
-                    int val = pixels[x][y];
-                    if (val <= lowerwinlvl) {
-                        wraster.setSample(x, y, 0, 0);
-                    } else if (val >= upperwinlvl) {
-                        wraster.setSample(x, y, 0, 255);
-                    } else {
-                        int newval = (val - lowerwinlvl) * 256 / winwidth;
-                        wraster.setSample(x, y, 0, newval);
-                    }
+        WritableRaster wraster = result.getRaster();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int val = pixels[x][y];
+                if (val <= lowerwinlvl) {
+                    wraster.setSample(x, y, 0, 0);
+                } else if (val >= upperwinlvl) {
+                    wraster.setSample(x, y, 0, 255);
+                } else {
+                    int newval = (val - lowerwinlvl) * 256 / winwidth;
+                    wraster.setSample(x, y, 0, newval);
                 }
             }
-        } else {
-            windowedImage = new BufferedImage(iw, ih,
-                    BufferedImage.TYPE_INT_RGB);
-            windowedImage.createGraphics()
-                    .drawImage(mBufferedImage, 0, 0, null);
-
         }
-        return windowedImage;
+        return result;
     }
 }

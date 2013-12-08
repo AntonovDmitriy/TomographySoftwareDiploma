@@ -5,11 +5,9 @@
  */
 package com.antonov.tomographysoftwarediploma.imageprocessing;
 
-import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
 import com.antonov.tomographysoftwarediploma.Utils;
 import static com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade.PerformWindowing;
 import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +22,7 @@ public class SinogramCreator extends ModellingImageCalculator {
 
     private static final Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
 
+    // I decided to remain this long method for better understanding
     private double[][] generateProjectionData(double[][] pixInitialImage, int regime) {
 
         double[][] projectionData = new double[rotates][scans];

@@ -5,7 +5,6 @@
  */
 package com.antonov.tomographysoftwarediploma.imageprocessing;
 
-import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import java.awt.image.BufferedImage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class ModellingImageCalculator {
 
     //---------------------Other--------------------------------
     boolean isDataModellingValid = false;
-    private static Logger logger = LoggerFactory.getLogger(ModellingImageCalculator.class);
+    private static final Logger logger = LoggerFactory.getLogger(ModellingImageCalculator.class);
 
     public static final int AREA_SCANNING_IN_DEGREES = 180;
 
