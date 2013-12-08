@@ -115,12 +115,13 @@ public class SinogramCreator extends ModellingImageCalculator {
         return result;
     }
 
-    public BufferedImage createSinogram() {
+    public BufferedImage createSinogram(int regimeInteprolation) throws NumberWrongValueException {
         BufferedImage sinogram;
+        checkRegimeInterpolation(regimeInteprolation);
 
         double[][] pixInitialImage = Utils.getDoubleRevertedArrayPixelsFromBufImg(sourceImage);
         logger.trace("Array of pixel values of source image has been created");
-        double[][] projectionData = generateProjectionData(pixInitialImage, REGIME_NEAREST_NEIGHBOUR_ITERPOLATION);
+        double[][] projectionData = generateProjectionData(pixInitialImage, regimeInteprolation);
         logger.trace("Projection data has been created");
         projectionData = Utils.normalize2DArray(projectionData, 0, 1);
         short[] pixelshortArray = Utils.getShortRowFromProjectionData(projectionData);
@@ -131,5 +132,14 @@ public class SinogramCreator extends ModellingImageCalculator {
         sinogram = PerformWindowing(sinogram);
         logger.trace("Sinogram inage has been performed for screaning");
         return sinogram;
+    }
+
+    private void checkRegimeInterpolation(int regimeInteprolation) throws NumberWrongValueException {
+        if (regimeInteprolation == 0 || (regimeInteprolation != REGIME_LINEAR_ITERPOLATION && 
+                regimeInteprolation != REGIME_NEAREST_NEIGHBOUR_ITERPOLATION)) {
+            logger.error("Error value of regimeInteprolation " + regimeInteprolation + " ");
+            throw new NumberWrongValueException("Error value regimeInteprolation " + regimeInteprolation + " ");
+        }
+
     }
 }

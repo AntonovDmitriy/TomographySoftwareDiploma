@@ -48,7 +48,6 @@ public class ModellingImageCalculator {
     }
 
     private void checkScans(int scans) throws NumberWrongValueException {
-
         try {
             checkInt(scans);
         } catch (NumberFormatException ex) {

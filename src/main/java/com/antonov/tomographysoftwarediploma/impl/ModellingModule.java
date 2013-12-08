@@ -7,8 +7,6 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
-import com.antonov.tomographysoftwarediploma.imageprocessing.ImageWrongValueException;
-import com.antonov.tomographysoftwarediploma.imageprocessing.NumberWrongValueException;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +36,7 @@ public class ModellingModule {
     //Parameters of modelling
     private Integer scans;
     private Integer stepSize;
+    private Integer regimeInterpolation;
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
@@ -160,6 +158,13 @@ public class ModellingModule {
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter STEPSIZE", ex);
         }
+
+        try {
+            regimeInterpolation = Integer.parseInt(tomographProperty.getProperty("REGIME_INTERPOLATION"));
+            logger.info("regimeInterpolation = " + regimeInterpolation);
+        } catch (NumberFormatException ex) {
+            logger.warn("Error reading initial parameter REGIME_INTERPOLATION", ex);
+        }
         logger.info("Initial modelling parameters have been read");
     }
 
@@ -167,24 +172,27 @@ public class ModellingModule {
         Integer oldScans = this.scans;
         this.scans = scans;
         logger.trace("Value of scans now is " + scans + ". Old value was " + oldScans);
-        firePropertyChange("setScansModel", oldScans, this.scans);
-
     }
 
     public void setStepSize(int stepSize) {
         Integer oldStepSize = this.stepSize;
         this.stepSize = stepSize;
         logger.trace("Value of stepSize now is " + stepSize + ". Old value was " + oldStepSize);
-        firePropertyChange("setStepSizeModel", oldStepSize, this.stepSize);
         firePropertyChange("clearResultModelling", null, null);
         logger.info("Result modelling is clear");
+    }
+
+    public void setRegimeInterpolation(int regimeInterpolation) {
+        Integer oldRegimeInterpolation = this.scans;
+        this.regimeInterpolation = regimeInterpolation;
+        logger.trace("Value of regimeInterpolation now is " + regimeInterpolation + ". Old value was " + oldRegimeInterpolation);
     }
 
     public void createSinogram() {
         try {
             logger.trace("Sinogram creating is starting");
             firePropertyChange("startSinogramm", null, null);
-            BufferedImage sinogram = ImageTransformerFacade.createSinogram(currentModellingImage, scans, stepSize);
+            BufferedImage sinogram = ImageTransformerFacade.createSinogram(currentModellingImage, scans, stepSize, regimeInterpolation);
             setSinogramImage(sinogram);
             firePropertyChange("enableReconControls", null, null);
             logger.trace("Recon controls are enabled");

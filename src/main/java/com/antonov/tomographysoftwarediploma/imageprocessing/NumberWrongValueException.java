@@ -15,4 +15,8 @@ public class NumberWrongValueException extends Exception {
         super(string, ex);
     }
 
+    NumberWrongValueException(String string) {
+        super(string);
+    }
+
 }
