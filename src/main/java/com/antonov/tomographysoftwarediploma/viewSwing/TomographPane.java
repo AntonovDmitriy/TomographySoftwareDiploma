@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
 
 public class TomographPane extends javax.swing.JFrame implements ITomographView {
 
-    private static Logger logger = LoggerFactory.getLogger(TomographPane.class);
+    private static final Logger logger = LoggerFactory.getLogger(TomographPane.class);
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
     private final ResourceBundle bundle = ResourceBundle.getBundle(
@@ -66,6 +66,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     public TomographPane() {
 
         initComponents();
+        initClosingOperations();
+        initButtons();
+        initTextFields();
+        initComboBoxes();
+    }
+
+    private void initClosingOperations() {
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -75,10 +83,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-
-        initButtons();
-        initTextFields();
-        initComboBoxes();
     }
 
     @Override
@@ -93,11 +97,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     @Override
     public void setModellingImages(Map<String, BufferedImage> imageSamplesMapWithNames) {
+
         fillModelNames(imageSamplesMapWithNames);
         initModelList();
     }
 
     private void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames) {
+
         if (!imageSamplesMapWithNames.isEmpty()) {
 
             for (String name : imageSamplesMapWithNames.keySet()) {
@@ -137,6 +143,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     @Override
     public void clearResultModelling() {
+
         labelImage2.setIcon(null);
     }
 
@@ -155,6 +162,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     @Override
     public void enableReconControls() {
+
         buttonReconstruct.setEnabled(true);
         buttonSaveSinogram.setEnabled(true);
         buttonDensityViewer.setEnabled(false);
@@ -162,12 +170,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     @Override
     public void setCurrentModellingImage(BufferedImage image) {
+
         ImageIcon icon = new ImageIcon(image);
         labelImage1.setIcon(icon);
     }
 
     @Override
     public void setSinogramImage(BufferedImage image) {
+
         ImageIcon icon = new ImageIcon(image);
         labelImage2.setIcon(icon);
     }
@@ -283,22 +293,23 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     }
 
     private void setCbInterpolation(Set setInterpolation) {
-        
+
         cbTypeInterpolation.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
     }
 
     private void showInternalErrorMessage(String messageError) {
+
         stopCalculating();
         JOptionPane.showMessageDialog(this, bundle.getString("INTERNAL_ERROR") + ". " + messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
 
     private void showWarningMessage(String messageWarning) {
-        JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
 
+        JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
     }
-    
-    private void initComboBoxes(){
-        
+
+    private void initComboBoxes() {
+
         cbTypeInterpolation.addActionListener(new ActionListener() {
 
             @Override

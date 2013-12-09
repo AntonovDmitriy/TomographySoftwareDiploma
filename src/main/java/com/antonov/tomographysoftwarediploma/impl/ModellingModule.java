@@ -29,20 +29,21 @@ import org.slf4j.LoggerFactory;
 public class ModellingModule {
 
     private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
-    ModellingModuleController controller;
-    private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
-    private Properties tomographProperty;
-    private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
-    private BufferedImage currentModellingImage;
-    private BufferedImage sinogramImage;
-
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+    private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
+    private ModellingModuleController controller;
+    private Properties tomographProperty;
+
+    private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
 
     //Parameters of modelling
     private Integer scans;
     private Integer stepSize;
     private PInterpolation regimeInterpolation;
     private Set<PInterpolation> setInterpolation;
+
+    private BufferedImage currentModellingImage;
+    private BufferedImage sinogramImage;
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
@@ -134,50 +135,26 @@ public class ModellingModule {
         logger.info("Views are prepared");
     }
 
-    public void setCurrentModellingImageByName(String image) {
-        currentModellingImage = imageSamplesMapWithNames.get(image);
-        logger.info("Current modelling image changes on " + image);
-        setCurrentModellingImage();
-    }
-
-    public void setCurrentModellingImage() {
-        firePropertyChange("currentImageModelling", null, currentModellingImage);
-        logger.info("Current modelling image changes on display");
-        firePropertyChange("clearResultModelling", null, null);
-        logger.info("Result modelling is clear");
-        firePropertyChange("disableModellingControls", null, null);
-        logger.info("Modelling controls are disabled");
-    }
-
-    public void setSinogramImage(BufferedImage image) {
-        BufferedImage oldSinogramImage = this.sinogramImage;
-        this.sinogramImage = image;
-        firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
-        logger.trace("Sinogram image is changed");
-    }
-
-    public void getAndSetFileModellingImage(File file) {
-        try {
-            BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
-            logger.info(file.getAbsolutePath() + " is successfully opened");
-            BufferedImage imagePrepared = ImageTransformerFacade.prepareImage(image);
-            logger.info(file.getAbsolutePath() + " is prepared");
-            currentModellingImage = imagePrepared;
-            logger.info("Current modelling image changes on " + file.getName());
-            setCurrentModellingImage();
-        } catch (IOException ex) {
-            logger.error("Error during openinig image " + ex);
-        }
-    }
-
     private void initParamModelling() {
+        
         logger.info("Reading initial modelling parameters");
+        initScans();
+        initStepSize();
+        initInterpolation();
+        logger.info("Initial modelling parameters have been read");
+    }
+
+    private void initScans() {
+
         try {
             scans = Integer.parseInt(tomographProperty.getProperty("SCANS"));
             logger.info("scans = " + scans);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter SCANS", ex);
         }
+    }
+
+    private void initStepSize() {
 
         try {
             stepSize = Integer.parseInt(tomographProperty.getProperty("STEPSIZE"));
@@ -185,6 +162,9 @@ public class ModellingModule {
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter STEPSIZE", ex);
         }
+    }
+
+    private void initInterpolation() {
 
         try {
             String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_INTERPOLATION");
@@ -198,13 +178,50 @@ public class ModellingModule {
                         break;
                     }
                 }
-
             }
             logger.info("regimeInterpolation = " + regimeInterpolation);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter REGIME_INTERPOLATION", ex);
         }
-        logger.info("Initial modelling parameters have been read");
+    }
+
+    public void setCurrentModellingImageByName(String image) {
+        currentModellingImage = imageSamplesMapWithNames.get(image);
+        logger.info("Current modelling image changes on " + image);
+        setCurrentModellingImage();
+    }
+
+    public void setCurrentModellingImage() {
+        
+        firePropertyChange("currentImageModelling", null, currentModellingImage);
+        logger.info("Current modelling image changes on display");
+        firePropertyChange("clearResultModelling", null, null);
+        logger.info("Result modelling is clear");
+        firePropertyChange("disableModellingControls", null, null);
+        logger.info("Modelling controls are disabled");
+    }
+
+    public void setSinogramImage(BufferedImage image) {
+        
+        BufferedImage oldSinogramImage = this.sinogramImage;
+        this.sinogramImage = image;
+        firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
+        logger.trace("Sinogram image is changed");
+    }
+
+    public void getAndSetFileModellingImage(File file) {
+        
+        try {
+            BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
+            logger.info(file.getAbsolutePath() + " is successfully opened");
+            BufferedImage imagePrepared = ImageTransformerFacade.prepareImage(image);
+            logger.info(file.getAbsolutePath() + " is prepared");
+            currentModellingImage = imagePrepared;
+            logger.info("Current modelling image changes on " + file.getName());
+            setCurrentModellingImage();
+        } catch (IOException ex) {
+            logger.error("Error during openinig image " + ex);
+        }
     }
 
     public void setScans(int scans) {
@@ -237,6 +254,7 @@ public class ModellingModule {
     }
 
     public void createSinogram() {
+        
         try {
             logger.trace("Sinogram creating is starting");
             firePropertyChange("startSinogramm", null, null);
