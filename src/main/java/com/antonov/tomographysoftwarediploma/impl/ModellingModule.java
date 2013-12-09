@@ -7,14 +7,18 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.imageprocessing.SinogramCreator;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +28,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ModellingModule {
 
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
     ModellingModuleController controller;
     private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
     private Properties tomographProperty;
@@ -36,7 +41,8 @@ public class ModellingModule {
     //Parameters of modelling
     private Integer scans;
     private Integer stepSize;
-    private Integer regimeInterpolation;
+    private PInterpolation regimeInterpolation;
+    private Set<PInterpolation> setInterpolation;
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
@@ -62,14 +68,31 @@ public class ModellingModule {
     }
 
     public ModellingModule(Properties p) {
+
         if (p != null) {
             this.tomographProperty = p;
+            initInterpolations();
             initSamplesMapImage();
             initParamModelling();
+
         } else {
             logger.warn("Properties file is null");
         }
 
+    }
+
+    private void initInterpolations() {
+
+        setInterpolation = new HashSet<>();
+        PInterpolation pojo = new PInterpolation();
+        pojo.setValue(SinogramCreator.REGIME_LINEAR_ITERPOLATION);
+        pojo.setNameInteprolation(bundle.getString("LINEAR_INTERPOLATION"));
+        setInterpolation.add(pojo);
+
+        pojo = new PInterpolation();
+        pojo.setValue(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION);
+        pojo.setNameInteprolation(bundle.getString("NEAREST_NEIGHBOUR_INTERPOLATION"));
+        setInterpolation.add(pojo);
     }
 
     private void initSamplesMapImage() {
@@ -102,9 +125,13 @@ public class ModellingModule {
     }
 
     public void prepareView() {
+
         controller.setModellingImages(imageSamplesMapWithNames);
         firePropertyChange("scans", null, scans);
         firePropertyChange("stepsize", null, stepSize);
+        firePropertyChange("regimeInterpolationModel", null, setInterpolation);
+        firePropertyChange("regimeInterpolation", null, regimeInterpolation);
+        logger.info("Views are prepared");
     }
 
     public void setCurrentModellingImageByName(String image) {
@@ -160,7 +187,19 @@ public class ModellingModule {
         }
 
         try {
-            regimeInterpolation = Integer.parseInt(tomographProperty.getProperty("REGIME_INTERPOLATION"));
+            String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_INTERPOLATION");
+            if (!regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_LINEAR_ITERPOLATION)
+                    && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_LINEAR_ITERPOLATION)) {
+                throw new NumberFormatException("Regime of interpolation has invalid value " + regimeInterpolationFromProperty);
+            } else {
+                for (PInterpolation pojoInterpolation : setInterpolation) {
+                    if (pojoInterpolation.getValue().equals(regimeInterpolationFromProperty)) {
+                        regimeInterpolation = pojoInterpolation;
+                        break;
+                    }
+                }
+
+            }
             logger.info("regimeInterpolation = " + regimeInterpolation);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter REGIME_INTERPOLATION", ex);
@@ -182,17 +221,26 @@ public class ModellingModule {
         logger.info("Result modelling is clear");
     }
 
-    public void setRegimeInterpolation(int regimeInterpolation) {
-        Integer oldRegimeInterpolation = this.scans;
+    public void setRegimeInterpolation(PInterpolation regimeInterpolation) {
+
+        PInterpolation oldRegimeInterpolation = this.regimeInterpolation;
         this.regimeInterpolation = regimeInterpolation;
-        logger.trace("Value of regimeInterpolation now is " + regimeInterpolation + ". Old value was " + oldRegimeInterpolation);
+
+        if (oldRegimeInterpolation != null) {
+            logger.trace("Value of regimeInterpolation now is " + regimeInterpolation.getValue()
+                    + ". Old value was " + oldRegimeInterpolation.getValue());
+        } else {
+            logger.trace("Value of regimeInterpolation now is " + regimeInterpolation.getValue()
+                    + ". Old value was " + oldRegimeInterpolation);
+        }
+
     }
 
     public void createSinogram() {
         try {
             logger.trace("Sinogram creating is starting");
             firePropertyChange("startSinogramm", null, null);
-            BufferedImage sinogram = ImageTransformerFacade.createSinogram(currentModellingImage, scans, stepSize, regimeInterpolation);
+            BufferedImage sinogram = ImageTransformerFacade.createSinogram(currentModellingImage, scans, stepSize, regimeInterpolation.getValue());
             setSinogramImage(sinogram);
             firePropertyChange("enableReconControls", null, null);
             logger.trace("Recon controls are enabled");

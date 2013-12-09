@@ -17,13 +17,13 @@ import org.slf4j.LoggerFactory;
  */
 public class SinogramCreator extends ModellingImageCalculator {
 
-    public static final int REGIME_NEAREST_NEIGHBOUR_ITERPOLATION = 1;
-    public static final int REGIME_LINEAR_ITERPOLATION = 2;
+    public static final String REGIME_NEAREST_NEIGHBOUR_INTERPOLATION = "nearest";
+    public static final String REGIME_LINEAR_ITERPOLATION = "linear";
 
     private static final Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
 
     // I decided to remain this long method for better understanding
-    private double[][] generateProjectionData(double[][] pixInitialImage, int regime) {
+    private double[][] generateProjectionData(double[][] pixInitialImage, String regime) {
 
         double[][] projectionData = new double[rotates][scans];
         Utils.fillZeroMatrix(projectionData);
@@ -50,9 +50,9 @@ public class SinogramCreator extends ModellingImageCalculator {
                     b = b * scaleImageToSinogramRatio;
 
                     for (int x = -Xcenter; x < Xcenter; x++) {
-                        if (regime == REGIME_NEAREST_NEIGHBOUR_ITERPOLATION) {
+                        if (regime.equals(REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
                             valueOfGray = inteprolationNearestNeighbour(a, x, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
-                        } else if (regime == REGIME_LINEAR_ITERPOLATION) {
+                        } else if (regime.equals(REGIME_LINEAR_ITERPOLATION)) {
                             valueOfGray = inteprolationLinear(a, x, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
                         }
                     }
@@ -66,9 +66,9 @@ public class SinogramCreator extends ModellingImageCalculator {
                     double b = (scanInGrid - sinTab[rotate] - minusCosTab[rotate]) / sinTab[rotate];
                     b = b * scaleImageToSinogramRatio;
                     for (int y = -Ycenter; y < Ycenter; y++) {
-                        if (regime == REGIME_NEAREST_NEIGHBOUR_ITERPOLATION) {
+                        if (regime.equals(REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
                             valueOfGray = inteprolationNearestNeighbour(aa, y, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
-                        } else if (regime == REGIME_LINEAR_ITERPOLATION) {
+                        } else if (regime.equals(REGIME_LINEAR_ITERPOLATION)) {
                             valueOfGray = inteprolationLinear(aa, y, b, Xcenter, Ycenter, pixInitialImage, valueOfGray);
                         }
                     }
@@ -115,7 +115,7 @@ public class SinogramCreator extends ModellingImageCalculator {
         return result;
     }
 
-    public BufferedImage createSinogram(int regimeInteprolation) throws NumberWrongValueException {
+    public BufferedImage createSinogram(String regimeInteprolation) throws NumberWrongValueException {
         BufferedImage sinogram;
         checkRegimeInterpolation(regimeInteprolation);
 
@@ -134,9 +134,9 @@ public class SinogramCreator extends ModellingImageCalculator {
         return sinogram;
     }
 
-    private void checkRegimeInterpolation(int regimeInteprolation) throws NumberWrongValueException {
-        if (regimeInteprolation == 0 || (regimeInteprolation != REGIME_LINEAR_ITERPOLATION && 
-                regimeInteprolation != REGIME_NEAREST_NEIGHBOUR_ITERPOLATION)) {
+    private void checkRegimeInterpolation(String regimeInteprolation) throws NumberWrongValueException {
+        if (regimeInteprolation == null || (!regimeInteprolation.equals(REGIME_LINEAR_ITERPOLATION)
+                && !regimeInteprolation.equals(REGIME_NEAREST_NEIGHBOUR_INTERPOLATION))) {
             logger.error("Error value of regimeInteprolation " + regimeInteprolation + " ");
             throw new NumberWrongValueException("Error value regimeInteprolation " + regimeInteprolation + " ");
         }

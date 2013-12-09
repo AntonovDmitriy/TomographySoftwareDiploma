@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.Set;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -76,6 +78,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         initButtons();
         initTextFields();
+        initComboBoxes();
     }
 
     @Override
@@ -210,6 +213,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "PARAMETER_VALUE_WARNING":
                         showWarningMessage((String) evt.getNewValue());
                         break;
+                    case "regimeInterpolationModel":
+                        setCbInterpolation((Set) evt.getNewValue());
+                        break;
+                    case "regimeInterpolation":
+                        cbTypeInterpolation.setSelectedItem(evt.getNewValue());
                 }
             }
         };
@@ -274,14 +282,30 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         });
     }
 
+    private void setCbInterpolation(Set setInterpolation) {
+        
+        cbTypeInterpolation.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
+    }
+
     private void showInternalErrorMessage(String messageError) {
         stopCalculating();
         JOptionPane.showMessageDialog(this, bundle.getString("INTERNAL_ERROR") + ". " + messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
 
     private void showWarningMessage(String messageWarning) {
-        JOptionPane.showMessageDialog(this, messageWarning +". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
 
+    }
+    
+    private void initComboBoxes(){
+        
+        cbTypeInterpolation.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modellingModuleController.setInterpolation(cbTypeInterpolation.getSelectedItem());
+            }
+        });
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -345,6 +369,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         edScansModel = new javax.swing.JTextField();
         labelStepsize = new javax.swing.JLabel();
         edStepsizeModel = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        cbTypeInterpolation = new javax.swing.JComboBox();
         filteringModel = new javax.swing.JCheckBox();
         buttonSaveSinogram = new javax.swing.JButton();
         buttonSinogram = new javax.swing.JButton();
@@ -960,6 +986,23 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneParamModelling.add(edStepsizeModel, gridBagConstraints);
 
+            jLabel13.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneParamModelling.add(jLabel13, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            paneParamModelling.add(cbTypeInterpolation, gridBagConstraints);
+
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
@@ -1545,7 +1588,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(buttonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(21, 21, 21)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                     .addComponent(sliderImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(12, 12, 12))
@@ -1553,7 +1596,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     .addGroup(TomographLayout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(buttonDensityViewer1)
-                        .addContainerGap(394, Short.MAX_VALUE)))
+                        .addContainerGap(438, Short.MAX_VALUE)))
             );
 
             colorPanelTomograph.setVisible(false);
@@ -2206,6 +2249,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonSaveSinogram;
     private javax.swing.JButton buttonSinogram;
     private javax.swing.JButton buttonStart;
+    private javax.swing.JComboBox cbTypeInterpolation;
     private javax.swing.JRadioButton color1;
     private javax.swing.JRadioButton color1Tomograph;
     private javax.swing.JRadioButton color2;
@@ -2252,6 +2296,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

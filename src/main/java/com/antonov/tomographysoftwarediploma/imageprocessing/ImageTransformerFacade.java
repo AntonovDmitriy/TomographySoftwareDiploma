@@ -34,7 +34,7 @@ public class ImageTransformerFacade {
         return image;
     }
 
-    public static BufferedImage createSinogram(BufferedImage initialImage, int views, int stepSize, int regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
+    public static BufferedImage createSinogram(BufferedImage initialImage, int views, int stepSize, String regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
 
         SinogramCreator sinogramCreator = new SinogramCreator();
         sinogramCreator.setDataModelling(initialImage, views, stepSize);

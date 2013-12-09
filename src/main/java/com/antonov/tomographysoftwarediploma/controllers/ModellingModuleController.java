@@ -1,6 +1,7 @@
 package com.antonov.tomographysoftwarediploma.controllers;
 
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
+import com.antonov.tomographysoftwarediploma.impl.PInterpolation;
 import com.antonov.tomographysoftwarediploma.impl.Tomograph;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
@@ -100,5 +101,15 @@ public class ModellingModuleController extends Controller {
     public void createSinogram(String scans, String stepSize) {
 
         super.tomograph.modellingModule.createSinogram();
+    }
+
+    public void setInterpolation(Object selectedItem) {
+        try{
+            
+        PInterpolation pojoInterpolation = (PInterpolation) selectedItem;
+        super.tomograph.modellingModule.setRegimeInterpolation(pojoInterpolation);
+        } catch (ClassCastException ex){
+            firePropertyChange("PARAMETER_VALUE_WARNING", null, " " + ex.getMessage());
+        }
     }
 }
