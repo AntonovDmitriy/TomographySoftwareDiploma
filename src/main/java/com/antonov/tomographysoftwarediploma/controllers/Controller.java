@@ -27,6 +27,6 @@ public abstract class Controller {
         tomograph.exitApplication();
     }
 
-    public abstract void setPropertyChangeListener(PropertyChangeListener p);
+    public abstract void addPropertyChangeListenerToModel(PropertyChangeListener p);
 
 }

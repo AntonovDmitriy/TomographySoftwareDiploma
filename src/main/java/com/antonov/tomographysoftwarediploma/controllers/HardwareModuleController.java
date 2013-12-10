@@ -21,7 +21,7 @@ public class HardwareModuleController extends Controller{
     }
 
     @Override
-    public void setPropertyChangeListener(PropertyChangeListener p) {
+    public void addPropertyChangeListenerToModel(PropertyChangeListener p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

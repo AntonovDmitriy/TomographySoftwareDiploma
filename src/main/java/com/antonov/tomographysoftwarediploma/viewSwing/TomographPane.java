@@ -71,8 +71,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         initTextFields();
         initComboBoxes();
     }
-
-    private void initClosingOperations() {
+    
+    @Override
+    public void initClosingOperations() {
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -102,7 +103,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         initModelList();
     }
 
-    private void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames) {
+    @Override
+    public void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames) {
 
         if (!imageSamplesMapWithNames.isEmpty()) {
 
@@ -114,7 +116,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         }
     }
 
-    private void initModelList() {
+    @Override
+    public void initModelList() {
 
         modelList.setModel(new javax.swing.AbstractListModel() {
 
@@ -184,9 +187,21 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     @Override
     public void initListeners() {
+        PropertyChangeListener errorListener = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                switch (evt.getPropertyName()) {
+                    case "INTERNAL_ERROR":
+                        showInternalErrorMessage((String) evt.getNewValue());
+                        break;
+                    case "PARAMETER_VALUE_WARNING":
+                        showWarningMessage((String) evt.getNewValue());
+                        break;
+                }
+            }
+        };
 
-        PropertyChangeListener currentImageModellingListener = new PropertyChangeListener() {
-
+        PropertyChangeListener imagesListener = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 switch (evt.getPropertyName()) {
@@ -196,17 +211,46 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "clearResultModelling":
                         clearResultModelling();
                         break;
-                    case "disableModellingControls":
-                        disableModellingControls();
+                    case "setSinogramImage":
+                        setSinogramImage((BufferedImage) evt.getNewValue());
                         break;
-                    case "enableReconControls":
-                        enableReconControls();
-                        break;
+                }
+            }
+        };
+
+        PropertyChangeListener paramsModellingListener = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                switch (evt.getPropertyName()) {
                     case "scans":
                         edScansModel.setText(((Integer) evt.getNewValue()).toString());
                         break;
                     case "stepsize":
                         edStepsizeModel.setText(((Integer) evt.getNewValue()).toString());
+                        break;
+                    case "regimeInterpolationModel":
+                        setCbInterpolation((Set) evt.getNewValue());
+                        break;
+                    case "regimeInterpolation":
+                        cbTypeInterpolation.setSelectedItem(evt.getNewValue());
+                        break;
+                    case "setModellingImages":
+                         setModellingImages((Map<String, BufferedImage>) evt.getNewValue());
+                        break;
+                }
+            }
+        };
+
+        PropertyChangeListener otherStuffListener = new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                switch (evt.getPropertyName()) {
+                    case "disableModellingControls":
+                        disableModellingControls();
+                        break;
+                    case "enableReconControls":
+                        enableReconControls();
                         break;
                     case "startSinogramm":
                         startCalculating();
@@ -214,35 +258,29 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "stopSinogramm":
                         stopCalculating();
                         break;
-                    case "setSinogramImage":
-                        setSinogramImage((BufferedImage) evt.getNewValue());
-                        break;
-                    case "INTERNAL_ERROR":
-                        showInternalErrorMessage((String) evt.getNewValue());
-                        break;
-                    case "PARAMETER_VALUE_WARNING":
-                        showWarningMessage((String) evt.getNewValue());
-                        break;
-                    case "regimeInterpolationModel":
-                        setCbInterpolation((Set) evt.getNewValue());
-                        break;
-                    case "regimeInterpolation":
-                        cbTypeInterpolation.setSelectedItem(evt.getNewValue());
                 }
             }
         };
-        modellingModuleController.setPropertyChangeListener(currentImageModellingListener);
-        modellingModuleController.addPropertyChangeListener(currentImageModellingListener);
-    }
+        
+        modellingModuleController.addPropertyChangeListenerToModel(paramsModellingListener);
+        modellingModuleController.addPropertyChangeListenerToModel(imagesListener);
+        modellingModuleController.addPropertyChangeListenerToModel(otherStuffListener);
+        modellingModuleController.addPropertyChangeListenerToModel(errorListener);
 
-    private void startCalculating() {
+        modellingModuleController.addPropertyChangeListener(errorListener);
+        modellingModuleController.addPropertyChangeListener(paramsModellingListener);
+    }
+    
+    @Override
+    public void startCalculating() {
 
         dialogProgressBar.setVisible(true);
         progressBar.setIndeterminate(true);
 
     }
 
-    private void stopCalculating() {
+    @Override
+    public void stopCalculating() {
         progressBar.setIndeterminate(false);
         dialogProgressBar.setVisible(false);
     }
@@ -297,13 +335,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         cbTypeInterpolation.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
     }
 
-    private void showInternalErrorMessage(String messageError) {
+    @Override
+    public void showInternalErrorMessage(String messageError) {
 
         stopCalculating();
         JOptionPane.showMessageDialog(this, bundle.getString("INTERNAL_ERROR") + ". " + messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
 
-    private void showWarningMessage(String messageWarning) {
+    @Override
+    public void showWarningMessage(String messageWarning) {
 
         JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
     }

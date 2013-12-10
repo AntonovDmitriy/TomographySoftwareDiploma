@@ -45,6 +45,7 @@ public class ModellingModule {
     private BufferedImage currentModellingImage;
     private BufferedImage sinogramImage;
 
+    
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
 

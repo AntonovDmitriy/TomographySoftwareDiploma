@@ -43,7 +43,7 @@ public class ModellingModuleController extends Controller {
     }
 
     public void setModellingImages(Map<String, BufferedImage> imageSamplesMapWithNames) {
-        super.view.setModellingImages(imageSamplesMapWithNames);
+        firePropertyChange("setModellingImages",null,imageSamplesMapWithNames);
     }
 
     public void setModelCurrentModellingImageByName(String image) {
@@ -78,7 +78,7 @@ public class ModellingModuleController extends Controller {
     }
 
     @Override
-    public void setPropertyChangeListener(PropertyChangeListener p) {
+    public void addPropertyChangeListenerToModel(PropertyChangeListener p) {
         super.tomograph.modellingModule.addPropertyChangeListener(p);
     }
 

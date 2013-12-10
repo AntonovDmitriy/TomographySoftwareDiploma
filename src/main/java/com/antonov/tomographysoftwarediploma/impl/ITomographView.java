@@ -16,6 +16,12 @@ import java.util.Map;
  */
 public interface ITomographView {
 
+    public void initClosingOperations();
+    
+    public void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames);
+    
+    public void initModelList();
+    
     public void setModellingController(ModellingModuleController controller);
 
     public void setHardwareController(HardwareModuleController controller);
@@ -33,4 +39,12 @@ public interface ITomographView {
     public void enableReconControls();
     
     public void initListeners();
+    
+    public void startCalculating();
+    
+    public void stopCalculating();
+    
+    public void showInternalErrorMessage(String messageError);
+    
+    public void showWarningMessage(String messageWarning);
 }
