@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,10 +43,14 @@ public class ModellingModule {
     private PInterpolation regimeInterpolation;
     private Set<PInterpolation> setInterpolation;
 
+    //Parameters of reconstruction
+    private Integer sizeReconstruction;
+    private Set<String> setFilterName;
+    private String currentFilter;
+
     private BufferedImage currentModellingImage;
     private BufferedImage sinogramImage;
 
-    
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
 
@@ -74,6 +79,7 @@ public class ModellingModule {
         if (p != null) {
             this.tomographProperty = p;
             initInterpolations();
+            initFilterNames();
             initSamplesMapImage();
             initParamModelling();
 
@@ -95,6 +101,16 @@ public class ModellingModule {
         pojo.setValue(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION);
         pojo.setNameInteprolation(bundle.getString("NEAREST_NEIGHBOUR_INTERPOLATION"));
         setInterpolation.add(pojo);
+    }
+
+    public void initFilterNames() {
+        setFilterName = new TreeSet<>();
+        setFilterName.add("ramp");
+        setFilterName.add("shepplogan");
+        setFilterName.add("hamming");
+        setFilterName.add("hann");
+        setFilterName.add("blackman");
+        setFilterName.add("none");
     }
 
     private void initSamplesMapImage() {
@@ -133,15 +149,20 @@ public class ModellingModule {
         firePropertyChange("stepsize", null, stepSize);
         firePropertyChange("regimeInterpolationModel", null, setInterpolation);
         firePropertyChange("regimeInterpolation", null, regimeInterpolation);
+        firePropertyChange("sizeReconstruction", null, sizeReconstruction);
+        firePropertyChange("filterSet", null, setFilterName);
+        firePropertyChange("filterModel", null, currentFilter);
         logger.info("Views are prepared");
     }
 
     private void initParamModelling() {
-        
+
         logger.info("Reading initial modelling parameters");
         initScans();
         initStepSize();
         initInterpolation();
+        initSizeReconstruction();
+        initFiltering();
         logger.info("Initial modelling parameters have been read");
     }
 
@@ -162,6 +183,15 @@ public class ModellingModule {
             logger.info("stepsize = " + stepSize);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter STEPSIZE", ex);
+        }
+    }
+
+    private void initSizeReconstruction() {
+        try {
+            sizeReconstruction = Integer.parseInt(tomographProperty.getProperty("SIZE_RECONSTRUCTION"));
+            logger.info("sizeReconstruction = " + sizeReconstruction);
+        } catch (NumberFormatException ex) {
+            logger.warn("Error reading initial parameter SIZE_RECONSTRUCTION", ex);
         }
     }
 
@@ -186,6 +216,21 @@ public class ModellingModule {
         }
     }
 
+    private void initFiltering() {
+
+        try {
+            String filteringFromProperty = tomographProperty.getProperty("FILTERING_MODELLING");
+            if (!setFilterName.contains(filteringFromProperty)) {
+                throw new NumberFormatException("Filter name has invalid value " + filteringFromProperty);
+            } else {
+                currentFilter = filteringFromProperty;
+            }
+            logger.info("current filtering model = " + currentFilter);
+        } catch (NumberFormatException ex) {
+            logger.warn("Error reading initial parameter FILTERING_MODELLING", ex);
+        }
+    }
+
     public void setCurrentModellingImageByName(String image) {
         currentModellingImage = imageSamplesMapWithNames.get(image);
         logger.info("Current modelling image changes on " + image);
@@ -193,7 +238,7 @@ public class ModellingModule {
     }
 
     public void setCurrentModellingImage() {
-        
+
         firePropertyChange("currentImageModelling", null, currentModellingImage);
         logger.info("Current modelling image changes on display");
         firePropertyChange("clearResultModelling", null, null);
@@ -203,7 +248,7 @@ public class ModellingModule {
     }
 
     public void setSinogramImage(BufferedImage image) {
-        
+
         BufferedImage oldSinogramImage = this.sinogramImage;
         this.sinogramImage = image;
         firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
@@ -211,7 +256,7 @@ public class ModellingModule {
     }
 
     public void getAndSetFileModellingImage(File file) {
-        
+
         try {
             BufferedImage image = ReaderWriterData.getImageFromFileSystem(file);
             logger.info(file.getAbsolutePath() + " is successfully opened");
@@ -239,6 +284,14 @@ public class ModellingModule {
         logger.info("Result modelling is clear");
     }
 
+    public void setSizeReconstruction(int sizeReconstruction) {
+        Integer oldSizeReconstruction = this.sizeReconstruction;
+        this.sizeReconstruction = sizeReconstruction;
+        logger.trace("Value of sizeReconstruction now is " + sizeReconstruction + ". Old value was " + oldSizeReconstruction);
+        firePropertyChange("clearResultReconstruction", null, null);
+        logger.info("Result reconstruction is clear");
+    }
+
     public void setRegimeInterpolation(PInterpolation regimeInterpolation) {
 
         PInterpolation oldRegimeInterpolation = this.regimeInterpolation;
@@ -254,8 +307,17 @@ public class ModellingModule {
 
     }
 
+    public void setFilterModel(String filterModel) {
+
+        String oldFilterModel = this.currentFilter;
+        this.currentFilter = filterModel;
+
+        logger.trace("Value of currentFilter now is " + currentFilter
+                + ". Old value was " + oldFilterModel);
+    }
+
     public void createSinogram() {
-        
+
         try {
             logger.trace("Sinogram creating is starting");
             firePropertyChange("startSinogramm", null, null);

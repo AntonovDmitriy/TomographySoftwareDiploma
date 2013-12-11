@@ -71,7 +71,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         initTextFields();
         initComboBoxes();
     }
-    
+
     @Override
     public void initClosingOperations() {
 
@@ -150,6 +150,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         labelImage2.setIcon(null);
     }
 
+    public void clearResultReconstruction() {
+        labelReconstruction.setIcon(null);
+    }
+
     @Override
     public void disableModellingControls() {
 
@@ -159,7 +163,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonReconstruct.setEnabled(false);
         coloring.setEnabled(false);
         coloring.setSelected(false);
-        colorPanel.setVisible(false);
+//        colorPanel.setVisible(false);
         buttonDensityViewer.setEnabled(false);
     }
 
@@ -214,6 +218,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "setSinogramImage":
                         setSinogramImage((BufferedImage) evt.getNewValue());
                         break;
+                    case "clearResultReconstruction":
+                        clearResultReconstruction();
+                        break;
                 }
             }
         };
@@ -235,7 +242,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         cbTypeInterpolation.setSelectedItem(evt.getNewValue());
                         break;
                     case "setModellingImages":
-                         setModellingImages((Map<String, BufferedImage>) evt.getNewValue());
+                        setModellingImages((Map<String, BufferedImage>) evt.getNewValue());
+                        break;
+                    case "sizeReconstruction":
+                        edSizeReconstruction.setText(((Integer) evt.getNewValue()).toString());
+                        break;
+                    case "filterSet":
+                        setCbFilteringModel((Set) evt.getNewValue());
+                        break;
+                    case "filterModel":
+                        cbFilteringModel.setSelectedItem(evt.getNewValue());
                         break;
                 }
             }
@@ -261,7 +277,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         };
-        
+
         modellingModuleController.addPropertyChangeListenerToModel(paramsModellingListener);
         modellingModuleController.addPropertyChangeListenerToModel(imagesListener);
         modellingModuleController.addPropertyChangeListenerToModel(otherStuffListener);
@@ -270,7 +286,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         modellingModuleController.addPropertyChangeListener(errorListener);
         modellingModuleController.addPropertyChangeListener(paramsModellingListener);
     }
-    
+
     @Override
     public void startCalculating() {
 
@@ -325,7 +341,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             @Override
             public void focusLost(FocusEvent e) {
-                modellingModuleController.setStepSize(edStepsizeModel.getText(), TomographPane.this);
+                modellingModuleController.setStepSize(edStepsizeModel.getText());
+            }
+        });
+
+        edSizeReconstruction.addFocusListener(new FocusLostListener() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                modellingModuleController.setSizeReconstruction(edSizeReconstruction.getText());
             }
         });
     }
@@ -333,6 +357,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private void setCbInterpolation(Set setInterpolation) {
 
         cbTypeInterpolation.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
+    }
+
+    private void setCbFilteringModel(Set setFilter) {
+        cbFilteringModel.setModel(new DefaultComboBoxModel(setFilter.toArray()));
     }
 
     @Override
@@ -355,6 +383,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setInterpolation(cbTypeInterpolation.getSelectedItem());
+            }
+        });
+
+        cbFilteringModel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modellingModuleController.setFilterModel(cbFilteringModel.getSelectedItem());
             }
         });
     }
@@ -407,13 +443,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         modelPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         modelList = new javax.swing.JList();
-        filterPanel = new javax.swing.JPanel();
-        filterRamp = new javax.swing.JRadioButton();
-        filterShepplogan = new javax.swing.JRadioButton();
-        filterHamming = new javax.swing.JRadioButton();
-        filterHann = new javax.swing.JRadioButton();
-        filterCosine = new javax.swing.JRadioButton();
-        filterBlackman = new javax.swing.JRadioButton();
         buttonSaveReconstruct = new javax.swing.JButton();
         paneParamModelling = new javax.swing.JPanel();
         labelDetectors = new javax.swing.JLabel();
@@ -422,20 +451,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         edStepsizeModel = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         cbTypeInterpolation = new javax.swing.JComboBox();
-        filteringModel = new javax.swing.JCheckBox();
         buttonSaveSinogram = new javax.swing.JButton();
         buttonSinogram = new javax.swing.JButton();
         buttonDensityViewer = new javax.swing.JButton();
         buttonReconstruct = new javax.swing.JButton();
-        colorPanel = new javax.swing.JPanel();
-        color1 = new javax.swing.JRadioButton();
-        color2 = new javax.swing.JRadioButton();
-        color4 = new javax.swing.JRadioButton();
-        color3 = new javax.swing.JRadioButton();
         coloring = new javax.swing.JCheckBox();
         paneParamReconstruct = new javax.swing.JPanel();
         labelReconstructSize = new javax.swing.JLabel();
-        edReconstructSize = new javax.swing.JTextField();
+        edSizeReconstruction = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        cbFilteringModel = new javax.swing.JComboBox();
         jSplitPane1 = new javax.swing.JSplitPane();
         paneSourceImage = new javax.swing.JPanel();
         toolbarSourceImage = new javax.swing.JToolBar();
@@ -450,7 +475,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         toolbarModellingImage = new javax.swing.JToolBar();
         paneReconstruct = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jLabel12 = new javax.swing.JLabel();
+        labelReconstruction = new javax.swing.JLabel();
         Tomograph = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         scansTomograph = new javax.swing.JTextField();
@@ -877,6 +902,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("bundle_Rus"); // NOI18N
             modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LIST_MODEL_TITLE"))); // NOI18N
 
+            modelList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
             modelList.setFocusable(false);
             jScrollPane4.setViewportView(modelList);
 
@@ -905,70 +931,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneControl.add(modelPanel, gridBagConstraints);
-
-            filterPanel.setLayout(new java.awt.GridBagLayout());
-
-            filterGroup.add(filterRamp);
-            filterRamp.setText("ramp");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            filterPanel.add(filterRamp, gridBagConstraints);
-
-            filterGroup.add(filterShepplogan);
-            filterShepplogan.setText("shepplogan");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            filterPanel.add(filterShepplogan, gridBagConstraints);
-
-            filterGroup.add(filterHamming);
-            filterHamming.setText("hamming");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            filterPanel.add(filterHamming, gridBagConstraints);
-
-            filterGroup.add(filterHann);
-            filterHann.setText("hann");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            filterPanel.add(filterHann, gridBagConstraints);
-
-            filterGroup.add(filterCosine);
-            filterCosine.setText("cosine");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            filterPanel.add(filterCosine, gridBagConstraints);
-
-            filterGroup.add(filterBlackman);
-            filterBlackman.setText("blackman");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            filterPanel.add(filterBlackman, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 7;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-            paneControl.add(filterPanel, gridBagConstraints);
-            filterPanel.setVisible(false);
 
             buttonSaveReconstruct.setText("<html> Сохранить<br> реконструкцию");
             buttonSaveReconstruct.setActionCommand("Сохранить<br> реконструкцию");
@@ -1063,20 +1025,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneControl.add(paneParamModelling, gridBagConstraints);
 
-            filteringModel.setText("Фильтрация");
-            filteringModel.setFocusPainted(false);
-            filteringModel.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    filteringModelActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 7;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(filteringModel, gridBagConstraints);
-
             buttonSaveSinogram.setText("<html> Сохранить<br> синограмму");
             buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
             buttonSaveSinogram.setEnabled(false);
@@ -1136,77 +1084,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonReconstruct, gridBagConstraints);
 
-            colorPanel.setLayout(new java.awt.GridBagLayout());
-
-            colorGroup.add(color1);
-            color1.setText("color1");
-            color1.setFocusPainted(false);
-            color1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color1ActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            colorPanel.add(color1, gridBagConstraints);
-
-            colorGroup.add(color2);
-            color2.setText("color2");
-            color2.setFocusPainted(false);
-            color2.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color2ActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            colorPanel.add(color2, gridBagConstraints);
-
-            colorGroup.add(color4);
-            color4.setText("color4");
-            color4.setFocusable(false);
-            color4.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color4ActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            colorPanel.add(color4, gridBagConstraints);
-
-            colorGroup.add(color3);
-            color3.setText("color3");
-            color3.setFocusPainted(false);
-            color3.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    color3ActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            colorPanel.add(color3, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 8;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(colorPanel, gridBagConstraints);
-            colorPanel.setVisible(false);
-
             coloring.setText("Цветовой фильтр");
             coloring.setEnabled(false);
             coloring.setFocusPainted(false);
@@ -1233,9 +1110,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
             paneParamReconstruct.add(labelReconstructSize, gridBagConstraints);
 
-            edReconstructSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            edReconstructSize.setToolTipText("");
-            edReconstructSize.setAutoscrolls(false);
+            edSizeReconstruction.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            edSizeReconstruction.setToolTipText("");
+            edSizeReconstruction.setAutoscrolls(false);
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
@@ -1245,7 +1122,23 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            paneParamReconstruct.add(edReconstructSize, gridBagConstraints);
+            paneParamReconstruct.add(edSizeReconstruction, gridBagConstraints);
+
+            jLabel12.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneParamReconstruct.add(jLabel12, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            paneParamReconstruct.add(cbFilteringModel, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
@@ -1350,8 +1243,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             paneReconstruct.setLayout(new java.awt.GridBagLayout());
 
-            jLabel12.setText("jLabel12");
-            jScrollPane5.setViewportView(jLabel12);
+            labelReconstruction.setText("jLabel12");
+            jScrollPane5.setViewportView(labelReconstruction);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
@@ -1722,23 +1615,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void coloringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloringActionPerformed
         // TODO add your handling code here:
-        if (coloring.isSelected()) {
-            colorPanel.setVisible(true);
-        } else {
-            colorPanel.setVisible(false);
-            ImageIcon icon2 = new ImageIcon(reconstructImage);
-            labelImage2.setIcon(icon2);
-        }
+//        if (coloring.isSelected()) {
+//            colorPanel.setVisible(true);
+//        } else {
+//            colorPanel.setVisible(false);
+//            ImageIcon icon2 = new ImageIcon(reconstructImage);
+//            labelImage2.setIcon(icon2);
+//        }
     }//GEN-LAST:event_coloringActionPerformed
-
-    private void filteringModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filteringModelActionPerformed
-        // TODO add your handling code here:
-        if (filteringModel.isSelected()) {
-            filterPanel.setVisible(true);
-        } else {
-            filterPanel.setVisible(false);
-        }
-    }//GEN-LAST:event_filteringModelActionPerformed
 
     private void buttonSaveSinogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveSinogramActionPerformed
         // TODO add your handling code here:
@@ -1752,39 +1636,39 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReconstructActionPerformed
 
-        dialogProgressBar.setVisible(true);
-        progressBar.setIndeterminate(true);
-
-        Thread threadReconstruct = new Thread(new Runnable() {
-            public void run() //Этот метод будет выполняться в побочном потоке
-            {
-                if (filteringModel.isSelected()) {
-
-                    String filterName = "shepplogan";  // for durak
-
-                    Enumeration<AbstractButton> allRadioButton = filterGroup.getElements();
-                    while (allRadioButton.hasMoreElements()) {
-                        JRadioButton temp = (JRadioButton) allRadioButton.nextElement();
-                        if (temp.isSelected()) {
-                            filterName = temp.getText();
-                            break;
-                        }
-                    }
-                    sinogramCreator.setReconstructParameters(Integer.parseInt(edReconstructSize.getText()), true, filterName);
-                } else {
-                    sinogramCreator.setReconstructParameters(Integer.parseInt(edReconstructSize.getText()));
-                }
-                reconstructImage = sinogramCreator.createReconstructedImage();
-                ImageIcon icon2 = new ImageIcon(reconstructImage);
-                labelImage2.setIcon(icon2);
-                buttonSaveReconstruct.setEnabled(true);
-                coloring.setEnabled(true);
-                progressBar.setIndeterminate(false);
-                dialogProgressBar.setVisible(false);
-                buttonDensityViewer.setEnabled(true);
-            }
-        });
-        threadReconstruct.start();	//Запуск потока
+//        dialogProgressBar.setVisible(true);
+//        progressBar.setIndeterminate(true);
+//
+//        Thread threadReconstruct = new Thread(new Runnable() {
+//            public void run() //Этот метод будет выполняться в побочном потоке
+//            {
+//                if (filteringModel.isSelected()) {
+//
+//                    String filterName = "shepplogan";  // for durak
+//
+//                    Enumeration<AbstractButton> allRadioButton = filterGroup.getElements();
+//                    while (allRadioButton.hasMoreElements()) {
+//                        JRadioButton temp = (JRadioButton) allRadioButton.nextElement();
+//                        if (temp.isSelected()) {
+//                            filterName = temp.getText();
+//                            break;
+//                        }
+//                    }
+//                    sinogramCreator.setReconstructParameters(Integer.parseInt(edSizeReconstruction.getText()), true, filterName);
+//                } else {
+//                    sinogramCreator.setReconstructParameters(Integer.parseInt(edSizeReconstruction.getText()));
+//                }
+//                reconstructImage = sinogramCreator.createReconstructedImage();
+//                ImageIcon icon2 = new ImageIcon(reconstructImage);
+//                labelImage2.setIcon(icon2);
+//                buttonSaveReconstruct.setEnabled(true);
+//                coloring.setEnabled(true);
+//                progressBar.setIndeterminate(false);
+//                dialogProgressBar.setVisible(false);
+//                buttonDensityViewer.setEnabled(true);
+//            }
+//        });
+//        threadReconstruct.start();	//Запуск потока
 
 
     }//GEN-LAST:event_buttonReconstructActionPerformed
@@ -2149,42 +2033,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         }
     }//GEN-LAST:event_buttonSaveReconstructActionPerformed
 
-    private void color3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color3ActionPerformed
-        // TODO add your handling code here:
-        if (color3.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.red_blue_saw_2());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color3ActionPerformed
-
-    private void color4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color4ActionPerformed
-        // TODO add your handling code here:
-        if (color4.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.invGray());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color4ActionPerformed
-
-    private void color2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color2ActionPerformed
-        // TODO add your handling code here:
-        if (color2.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.green_blue_saw_2());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color2ActionPerformed
-
-    private void color1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1ActionPerformed
-        // TODO add your handling code here:
-        if (color1.isSelected()) {
-            reconstructColorImage = ImageTransformator.getColorLutImage(reconstructImage, LUTFunctions.sin_rbg());
-            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-            labelImage2.setIcon(icon2);
-        }
-    }//GEN-LAST:event_color1ActionPerformed
-
     class ImageFilter extends javax.swing.filechooser.FileFilter {
 
         @Override
@@ -2300,18 +2148,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonSaveSinogram;
     private javax.swing.JButton buttonSinogram;
     private javax.swing.JButton buttonStart;
+    private javax.swing.JComboBox cbFilteringModel;
     private javax.swing.JComboBox cbTypeInterpolation;
-    private javax.swing.JRadioButton color1;
     private javax.swing.JRadioButton color1Tomograph;
-    private javax.swing.JRadioButton color2;
     private javax.swing.JRadioButton color2Tomograph;
-    private javax.swing.JRadioButton color3;
     private javax.swing.JRadioButton color3Tomograph;
-    private javax.swing.JRadioButton color4;
     private javax.swing.JRadioButton color4Tomograph;
     private javax.swing.ButtonGroup colorGroup;
     private javax.swing.ButtonGroup colorGroupTomograph;
-    private javax.swing.JPanel colorPanel;
     private javax.swing.JPanel colorPanelTomograph;
     private javax.swing.JCheckBox coloring;
     private javax.swing.JCheckBox coloringTomograph;
@@ -2322,25 +2166,17 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JDialog dialogNameAsker;
     private javax.swing.JDialog dialogProgressBar;
     private javax.swing.JDialog dialogProjDataChooser;
-    private javax.swing.JTextField edReconstructSize;
     private javax.swing.JTextField edScansModel;
+    private javax.swing.JTextField edSizeReconstruction;
     private javax.swing.JTextField edStepsizeModel;
     private javax.swing.JRadioButton filterBlackManTomograph;
-    private javax.swing.JRadioButton filterBlackman;
-    private javax.swing.JRadioButton filterCosine;
     private javax.swing.JRadioButton filterCosineTomograph;
     private javax.swing.ButtonGroup filterGroup;
     private javax.swing.ButtonGroup filterGroupTomograph;
-    private javax.swing.JRadioButton filterHamming;
     private javax.swing.JRadioButton filterHammingTomograph;
-    private javax.swing.JRadioButton filterHann;
     private javax.swing.JRadioButton filterHannTomograph;
-    private javax.swing.JPanel filterPanel;
-    private javax.swing.JRadioButton filterRamp;
     private javax.swing.JRadioButton filterRampTomograph;
-    private javax.swing.JRadioButton filterShepplogan;
     private javax.swing.JRadioButton filterShepploganTomograph;
-    private javax.swing.JCheckBox filteringModel;
     private javax.swing.JCheckBox filteringTomograph;
     private javax.swing.JScrollPane image1;
     private javax.swing.JLabel jLabel1;
@@ -2372,6 +2208,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel labelImage2;
     private javax.swing.JLabel labelImageDensityViewer;
     private javax.swing.JLabel labelReconstructSize;
+    private javax.swing.JLabel labelReconstruction;
     private javax.swing.JLabel labelStepsize;
     private javax.swing.JLabel labelimage3;
     private javax.swing.JList modelList;

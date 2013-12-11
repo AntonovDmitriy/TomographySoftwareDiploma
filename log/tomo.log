@@ -7586,3 +7586,427 @@ java.lang.NumberFormatException: For input string: "ew"
 2013-12-11 01:50:32 TRACE ModellingModule:264 - Recon controls are enabled
 2013-12-11 01:50:32 TRACE ModellingModule:266 - Sinogram createing is finishing
 2013-12-11 01:50:51 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-11 21:14:40 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-11 21:14:41 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-11 21:14:41 INFO  ModellingModule:108 - Path to the internal images is resources/internalImages
+2013-12-11 21:14:41 TRACE ModellingModule:113 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-11 21:14:41 TRACE ModellingModule:115 - File successfully has been read 
+2013-12-11 21:14:41 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-11 21:14:41 TRACE ModellingModule:119 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-11 21:14:41 TRACE ModellingModule:113 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-11 21:14:41 TRACE ModellingModule:115 - File successfully has been read 
+2013-12-11 21:14:41 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-11 21:14:42 TRACE ModellingModule:119 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-11 21:14:42 TRACE ModellingModule:113 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-11 21:14:42 TRACE ModellingModule:115 - File successfully has been read 
+2013-12-11 21:14:42 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-11 21:14:42 TRACE ModellingModule:119 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-11 21:14:42 INFO  ModellingModule:145 - Reading initial modelling parameters
+2013-12-11 21:14:42 INFO  ModellingModule:157 - scans = 400
+2013-12-11 21:14:42 INFO  ModellingModule:167 - stepsize = 1
+2013-12-11 21:14:42 INFO  ModellingModule:196 - regimeInterpolation = Линейная
+2013-12-11 21:14:42 INFO  ModellingModule:176 - sizeReconstruction = 600
+2013-12-11 21:14:42 INFO  ModellingModule:150 - Initial modelling parameters have been read
+2013-12-11 21:14:45 TRACE ModellingModule:269 - Value of regimeInterpolation now is linear. Old value was linear
+2013-12-11 21:14:45 INFO  ModellingModule:140 - Views are prepared
+2013-12-11 21:14:55 WARN  ModellingModuleController:84 - Error parsing value of sizeReconstruction
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:504)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController.checkAndGetInt(ModellingModuleController.java:94)
+	at com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController.setSizeReconstruction(ModellingModuleController.java:81)
+	at com.antonov.tomographysoftwarediploma.viewSwing.TomographPane$12.focusLost(TomographPane.java:342)
+	at java.awt.AWTEventMulticaster.focusLost(AWTEventMulticaster.java:230)
+	at java.awt.Component.processFocusEvent(Component.java:6397)
+	at java.awt.Component.processEvent(Component.java:6261)
+	at java.awt.Container.processEvent(Container.java:2229)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1895)
+	at java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:947)
+	at java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:621)
+	at java.awt.Component.dispatchEventImpl(Component.java:4731)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:735)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:708)
+	at java.awt.EventQueue$4.run(EventQueue.java:706)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:705)
+	at java.awt.SentEvent.dispatch(SentEvent.java:70)
+	at java.awt.DefaultKeyboardFocusManager$DefaultKeyboardFocusManagerSentEvent.dispatch(DefaultKeyboardFocusManager.java:216)
+	at java.awt.DefaultKeyboardFocusManager.sendMessage(DefaultKeyboardFocusManager.java:243)
+	at java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:687)
+	at java.awt.Component.dispatchEventImpl(Component.java:4731)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Window.dispatchEventImpl(Window.java:2719)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:735)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:708)
+	at java.awt.EventQueue$4.run(EventQueue.java:706)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:705)
+	at java.awt.SequencedEvent.dispatch(SequencedEvent.java:128)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:708)
+	at java.awt.EventQueue$4.run(EventQueue.java:706)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:705)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:154)
+	at java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:182)
+	at java.awt.WaitDispatchSupport$4.run(WaitDispatchSupport.java:221)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:219)
+	at java.awt.Dialog.show(Dialog.java:1082)
+	at javax.swing.JOptionPane.showOptionDialog(JOptionPane.java:870)
+	at javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:796)
+	at javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:758)
+	at javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:719)
+	at com.antonov.tomographysoftwarediploma.viewSwing.TomographPane$1.windowClosing(TomographPane.java:81)
+	at java.awt.AWTEventMulticaster.windowClosing(AWTEventMulticaster.java:350)
+	at java.awt.Window.processWindowEvent(Window.java:2051)
+	at javax.swing.JFrame.processWindowEvent(JFrame.java:296)
+	at java.awt.Window.processEvent(Window.java:2009)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Window.dispatchEventImpl(Window.java:2719)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at com.jtattoo.plaf.BaseTitlePane.close(BaseTitlePane.java:295)
+	at com.jtattoo.plaf.BaseTitlePane$CloseAction.actionPerformed(BaseTitlePane.java:570)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2018)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2341)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at com.jtattoo.plaf.BaseButtonListener.mouseReleased(BaseButtonListener.java:60)
+	at java.awt.Component.processMouseEvent(Component.java:6505)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3320)
+	at java.awt.Component.processEvent(Component.java:6270)
+	at java.awt.Container.processEvent(Container.java:2229)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4832)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4492)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4422)
+	at java.awt.Container.dispatchEventImpl(Container.java:2273)
+	at java.awt.Window.dispatchEventImpl(Window.java:2719)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:735)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:708)
+	at java.awt.EventQueue$4.run(EventQueue.java:706)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:705)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2013-12-11 21:14:59 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-11 21:16:44 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-11 21:16:45 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-11 21:16:45 INFO  ModellingModule:108 - Path to the internal images is resources/internalImages
+2013-12-11 21:16:45 TRACE ModellingModule:113 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-11 21:16:45 TRACE ModellingModule:115 - File successfully has been read 
+2013-12-11 21:16:45 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-11 21:16:45 TRACE ModellingModule:119 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-11 21:16:45 TRACE ModellingModule:113 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-11 21:16:45 TRACE ModellingModule:115 - File successfully has been read 
+2013-12-11 21:16:45 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-11 21:16:45 TRACE ModellingModule:119 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-11 21:16:45 TRACE ModellingModule:113 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-11 21:16:45 TRACE ModellingModule:115 - File successfully has been read 
+2013-12-11 21:16:45 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-11 21:16:45 TRACE ModellingModule:119 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-11 21:16:45 INFO  ModellingModule:145 - Reading initial modelling parameters
+2013-12-11 21:16:45 INFO  ModellingModule:157 - scans = 400
+2013-12-11 21:16:45 INFO  ModellingModule:167 - stepsize = 1
+2013-12-11 21:16:45 INFO  ModellingModule:196 - regimeInterpolation = Линейная
+2013-12-11 21:16:45 INFO  ModellingModule:176 - sizeReconstruction = 600
+2013-12-11 21:16:45 INFO  ModellingModule:150 - Initial modelling parameters have been read
+2013-12-11 21:16:47 TRACE ModellingModule:269 - Value of regimeInterpolation now is linear. Old value was linear
+2013-12-11 21:16:47 INFO  ModellingModule:140 - Views are prepared
+2013-12-11 21:16:58 WARN  ModellingModuleController:84 - Error parsing value of sizeReconstruction
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:504)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController.checkAndGetInt(ModellingModuleController.java:94)
+	at com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController.setSizeReconstruction(ModellingModuleController.java:81)
+	at com.antonov.tomographysoftwarediploma.viewSwing.TomographPane$12.focusLost(TomographPane.java:345)
+	at java.awt.AWTEventMulticaster.focusLost(AWTEventMulticaster.java:230)
+	at java.awt.Component.processFocusEvent(Component.java:6397)
+	at java.awt.Component.processEvent(Component.java:6261)
+	at java.awt.Container.processEvent(Container.java:2229)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1895)
+	at java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:947)
+	at java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:621)
+	at java.awt.Component.dispatchEventImpl(Component.java:4731)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:735)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:708)
+	at java.awt.EventQueue$4.run(EventQueue.java:706)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:705)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2013-12-11 21:16:58 TRACE ModellingModule:250 - Value of stepSize now is 1. Old value was 1
+2013-12-11 21:16:58 INFO  ModellingModule:252 - Result modelling is clear
+2013-12-11 21:17:04 TRACE ModellingModule:250 - Value of stepSize now is 1. Old value was 1
+2013-12-11 21:17:04 INFO  ModellingModule:252 - Result modelling is clear
+2013-12-11 21:17:28 TRACE ModellingModule:258 - Value of sizeReconstruction now is 54. Old value was 600
+2013-12-11 21:17:28 INFO  ModellingModule:260 - Result reconstruction is clear
+2013-12-11 21:17:46 TRACE ModellingModule:250 - Value of stepSize now is 1. Old value was 1
+2013-12-11 21:17:46 INFO  ModellingModule:252 - Result modelling is clear
+2013-12-11 21:17:48 TRACE ModellingModule:258 - Value of sizeReconstruction now is 54. Old value was 54
+2013-12-11 21:17:48 INFO  ModellingModule:260 - Result reconstruction is clear
+2013-12-11 21:17:50 TRACE ModellingModule:250 - Value of stepSize now is 1. Old value was 1
+2013-12-11 21:17:50 INFO  ModellingModule:252 - Result modelling is clear
+2013-12-11 21:17:52 TRACE ModellingModule:244 - Value of scans now is 400. Old value was 400
+2013-12-11 21:18:09 TRACE ModellingModule:258 - Value of sizeReconstruction now is 54. Old value was 54
+2013-12-11 21:18:09 INFO  ModellingModule:260 - Result reconstruction is clear
+2013-12-11 21:18:20 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-12 01:42:15 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-12 01:42:15 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-12 01:42:15 INFO  ModellingModule:120 - Path to the internal images is resources/internalImages
+2013-12-12 01:42:15 TRACE ModellingModule:125 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-12 01:42:16 TRACE ModellingModule:127 - File successfully has been read 
+2013-12-12 01:42:16 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:42:16 TRACE ModellingModule:131 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-12 01:42:16 TRACE ModellingModule:125 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-12 01:42:16 TRACE ModellingModule:127 - File successfully has been read 
+2013-12-12 01:42:16 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:42:16 TRACE ModellingModule:131 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-12 01:42:16 TRACE ModellingModule:125 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-12 01:42:16 TRACE ModellingModule:127 - File successfully has been read 
+2013-12-12 01:42:16 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:42:16 TRACE ModellingModule:131 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-12 01:42:16 INFO  ModellingModule:159 - Reading initial modelling parameters
+2013-12-12 01:42:16 INFO  ModellingModule:172 - scans = 400
+2013-12-12 01:42:16 INFO  ModellingModule:182 - stepsize = 1
+2013-12-12 01:42:16 INFO  ModellingModule:212 - regimeInterpolation = Линейная
+2013-12-12 01:42:16 INFO  ModellingModule:191 - sizeReconstruction = 600
+2013-12-12 01:44:31 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-12 01:44:31 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-12 01:44:31 INFO  ModellingModule:121 - Path to the internal images is resources/internalImages
+2013-12-12 01:44:31 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-12 01:44:31 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:44:31 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:44:32 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-12 01:44:32 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-12 01:44:32 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:44:32 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:44:32 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-12 01:44:32 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-12 01:44:32 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:44:32 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:44:32 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-12 01:44:32 INFO  ModellingModule:160 - Reading initial modelling parameters
+2013-12-12 01:44:32 INFO  ModellingModule:173 - scans = 400
+2013-12-12 01:44:32 INFO  ModellingModule:183 - stepsize = 1
+2013-12-12 01:44:32 INFO  ModellingModule:213 - regimeInterpolation = Линейная
+2013-12-12 01:44:32 INFO  ModellingModule:192 - sizeReconstruction = 600
+2013-12-12 01:44:32 INFO  ModellingModule:228 - current filtering model = none
+2013-12-12 01:44:32 INFO  ModellingModule:166 - Initial modelling parameters have been read
+2013-12-12 01:44:34 TRACE ModellingModule:301 - Value of regimeInterpolation now is linear. Old value was linear
+2013-12-12 01:44:34 TRACE ModellingModule:315 - Value of currentFilter now is none. Old value was none
+2013-12-12 01:44:34 INFO  ModellingModule:155 - Views are prepared
+2013-12-12 01:44:40 TRACE ModellingModule:315 - Value of currentFilter now is hamming. Old value was none
+2013-12-12 01:44:43 TRACE ModellingModule:315 - Value of currentFilter now is blackman. Old value was hamming
+2013-12-12 01:44:47 TRACE ModellingModule:315 - Value of currentFilter now is shepplogan. Old value was blackman
+2013-12-12 01:44:58 TRACE ModellingModule:315 - Value of currentFilter now is hamming. Old value was shepplogan
+2013-12-12 01:45:00 TRACE ModellingModule:301 - Value of regimeInterpolation now is linear. Old value was linear
+2013-12-12 01:45:02 TRACE ModellingModule:315 - Value of currentFilter now is none. Old value was hamming
+2013-12-12 01:45:12 INFO  ModellingModule:236 - Current modelling image changes on Сложная структура
+2013-12-12 01:45:12 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:45:12 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:45:12 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:45:15 INFO  ModellingModule:236 - Current modelling image changes on Without_deffect
+2013-12-12 01:45:15 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:45:15 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:45:15 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:45:16 INFO  ModellingModule:236 - Current modelling image changes on With_deffect
+2013-12-12 01:45:16 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:45:16 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:45:16 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:45:17 TRACE ModellingModule:322 - Sinogram creating is starting
+2013-12-12 01:45:17 TRACE ModellingImageCalculator:37 - scans value is correct 400
+2013-12-12 01:45:17 TRACE ModellingImageCalculator:41 - stepSize value is correct 1
+2013-12-12 01:45:17 TRACE ModellingImageCalculator:47 - sourceImage is correct 
+2013-12-12 01:45:17 TRACE SinogramCreator:123 - Array of pixel values of source image has been created
+2013-12-12 01:45:19 TRACE SinogramCreator:125 - Projection data has been created
+2013-12-12 01:45:20 TRACE SinogramCreator:128 - Short row projection data has been created
+2013-12-12 01:45:20 TRACE SinogramCreator:131 - Sinogram image is created
+2013-12-12 01:45:20 TRACE SinogramCreator:133 - Sinogram inage has been performed for screaning
+2013-12-12 01:45:20 TRACE ModellingModule:255 - Sinogram image is changed
+2013-12-12 01:45:20 TRACE ModellingModule:327 - Recon controls are enabled
+2013-12-12 01:45:20 TRACE ModellingModule:329 - Sinogram createing is finishing
+2013-12-12 01:45:27 TRACE ModellingModule:315 - Value of currentFilter now is blackman. Old value was none
+2013-12-12 01:45:31 TRACE ModellingModule:315 - Value of currentFilter now is hamming. Old value was blackman
+2013-12-12 01:47:51 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-12 01:55:14 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-12 01:55:14 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-12 01:55:14 INFO  ModellingModule:121 - Path to the internal images is resources/internalImages
+2013-12-12 01:55:14 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-12 01:55:14 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:55:14 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:55:15 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-12 01:55:15 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-12 01:55:15 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:55:15 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:55:15 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-12 01:55:15 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-12 01:55:15 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:55:15 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:55:15 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-12 01:55:15 INFO  ModellingModule:160 - Reading initial modelling parameters
+2013-12-12 01:55:15 INFO  ModellingModule:173 - scans = 400
+2013-12-12 01:55:15 INFO  ModellingModule:183 - stepsize = 1
+2013-12-12 01:55:15 INFO  ModellingModule:213 - regimeInterpolation = Линейная
+2013-12-12 01:55:15 INFO  ModellingModule:192 - sizeReconstruction = 600
+2013-12-12 01:55:15 INFO  ModellingModule:228 - current filtering model = none
+2013-12-12 01:55:15 INFO  ModellingModule:166 - Initial modelling parameters have been read
+2013-12-12 01:55:17 TRACE ModellingModule:301 - Value of regimeInterpolation now is linear. Old value was linear
+2013-12-12 01:55:17 TRACE ModellingModule:315 - Value of currentFilter now is none. Old value was none
+2013-12-12 01:55:17 INFO  ModellingModule:155 - Views are prepared
+2013-12-12 01:55:34 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-12 01:57:39 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-12 01:57:40 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-12 01:57:40 INFO  ModellingModule:121 - Path to the internal images is resources/internalImages
+2013-12-12 01:57:40 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-12 01:57:40 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:57:40 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:57:40 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-12 01:57:40 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-12 01:57:40 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:57:40 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:57:40 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-12 01:57:40 TRACE ModellingModule:126 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-12 01:57:40 TRACE ModellingModule:128 - File successfully has been read 
+2013-12-12 01:57:40 TRACE Tomograph:28 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-12 01:57:40 TRACE ModellingModule:132 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-12 01:57:40 INFO  ModellingModule:160 - Reading initial modelling parameters
+2013-12-12 01:57:40 INFO  ModellingModule:173 - scans = 400
+2013-12-12 01:57:40 INFO  ModellingModule:183 - stepsize = 1
+2013-12-12 01:57:40 INFO  ModellingModule:213 - regimeInterpolation = Линейная
+2013-12-12 01:57:40 INFO  ModellingModule:192 - sizeReconstruction = 600
+2013-12-12 01:57:40 INFO  ModellingModule:228 - current filtering model = none
+2013-12-12 01:57:40 INFO  ModellingModule:166 - Initial modelling parameters have been read
+2013-12-12 01:57:42 TRACE ModellingModule:301 - Value of regimeInterpolation now is linear. Old value was linear
+2013-12-12 01:57:42 TRACE ModellingModule:315 - Value of currentFilter now is none. Old value was none
+2013-12-12 01:57:42 INFO  ModellingModule:155 - Views are prepared
+2013-12-12 01:57:59 INFO  ModellingModule:236 - Current modelling image changes on Without_deffect
+2013-12-12 01:57:59 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:57:59 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:57:59 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:58:00 INFO  ModellingModule:236 - Current modelling image changes on With_deffect
+2013-12-12 01:58:00 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:58:00 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:58:00 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:58:06 TRACE ModellingModule:315 - Value of currentFilter now is hamming. Old value was none
+2013-12-12 01:58:07 TRACE ModellingModule:315 - Value of currentFilter now is hann. Old value was hamming
+2013-12-12 01:58:37 TRACE ModellingModule:315 - Value of currentFilter now is hamming. Old value was hann
+2013-12-12 01:58:39 TRACE ModellingModule:315 - Value of currentFilter now is blackman. Old value was hamming
+2013-12-12 01:58:40 TRACE ModellingModule:315 - Value of currentFilter now is ramp. Old value was blackman
+2013-12-12 01:58:44 TRACE ModellingModule:315 - Value of currentFilter now is none. Old value was ramp
+2013-12-12 01:58:51 TRACE ModellingModule:282 - Value of stepSize now is 1. Old value was 1
+2013-12-12 01:58:51 INFO  ModellingModule:284 - Result modelling is clear
+2013-12-12 01:58:53 TRACE ModellingModule:276 - Value of scans now is 400. Old value was 400
+2013-12-12 01:58:53 TRACE ModellingModule:282 - Value of stepSize now is 1. Old value was 1
+2013-12-12 01:58:53 INFO  ModellingModule:284 - Result modelling is clear
+2013-12-12 01:58:55 TRACE ModellingModule:290 - Value of sizeReconstruction now is 600. Old value was 600
+2013-12-12 01:58:55 INFO  ModellingModule:292 - Result reconstruction is clear
+2013-12-12 01:59:03 TRACE ModellingModule:282 - Value of stepSize now is 1. Old value was 1
+2013-12-12 01:59:03 INFO  ModellingModule:284 - Result modelling is clear
+2013-12-12 01:59:05 TRACE ModellingModule:290 - Value of sizeReconstruction now is 600. Old value was 600
+2013-12-12 01:59:05 INFO  ModellingModule:292 - Result reconstruction is clear
+2013-12-12 01:59:07 TRACE ModellingModule:282 - Value of stepSize now is 1. Old value was 1
+2013-12-12 01:59:07 INFO  ModellingModule:284 - Result modelling is clear
+2013-12-12 01:59:09 INFO  ModellingModule:236 - Current modelling image changes on Сложная структура
+2013-12-12 01:59:09 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:59:09 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:59:09 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:59:10 INFO  ModellingModule:236 - Current modelling image changes on Without_deffect
+2013-12-12 01:59:10 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:59:10 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:59:10 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:59:11 INFO  ModellingModule:236 - Current modelling image changes on With_deffect
+2013-12-12 01:59:11 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:59:11 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:59:11 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:59:11 INFO  ModellingModule:236 - Current modelling image changes on Сложная структура
+2013-12-12 01:59:11 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:59:11 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:59:11 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:59:13 TRACE ModellingModule:276 - Value of scans now is 400. Old value was 400
+2013-12-12 01:59:13 TRACE ModellingModule:322 - Sinogram creating is starting
+2013-12-12 01:59:13 TRACE ModellingImageCalculator:37 - scans value is correct 400
+2013-12-12 01:59:13 TRACE ModellingImageCalculator:41 - stepSize value is correct 1
+2013-12-12 01:59:13 TRACE ModellingImageCalculator:47 - sourceImage is correct 
+2013-12-12 01:59:13 TRACE SinogramCreator:123 - Array of pixel values of source image has been created
+2013-12-12 01:59:15 TRACE SinogramCreator:125 - Projection data has been created
+2013-12-12 01:59:15 TRACE SinogramCreator:128 - Short row projection data has been created
+2013-12-12 01:59:16 TRACE SinogramCreator:131 - Sinogram image is created
+2013-12-12 01:59:16 TRACE SinogramCreator:133 - Sinogram inage has been performed for screaning
+2013-12-12 01:59:16 TRACE ModellingModule:255 - Sinogram image is changed
+2013-12-12 01:59:16 TRACE ModellingModule:327 - Recon controls are enabled
+2013-12-12 01:59:16 TRACE ModellingModule:329 - Sinogram createing is finishing
+2013-12-12 01:59:30 INFO  ModellingModule:236 - Current modelling image changes on Without_deffect
+2013-12-12 01:59:30 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:59:30 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:59:30 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:59:32 INFO  ModellingModule:236 - Current modelling image changes on With_deffect
+2013-12-12 01:59:32 INFO  ModellingModule:243 - Current modelling image changes on display
+2013-12-12 01:59:32 INFO  ModellingModule:245 - Result modelling is clear
+2013-12-12 01:59:32 INFO  ModellingModule:247 - Modelling controls are disabled
+2013-12-12 01:59:35 TRACE ModellingModule:315 - Value of currentFilter now is blackman. Old value was none
+2013-12-12 01:59:47 TRACE ModellingModule:315 - Value of currentFilter now is none. Old value was blackman
+2013-12-12 02:00:11 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
