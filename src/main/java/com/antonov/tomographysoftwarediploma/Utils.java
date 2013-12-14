@@ -121,6 +121,49 @@ public class Utils {
         return result;
     }
 
+    public static double[][] getDoubleArrayPixelsFromBufImg(BufferedImage img) {
+
+        int width = img.getWidth(null);
+        int height = img.getHeight(null);
+        double[][] result = new double[height][width];
+
+        if (img.getType() == 11) {
+            // TYPE_USHORT_GRAY Represents an unsigned short grayscale image,
+            // non-indexed).
+
+            DataBufferUShort db = (DataBufferUShort) img.getRaster().getDataBuffer();
+            short[] shortPixelArray = db.getData();
+            for (int x = 0; x < result[0].length; x++) {
+                for (int y = 0; y < result.length; y++) {
+                    result[y][x] = shortPixelArray[x + y * result.length] & 0xFFFF;
+                }
+            }
+        } else if (img.getType() == 1) {
+            // TYPE_INT_RGB Represents an image with 8-bit RGB color components
+            // packed into integer pixels
+
+            DataBufferInt db = (DataBufferInt) img.getRaster().getDataBuffer();
+            int[] intPixelArray = db.getData();
+            for (int x = 0; x < result[0].length; x++) {
+                for (int y = 0; y < result.length; y++) {
+                    result[x][y] = intPixelArray[x + y * result.length] & 0xFF;
+                }
+            }
+        } // else assume 8 bit
+        else {
+
+            DataBufferByte db = (DataBufferByte) img.getRaster()
+                    .getDataBuffer();
+            byte[] bytePixelArray = db.getData();
+            for (int x = 0; x < result[0].length; x++) {
+                for (int y = 0; y < result.length; y++) {
+                    result[y][x] = bytePixelArray[x + y * result.length] & 0xFF;
+                }
+            }
+        }
+        return result;
+    }
+
     public static double[][] fillZeroMatrix(double[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -138,12 +181,13 @@ public class Utils {
         for (int argument = startFunctionPositiveArgument; argument < endFunctionPositiveArgument; argument = (int) (argument + stepSize), i++) {
             switch (function) {
                 case "-cos":
-//                    result[i] = Math.sin((double) argument * Math.PI / 180 - Math.PI / 2);
                     result[i] = (-1) * Math.cos((double) argument * Math.PI / 180);
                     break;
                 case "sin":
-//                    result[i] = Math.sin((double) argument * Math.PI / 180 - Math.PI / 2);
                     result[i] = Math.sin((double) argument * Math.PI / 180);
+                    break;
+                case "cos":
+                    result[i] = Math.cos((double) argument * Math.PI / 180);
                     break;
             }
         }

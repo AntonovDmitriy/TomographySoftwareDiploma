@@ -108,7 +108,7 @@ public class ModellingModuleController extends Controller {
         }
     }
     
-    public void createSinogram(String scans, String stepSize) {
+    public void createSinogram() {
         
         super.tomograph.modellingModule.createSinogram();
     }
@@ -125,5 +125,10 @@ public class ModellingModuleController extends Controller {
     
     public void setFilterModel(Object selectedItem) {
         super.tomograph.modellingModule.setFilterModel((String) selectedItem);
+    }
+
+    public void reconstructModellingSinogram() {
+        
+        super.tomograph.modellingModule.reconstructModellingSinogram();
     }
 }

@@ -32,16 +32,21 @@ public class ModellingImageCalculator {
 
     public static final int AREA_SCANNING_IN_DEGREES = 180;
 
-    public void setDataModelling(BufferedImage sourceImage, int scans, int stepSize) throws NumberWrongValueException, ImageWrongValueException {
+    public void setDataModelling(int scans, int stepSize) throws NumberWrongValueException, ImageWrongValueException {
+
         checkScans(scans);
         logger.trace("scans value is correct " + scans);
         this.scans = scans;
-        
+
         checkStepSize(stepSize);
         logger.trace("stepSize value is correct " + stepSize);
         this.stepSize = stepSize;
         this.rotates = AREA_SCANNING_IN_DEGREES / stepSize;
-        
+
+    }
+
+    protected void setInitialImage(BufferedImage sourceImage) throws ImageWrongValueException {
+
         checkSourceImage(sourceImage);
         this.sourceImage = sourceImage;
         logger.trace("sourceImage is correct ");
@@ -67,7 +72,7 @@ public class ModellingImageCalculator {
         }
     }
 
-    private void checkInt(int number) throws NumberFormatException {
+    protected void checkInt(int number) throws NumberFormatException {
         if (number == 0) {
             throw new NumberFormatException("Number is zero");
         }
@@ -84,8 +89,8 @@ public class ModellingImageCalculator {
         }
     }
 
-    private void checkSourceImage(BufferedImage sourceImage) throws ImageWrongValueException {
-        if(sourceImage == null){
+    protected void checkSourceImage(BufferedImage sourceImage) throws ImageWrongValueException {
+        if (sourceImage == null) {
             logger.error("sourceImage is null");
             throw new ImageWrongValueException("Source image is null");
         }

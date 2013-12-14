@@ -25,7 +25,6 @@ import java.util.Enumeration;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
-import javax.swing.JRadioButton;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -189,6 +188,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         labelImage2.setIcon(icon);
     }
 
+    private void setReconstructionOfSinogramImage(BufferedImage image) {
+
+        ImageIcon icon = new ImageIcon(image);
+        labelReconstruction.setIcon(icon);
+    }
+
     @Override
     public void initListeners() {
         PropertyChangeListener errorListener = new PropertyChangeListener() {
@@ -217,6 +222,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         break;
                     case "setSinogramImage":
                         setSinogramImage((BufferedImage) evt.getNewValue());
+                        break;
+                    case "setReconstructionOfSinogramImage":
+                        setReconstructionOfSinogramImage((BufferedImage) evt.getNewValue());
                         break;
                     case "clearResultReconstruction":
                         clearResultReconstruction();
@@ -253,6 +261,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "filterModel":
                         cbFilteringModel.setSelectedItem(evt.getNewValue());
                         break;
+                    case "enableColoringModel":
+                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        break;
                 }
             }
         };
@@ -272,6 +283,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         startCalculating();
                         break;
                     case "stopSinogramm":
+                        stopCalculating();
+                        break;
+                    case "startReconstructionSinogram":
+                        startCalculating();
+                        break;
+                    case "stopReconstructionSinogram":
                         stopCalculating();
                         break;
                 }
@@ -320,7 +337,20 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        modellingModuleController.createSinogram(edScansModel.getText(), edStepsizeModel.getText());
+                        modellingModuleController.createSinogram();
+                    }
+                }).start();
+            }
+        });
+
+        buttonReconstruct.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        modellingModuleController.reconstructModellingSinogram();
                     }
                 }).start();
             }
@@ -1636,40 +1666,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReconstructActionPerformed
 
-//        dialogProgressBar.setVisible(true);
-//        progressBar.setIndeterminate(true);
-//
-//        Thread threadReconstruct = new Thread(new Runnable() {
-//            public void run() //Этот метод будет выполняться в побочном потоке
-//            {
-//                if (filteringModel.isSelected()) {
-//
-//                    String filterName = "shepplogan";  // for durak
-//
-//                    Enumeration<AbstractButton> allRadioButton = filterGroup.getElements();
-//                    while (allRadioButton.hasMoreElements()) {
-//                        JRadioButton temp = (JRadioButton) allRadioButton.nextElement();
-//                        if (temp.isSelected()) {
-//                            filterName = temp.getText();
-//                            break;
-//                        }
-//                    }
-//                    sinogramCreator.setReconstructParameters(Integer.parseInt(edSizeReconstruction.getText()), true, filterName);
-//                } else {
-//                    sinogramCreator.setReconstructParameters(Integer.parseInt(edSizeReconstruction.getText()));
-//                }
 //                reconstructImage = sinogramCreator.createReconstructedImage();
-//                ImageIcon icon2 = new ImageIcon(reconstructImage);
-//                labelImage2.setIcon(icon2);
-//                buttonSaveReconstruct.setEnabled(true);
-//                coloring.setEnabled(true);
-//                progressBar.setIndeterminate(false);
-//                dialogProgressBar.setVisible(false);
-//                buttonDensityViewer.setEnabled(true);
-//            }
-//        });
-//        threadReconstruct.start();	//Запуск потока
-
 
     }//GEN-LAST:event_buttonReconstructActionPerformed
 

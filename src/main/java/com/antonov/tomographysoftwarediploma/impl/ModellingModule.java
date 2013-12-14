@@ -7,6 +7,7 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.imageprocessing.IProjDataSaver;
 import com.antonov.tomographysoftwarediploma.imageprocessing.SinogramCreator;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
@@ -27,7 +28,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Antonov
  */
-public class ModellingModule {
+public class ModellingModule implements IProjDataSaver {
 
     private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
@@ -50,6 +51,8 @@ public class ModellingModule {
 
     private BufferedImage currentModellingImage;
     private BufferedImage sinogramImage;
+    private double[][] projectionDataOfModelling;
+    private BufferedImage reconstructionOfSinogramImage;
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
@@ -200,7 +203,7 @@ public class ModellingModule {
         try {
             String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_INTERPOLATION");
             if (!regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_LINEAR_ITERPOLATION)
-                    && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_LINEAR_ITERPOLATION)) {
+                    && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
                 throw new NumberFormatException("Regime of interpolation has invalid value " + regimeInterpolationFromProperty);
             } else {
                 for (PInterpolation pojoInterpolation : setInterpolation) {
@@ -253,6 +256,14 @@ public class ModellingModule {
         this.sinogramImage = image;
         firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
         logger.trace("Sinogram image is changed");
+    }
+
+    public void setReconstructionOfSinogramImage(BufferedImage image) {
+
+        BufferedImage oldReconstructionOfSinogramImage = this.reconstructionOfSinogramImage;
+        this.reconstructionOfSinogramImage = image;
+        firePropertyChange("setReconstructionOfSinogramImage", oldReconstructionOfSinogramImage, reconstructionOfSinogramImage);
+        logger.trace("Reconstruction image of sinogram is changed");
     }
 
     public void getAndSetFileModellingImage(File file) {
@@ -321,7 +332,7 @@ public class ModellingModule {
         try {
             logger.trace("Sinogram creating is starting");
             firePropertyChange("startSinogramm", null, null);
-            BufferedImage sinogram = ImageTransformerFacade.createSinogram(currentModellingImage, scans, stepSize, regimeInterpolation.getValue());
+            BufferedImage sinogram = ImageTransformerFacade.createSinogram(this, currentModellingImage, scans, stepSize, regimeInterpolation.getValue());
             setSinogramImage(sinogram);
             firePropertyChange("enableReconControls", null, null);
             logger.trace("Recon controls are enabled");
@@ -331,5 +342,27 @@ public class ModellingModule {
             logger.error("Internal error during calculating sinogram ", ex);
             firePropertyChange("INTERNAL_ERROR", null, "Internal error during calculating sinogram");
         }
+    }
+
+    public void reconstructModellingSinogram() {
+
+        try {
+            logger.trace("Reconstruction of modelling sinogram is starting");
+            firePropertyChange("startReconstructionSinogram", null, null);
+            BufferedImage reconstruction = ImageTransformerFacade.reconstructProjectionData(projectionDataOfModelling, scans, stepSize, sizeReconstruction, currentFilter);
+            setReconstructionOfSinogramImage(reconstruction);
+            firePropertyChange("enableColoringModel", null, null);
+            logger.trace("Coloring model controls are enabled");
+            firePropertyChange("stopReconstructionSinogram", null, null);
+            logger.trace("Reconstruction of modelling sinogram is finishied");
+        } catch (Throwable ex) {
+            logger.error("Internal error during reconstruction sinogram ", ex);
+            firePropertyChange("INTERNAL_ERROR", null, "Internal error during reconstruction sinogram");
+        }
+    }
+
+    @Override
+    public void setProjectionData(double[][] projData) {
+        this.projectionDataOfModelling = projData;
     }
 }
