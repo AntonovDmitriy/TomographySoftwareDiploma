@@ -18,9 +18,6 @@ import org.slf4j.LoggerFactory;
  */
 public class SinogramCreator extends ModellingImageCalculator {
 
-    public static final String REGIME_NEAREST_NEIGHBOUR_INTERPOLATION = "nearest";
-    public static final String REGIME_LINEAR_ITERPOLATION = "linear";
-
     private static final Logger logger = LoggerFactory.getLogger(SinogramCreator.class);
 
     // I decided to remain this long method for better understanding
@@ -28,7 +25,8 @@ public class SinogramCreator extends ModellingImageCalculator {
 
         double[][] projectionData = new double[rotates][scans];
         Utils.fillZeroMatrix(projectionData);
-        double scaleImageToSinogramRatio = calculateImageToSinogramScaleRatio(pixInitialImage, this.scans);
+        
+        double scaleImageToSinogramRatio = calculateImageScaleRatio(pixInitialImage, this.scans);
 
         double[] minusCosTab = Utils.getRowOfFunctionIncrementalValues("-cos", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
         double[] sinTab = Utils.getRowOfFunctionIncrementalValues("sin", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
@@ -128,12 +126,6 @@ public class SinogramCreator extends ModellingImageCalculator {
         return Math.abs(minusCosTab[view]) > cosOf45Degrees;
     }
 
-    private double calculateImageToSinogramScaleRatio(double[][] imagePixArray, int scans) {
-
-        int heightInitialImage = imagePixArray[0].length;
-        double result = heightInitialImage * Math.sqrt(2) / scans;
-        return result;
-    }
 
     public BufferedImage createSinogram(IProjDataSaver model, BufferedImage sourceImage, String regimeInteprolation) throws NumberWrongValueException, ImageWrongValueException {
         super.setInitialImage(sourceImage);

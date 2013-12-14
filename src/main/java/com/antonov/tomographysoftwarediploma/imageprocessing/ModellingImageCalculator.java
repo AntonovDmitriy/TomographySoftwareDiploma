@@ -21,7 +21,8 @@ public class ModellingImageCalculator {
     int rotates;
     public static final int START_ROTATION_ANGLE = 0;
     public static final int FINISH_ROTATION_ANGLE = 180;
-
+    public static final String REGIME_NEAREST_NEIGHBOUR_INTERPOLATION = "nearest";
+    public static final String REGIME_LINEAR_ITERPOLATION = "linear";
     //---------------------Images-------------------------------
     BufferedImage sourceImage;
     BufferedImage resultImage;
@@ -96,4 +97,10 @@ public class ModellingImageCalculator {
         }
     }
 
+    protected double calculateImageScaleRatio(double[][] imagePixArray, int scans) {
+
+        int heightInitialImage = imagePixArray[0].length;
+        double result = heightInitialImage * Math.sqrt(2) / scans;
+        return result;
+    }
 }

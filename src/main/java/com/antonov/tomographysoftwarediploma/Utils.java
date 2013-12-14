@@ -1,5 +1,6 @@
 package com.antonov.tomographysoftwarediploma;
 
+import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
@@ -165,9 +166,9 @@ public class Utils {
     }
 
     public static double[][] fillZeroMatrix(double[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
+        for (double[] matrix1 : matrix) {
             for (int j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = 0.0;
+                matrix1[j] = 0.0;
             }
         }
         return matrix;
@@ -437,5 +438,52 @@ public class Utils {
             }
 
         }
+    }
+
+    public static BufferedImage createImagefromArray(double[][] pix) {
+
+        double max = getMax(pix);
+        int i, j;
+        i = 0;
+        j = 0;
+
+        short[] pixelshortArray = new short[pix.length * pix[0].length];
+        double min = Utils.getMin(pix);
+
+        double datamin = Utils.getMin(pix);
+
+        // zero matrix
+        if (datamin < 0) {
+            for (i = 0; i < pix.length; i++) {
+                for (j = 0; j < pix[0].length; j++) {
+                    if (pix[i][j] < 0) {
+                        pix[i][j] = 0;
+                    }
+                }
+            }
+        }
+
+        int gray;
+        // System.out.println("rescaling output image: ");
+
+        for (int y = 0; y < pix[0].length; y++) {
+            for (int x = 0; x < pix.length; x++) {
+                if (min < 0) {
+                    gray = (int) ((pix[x][y]) * 2000 / (max));
+                } else {
+
+                    gray = (int) ((pix[x][y]) * 2000 / (max));
+                }
+                pixelshortArray[x + y * pix.length] = (short) gray;
+            }
+        }
+
+        BufferedImage img;
+        // returns an 8-bit buffered image for display purposes
+
+        img = create12bitImage(pix.length, pix.length, pixelshortArray);
+
+        return img;
+
     }
 }

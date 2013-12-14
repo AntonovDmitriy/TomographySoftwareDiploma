@@ -41,7 +41,7 @@ public class ModellingModule implements IProjDataSaver {
     //Parameters of modelling
     private Integer scans;
     private Integer stepSize;
-    private PInterpolation regimeInterpolation;
+    private PInterpolation regimeSinogramInterpolation;
     private Set<PInterpolation> setInterpolation;
 
     //Parameters of reconstruction
@@ -151,7 +151,7 @@ public class ModellingModule implements IProjDataSaver {
         firePropertyChange("scans", null, scans);
         firePropertyChange("stepsize", null, stepSize);
         firePropertyChange("regimeInterpolationModel", null, setInterpolation);
-        firePropertyChange("regimeInterpolation", null, regimeInterpolation);
+        firePropertyChange("regimeSinogramInterpolation", null, regimeSinogramInterpolation);
         firePropertyChange("sizeReconstruction", null, sizeReconstruction);
         firePropertyChange("filterSet", null, setFilterName);
         firePropertyChange("filterModel", null, currentFilter);
@@ -163,7 +163,7 @@ public class ModellingModule implements IProjDataSaver {
         logger.info("Reading initial modelling parameters");
         initScans();
         initStepSize();
-        initInterpolation();
+        initSinogramInterpolation();
         initSizeReconstruction();
         initFiltering();
         logger.info("Initial modelling parameters have been read");
@@ -198,7 +198,7 @@ public class ModellingModule implements IProjDataSaver {
         }
     }
 
-    private void initInterpolation() {
+    private void initSinogramInterpolation() {
 
         try {
             String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_INTERPOLATION");
@@ -208,12 +208,12 @@ public class ModellingModule implements IProjDataSaver {
             } else {
                 for (PInterpolation pojoInterpolation : setInterpolation) {
                     if (pojoInterpolation.getValue().equals(regimeInterpolationFromProperty)) {
-                        regimeInterpolation = pojoInterpolation;
+                        regimeSinogramInterpolation = pojoInterpolation;
                         break;
                     }
                 }
             }
-            logger.info("regimeInterpolation = " + regimeInterpolation);
+            logger.info("regimeSinogramInterpolation = " + regimeSinogramInterpolation);
         } catch (NumberFormatException ex) {
             logger.warn("Error reading initial parameter REGIME_INTERPOLATION", ex);
         }
@@ -303,16 +303,16 @@ public class ModellingModule implements IProjDataSaver {
         logger.info("Result reconstruction is clear");
     }
 
-    public void setRegimeInterpolation(PInterpolation regimeInterpolation) {
+    public void setSinogramRegimeInterpolation(PInterpolation regimeInterpolation) {
 
-        PInterpolation oldRegimeInterpolation = this.regimeInterpolation;
-        this.regimeInterpolation = regimeInterpolation;
+        PInterpolation oldRegimeInterpolation = this.regimeSinogramInterpolation;
+        this.regimeSinogramInterpolation = regimeInterpolation;
 
         if (oldRegimeInterpolation != null) {
-            logger.trace("Value of regimeInterpolation now is " + regimeInterpolation.getValue()
+            logger.trace("Value of regimeSinogramInterpolation now is " + regimeInterpolation.getValue()
                     + ". Old value was " + oldRegimeInterpolation.getValue());
         } else {
-            logger.trace("Value of regimeInterpolation now is " + regimeInterpolation.getValue()
+            logger.trace("Value of regimeSinogramInterpolation now is " + regimeInterpolation.getValue()
                     + ". Old value was " + oldRegimeInterpolation);
         }
 
@@ -332,7 +332,7 @@ public class ModellingModule implements IProjDataSaver {
         try {
             logger.trace("Sinogram creating is starting");
             firePropertyChange("startSinogramm", null, null);
-            BufferedImage sinogram = ImageTransformerFacade.createSinogram(this, currentModellingImage, scans, stepSize, regimeInterpolation.getValue());
+            BufferedImage sinogram = ImageTransformerFacade.createSinogram(this, currentModellingImage, scans, stepSize, regimeSinogramInterpolation.getValue());
             setSinogramImage(sinogram);
             firePropertyChange("enableReconControls", null, null);
             logger.trace("Recon controls are enabled");
@@ -349,7 +349,7 @@ public class ModellingModule implements IProjDataSaver {
         try {
             logger.trace("Reconstruction of modelling sinogram is starting");
             firePropertyChange("startReconstructionSinogram", null, null);
-            BufferedImage reconstruction = ImageTransformerFacade.reconstructProjectionData(projectionDataOfModelling, scans, stepSize, sizeReconstruction, currentFilter);
+            BufferedImage reconstruction = ImageTransformerFacade.reconstructProjectionData(projectionDataOfModelling, scans, stepSize, sizeReconstruction, currentFilter, "linear");
             setReconstructionOfSinogramImage(reconstruction);
             firePropertyChange("enableColoringModel", null, null);
             logger.trace("Coloring model controls are enabled");

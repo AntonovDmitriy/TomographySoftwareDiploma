@@ -1137,7 +1137,7 @@
                               <SubComponents>
                                 <Component class="javax.swing.JLabel" name="labelReconstruction">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="jLabel12"/>
+                                    <Property name="horizontalAlignment" type="int" value="0"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>

@@ -246,7 +246,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "regimeInterpolationModel":
                         setCbInterpolation((Set) evt.getNewValue());
                         break;
-                    case "regimeInterpolation":
+                    case "regimeSinogramInterpolation":
                         cbTypeInterpolation.setSelectedItem(evt.getNewValue());
                         break;
                     case "setModellingImages":
@@ -1273,7 +1273,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             paneReconstruct.setLayout(new java.awt.GridBagLayout());
 
-            labelReconstruction.setText("jLabel12");
+            labelReconstruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             jScrollPane5.setViewportView(labelReconstruction);
 
             gridBagConstraints = new java.awt.GridBagConstraints();

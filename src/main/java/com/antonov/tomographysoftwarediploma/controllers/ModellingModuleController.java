@@ -19,42 +19,42 @@ import org.slf4j.LoggerFactory;
  * @author Antonov
  */
 public class ModellingModuleController extends Controller {
-    
+
     public static final int AREA_SCANNING_IN_DEGREES = 180;
-    
+
     private static Logger logger = LoggerFactory.getLogger(ModellingModuleController.class);
     private final ResourceBundle bundle = ResourceBundle.getBundle(
             "bundle_Rus");
-    
+
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
-    
+
     protected void firePropertyChange(String propertyName, Object oldValue,
             Object newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, oldValue,
                 newValue);
     }
-    
+
     public ModellingModuleController(Tomograph tomograph, ITomographView view) {
         super(tomograph, view);
     }
-    
+
     public void setModellingImages(Map<String, BufferedImage> imageSamplesMapWithNames) {
         firePropertyChange("setModellingImages", null, imageSamplesMapWithNames);
     }
-    
+
     public void setModelCurrentModellingImageByName(String image) {
-        
+
         super.tomograph.modellingModule.setCurrentModellingImageByName(image);
     }
-    
+
     public void getAndSetFileModellingImage(File file) {
         super.tomograph.modellingModule.getAndSetFileModellingImage(file);
     }
-    
+
     public void setScans(String scansString, Component comp) {
         try {
             int scans = checkAndGetInt(scansString);
@@ -63,9 +63,9 @@ public class ModellingModuleController extends Controller {
             logger.warn("Error parsing value of scans", ex);
             firePropertyChange("PARAMETER_VALUE_WARNING", null, bundle.getString("ERROR_PARSE_SCANS") + " " + scansString + " " + ex.getMessage());
         }
-        
+
     }
-    
+
     public void setStepSize(String stepSizeString) {
         try {
             int stepSize = checkAndGetInt(stepSizeString);
@@ -85,13 +85,13 @@ public class ModellingModuleController extends Controller {
             logger.warn("Error parsing value of sizeReconstruction", ex);
             firePropertyChange("PARAMETER_VALUE_WARNING", null, bundle.getString("ERROR_PARSE_SIZERECONSTRUCTION") + " " + sizeReconstructionString + " " + ex.getMessage());
         }
-    }    
+    }
 
     @Override
     public void addPropertyChangeListenerToModel(PropertyChangeListener p) {
         super.tomograph.modellingModule.addPropertyChangeListener(p);
     }
-    
+
     private int checkAndGetInt(String scansString) throws NumberFormatException {
         int scans = Integer.parseInt(scansString);
         if (scans <= 0) {
@@ -99,36 +99,36 @@ public class ModellingModuleController extends Controller {
         }
         return scans;
     }
-    
+
     private void checkRestOfDevision(int divisor, int dividend) {
-        
+
         int restOf = dividend % divisor;
         if (restOf != 0) {
             throw new NumberFormatException("Rest of devision " + dividend + " on " + divisor + " is not 0");
         }
     }
-    
+
     public void createSinogram() {
-        
+
         super.tomograph.modellingModule.createSinogram();
     }
-    
+
     public void setInterpolation(Object selectedItem) {
         try {
-            
+
             PInterpolation pojoInterpolation = (PInterpolation) selectedItem;
-            super.tomograph.modellingModule.setRegimeInterpolation(pojoInterpolation);
+            super.tomograph.modellingModule.setSinogramRegimeInterpolation(pojoInterpolation);
         } catch (ClassCastException ex) {
             firePropertyChange("PARAMETER_VALUE_WARNING", null, " " + ex.getMessage());
         }
     }
-    
+
     public void setFilterModel(Object selectedItem) {
         super.tomograph.modellingModule.setFilterModel((String) selectedItem);
     }
 
     public void reconstructModellingSinogram() {
-        
+
         super.tomograph.modellingModule.reconstructModellingSinogram();
     }
 }

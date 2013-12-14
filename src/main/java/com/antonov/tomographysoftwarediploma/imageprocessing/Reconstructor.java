@@ -38,217 +38,144 @@ public class Reconstructor extends ModellingImageCalculator {
         this.filterName = filterName;
     }
 
-    public BufferedImage createReconstructedImage(double[][] projectionDat) {
+    // this method is too long cause better understanding of sequence of actions with data
+    public double[][] getReconstructedDate(double[][] filteredProjectionData, String regimeInterpolation) {
 
-        int i, a;
-        i = 0;
-        double val = 0, pos, Aleft, Aright;
-        double[][] bpimage = new double[sizeOfReconstruction][sizeOfReconstruction]; // массив с данными реконструкции
-        int x, y, Xcenter, Ycenter, Ileft, Iright;
-        double[][] fprojection;
-        int S = 0;
-        String interp = "nearest";
-        fprojection = filteringBackProjection(projectionDat);
+        //for better production tabs of angles are created at the rest of cycle
         double[] sinTab = Utils.getRowOfFunctionIncrementalValues("sin", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
         double[] cosTab = Utils.getRowOfFunctionIncrementalValues("cos", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
 
-        // Заполнение матрицы для реконструкции нулями
-        for (x = 0; x < sizeOfReconstruction; x++) {
-            for (y = 0; y < sizeOfReconstruction; y++) {
-                bpimage[x][y] = 0;
-            }
-        }
+        double[][] reconstructedData = new double[sizeOfReconstruction][sizeOfReconstruction];
+        reconstructedData = Utils.fillZeroMatrix(reconstructedData);
 
-        // Back Project each pixel in the image
-        Xcenter = sizeOfReconstruction / 2;
-        Ycenter = sizeOfReconstruction / 2;
-        i = 0;
-        double scale = sizeOfReconstruction * Math.sqrt(2) / scans;
-        System.out.println("Performing back projection.. ");
+        double scaleArrayRecostructedDataToImageRatio = calculateImageScaleRatio(reconstructedData, this.scans);
+        int Xcenter = sizeOfReconstruction / 2;
+        int Ycenter = sizeOfReconstruction / 2;
 
-        boolean interrupt = false;
+        for (int x = -Xcenter; x < Xcenter; x++) {
+            for (int y = -Ycenter; y < Ycenter; y++) {
+                int rotate = 0;
+                double valueOfGray = 0;
+                for (int angle = START_ROTATION_ANGLE; angle < FINISH_ROTATION_ANGLE; angle = angle + stepSize) {
 
-        for (x = -Xcenter; x < Xcenter; x++) {
-            if (interrupt == true) {
-                break;
-            }
-            for (y = -Ycenter; y < Ycenter; y++) {
-                int x1 = x;
-                int y1 = y;
-
-                for (int phi = 0; phi < 180; phi = phi + stepSize) {
-                    // pos = (x1 * sintab[i] - y1 * costab[i]);
-                    pos = (-x1 * cosTab[i] + y1 * sinTab[i]);
-                    // System.out.print("pos= "+pos+" ");
-
-                    if (interp == "nearest") {
-
-                        S = (int) Math.round(pos / scale);
-                        S = S + scans / 2;
-                        if (S < scans && S > 0) {
-                            val = val + fprojection[i][S];
-                        }
-                    } // perform linear interpolation
-                    else if (interp == "linear") {
-                        if (pos >= 0) {
-                            a = (int) Math.floor(pos / scale);
-                            int b = a + scans / 2;
-                            if (b < scans - 1 && b > 0) {
-                                val = val
-                                        + fprojection[i][b]
-                                        + (fprojection[i][b + 1] - fprojection[i][b])
-                                        * (pos / scale - (double) a);
-                            }
-                        } else if (pos < 0) {
-                            a = (int) Math.floor(pos / scale);
-                            int b = a + scans / 2;
-                            if (b < scans - 1 && b > 0) {
-                                val = val
-                                        + fprojection[i][b]
-                                        + (fprojection[i][b] - fprojection[i][b + 1])
-                                        * (Math.abs(pos / scale) - Math
-                                        .abs(a));
-                            }
-                        }
+                    double position = (-x * cosTab[rotate] + y * sinTab[rotate]);
+                    switch (regimeInterpolation) {
+                        case REGIME_NEAREST_NEIGHBOUR_INTERPOLATION:
+                            valueOfGray = revertedInteprolationNearestNeighbous(filteredProjectionData, position, scaleArrayRecostructedDataToImageRatio, valueOfGray, rotate);
+                            break;
+                        case REGIME_LINEAR_ITERPOLATION:
+                            valueOfGray = revertedInterpolationLinear(filteredProjectionData, rotate, position, scaleArrayRecostructedDataToImageRatio, valueOfGray);
+                            break;
                     }
-                    i++;
+                    rotate++;
                 }
-                S = 0;
-                i = 0;
-
-                bpimage[x + Xcenter][y + Ycenter] = val / rotates;
-                // bpimage[x + Xcenter][y + Ycenter] = val*Math.PI/2*views;
-                // img = img*pi/(2*length(theta));
-                val = 0;
+                reconstructedData[x + Xcenter][y + Ycenter] = valueOfGray / rotates;
             }
         }
 
-        double maxval = Utils.getMax(bpimage);
-        BufferedImage reconstruction = CreateImagefromArray(bpimage, maxval, 1);
-        BufferedImage reconstuctionImage;
-
-        reconstuctionImage = PerformWindowing(reconstruction);
-        return reconstuctionImage;
-    }
-
-    private BufferedImage CreateImagefromArray(double[][] pix, double max,
-            int type) {
-
-        int i, j;
-        i = 0;
-        j = 0;
-
-        short[] pixelshortArray = new short[pix.length * pix[0].length];
-        double min = Utils.getMin(pix);
-
-        double datamin = Utils.getMin(pix);
-
-        // zero matrix
-        if (datamin < 0) {
-            for (i = 0; i < pix.length; i++) {
-                for (j = 0; j < pix[0].length; j++) {
-                    if (pix[i][j] < 0) {
-                        pix[i][j] = 0;
-                    }
-                }
-            }
-        }
-
-        int gray;
-        // System.out.println("rescaling output image: ");
-
-        for (int y = 0; y < pix[0].length; y++) {
-            for (int x = 0; x < pix.length; x++) {
-                if (min < 0) {
-                    gray = (int) ((pix[x][y]) * 2000 / (max));
-                } else {
-
-                    gray = (int) ((pix[x][y]) * 2000 / (max));
-                }
-                pixelshortArray[x + y * pix.length] = (short) gray;
-            }
-        }
-
-        BufferedImage img;
-        // returns an 8-bit buffered image for display purposes
-
-        img = create12bitImage(sizeOfReconstruction, sizeOfReconstruction, pixelshortArray);
-
-        return img;
-
+        return reconstructedData;
     }
 
     private double[][] filteringBackProjection(double[][] projectionData) {
 
-        int i, pscans;
-        double filter[], pfilter[];   //array to store filter and padded filter
+        double[][] filteredProjectionData = new double[rotates][scans];
+        
+        int scansPow2 = getScansPow2();
+        double[] rawdata = new double[scansPow2 * 2];
+        double[] idata = new double[scansPow2 * 2];
 
-        double[] rawdata;
-        double[] idata;
-
-        double[][] fproj = new double[rotates][scans];
-
-        //length of array - no of 'scans', must be a power of 2
-        //if scans is a power of 2 then just allocated twice this value for arrays and then pad
-        //the projection (and filter data?) with zeroes before applying FFT
-        if (Utils.isPow2(scans) == true) {
-            pscans = scans;   //System.out.println("power of 2");
-        } //if scans is not a power of 2, then round pscans up to nearest power and double
-        else {
-            int power = (int) ((Math.log(scans) / Math.log(2))) + 1; //closest power of 2 rounded up
-            pscans = (int) Math.pow(2, power);
-            System.out.println("PSCANS: " + pscans);
+        for (int i = 0; i < scansPow2; i++) {
+            idata[i] = 0;
         }
-        rawdata = new double[pscans * 2];
-        idata = new double[pscans * 2];
-        pfilter = new double[pscans * 2];
-
-        for (int S = 0; S < pscans; S++) {
-            idata[S] = 0;
-        }
-
+        
         // Initialize the filter
-        filter = Utils.filter1(filterName, pscans * 2, 1.0);
+        double[] filter = Utils.filter1(filterName, scansPow2 * 2, 1.0);
 
-        i = 0;
-
+        int i = 0;
         // Filter each projection
-        for (int phi = 0; phi < 180; phi += stepSize) {
+        for (int phi = 0; phi < 180; phi += stepSize, i++) {
             for (int S = 0; S < scans; S++) {
                 rawdata[S] = projectionData[i][S];
             }
             //zero pad projections
-            for (int S = scans; S < pscans * 2; S++) {
+            for (int S = scans; S < scansPow2 * 2; S++) {
                 rawdata[S] = 0;
             }
-            Utils.FFT(1, pscans * 2, rawdata, idata);
+            Utils.FFT(1, scansPow2 * 2, rawdata, idata);
             for (int S = 0; S < scans * 2; S++) {
                 rawdata[S] *= filter[S];
             }
             //perform inverse fourier transform of filtered product
-            Utils.FFT(0, pscans * 2, rawdata, idata);
+            Utils.FFT(0, scansPow2 * 2, rawdata, idata);
             for (int S = 0; S < scans; S++) {
-                fproj[i][S] = rawdata[S];
+                filteredProjectionData[i][S] = rawdata[S];
             }
-            for (int S = 0; S < pscans * 2; S++) {
+            for (int S = 0; S < scansPow2 * 2; S++) {
                 idata[S] = 0;
             }
-            i++;
         }
-        return fproj;
+        return filteredProjectionData;
     }
 
     public BufferedImage reconstructModellingSinogram(BufferedImage sinogram) throws ImageWrongValueException {
         return null;
     }
 
-    public BufferedImage reconstructProjectionData(double[][] projData) {
+    public BufferedImage reconstructProjectionData(double[][] projectionData, String regimeInterpolation) {
 
         if (scans != 0 && stepSize != 0 && sizeOfReconstruction != 0 && filterName != null) {
-            BufferedImage reconstruction = createReconstructedImage(projData);
-            return reconstruction;
+
+            double[][] filteredProjectionData = filteringBackProjection(projectionData);
+            logger.trace("Projection data is filtered");
+            double[][] reconstructedData = getReconstructedDate(filteredProjectionData, regimeInterpolation);
+            logger.trace("Reconstructed data is created");
+            BufferedImage reconstructionImage = Utils.createImagefromArray(reconstructedData);
+            logger.trace("Reconstructed image is created");
+            reconstructionImage = PerformWindowing(reconstructionImage);
+            logger.trace("Reconstructed inage has been performed for screaning");
+            return reconstructionImage;
         } else {
             throw new MissingFormatArgumentException("Parameters of modelling are emptry or incorrect");
+        }
+    }
+
+    private double revertedInteprolationNearestNeighbous(double[][] filteredProjectionData, double position, double scaleArrayRecostructedDataToImageRatio, double valueOfGray, int rotate) {
+
+        int positionInGrid = (int) Math.round(position / scaleArrayRecostructedDataToImageRatio);
+        positionInGrid = positionInGrid + scans / 2;
+        if (positionInGrid < scans && positionInGrid > 0) {
+            valueOfGray += filteredProjectionData[rotate][positionInGrid];
+        }
+        return valueOfGray;
+    }
+
+    private double revertedInterpolationLinear(double[][] filteredProjectionData, int rotate, double position, double scaleArrayRecostructedDataToImageRatio, double valueOfGray) {
+        int a = (int) Math.floor(position / scaleArrayRecostructedDataToImageRatio);
+        int b = a + scans / 2;
+        if (b < scans - 1 && b > 0) {
+            if (position >= 0) {
+                valueOfGray = valueOfGray
+                        + filteredProjectionData[rotate][b]
+                        + (filteredProjectionData[rotate][b + 1] - filteredProjectionData[rotate][b])
+                        * (position / scaleArrayRecostructedDataToImageRatio - (double) a);
+            } else {
+                valueOfGray = valueOfGray
+                        + filteredProjectionData[rotate][b]
+                        + (filteredProjectionData[rotate][b] - filteredProjectionData[rotate][b + 1])
+                        * (Math.abs(position / scaleArrayRecostructedDataToImageRatio) - Math
+                        .abs(a));
+            }
+        }
+        return valueOfGray;
+    }
+
+    private int getScansPow2() {
+
+        if (Utils.isPow2(scans) == true) {
+            return scans;
+        } else {
+            int power = (int) ((Math.log(scans) / Math.log(2))) + 1; //closest power of 2 rounded up
+            return (int) Math.pow(2, power);
         }
     }
 }
