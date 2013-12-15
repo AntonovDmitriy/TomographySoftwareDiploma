@@ -1,4 +1,4 @@
-package com.antonov.tomographysoftwarediploma;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
 import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
 import java.awt.Point;

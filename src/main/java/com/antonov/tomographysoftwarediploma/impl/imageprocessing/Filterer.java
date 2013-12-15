@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.imageprocessing;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
-import static com.antonov.tomographysoftwarediploma.Utils.setRange1DArray;
+import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils.setRange1DArray;
 
 /**
  *

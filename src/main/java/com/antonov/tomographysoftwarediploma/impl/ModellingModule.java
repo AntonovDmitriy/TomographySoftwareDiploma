@@ -5,10 +5,10 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
-import com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
-import com.antonov.tomographysoftwarediploma.imageprocessing.IProjDataSaver;
-import com.antonov.tomographysoftwarediploma.imageprocessing.SinogramCreator;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.IProjDataSaver;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.SinogramCreator;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -48,6 +48,7 @@ public class ModellingModule implements IProjDataSaver {
     private Integer sizeReconstruction;
     private Set<String> setFilterName;
     private String currentFilter;
+    private PInterpolation regimeReconstructionInterpolation;
 
     private BufferedImage currentModellingImage;
     private BufferedImage sinogramImage;
@@ -152,6 +153,7 @@ public class ModellingModule implements IProjDataSaver {
         firePropertyChange("stepsize", null, stepSize);
         firePropertyChange("regimeInterpolationModel", null, setInterpolation);
         firePropertyChange("regimeSinogramInterpolation", null, regimeSinogramInterpolation);
+        firePropertyChange("regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
         firePropertyChange("sizeReconstruction", null, sizeReconstruction);
         firePropertyChange("filterSet", null, setFilterName);
         firePropertyChange("filterModel", null, currentFilter);
@@ -164,6 +166,7 @@ public class ModellingModule implements IProjDataSaver {
         initScans();
         initStepSize();
         initSinogramInterpolation();
+        initReconstructionInterpolation();
         initSizeReconstruction();
         initFiltering();
         logger.info("Initial modelling parameters have been read");
@@ -201,10 +204,10 @@ public class ModellingModule implements IProjDataSaver {
     private void initSinogramInterpolation() {
 
         try {
-            String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_INTERPOLATION");
+            String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_SINOGRAM_INTERPOLATION");
             if (!regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_LINEAR_ITERPOLATION)
                     && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
-                throw new NumberFormatException("Regime of interpolation has invalid value " + regimeInterpolationFromProperty);
+                throw new NumberFormatException("Regime of sinogram interpolation has invalid value " + regimeInterpolationFromProperty);
             } else {
                 for (PInterpolation pojoInterpolation : setInterpolation) {
                     if (pojoInterpolation.getValue().equals(regimeInterpolationFromProperty)) {
@@ -215,7 +218,28 @@ public class ModellingModule implements IProjDataSaver {
             }
             logger.info("regimeSinogramInterpolation = " + regimeSinogramInterpolation);
         } catch (NumberFormatException ex) {
-            logger.warn("Error reading initial parameter REGIME_INTERPOLATION", ex);
+            logger.warn("Error reading initial parameter REGIME_SINOGRAM_INTERPOLATION", ex);
+        }
+    }
+
+    private void initReconstructionInterpolation() {
+
+        try {
+            String regimeInterpolationFromProperty = tomographProperty.getProperty("REGIME_RECONSTRUCTION_INTERPOLATION");
+            if (!regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_LINEAR_ITERPOLATION)
+                    && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
+                throw new NumberFormatException("Regime of reconstruction interpolation has invalid value " + regimeInterpolationFromProperty);
+            } else {
+                for (PInterpolation pojoInterpolation : setInterpolation) {
+                    if (pojoInterpolation.getValue().equals(regimeInterpolationFromProperty)) {
+                        regimeReconstructionInterpolation = pojoInterpolation;
+                        break;
+                    }
+                }
+            }
+            logger.info("regimeReconstructionInterpolation = " + regimeReconstructionInterpolation);
+        } catch (NumberFormatException ex) {
+            logger.warn("Error reading initial parameter REGIME_RECONSTRUCTION_INTERPOLATION", ex);
         }
     }
 
@@ -318,6 +342,21 @@ public class ModellingModule implements IProjDataSaver {
 
     }
 
+        public void setReconstructionRegimeInterpolation(PInterpolation regimeInterpolation) {
+
+        PInterpolation oldRegimeInterpolation = this.regimeReconstructionInterpolation;
+        this.regimeReconstructionInterpolation = regimeInterpolation;
+
+        if (oldRegimeInterpolation != null) {
+            logger.trace("Value of regimeReconstructionInterpolation now is " + regimeInterpolation.getValue()
+                    + ". Old value was " + oldRegimeInterpolation.getValue());
+        } else {
+            logger.trace("Value of regimeReconstructionInterpolation now is " + regimeInterpolation.getValue()
+                    + ". Old value was " + oldRegimeInterpolation);
+        }
+
+    }
+    
     public void setFilterModel(String filterModel) {
 
         String oldFilterModel = this.currentFilter;

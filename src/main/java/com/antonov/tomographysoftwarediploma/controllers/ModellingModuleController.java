@@ -113,11 +113,21 @@ public class ModellingModuleController extends Controller {
         super.tomograph.modellingModule.createSinogram();
     }
 
-    public void setInterpolation(Object selectedItem) {
+    public void setSinogramInterpolation(Object selectedItem) {
         try {
 
             PInterpolation pojoInterpolation = (PInterpolation) selectedItem;
             super.tomograph.modellingModule.setSinogramRegimeInterpolation(pojoInterpolation);
+        } catch (ClassCastException ex) {
+            firePropertyChange("PARAMETER_VALUE_WARNING", null, " " + ex.getMessage());
+        }
+    }
+
+    public void setReconstructionInterpolation(Object selectedItem) {
+        try {
+
+            PInterpolation pojoInterpolation = (PInterpolation) selectedItem;
+            super.tomograph.modellingModule.setReconstructionRegimeInterpolation(pojoInterpolation);
         } catch (ClassCastException ex) {
             firePropertyChange("PARAMETER_VALUE_WARNING", null, " " + ex.getMessage());
         }

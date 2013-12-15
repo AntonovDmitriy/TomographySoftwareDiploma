@@ -1,7 +1,8 @@
 package com.antonov.tomographysoftwarediploma;
 
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
-import com.antonov.tomographysoftwarediploma.imageprocessing.Filterer;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Filterer;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;

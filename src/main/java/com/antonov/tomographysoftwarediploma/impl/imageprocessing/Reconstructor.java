@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.imageprocessing;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
 import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
-import com.antonov.tomographysoftwarediploma.Utils;
-import static com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade.PerformWindowing;
-import static com.antonov.tomographysoftwarediploma.imageprocessing.ImageTransformerFacade.prepareImage;
+import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade.PerformWindowing;
+import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade.prepareImage;
 import java.awt.image.BufferedImage;
 import java.util.MissingFormatArgumentException;
 import org.slf4j.Logger;

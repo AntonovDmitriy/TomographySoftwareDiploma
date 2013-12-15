@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.imageprocessing;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
 import java.awt.image.BufferedImage;
 import org.slf4j.Logger;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.antonov.tomographysoftwarediploma.imageprocessing;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
 /**
  *

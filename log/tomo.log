@@ -3439,3 +3439,335 @@ java.lang.UnsupportedOperationException: Not supported yet.
 2013-12-15 16:40:38 TRACE ModellingModule:355 - Coloring model controls are enabled
 2013-12-15 16:40:38 TRACE ModellingModule:357 - Reconstruction of modelling sinogram is finishied
 2013-12-15 16:41:01 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:05:41 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:05:41 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:05:41 INFO  ModellingModule:124 - Path to the internal images is resources/internalImages
+2013-12-15 17:05:41 TRACE ModellingModule:129 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:05:41 TRACE ModellingModule:131 - File successfully has been read 
+2013-12-15 17:05:41 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:05:41 TRACE ModellingModule:135 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:05:41 TRACE ModellingModule:129 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:05:41 TRACE ModellingModule:131 - File successfully has been read 
+2013-12-15 17:05:41 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:05:41 TRACE ModellingModule:135 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:05:41 TRACE ModellingModule:129 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:05:41 TRACE ModellingModule:131 - File successfully has been read 
+2013-12-15 17:05:41 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:05:41 TRACE ModellingModule:135 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:05:41 INFO  ModellingModule:163 - Reading initial modelling parameters
+2013-12-15 17:05:41 INFO  ModellingModule:176 - scans = 400
+2013-12-15 17:05:41 INFO  ModellingModule:186 - stepsize = 1
+2013-12-15 17:05:41 INFO  ModellingModule:216 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:05:41 INFO  ModellingModule:195 - sizeReconstruction = 600
+2013-12-15 17:05:41 INFO  ModellingModule:231 - current filtering model = none
+2013-12-15 17:05:41 INFO  ModellingModule:169 - Initial modelling parameters have been read
+2013-12-15 17:05:44 TRACE ModellingModule:312 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:05:44 TRACE ModellingModule:326 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:05:44 INFO  ModellingModule:158 - Views are prepared
+2013-12-15 17:05:45 INFO  ModellingModule:239 - Current modelling image changes on With_deffect
+2013-12-15 17:05:45 INFO  ModellingModule:246 - Current modelling image changes on display
+2013-12-15 17:05:45 INFO  ModellingModule:248 - Result modelling is clear
+2013-12-15 17:05:45 INFO  ModellingModule:250 - Modelling controls are disabled
+2013-12-15 17:05:48 TRACE ModellingModule:326 - Value of currentFilter now is hamming. Old value was none
+2013-12-15 17:05:49 TRACE ModellingModule:333 - Sinogram creating is starting
+2013-12-15 17:05:49 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2013-12-15 17:05:49 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2013-12-15 17:05:49 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2013-12-15 17:05:49 TRACE SinogramCreator:136 - Array of pixel values of source image has been created
+2013-12-15 17:05:51 TRACE SinogramCreator:139 - Projection data has been created and saved to model
+2013-12-15 17:05:51 TRACE SinogramCreator:144 - Short row projection data has been created
+2013-12-15 17:05:51 TRACE SinogramCreator:148 - Sinogram image is created
+2013-12-15 17:05:51 TRACE SinogramCreator:150 - Sinogram inage has been performed for screaning
+2013-12-15 17:05:51 TRACE ModellingModule:258 - Sinogram image is changed
+2013-12-15 17:05:51 TRACE ModellingModule:338 - Recon controls are enabled
+2013-12-15 17:05:51 TRACE ModellingModule:340 - Sinogram createing is finishing
+2013-12-15 17:05:51 TRACE ModellingModule:350 - Reconstruction of modelling sinogram is starting
+2013-12-15 17:05:51 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2013-12-15 17:05:51 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2013-12-15 17:05:51 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2013-12-15 17:05:52 TRACE Reconstructor:117 - Projection data is filtered
+2013-12-15 17:05:56 TRACE Reconstructor:119 - Reconstructed data is created
+2013-12-15 17:05:56 TRACE Reconstructor:121 - Reconstructed image is created
+2013-12-15 17:05:56 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2013-12-15 17:05:56 TRACE ModellingModule:266 - Reconstruction image of sinogram is changed
+2013-12-15 17:05:56 TRACE ModellingModule:355 - Coloring model controls are enabled
+2013-12-15 17:05:56 TRACE ModellingModule:357 - Reconstruction of modelling sinogram is finishied
+2013-12-15 17:06:02 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:24:31 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:24:31 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:24:31 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:24:31 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:24:31 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:24:31 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:24:31 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:24:31 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:24:31 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:24:31 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:24:31 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:24:31 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:24:31 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:24:31 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:24:32 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:24:32 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:24:32 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:24:32 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:24:32 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:24:32 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:24:32 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:24:32 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:24:32 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:24:34 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:24:34 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:24:34 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:24:34 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:24:50 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:24:56 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:25:05 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:25:15 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:25:19 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:25:22 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is linear. Old value was nearest
+2013-12-15 17:25:29 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is linear. Old value was nearest
+2013-12-15 17:25:49 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is linear. Old value was linear
+2013-12-15 17:28:14 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:31:00 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:31:00 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:31:00 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:31:00 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:31:00 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:31:00 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:31:00 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:31:00 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:31:00 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:31:00 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:31:00 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:31:00 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:31:00 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:31:00 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:31:00 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:31:00 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:31:00 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:31:00 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:31:00 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:31:00 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:31:00 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:31:00 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:31:00 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:31:02 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:31:02 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:31:02 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:31:02 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:31:45 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:32:32 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:32:32 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:32:32 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:32:32 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:32:32 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:32:32 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:32:32 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:32:32 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:32:32 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:32:32 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:32:32 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:32:32 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:32:32 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:32:32 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:32:33 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:32:33 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:32:33 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:32:33 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:32:33 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:32:33 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:32:33 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:32:33 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:32:33 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:32:34 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:32:34 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:32:34 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:32:34 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:33:08 INFO  ModellingModule:263 - Current modelling image changes on With_deffect
+2013-12-15 17:33:08 INFO  ModellingModule:270 - Current modelling image changes on display
+2013-12-15 17:33:08 INFO  ModellingModule:272 - Result modelling is clear
+2013-12-15 17:33:08 INFO  ModellingModule:274 - Modelling controls are disabled
+2013-12-15 17:33:21 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:36:15 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:36:15 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:36:15 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:36:15 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:36:15 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:36:15 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:36:15 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:36:15 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:36:15 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:36:15 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:36:15 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:36:15 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:36:15 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:36:15 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:36:15 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:36:15 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:36:15 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:36:15 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:36:15 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:36:15 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:36:15 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:36:15 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:36:15 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:36:17 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:36:17 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:36:17 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:36:17 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:36:55 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:43:53 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:43:53 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:43:53 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:43:53 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:43:53 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:43:53 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:43:53 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:43:53 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:43:53 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:43:53 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:43:53 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:43:53 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:43:53 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:43:53 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:43:53 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:43:53 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:43:53 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:43:53 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:43:53 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:43:53 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:43:53 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:43:53 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:43:53 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:43:55 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:43:55 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:43:55 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:43:55 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:44:58 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:46:05 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:46:05 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:46:05 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:46:05 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:46:05 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:46:05 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:46:05 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:46:05 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:46:05 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:46:05 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:46:05 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:46:05 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:46:05 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:46:05 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:46:05 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:46:05 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:46:05 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:46:05 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:46:05 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:46:05 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:46:05 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:46:05 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:46:05 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:46:07 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:46:07 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:46:07 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:46:07 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:46:35 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:47:18 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:47:19 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:47:19 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:47:19 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:47:19 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:47:19 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:47:19 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:47:19 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:47:19 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:47:19 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:47:19 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:47:19 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:47:19 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:47:19 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:47:19 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:47:19 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:47:19 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:47:19 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:47:19 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:47:19 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:47:19 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:47:19 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:47:19 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:47:21 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:47:21 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:47:21 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:47:21 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:47:39 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======
+2013-12-15 17:48:01 INFO  AppLaunch:50 - =======Start TomographySoftware 1.0.0 application=======
+2013-12-15 17:48:02 INFO  Tomograph:49 - Successfully loading config file conf/tomograph.conf
+2013-12-15 17:48:02 INFO  ModellingModule:125 - Path to the internal images is resources/internalImages
+2013-12-15 17:48:02 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2013-12-15 17:48:02 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:48:02 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:48:02 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2013-12-15 17:48:02 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2013-12-15 17:48:02 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:48:02 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:48:02 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2013-12-15 17:48:02 TRACE ModellingModule:130 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2013-12-15 17:48:02 TRACE ModellingModule:132 - File successfully has been read 
+2013-12-15 17:48:02 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2013-12-15 17:48:02 TRACE ModellingModule:136 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2013-12-15 17:48:02 INFO  ModellingModule:165 - Reading initial modelling parameters
+2013-12-15 17:48:02 INFO  ModellingModule:179 - scans = 400
+2013-12-15 17:48:02 INFO  ModellingModule:189 - stepsize = 1
+2013-12-15 17:48:02 INFO  ModellingModule:219 - regimeSinogramInterpolation = Ближайшего соседа
+2013-12-15 17:48:02 INFO  ModellingModule:240 - regimeReconstructionInterpolation = Ближайшего соседа
+2013-12-15 17:48:02 INFO  ModellingModule:198 - sizeReconstruction = 600
+2013-12-15 17:48:02 INFO  ModellingModule:255 - current filtering model = none
+2013-12-15 17:48:02 INFO  ModellingModule:172 - Initial modelling parameters have been read
+2013-12-15 17:48:04 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2013-12-15 17:48:04 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2013-12-15 17:48:04 TRACE ModellingModule:365 - Value of currentFilter now is none. Old value was none
+2013-12-15 17:48:04 INFO  ModellingModule:160 - Views are prepared
+2013-12-15 17:49:06 INFO  ModellingModule:263 - Current modelling image changes on With_deffect
+2013-12-15 17:49:06 INFO  ModellingModule:270 - Current modelling image changes on display
+2013-12-15 17:49:06 INFO  ModellingModule:272 - Result modelling is clear
+2013-12-15 17:49:06 INFO  ModellingModule:274 - Modelling controls are disabled
+2013-12-15 17:49:12 TRACE ModellingModule:336 - Value of regimeSinogramInterpolation now is linear. Old value was nearest
+2013-12-15 17:49:17 TRACE ModellingModule:351 - Value of regimeReconstructionInterpolation now is linear. Old value was nearest
+2013-12-15 17:49:19 TRACE ModellingModule:365 - Value of currentFilter now is shepplogan. Old value was none
+2013-12-15 17:49:20 TRACE ModellingModule:372 - Sinogram creating is starting
+2013-12-15 17:49:20 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2013-12-15 17:49:20 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2013-12-15 17:49:20 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2013-12-15 17:49:20 TRACE SinogramCreator:136 - Array of pixel values of source image has been created
+2013-12-15 17:49:22 TRACE SinogramCreator:139 - Projection data has been created and saved to model
+2013-12-15 17:49:22 TRACE SinogramCreator:144 - Short row projection data has been created
+2013-12-15 17:49:22 TRACE SinogramCreator:148 - Sinogram image is created
+2013-12-15 17:49:22 TRACE SinogramCreator:150 - Sinogram inage has been performed for screaning
+2013-12-15 17:49:22 TRACE ModellingModule:282 - Sinogram image is changed
+2013-12-15 17:49:22 TRACE ModellingModule:377 - Recon controls are enabled
+2013-12-15 17:49:22 TRACE ModellingModule:379 - Sinogram createing is finishing
+2013-12-15 17:49:23 TRACE ModellingModule:389 - Reconstruction of modelling sinogram is starting
+2013-12-15 17:49:23 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2013-12-15 17:49:23 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2013-12-15 17:49:23 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2013-12-15 17:49:23 TRACE Reconstructor:117 - Projection data is filtered
+2013-12-15 17:49:27 TRACE Reconstructor:119 - Reconstructed data is created
+2013-12-15 17:49:27 TRACE Reconstructor:121 - Reconstructed image is created
+2013-12-15 17:49:27 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2013-12-15 17:49:27 TRACE ModellingModule:290 - Reconstruction image of sinogram is changed
+2013-12-15 17:49:27 TRACE ModellingModule:394 - Coloring model controls are enabled
+2013-12-15 17:49:27 TRACE ModellingModule:396 - Reconstruction of modelling sinogram is finishied
+2013-12-15 17:49:42 TRACE ModellingModule:365 - Value of currentFilter now is hamming. Old value was shepplogan
+2013-12-15 17:49:43 TRACE ModellingModule:389 - Reconstruction of modelling sinogram is starting
+2013-12-15 17:49:43 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2013-12-15 17:49:43 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2013-12-15 17:49:43 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2013-12-15 17:49:43 TRACE Reconstructor:117 - Projection data is filtered
+2013-12-15 17:49:47 TRACE Reconstructor:119 - Reconstructed data is created
+2013-12-15 17:49:47 TRACE Reconstructor:121 - Reconstructed image is created
+2013-12-15 17:49:47 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2013-12-15 17:49:47 TRACE ModellingModule:290 - Reconstruction image of sinogram is changed
+2013-12-15 17:49:47 TRACE ModellingModule:394 - Coloring model controls are enabled
+2013-12-15 17:49:47 TRACE ModellingModule:396 - Reconstruction of modelling sinogram is finishied
+2013-12-15 17:50:15 INFO  Tomograph:61 - =======Stop TomographySoftware 1.0.0 application=======

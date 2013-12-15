@@ -4,6 +4,7 @@
  */
 package com.antonov.tomographysoftwarediploma;
 
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;

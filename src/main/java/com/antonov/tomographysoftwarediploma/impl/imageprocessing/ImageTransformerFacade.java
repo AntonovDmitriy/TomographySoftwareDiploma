@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.imageprocessing;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
-import com.antonov.tomographysoftwarediploma.Utils;
 import com.antonov.tomographysoftwarediploma.impl.Tomograph;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
