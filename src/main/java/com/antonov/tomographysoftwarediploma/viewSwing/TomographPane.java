@@ -162,6 +162,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveReconstruct.setEnabled(false);
         buttonSinogram.setEnabled(true);
         buttonReconstruct.setEnabled(false);
+        cbColoringModel.setEnabled(false);
         buttonDensityViewer.setEnabled(false);
     }
 
@@ -170,9 +171,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         buttonReconstruct.setEnabled(true);
         buttonSaveSinogram.setEnabled(true);
-        buttonDensityViewer.setEnabled(false);
     }
 
+    public void enableAfterReconstructControls(){
+        buttonDensityViewer.setEnabled(true);
+        cbColoringModel.setEnabled(true);
+    }
+    
     @Override
     public void setCurrentModellingImage(BufferedImage image) {
 
@@ -270,8 +275,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "colorImageModelling":
                         setReconstructionImage((BufferedImage) evt.getNewValue());
                         break;
-                    case "enableColoringModel":
-                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    case "enableAfterReconstructControls":
+                        enableAfterReconstructControls();
                         break;
                 }
             }

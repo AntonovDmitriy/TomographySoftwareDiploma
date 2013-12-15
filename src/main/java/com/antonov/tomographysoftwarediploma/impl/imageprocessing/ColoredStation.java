@@ -142,7 +142,6 @@ public class ColoredStation {
             return getColorLutImage(image, LUTFunctions.sin_rbg());
         } else if (colorEnum.equals(ColorFunctionNamesEnum.sin_rbg_0)) {
             return getColorLutImage(image, LUTFunctions.sin_rbg_0());
-
         } else if (colorEnum.equals(ColorFunctionNamesEnum.sqrt_bgr)) {
             return getColorLutImage(image, LUTFunctions.sqrt_bgr());
         } else if (colorEnum.equals(ColorFunctionNamesEnum.sqrt_bgr_0)) {
@@ -167,6 +166,8 @@ public class ColoredStation {
             return getColorLutImage(image, LUTFunctions.sqrt_rbg());
         } else if (colorEnum.equals(ColorFunctionNamesEnum.sqrt_rbg_0)) {
             return getColorLutImage(image, LUTFunctions.sqrt_rbg_0());
+        } else if (colorEnum.equals(ColorFunctionNamesEnum.yellow)) {
+            return getColorLutImage(image, LUTFunctions.yellow());
         }
         return null;
     }
