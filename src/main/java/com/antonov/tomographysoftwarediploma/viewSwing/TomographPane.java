@@ -2,12 +2,13 @@ package com.antonov.tomographysoftwarediploma.viewSwing;
 
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
 import com.antonov.tomographysoftwarediploma.DensityAnalizator;
-import com.antonov.tomographysoftwarediploma.ImageTransformator;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.LUTFunctions;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -36,6 +37,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -160,9 +162,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveReconstruct.setEnabled(false);
         buttonSinogram.setEnabled(true);
         buttonReconstruct.setEnabled(false);
-        coloring.setEnabled(false);
-        coloring.setSelected(false);
-//        colorPanel.setVisible(false);
         buttonDensityViewer.setEnabled(false);
     }
 
@@ -186,9 +185,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
         ImageIcon icon = new ImageIcon(image);
         labelImage2.setIcon(icon);
+
     }
 
-    private void setReconstructionOfSinogramImage(BufferedImage image) {
+    private void setReconstructionImage(BufferedImage image) {
 
         ImageIcon icon = new ImageIcon(image);
         labelReconstruction.setIcon(icon);
@@ -224,7 +224,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         setSinogramImage((BufferedImage) evt.getNewValue());
                         break;
                     case "setReconstructionOfSinogramImage":
-                        setReconstructionOfSinogramImage((BufferedImage) evt.getNewValue());
+                        setReconstructionImage((BufferedImage) evt.getNewValue());
                         break;
                     case "clearResultReconstruction":
                         clearResultReconstruction();
@@ -264,11 +264,18 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "regimeReconstructionInterpolation":
                         cbReconstructionInterpolation.setSelectedItem(evt.getNewValue());
                         break;
+                    case "colorModelModelling":
+                        setCbColoring();
+                        break;
+                    case "colorImageModelling":
+                        setReconstructionImage((BufferedImage) evt.getNewValue());
+                        break;
                     case "enableColoringModel":
                         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         break;
                 }
             }
+
         };
 
         PropertyChangeListener otherStuffListener = new PropertyChangeListener() {
@@ -397,6 +404,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         cbFilteringModel.setModel(new DefaultComboBoxModel(setFilter.toArray()));
     }
 
+    private void setCbColoring() {
+
+        cbColoringModel.setModel(new DefaultComboBoxModel(ColorFunctionNamesEnum.values()));
+    }
+
     @Override
     public void showInternalErrorMessage(String messageError) {
 
@@ -433,6 +445,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setFilterModel(cbFilteringModel.getSelectedItem());
+            }
+        });
+
+        cbColoringModel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modellingModuleController.setColoringName((ColorFunctionNamesEnum) cbColoringModel.getSelectedItem());
             }
         });
     }
@@ -497,7 +517,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSinogram = new javax.swing.JButton();
         buttonDensityViewer = new javax.swing.JButton();
         buttonReconstruct = new javax.swing.JButton();
-        coloring = new javax.swing.JCheckBox();
         paneParamReconstruct = new javax.swing.JPanel();
         labelReconstructSize = new javax.swing.JLabel();
         edSizeReconstruction = new javax.swing.JTextField();
@@ -505,6 +524,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         cbFilteringModel = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         cbReconstructionInterpolation = new javax.swing.JComboBox();
+        jLabel15 = new javax.swing.JLabel();
+        cbColoringModel = new javax.swing.JComboBox();
         jSplitPane1 = new javax.swing.JSplitPane();
         paneSourceImage = new javax.swing.JPanel();
         toolbarSourceImage = new javax.swing.JToolBar();
@@ -1118,21 +1139,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonReconstruct, gridBagConstraints);
 
-            coloring.setText("Цветовой фильтр");
-            coloring.setEnabled(false);
-            coloring.setFocusPainted(false);
-            coloring.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    coloringActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 8;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(coloring, gridBagConstraints);
-
             paneParamReconstruct.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
             paneParamReconstruct.setLayout(new java.awt.GridBagLayout());
 
@@ -1189,6 +1195,21 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneParamReconstruct.add(cbReconstructionInterpolation, gridBagConstraints);
+
+            jLabel15.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 6;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            paneParamReconstruct.add(jLabel15, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 7;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            paneParamReconstruct.add(cbColoringModel, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
@@ -1254,7 +1275,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             paneResultModelling.setLayout(new java.awt.GridBagLayout());
 
             jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-            jSplitPane2.setResizeWeight(0.5);
+            jSplitPane2.setResizeWeight(0.34);
             jSplitPane2.setToolTipText("");
 
             paneSinogram.setLayout(new java.awt.GridBagLayout());
@@ -1661,17 +1682,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         dialogNameAsker.setVisible(true);
 
     }//GEN-LAST:event_buttonStartActionPerformed
-
-    private void coloringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloringActionPerformed
-        // TODO add your handling code here:
-//        if (coloring.isSelected()) {
-//            colorPanel.setVisible(true);
-//        } else {
-//            colorPanel.setVisible(false);
-//            ImageIcon icon2 = new ImageIcon(reconstructImage);
-//            labelImage2.setIcon(icon2);
-//        }
-    }//GEN-LAST:event_coloringActionPerformed
 
     private void buttonSaveSinogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveSinogramActionPerformed
         // TODO add your handling code here:
@@ -2164,6 +2174,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonSaveSinogram;
     private javax.swing.JButton buttonSinogram;
     private javax.swing.JButton buttonStart;
+    private javax.swing.JComboBox cbColoringModel;
     private javax.swing.JComboBox cbFilteringModel;
     private javax.swing.JComboBox cbReconstructionInterpolation;
     private javax.swing.JComboBox cbSinogramInterpolation;
@@ -2174,7 +2185,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.ButtonGroup colorGroup;
     private javax.swing.ButtonGroup colorGroupTomograph;
     private javax.swing.JPanel colorPanelTomograph;
-    private javax.swing.JCheckBox coloring;
     private javax.swing.JCheckBox coloringTomograph;
     private javax.swing.JPanel densityGraphPane;
     private javax.swing.JSlider densitySlider;
@@ -2202,6 +2212,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

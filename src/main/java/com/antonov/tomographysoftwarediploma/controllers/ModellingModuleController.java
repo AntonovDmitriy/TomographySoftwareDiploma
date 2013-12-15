@@ -3,6 +3,7 @@ package com.antonov.tomographysoftwarediploma.controllers;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.impl.PInterpolation;
 import com.antonov.tomographysoftwarediploma.impl.Tomograph;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
@@ -140,5 +141,9 @@ public class ModellingModuleController extends Controller {
     public void reconstructModellingSinogram() {
 
         super.tomograph.modellingModule.reconstructModellingSinogram();
+    }
+
+    public void setColoringName(ColorFunctionNamesEnum name) {
+        super.tomograph.modellingModule.setCurrentColorOfModellingImage(name);
     }
 }

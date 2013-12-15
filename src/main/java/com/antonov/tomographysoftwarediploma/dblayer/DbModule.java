@@ -90,7 +90,7 @@ public class DbModule {
             if (file.isFile()) {
                 try {
                     BufferedImage img = ImageIO.read(file);
-                    double[][] entry = com.antonov.tomographysoftwarediploma.ImageTransformator.createProjectionData(img,views,scans,stepSize);
+                    double[][] entry = com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator.createProjectionData(img,views,scans,stepSize);
                     projArrayList.add(entry);
                 } catch (IOException e) {
                 }
@@ -144,7 +144,7 @@ public class DbModule {
                 if (file.isFile()) {
                     try {
                         BufferedImage img = ImageIO.read(file);
-                        double[][] entry = com.antonov.tomographysoftwarediploma.ImageTransformator.createProjectionData(img,180,700,1);
+                        double[][] entry = com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator.createProjectionData(img,180,700,1);
                         projArrayList.add(entry);
                     } catch (IOException e) {
                     }

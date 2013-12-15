@@ -7,6 +7,7 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.IProjDataSaver;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.SinogramCreator;
 import java.awt.image.BufferedImage;
@@ -54,6 +55,9 @@ public class ModellingModule implements IProjDataSaver {
     private BufferedImage sinogramImage;
     private double[][] projectionDataOfModelling;
     private BufferedImage reconstructionOfSinogramImage;
+    
+    private BufferedImage coloredReconstructionImage;
+    private ColorFunctionNamesEnum currentColorName;
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
@@ -157,6 +161,8 @@ public class ModellingModule implements IProjDataSaver {
         firePropertyChange("sizeReconstruction", null, sizeReconstruction);
         firePropertyChange("filterSet", null, setFilterName);
         firePropertyChange("filterModel", null, currentFilter);
+        firePropertyChange("colorModelModelling", null, ColorFunctionNamesEnum.class);
+        
         logger.info("Views are prepared");
     }
 
@@ -270,6 +276,8 @@ public class ModellingModule implements IProjDataSaver {
         logger.info("Current modelling image changes on display");
         firePropertyChange("clearResultModelling", null, null);
         logger.info("Result modelling is clear");
+        firePropertyChange("clearResultReconstruction", null, null);
+        logger.info("Result reconstruction is clear");
         firePropertyChange("disableModellingControls", null, null);
         logger.info("Modelling controls are disabled");
     }
@@ -280,6 +288,8 @@ public class ModellingModule implements IProjDataSaver {
         this.sinogramImage = image;
         firePropertyChange("setSinogramImage", oldSinogramImage, sinogramImage);
         logger.trace("Sinogram image is changed");
+        firePropertyChange("clearResultReconstruction", null, null);
+        logger.info("Result reconstruction is clear");
     }
 
     public void setReconstructionOfSinogramImage(BufferedImage image) {
@@ -342,7 +352,7 @@ public class ModellingModule implements IProjDataSaver {
 
     }
 
-        public void setReconstructionRegimeInterpolation(PInterpolation regimeInterpolation) {
+    public void setReconstructionRegimeInterpolation(PInterpolation regimeInterpolation) {
 
         PInterpolation oldRegimeInterpolation = this.regimeReconstructionInterpolation;
         this.regimeReconstructionInterpolation = regimeInterpolation;
@@ -356,7 +366,7 @@ public class ModellingModule implements IProjDataSaver {
         }
 
     }
-    
+
     public void setFilterModel(String filterModel) {
 
         String oldFilterModel = this.currentFilter;
@@ -403,5 +413,24 @@ public class ModellingModule implements IProjDataSaver {
     @Override
     public void setProjectionData(double[][] projData) {
         this.projectionDataOfModelling = projData;
+    }
+    
+    public void setCurrentColorOfModellingImage(ColorFunctionNamesEnum colorName){
+                ColorFunctionNamesEnum oldCurrentColorName = this.currentColorName;
+        this.currentColorName = colorName;
+
+        logger.trace("Value of currentColorName now is " + currentColorName
+                + ". Old value was " + oldCurrentColorName);
+        
+        doColoringToReconstructedImage();
+    }
+    
+    private void doColoringToReconstructedImage(){
+        
+        BufferedImage colorImage = ImageTransformerFacade.doColorOnImage(reconstructionOfSinogramImage, currentColorName);
+        logger.trace("Colored image has been created");
+        this.coloredReconstructionImage = colorImage;
+        logger.trace("current colored image has been changed");
+        firePropertyChange("colorImageModelling", null, coloredReconstructionImage);
     }
 }

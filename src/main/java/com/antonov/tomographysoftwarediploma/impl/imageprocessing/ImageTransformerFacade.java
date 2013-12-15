@@ -105,4 +105,12 @@ public class ImageTransformerFacade {
         }
         return result;
     }
+
+    public static BufferedImage doColorOnImage(BufferedImage image, ColorFunctionNamesEnum nameColor) {
+        if (nameColor.equals(ColorFunctionNamesEnum.none)) {
+            return image;
+        } else {
+            return ColoredStation.doColorOnImage(image, nameColor);
+        }
+    }
 }

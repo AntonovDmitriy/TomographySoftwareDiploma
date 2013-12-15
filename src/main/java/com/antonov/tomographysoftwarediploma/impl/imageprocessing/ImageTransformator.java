@@ -1,4 +1,4 @@
-package com.antonov.tomographysoftwarediploma;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;

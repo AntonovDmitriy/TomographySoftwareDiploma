@@ -5,7 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
-import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
+import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator.create12bitImage;
 import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade.PerformWindowing;
 import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade.prepareImage;
 import java.awt.image.BufferedImage;

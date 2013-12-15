@@ -1,6 +1,6 @@
 package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
-import static com.antonov.tomographysoftwarediploma.ImageTransformator.create12bitImage;
+import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator.create12bitImage;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
