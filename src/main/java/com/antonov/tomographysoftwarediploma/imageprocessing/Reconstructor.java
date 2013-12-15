@@ -79,40 +79,29 @@ public class Reconstructor extends ModellingImageCalculator {
     private double[][] filteringBackProjection(double[][] projectionData) {
 
         double[][] filteredProjectionData = new double[rotates][scans];
-        
+
         int scansPow2 = getScansPow2();
         double[] rawdata = new double[scansPow2 * 2];
-        double[] idata = new double[scansPow2 * 2];
+        double[] columnData = new double[scansPow2 * 2];
 
         for (int i = 0; i < scansPow2; i++) {
-            idata[i] = 0;
+            columnData[i] = 0;
         }
-        
-        // Initialize the filter
-        double[] filter = Utils.filter1(filterName, scansPow2 * 2, 1.0);
+        double[] filterMatrix = Filterer.getFilterMatrix(filterName, scansPow2 * 2, 1);
 
-        int i = 0;
+        int rotate = 0;
         // Filter each projection
-        for (int phi = 0; phi < 180; phi += stepSize, i++) {
-            for (int S = 0; S < scans; S++) {
-                rawdata[S] = projectionData[i][S];
-            }
-            //zero pad projections
-            for (int S = scans; S < scansPow2 * 2; S++) {
-                rawdata[S] = 0;
-            }
-            Utils.FFT(1, scansPow2 * 2, rawdata, idata);
-            for (int S = 0; S < scans * 2; S++) {
-                rawdata[S] *= filter[S];
-            }
-            //perform inverse fourier transform of filtered product
-            Utils.FFT(0, scansPow2 * 2, rawdata, idata);
-            for (int S = 0; S < scans; S++) {
-                filteredProjectionData[i][S] = rawdata[S];
-            }
-            for (int S = 0; S < scansPow2 * 2; S++) {
-                idata[S] = 0;
-            }
+        for (int angle = START_ROTATION_ANGLE; angle < FINISH_ROTATION_ANGLE; angle += stepSize, rotate++) {
+
+            fillProjectionDataInRow(rotate, rawdata, projectionData);
+            fillZeroInRow(rawdata);
+            fillZeroInColumn(columnData);
+            Filterer.rightFFT(scansPow2 * 2, rawdata, columnData);
+            multiplyDataOnFilterMatrix(rawdata, filterMatrix);
+            Filterer.inverseFFT(scansPow2 * 2, rawdata, columnData);
+
+            fillFilteredProjectionDataByFilteredRow(filteredProjectionData, rotate, rawdata);
+
         }
         return filteredProjectionData;
     }
@@ -176,6 +165,35 @@ public class Reconstructor extends ModellingImageCalculator {
         } else {
             int power = (int) ((Math.log(scans) / Math.log(2))) + 1; //closest power of 2 rounded up
             return (int) Math.pow(2, power);
+        }
+    }
+
+    private void fillProjectionDataInRow(int rotate, double[] rawdata, double[][] projectionData) {
+        for (int S = 0; S < scans; S++) {
+            rawdata[S] = projectionData[rotate][S];
+        }
+    }
+
+    private void fillZeroInRow(double[] rawdata) {
+        Utils.fillZeroMatrix(rawdata, scans, rawdata.length);
+    }
+
+    private void fillZeroInColumn(double[] idata) {
+
+        Utils.fillZeroMatrix(idata);
+    }
+
+    private void multiplyDataOnFilterMatrix(double[] rawdata, double[] filterMatrix) {
+
+        for (int i = 0; i < scans * 2; i++) {
+            rawdata[i] *= filterMatrix[i];
+        }
+    }
+
+    private void fillFilteredProjectionDataByFilteredRow(double[][] filteredProjectionData, int rotate, double[] rawdata) {
+
+        for (int S = 0; S < scans; S++) {
+            filteredProjectionData[rotate][S] = rawdata[S];
         }
     }
 }

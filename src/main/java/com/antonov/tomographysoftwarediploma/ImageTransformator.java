@@ -1,6 +1,7 @@
 package com.antonov.tomographysoftwarediploma;
 
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
+import com.antonov.tomographysoftwarediploma.imageprocessing.Filterer;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
@@ -598,7 +599,7 @@ public class ImageTransformator {
         }
 
         // Initialize the filter
-        filter = Utils.filter1(filterName, pscans * 2, 1.0);
+        filter = Filterer.getFilterMatrix(filterName, pscans * 2, 1.0);
 
         i = 0;
 
@@ -611,12 +612,12 @@ public class ImageTransformator {
             for (int S = scans; S < pscans * 2; S++) {
                 rawdata[S] = 0;
             }
-            Utils.FFT(1, pscans * 2, rawdata, idata);
+            Filterer.FFT(1, pscans * 2, rawdata, idata);
             for (int S = 0; S < scans * 2; S++) {
                 rawdata[S] *= filter[S];
             }
             //perform inverse fourier transform of filtered product
-            Utils.FFT(0, pscans * 2, rawdata, idata);
+            Filterer.FFT(0, pscans * 2, rawdata, idata);
             for (int S = 0; S < scans; S++) {
                 fproj[i][S] = rawdata[S];
             }
@@ -653,7 +654,7 @@ public class ImageTransformator {
         }
 
         // Инициализация фильтра
-        filter = Utils.filter1(filterName, pscans * 2, 1.0);
+        filter = Filterer.getFilterMatrix(filterName, pscans * 2, 1.0);
 
         i = 0;
 
@@ -667,12 +668,12 @@ public class ImageTransformator {
                 rawdata[S] = 0;
             }
             //Прямое преобразование фурье
-            Utils.FFT(1, pscans * 2, rawdata, idata);
+            Filterer.FFT(1, pscans * 2, rawdata, idata);
             for (int S = 0; S < scans * 2; S++) {
                 rawdata[S] *= filter[S];
             }
             //Обратное преобразование Фурье
-            Utils.FFT(0, pscans * 2, rawdata, idata);
+            Filterer.FFT(0, pscans * 2, rawdata, idata);
             for (int S = 0; S < scans; S++) {
                 fproj[i][S] = rawdata[S];
             }
