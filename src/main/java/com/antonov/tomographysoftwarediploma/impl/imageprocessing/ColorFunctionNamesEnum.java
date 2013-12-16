@@ -100,4 +100,5 @@ public enum ColorFunctionNamesEnum {
     public String toString(){
        return name;
     }
+
 }

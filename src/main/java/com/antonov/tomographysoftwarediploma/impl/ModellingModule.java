@@ -15,6 +15,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class ModellingModule implements IProjDataSaver {
     private BufferedImage sinogramImage;
     private double[][] projectionDataOfModelling;
     private BufferedImage reconstructionOfSinogramImage;
-    
+
     private BufferedImage coloredReconstructionImage;
     private ColorFunctionNamesEnum currentColorName;
 
@@ -162,7 +163,7 @@ public class ModellingModule implements IProjDataSaver {
         firePropertyChange("filterSet", null, setFilterName);
         firePropertyChange("filterModel", null, currentFilter);
         firePropertyChange("colorModelModelling", null, ColorFunctionNamesEnum.class);
-        
+        firePropertyChange("currentColorModelModelling", null, currentColorName);
         logger.info("Views are prepared");
     }
 
@@ -175,6 +176,7 @@ public class ModellingModule implements IProjDataSaver {
         initReconstructionInterpolation();
         initSizeReconstruction();
         initFiltering();
+        initColoring();
         logger.info("Initial modelling parameters have been read");
     }
 
@@ -264,6 +266,18 @@ public class ModellingModule implements IProjDataSaver {
         }
     }
 
+    private void initColoring() {
+
+        String coloringFromProperty = tomographProperty.getProperty("COLORING_MODELLING");
+        if (isColoringEnumContainsColorName(coloringFromProperty)) {
+            currentColorName = ColorFunctionNamesEnum.valueOf(coloringFromProperty);
+            logger.info("coloring name model = " + coloringFromProperty);
+        } else {
+            logger.warn("Coloring name has invalid value " + coloringFromProperty);
+        }
+
+    }
+
     public void setCurrentModellingImageByName(String image) {
         currentModellingImage = imageSamplesMapWithNames.get(image);
         logger.info("Current modelling image changes on " + image);
@@ -295,9 +309,14 @@ public class ModellingModule implements IProjDataSaver {
     public void setReconstructionOfSinogramImage(BufferedImage image) {
 
         BufferedImage oldReconstructionOfSinogramImage = this.reconstructionOfSinogramImage;
+
         this.reconstructionOfSinogramImage = image;
-        firePropertyChange("setReconstructionOfSinogramImage", oldReconstructionOfSinogramImage, reconstructionOfSinogramImage);
-        logger.trace("Reconstruction image of sinogram is changed");
+        if (currentColorName != null) {
+            doColoringToReconstructedImage();
+        } else {
+            firePropertyChange("setReconstructionOfSinogramImage", oldReconstructionOfSinogramImage, reconstructionOfSinogramImage);
+            logger.trace("Reconstruction image of sinogram is changed");
+        }
     }
 
     public void getAndSetFileModellingImage(File file) {
@@ -404,6 +423,7 @@ public class ModellingModule implements IProjDataSaver {
             logger.trace("Coloring model controls are enabled");
             firePropertyChange("stopReconstructionSinogram", null, null);
             logger.trace("Reconstruction of modelling sinogram is finishied");
+
         } catch (Throwable ex) {
             logger.error("Internal error during reconstruction sinogram ", ex);
             firePropertyChange("INTERNAL_ERROR", null, "Internal error during reconstruction sinogram");
@@ -414,23 +434,35 @@ public class ModellingModule implements IProjDataSaver {
     public void setProjectionData(double[][] projData) {
         this.projectionDataOfModelling = projData;
     }
-    
-    public void setCurrentColorOfModellingImage(ColorFunctionNamesEnum colorName){
-                ColorFunctionNamesEnum oldCurrentColorName = this.currentColorName;
+
+    public void setCurrentColorOfModellingImage(ColorFunctionNamesEnum colorName) {
+        ColorFunctionNamesEnum oldCurrentColorName = this.currentColorName;
         this.currentColorName = colorName;
 
         logger.trace("Value of currentColorName now is " + currentColorName
                 + ". Old value was " + oldCurrentColorName);
-        
-        doColoringToReconstructedImage();
+
+        if (reconstructionOfSinogramImage != null) {
+            doColoringToReconstructedImage();
+        }
     }
-    
-    private void doColoringToReconstructedImage(){
-        
+
+    private void doColoringToReconstructedImage() {
+
         BufferedImage colorImage = ImageTransformerFacade.doColorOnImage(reconstructionOfSinogramImage, currentColorName);
         logger.trace("Colored image has been created");
         this.coloredReconstructionImage = colorImage;
         logger.trace("current colored image has been changed");
         firePropertyChange("colorImageModelling", null, coloredReconstructionImage);
+    }
+
+    private boolean isColoringEnumContainsColorName(String coloringFromProperty) {
+
+        for (ColorFunctionNamesEnum color : ColorFunctionNamesEnum.values()) {
+            if (color.toString().equals(coloringFromProperty)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

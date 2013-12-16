@@ -275,6 +275,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "colorImageModelling":
                         setReconstructionImage((BufferedImage) evt.getNewValue());
                         break;
+                    case "currentColorModelModelling":
+                        cbColoringModel.setSelectedItem(evt.getNewValue());
                     case "enableAfterReconstructControls":
                         enableAfterReconstructControls();
                         break;
