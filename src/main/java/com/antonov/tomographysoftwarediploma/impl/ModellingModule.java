@@ -337,7 +337,14 @@ public class ModellingModule implements IProjDataSaver {
     public void setScans(int scans) {
         Integer oldScans = this.scans;
         this.scans = scans;
+        firePropertyChange("clearResultModelling", null, null);
         logger.trace("Value of scans now is " + scans + ". Old value was " + oldScans);
+        firePropertyChange("clearResultModelling", null, null);
+        logger.info("Result modelling is clear");
+        firePropertyChange("clearResultReconstruction", null, null);
+        logger.info("Result reconstruction is clear");
+        firePropertyChange("disableModellingControls", null, null);
+        logger.info("Modelling controls are disabled");
     }
 
     public void setStepSize(int stepSize) {
@@ -346,6 +353,10 @@ public class ModellingModule implements IProjDataSaver {
         logger.trace("Value of stepSize now is " + stepSize + ". Old value was " + oldStepSize);
         firePropertyChange("clearResultModelling", null, null);
         logger.info("Result modelling is clear");
+        firePropertyChange("clearResultReconstruction", null, null);
+        logger.info("Result reconstruction is clear");
+        firePropertyChange("disableModellingControls", null, null);
+        logger.info("Modelling controls are disabled");
     }
 
     public void setSizeReconstruction(int sizeReconstruction) {
@@ -354,6 +365,8 @@ public class ModellingModule implements IProjDataSaver {
         logger.trace("Value of sizeReconstruction now is " + sizeReconstruction + ". Old value was " + oldSizeReconstruction);
         firePropertyChange("clearResultReconstruction", null, null);
         logger.info("Result reconstruction is clear");
+        firePropertyChange("disableAfterReconstrucionControls", null, null);
+        logger.info("After reconstruction controls are disabled");
     }
 
     public void setSinogramRegimeInterpolation(PInterpolation regimeInterpolation) {
@@ -398,7 +411,9 @@ public class ModellingModule implements IProjDataSaver {
     public void createSinogram() {
 
         try {
+
             logger.trace("Sinogram creating is starting");
+            firePropertyChange("disableReconControls", null, null);
             firePropertyChange("startSinogramm", null, null);
             BufferedImage sinogram = ImageTransformerFacade.createSinogram(this, currentModellingImage, scans, stepSize, regimeSinogramInterpolation.getValue());
             setSinogramImage(sinogram);

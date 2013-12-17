@@ -37,7 +37,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -69,6 +68,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         initComponents();
         initClosingOperations();
         initButtons();
+        initToolBars();
         initTextFields();
         initComboBoxes();
     }
@@ -161,9 +161,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveSinogram.setEnabled(false);
         buttonSaveReconstruct.setEnabled(false);
         buttonSinogram.setEnabled(true);
-        buttonReconstruct.setEnabled(false);
-        cbColoringModel.setEnabled(false);
+
+        disableReconControls();
+    }
+
+    public void disableReconControls() {
         buttonDensityViewer.setEnabled(false);
+        cbColoringModel.setEnabled(false);
+        buttonReconstruct.setEnabled(false);
     }
 
     @Override
@@ -173,11 +178,17 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveSinogram.setEnabled(true);
     }
 
-    public void enableAfterReconstructControls(){
+    public void enableAfterReconstructControls() {
         buttonDensityViewer.setEnabled(true);
         cbColoringModel.setEnabled(true);
     }
-    
+
+    public void disableAfterReconstrucionControls() {
+
+        buttonDensityViewer.setEnabled(false);
+        cbColoringModel.setEnabled(false);
+    }
+
     @Override
     public void setCurrentModellingImage(BufferedImage image) {
 
@@ -277,8 +288,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         break;
                     case "currentColorModelModelling":
                         cbColoringModel.setSelectedItem(evt.getNewValue());
-                    case "enableAfterReconstructControls":
-                        enableAfterReconstructControls();
                         break;
                 }
             }
@@ -295,6 +304,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         break;
                     case "enableReconControls":
                         enableReconControls();
+                        break;
+                    case "disableReconControls":
+                        disableReconControls();
+                        break;
+                    case "enableAfterReconstructControls":
+                        enableAfterReconstructControls();
+                        break;
+                    case "disableAfterReconstrucionControls":
+                        disableAfterReconstrucionControls();
                         break;
                     case "startSinogramm":
                         startCalculating();
@@ -335,8 +353,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         dialogProgressBar.setVisible(false);
     }
 
-    private void initButtons() {
-
+    private void initToolBars() {
         buttonOpenFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -346,6 +363,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
+        
+        
+    }
+
+    private void initButtons() {
 
         buttonSinogram.addActionListener(new ActionListener() {
             @Override
@@ -471,9 +493,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jLabel11 = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         openFileChooser = new javax.swing.JFileChooser();
-        filterGroup = new javax.swing.ButtonGroup();
         saveFileChooser = new javax.swing.JFileChooser();
-        colorGroup = new javax.swing.ButtonGroup();
         dialogProjDataChooser = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         buttonProjDataOk = new javax.swing.JButton();
@@ -1023,11 +1043,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             edScansModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             edScansModel.setToolTipText("");
-            edScansModel.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void keyTyped(java.awt.event.KeyEvent evt) {
-                    edScansModelKeyTyped(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
@@ -1048,11 +1063,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             edStepsizeModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             edStepsizeModel.setToolTipText("");
             edStepsizeModel.setAutoscrolls(false);
-            edStepsizeModel.addKeyListener(new java.awt.event.KeyAdapter() {
-                public void keyTyped(java.awt.event.KeyEvent evt) {
-                    edStepsizeModelKeyTyped(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 1;
@@ -2041,18 +2051,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
 
-    private void edStepsizeModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edStepsizeModelKeyTyped
-        // TODO add your handling code here:
-        buttonSaveReconstruct.setEnabled(false);
-        buttonReconstruct.setEnabled(false);
-    }//GEN-LAST:event_edStepsizeModelKeyTyped
-
-    private void edScansModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edScansModelKeyTyped
-        // TODO add your handling code here:
-        buttonSaveReconstruct.setEnabled(false);
-        buttonReconstruct.setEnabled(false);
-    }//GEN-LAST:event_edScansModelKeyTyped
-
     private void buttonSaveReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructActionPerformed
 
         if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
@@ -2189,7 +2187,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JRadioButton color2Tomograph;
     private javax.swing.JRadioButton color3Tomograph;
     private javax.swing.JRadioButton color4Tomograph;
-    private javax.swing.ButtonGroup colorGroup;
     private javax.swing.ButtonGroup colorGroupTomograph;
     private javax.swing.JPanel colorPanelTomograph;
     private javax.swing.JCheckBox coloringTomograph;
@@ -2205,7 +2202,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JTextField edStepsizeModel;
     private javax.swing.JRadioButton filterBlackManTomograph;
     private javax.swing.JRadioButton filterCosineTomograph;
-    private javax.swing.ButtonGroup filterGroup;
     private javax.swing.ButtonGroup filterGroupTomograph;
     private javax.swing.JRadioButton filterHammingTomograph;
     private javax.swing.JRadioButton filterHannTomograph;
