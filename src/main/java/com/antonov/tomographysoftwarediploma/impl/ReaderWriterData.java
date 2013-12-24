@@ -17,6 +17,31 @@ import javax.imageio.ImageIO;
 public class ReaderWriterData {
 
     public static BufferedImage getImageFromFileSystem(File file) throws IOException {
+        
         return ImageIO.read(file);
+    }
+
+    public static void saveImageToFileSystem(BufferedImage image, File file, String filterImageDesc) throws IOException {
+
+        String format = "";
+        String name = file.getAbsolutePath();
+        if (filterImageDesc.equals("JPEG File")) {
+            String ext = ".jpeg";
+            name = name + ext;
+            format = "jpeg";
+        } else if (filterImageDesc.equals("PNG File")) {
+            String ext = ".png";
+            name = name + ext;
+            format = "PNG";
+        } else if (filterImageDesc.equals("BMP File")) {
+            String ext = ".bmp";
+            name = name + ext;
+            format = "BMP";
+        } else if (filterImageDesc.equals("All Files")) {
+            format = "";
+        }
+        
+        ImageIO.write(image, format, new File(name));
+
     }
 }

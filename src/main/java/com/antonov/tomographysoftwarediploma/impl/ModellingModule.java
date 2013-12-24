@@ -23,6 +23,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -480,4 +481,29 @@ public class ModellingModule implements IProjDataSaver {
         }
         return false;
     }
+
+    public void saveSinogram(File file, String desc) {
+
+        try {
+            logger.trace("Sinogram image is being saved (" + file.getAbsolutePath() + " " + desc + ")..");
+            ReaderWriterData.saveImageToFileSystem(sinogramImage, file, desc);
+            logger.trace("Sinogram image has been saved..");
+        } catch (IOException ex) {
+            logger.error("Error while saving sinogram image with name " + file.getAbsolutePath(), ex);
+            firePropertyChange("ERROR", null, "Error while saving sinogram image " + file.getAbsolutePath());
+        }
+    }
+
+    public void saveReconstruction(File file, String desc) {
+
+        try {
+            logger.trace("Reconstrucion image is being saved (" + file.getAbsolutePath() + " " + desc + ")..");
+            ReaderWriterData.saveImageToFileSystem(coloredReconstructionImage, file, desc);
+            logger.trace("Reconstrucion image has been saved..");
+        } catch (IOException ex) {
+            logger.error("Error while saving reconstrucion image with name " + file.getAbsolutePath(), ex);
+            firePropertyChange("ERROR", null, "Error while saving reconstrucion image " + file.getAbsolutePath());
+        }
+    }
+
 }

@@ -38,6 +38,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -54,7 +56,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     public static final List<String> modelNames = new ArrayList<>(); // For modelling images names
 
-    private BufferedImage sinogramImage;
     private BufferedImage reconstructImage;
     private BufferedImage reconstructColorImage;
     private BufferedImage scaleReconstructImage; // для DensityViewer
@@ -159,15 +160,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     public void disableModellingControls() {
 
         buttonSaveSinogram.setEnabled(false);
-        buttonSaveReconstruct.setEnabled(false);
+        buttonSaveReconstructModelling.setEnabled(false);
         buttonSinogram.setEnabled(true);
 
         disableReconControls();
+        disableAfterReconstrucionControls();
     }
 
     public void disableReconControls() {
-        buttonDensityViewer.setEnabled(false);
-        cbColoringModel.setEnabled(false);
+
         buttonReconstruct.setEnabled(false);
     }
 
@@ -181,12 +182,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     public void enableAfterReconstructControls() {
         buttonDensityViewer.setEnabled(true);
         cbColoringModel.setEnabled(true);
+        buttonSaveReconstructModelling.setEnabled(true);
     }
 
     public void disableAfterReconstrucionControls() {
 
         buttonDensityViewer.setEnabled(false);
         cbColoringModel.setEnabled(false);
+        buttonSaveReconstructModelling.setEnabled(false);
     }
 
     @Override
@@ -222,8 +225,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "PARAMETER_VALUE_WARNING":
                         showWarningMessage((String) evt.getNewValue());
                         break;
+                    case "ERROR":
+                        showErrorMessage((String) evt.getNewValue());
+                        break;
                 }
             }
+
         };
 
         PropertyChangeListener imagesListener = new PropertyChangeListener() {
@@ -354,6 +361,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     }
 
     private void initToolBars() {
+        buttonOpenFile.setToolTipText(bundle.getString("TIP_OPEN_MODELLING_IMAGE"));
         buttonOpenFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -363,8 +371,32 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-        
-        
+
+        buttonSaveSinogram.setToolTipText(bundle.getString("TIP_SAVE_SINOGRAM_IMAGE"));
+        buttonSaveSinogram.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (saveFileChooser.showSaveDialog(TomographPane.this) == JFileChooser.APPROVE_OPTION) {
+                    File file = saveFileChooser.getSelectedFile();
+                    String desc = saveFileChooser.getFileFilter().getDescription();
+                    modellingModuleController.saveModellingSinogram(file, desc);
+                }
+            }
+        });
+
+        buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
+        buttonSaveReconstructModelling.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (saveFileChooser.showSaveDialog(TomographPane.this) == JFileChooser.APPROVE_OPTION) {
+                    File file = saveFileChooser.getSelectedFile();
+                    String desc = saveFileChooser.getFileFilter().getDescription();
+                    modellingModuleController.saveModellingReconstruction(file, desc);
+                }
+            }
+        });
     }
 
     private void initButtons() {
@@ -451,6 +483,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
     }
 
+    private void showErrorMessage(String messageError) {
+
+        stopCalculating();
+        JOptionPane.showMessageDialog(this, messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
+    }
+
     private void initComboBoxes() {
 
         cbSinogramInterpolation.addActionListener(new ActionListener() {
@@ -532,7 +570,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         modelPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         modelList = new javax.swing.JList();
-        buttonSaveReconstruct = new javax.swing.JButton();
         paneParamModelling = new javax.swing.JPanel();
         labelDetectors = new javax.swing.JLabel();
         edScansModel = new javax.swing.JTextField();
@@ -540,7 +577,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         edStepsizeModel = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         cbSinogramInterpolation = new javax.swing.JComboBox();
-        buttonSaveSinogram = new javax.swing.JButton();
         buttonSinogram = new javax.swing.JButton();
         buttonDensityViewer = new javax.swing.JButton();
         buttonReconstruct = new javax.swing.JButton();
@@ -565,6 +601,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         Image2 = new javax.swing.JScrollPane();
         labelImage2 = new javax.swing.JLabel();
         toolbarModellingImage = new javax.swing.JToolBar();
+        buttonSaveSinogram = new javax.swing.JButton();
+        buttonSaveReconstructModelling = new javax.swing.JButton();
         paneReconstruct = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         labelReconstruction = new javax.swing.JLabel();
@@ -1014,22 +1052,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneControl.add(modelPanel, gridBagConstraints);
 
-            buttonSaveReconstruct.setText("<html> Сохранить<br> реконструкцию");
-            buttonSaveReconstruct.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveReconstruct.setEnabled(false);
-            buttonSaveReconstruct.setFocusPainted(false);
-            buttonSaveReconstruct.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonSaveReconstructActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(buttonSaveReconstruct, gridBagConstraints);
-
             paneParamModelling.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
             paneParamModelling.setLayout(new java.awt.GridBagLayout());
 
@@ -1096,22 +1118,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             paneControl.add(paneParamModelling, gridBagConstraints);
-
-            buttonSaveSinogram.setText("<html> Сохранить<br> синограмму");
-            buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveSinogram.setEnabled(false);
-            buttonSaveSinogram.setFocusPainted(false);
-            buttonSaveSinogram.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonSaveSinogramActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(buttonSaveSinogram, gridBagConstraints);
 
             buttonSinogram.setText("Синограмма");
             buttonSinogram.setDefaultCapable(false);
@@ -1253,7 +1259,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             toolbarSourceImage.setRollover(true);
 
-            buttonOpenFile.setIcon(UIManager.getIcon("FileView.directoryIcon"));
+            buttonOpenFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/open.png"))); // NOI18N
             buttonOpenFile.setFocusPainted(false);
             buttonOpenFile.setFocusable(false);
             buttonOpenFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1317,13 +1323,42 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             paneSinogram.add(Image2, gridBagConstraints);
 
             toolbarModellingImage.setRollover(true);
+
+            buttonSaveSinogram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+            buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
+            buttonSaveSinogram.setEnabled(false);
+            buttonSaveSinogram.setFocusPainted(false);
+            buttonSaveSinogram.setFocusable(false);
+            buttonSaveSinogram.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            buttonSaveSinogram.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            buttonSaveSinogram.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonSaveSinogramActionPerformed(evt);
+                }
+            });
+            toolbarModellingImage.add(buttonSaveSinogram);
+
+            buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+            buttonSaveReconstructModelling.setActionCommand("Сохранить<br> реконструкцию");
+            buttonSaveReconstructModelling.setEnabled(false);
+            buttonSaveReconstructModelling.setFocusPainted(false);
+            buttonSaveReconstructModelling.setFocusable(false);
+            buttonSaveReconstructModelling.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            buttonSaveReconstructModelling.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            buttonSaveReconstructModelling.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonSaveReconstructModellingActionPerformed(evt);
+                }
+            });
+            toolbarModellingImage.add(buttonSaveReconstructModelling);
+
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
+            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
             paneSinogram.add(toolbarModellingImage, gridBagConstraints);
 
             jSplitPane2.setTopComponent(paneSinogram);
@@ -1351,7 +1386,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
             paneResultModelling.add(jSplitPane2, gridBagConstraints);
 
             jSplitPane1.setRightComponent(paneResultModelling);
@@ -1642,17 +1677,17 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonSaveReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructTomographActionPerformed
         // TODO add your handling code here:
-        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
-            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
-
-            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-
-            saveFile(bi, name, filterImageDesc);
-
-        }
+//        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
+//            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
+//            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
+//            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
+//
+//            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
+//            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
+//
+//            saveFile(bi, name, filterImageDesc);
+//
+//        }
     }//GEN-LAST:event_buttonSaveReconstructTomographActionPerformed
 
     private void buttonOpenProjDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenProjDataActionPerformed
@@ -1702,12 +1737,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonSaveSinogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveSinogramActionPerformed
         // TODO add your handling code here:
-        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-            saveFile(sinogramImage, name, filterImageDesc);
 
-        }
     }//GEN-LAST:event_buttonSaveSinogramActionPerformed
 
     private void buttonReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReconstructActionPerformed
@@ -2051,39 +2081,18 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
 
-    private void buttonSaveReconstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructActionPerformed
+    private void buttonSaveReconstructModellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructModellingActionPerformed
 
-        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-            ImageIcon icon = (ImageIcon) labelImage2.getIcon();
-            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-
-            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-            saveFile(bi, name, filterImageDesc);
-
-        }
-    }//GEN-LAST:event_buttonSaveReconstructActionPerformed
-
-    class ImageFilter extends javax.swing.filechooser.FileFilter {
-
-        @Override
-        public boolean accept(File f) {
-            if (f.isDirectory()) {
-                return true;
-            }
-            String name = f.getName();
-            if (name.matches(".*((.jpg)|(.gif)|(.png)|(.bmp))")) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public String getDescription() {
-            return "Image files (*.jpg, *.gif, *.png, *.bmp)";
-        }
-    }
+//        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
+//            ImageIcon icon = (ImageIcon) labelImage2.getIcon();
+//            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
+//
+//            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
+//            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
+//            saveFile(bi, name, filterImageDesc);
+//
+//        }
+    }//GEN-LAST:event_buttonSaveReconstructModellingActionPerformed
 
     class FileNameExtensionFilter extends javax.swing.filechooser.FileFilter {
 
@@ -2128,32 +2137,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         return checkflag;
     }
 
-    public void saveFile(BufferedImage image, String name, String filterImageDesc) {
-
-        String format = "";
-        if (filterImageDesc.equals("JPEG File")) {
-            String ext = ".jpeg";
-            name = name + ext;
-            format = "jpeg";
-        } else if (filterImageDesc.equals("PNG File")) {
-            String ext = ".png";
-            name = name + ext;
-            format = "PNG";
-        } else if (filterImageDesc.equals("BMP File")) {
-            String ext = ".bmp";
-            name = name + ext;
-            format = "BMP";
-        } else if (filterImageDesc.equals("All Files")) {
-            format = "";
-        }
-        File file = new File(name);
-        try {
-            ImageIO.write(image, format, file);
-        } catch (IOException ex) {
-//            Logger.getLogger(TomographPaneetName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void displayImageDetails(BufferedImage img) {
         jLabel1.setText("Размер изображения " + img.getWidth() + " * " + img.getHeight());
     }
@@ -2174,7 +2157,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonProjDataOk;
     private javax.swing.JButton buttonProjDataOpenFile;
     private javax.swing.JButton buttonReconstruct;
-    private javax.swing.JButton buttonSaveReconstruct;
+    private javax.swing.JButton buttonSaveReconstructModelling;
     private javax.swing.JButton buttonSaveReconstructTomograph;
     private javax.swing.JButton buttonSaveSinogram;
     private javax.swing.JButton buttonSinogram;

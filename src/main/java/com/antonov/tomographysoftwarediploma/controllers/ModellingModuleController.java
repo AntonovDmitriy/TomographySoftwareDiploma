@@ -146,4 +146,14 @@ public class ModellingModuleController extends Controller {
     public void setColoringName(ColorFunctionNamesEnum name) {
         super.tomograph.modellingModule.setCurrentColorOfModellingImage(name);
     }
+
+    public void saveModellingSinogram(File file, String desc) {
+        
+        super.tomograph.modellingModule.saveSinogram(file, desc);
+    }
+
+    public void saveModellingReconstruction(File file, String desc) {
+        
+        super.tomograph.modellingModule.saveReconstruction(file, desc);
+    }
 }

@@ -8,7 +8,9 @@ package com.antonov.tomographysoftwarediploma.impl;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import com.antonov.tomographysoftwarediploma.viewSwing.TomographPane;
+import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
 import java.awt.Frame;
+import java.util.Properties;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
@@ -23,7 +25,7 @@ public class AppLaunch {
     private static Logger logger = LoggerFactory.getLogger(AppLaunch.class);
 
     public static void main(String[] args) {
-        
+
         initLAF();
         Tomograph model = new Tomograph();
         ITomographView view = new TomographPane();
@@ -45,11 +47,13 @@ public class AppLaunch {
 //
 //        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 //    }
-
     private static void initLAF() {
         logger.info("=======Start TomographySoftware 1.0.0 application=======");
         try {
 //            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            Properties props = new Properties();
+            props.put("logoString", "");
+            HiFiLookAndFeel.setCurrentTheme(props);
             UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 ////                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
 ////                    UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
