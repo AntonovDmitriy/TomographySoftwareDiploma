@@ -1,4 +1,4 @@
-package com.antonov.tomographysoftwarediploma;
+package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
 /**
  * This class contains several static methods that create on-the-fly look-up

@@ -1,9 +1,8 @@
 package com.antonov.tomographysoftwarediploma.viewSwing;
 
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
-import com.antonov.tomographysoftwarediploma.DensityAnalizator;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator;
-import com.antonov.tomographysoftwarediploma.LUTFunctions;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.LUTFunctions;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
@@ -2085,52 +2084,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
 
-    class FileNameExtensionFilter extends javax.swing.filechooser.FileFilter {
-
-        private String extenName;
-        private String exten;
-
-        FileNameExtensionFilter(String extenName, String exten) {
-            this.extenName = extenName;
-            this.exten = exten;
-        }
-
-        @Override
-        public boolean accept(File f) {
-            if (f.isDirectory()) {
-                return true;
-            }
-            String name = f.getName();
-            if (name.matches(".*(" + exten + ")")) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public String getDescription() {
-            return extenName;
-        }
-    }
-
-    public boolean checkScanParameters() {
-        boolean checkflag = false;
-
-        try {
-
-            Integer.parseInt(edScansModel.getText());
-            Integer.parseInt(edStepsizeModel.getText());
-        } catch (NumberFormatException e) {
-            return checkflag;
-        }
-        checkflag = true;
-        return checkflag;
-    }
-
-    public void displayImageDetails(BufferedImage img) {
-        jLabel1.setText("Размер изображения " + img.getWidth() + " * " + img.getHeight());
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;

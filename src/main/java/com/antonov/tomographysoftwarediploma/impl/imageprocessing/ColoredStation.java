@@ -5,7 +5,6 @@
  */
 package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
-import com.antonov.tomographysoftwarediploma.LUTFunctions;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
