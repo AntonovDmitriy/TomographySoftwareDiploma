@@ -167,4 +167,10 @@ public class ModellingModuleController extends Controller {
             super.tomograph.modellingModule.showReconstruction();
         }
     }
+
+    public void showDensityAnalizator() {
+        if (!super.view.isReconstructionModellingEmpty()) {
+            super.tomograph.modellingModule.showDensityAnalizator();
+        }
+    }
 }

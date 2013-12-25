@@ -517,4 +517,9 @@ public class ModellingModule implements IProjDataSaver {
         logger.trace("Reconstruction modelling is showing in viewer");
     }
 
+    public void showDensityAnalizator() {
+        firePropertyChange("showDensityAnalizator", null, coloredReconstructionImage);
+        logger.trace("density analizator is opened");
+    }
+
 }

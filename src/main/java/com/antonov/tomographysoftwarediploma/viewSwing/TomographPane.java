@@ -338,6 +338,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "showReconstructionModelling":
                         startViewer((BufferedImage) evt.getNewValue());
                         break;
+                    case "showDensityAnalizator":
+                        startDensityAnalizator((BufferedImage) evt.getNewValue());
+                        break;
                 }
             }
         };
@@ -429,6 +432,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         modellingModuleController.reconstructModellingSinogram();
                     }
                 }).start();
+            }
+        });
+
+        buttonDensityViewer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modellingModuleController.showDensityAnalizator();
             }
         });
     }
@@ -559,6 +569,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             public void run() {
                 ImageViewerPane viewer = new ImageViewerPane(image);
                 viewer.setVisible(true);
+            }
+        });
+    }
+
+    private void startDensityAnalizator(final BufferedImage image) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DensityAnalizatorPane vi = new DensityAnalizatorPane(image);
+                vi.setVisible(true);
             }
         });
     }
@@ -1959,24 +1979,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     }//GEN-LAST:event_labelImage3MouseClicked
 
     private void buttonDensityViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerActionPerformed
-//        try {
-        densityViewer.setVisible(true);
-
-        scaleReconstructImage = DensityAnalizator.scaleImage(reconstructImage, 300, 300, Color.white);
-        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateLineonImage(scaleReconstructImage, 0);
-        ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
-        labelImageDensityViewer.setIcon(icon);
-
-        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(reconstructImage);
-        int initialLineSlise = densitySourseArray.length / 2;
-        densitySlider.setMaximum(densitySourseArray.length - 1);
-        densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
-        densitySlider.setPaintLabels(true);
-        densitySlider.setPaintTicks(true);
-
-        densityGraphPane.setLayout(new java.awt.BorderLayout());
-        densityGraphPane.add(DensityAnalizator.generateDensityGraph(reconstructImage, initialLineSlise), BorderLayout.CENTER);
-        densityGraphPane.validate();
 
     }//GEN-LAST:event_buttonDensityViewerActionPerformed
 
@@ -1989,7 +1991,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         if (jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Томограф")) {
             int scaleLineSlise = (int) ((300 * lineSlise) / maxSlider);
             scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
-            BufferedImage scaleReconstructImageLine = DensityAnalizator.generateLineonImage(scaleReconstructImage, scaleLineSlise);
+            BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, scaleLineSlise);
             ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
             labelImageDensityViewer.setIcon(null);
             labelImageDensityViewer.setIcon(icon);
@@ -1999,7 +2001,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         } else {
             int scaleLineSlise = (int) ((300 * lineSlise) / maxSlider);
             scaleReconstructImage = DensityAnalizator.scaleImage(reconstructImage, 300, 300, Color.white);
-            BufferedImage scaleReconstructImageLine = DensityAnalizator.generateLineonImage(scaleReconstructImage, scaleLineSlise);
+            BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, scaleLineSlise);
             ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
             labelImageDensityViewer.setIcon(null);
             labelImageDensityViewer.setIcon(icon);
@@ -2068,7 +2070,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         densityViewer.setVisible(true);
 
         scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
-        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateLineonImage(scaleReconstructImage, 0);
+        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, 0);
         ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
         labelImageDensityViewer.setIcon(icon);
 

@@ -20,19 +20,18 @@ import org.jfree.data.xy.DefaultXYDataset;
  * @author Antonov
  */
 public class DensityAnalizator {
-    
-    public static ChartPanel generateDensityGraph(BufferedImage densitySourse, int lineOfSlise){
-        
-        
-  //      BufferedImage inverseReconstructImage = ImageTransformator.getColorLutImage(densitySourse, LUTFunctions.invGray());
+
+    public static ChartPanel generateDensityGraph(BufferedImage densitySourse, int lineOfSlise) {
+
+        //      BufferedImage inverseReconstructImage = ImageTransformator.getColorLutImage(densitySourse, LUTFunctions.invGray());
         double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(densitySourse);
         double[][] densityInverseArray = new double[densitySourseArray.length][densitySourseArray.length];
-        for(int x = 0;x<densitySourseArray.length;x++){
-            for(int y = 0;y<densitySourseArray.length;y++){
-                densityInverseArray[x][y] = Math.abs(densitySourseArray[x][y]-255);
+        for (int x = 0; x < densitySourseArray.length; x++) {
+            for (int y = 0; y < densitySourseArray.length; y++) {
+                densityInverseArray[x][y] = Math.abs(densitySourseArray[x][y] - 255);
             }
         }
-        
+
         double[][] normdensitySourseArray = Utils.normalize2DArray(densityInverseArray, 0, 1);
         DefaultXYDataset ds = new DefaultXYDataset();
 
@@ -49,51 +48,52 @@ public class DensityAnalizator {
 
         ds.addSeries("density1", arrayDataSetDensitySource);
 
-        JFreeChart chart =
-                ChartFactory.createXYLineChart("Плотность образца",
-                "x", "Плотность, отн.ед", ds, PlotOrientation.VERTICAL, false, false,
-                false);
-        
+        JFreeChart chart
+                = ChartFactory.createXYLineChart("Плотность образца",
+                        "x", "Плотность, отн.ед", ds, PlotOrientation.VERTICAL, false, false,
+                        false);
+
         ChartPanel cp = new ChartPanel(chart);
         cp.setVerticalAxisTrace(false);
         cp.setMouseWheelEnabled(true);
-        
+
         return cp;
     }
-    
-    public static BufferedImage generateLineonImage(BufferedImage initialImage,int line){
-        
+
+    public static BufferedImage generateCursorOnImage(BufferedImage initialImage, int line) {
+
         BufferedImage outputImage = initialImage;
-        
+
         Graphics2D g2d = outputImage.createGraphics();
         g2d.setColor(Color.GREEN);
-        g2d.drawLine(0, line, outputImage.getWidth(),line);
-       // BasicStroke bs = new BasicStroke(2);
+        g2d.drawLine(0, line, outputImage.getWidth(), line);
+        // BasicStroke bs = new BasicStroke(2);
         g2d.dispose();
         return outputImage;
     }
-    
+
     public static BufferedImage scaleImage(BufferedImage img, int width, int height,
-        Color background) {
-    int imgWidth = img.getWidth();
-    int imgHeight = img.getHeight();
-    if (imgWidth*height < imgHeight*width) {
-        width = imgWidth*height/imgHeight;
-    } else {
-        height = imgHeight*width/imgWidth;
+            Color background) {
+        
+        int imgWidth = img.getWidth();
+        int imgHeight = img.getHeight();
+        if (imgWidth * height < imgHeight * width) {
+            width = imgWidth * height / imgHeight;
+        } else {
+            height = imgHeight * width / imgWidth;
+        }
+        BufferedImage newImage = new BufferedImage(width, height,
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = newImage.createGraphics();
+        try {
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                    RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            g.setBackground(background);
+            g.clearRect(0, 0, width, height);
+            g.drawImage(img, 0, 0, width, height, null);
+        } finally {
+            g.dispose();
+        }
+        return newImage;
     }
-    BufferedImage newImage = new BufferedImage(width, height,
-            BufferedImage.TYPE_INT_RGB);
-    Graphics2D g = newImage.createGraphics();
-    try {
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g.setBackground(background);
-        g.clearRect(0, 0, width, height);
-        g.drawImage(img, 0, 0, width, height, null);
-    } finally {
-        g.dispose();
-    }
-    return newImage;
-}
 }
