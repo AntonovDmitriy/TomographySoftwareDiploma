@@ -11,6 +11,7 @@ import com.antonov.tomographysoftwarediploma.viewSwing.TomographPane;
 import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
 import java.awt.Frame;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ public class AppLaunch {
     public static void main(String[] args) {
 
         initLAF();
+        internationalize();
+    
         Tomograph model = new Tomograph();
         ITomographView view = new TomographPane();
 
@@ -47,6 +50,13 @@ public class AppLaunch {
 //
 //        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 //    }
+    private static void internationalize() {
+        ResourceBundle b = ResourceBundle.getBundle("chooser_ru");
+        for (String s : b.keySet()) {
+            UIManager.put(s, b.getString(s));
+        }
+    }
+
     private static void initLAF() {
         logger.info("=======Start TomographySoftware 1.0.0 application=======");
         try {
