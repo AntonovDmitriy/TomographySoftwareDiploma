@@ -627,11 +627,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jLabel10 = new javax.swing.JLabel();
         buttonOkSetName = new javax.swing.JButton();
         buttonCanselSetName = new javax.swing.JButton();
-        densityViewer = new javax.swing.JDialog();
-        jPanel3 = new javax.swing.JPanel();
-        labelImageDensityViewer = new javax.swing.JLabel();
-        densityGraphPane = new javax.swing.JPanel();
-        densitySlider = new javax.swing.JSlider();
         colorGroupTomograph = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Model = new javax.swing.JPanel();
@@ -998,93 +993,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             dialogNameAsker.setLocationRelativeTo(null);
 
-            densityViewer.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-            densityViewer.setTitle("Анализатор плотности");
-            densityViewer.setAlwaysOnTop(true);
-            densityViewer.setLocationByPlatform(true);
-            densityViewer.setMinimumSize(new java.awt.Dimension(950, 550));
-            densityViewer.setResizable(false);
-
-            jPanel3.setMaximumSize(new java.awt.Dimension(475, 404));
-            jPanel3.setMinimumSize(new java.awt.Dimension(475, 404));
-            jPanel3.setPreferredSize(new java.awt.Dimension(475, 404));
-
-            labelImageDensityViewer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelImageDensityViewer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-            javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-            jPanel3.setLayout(jPanel3Layout);
-            jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(51, 51, 51)
-                    .addComponent(labelImageDensityViewer)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-            jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(66, 66, 66)
-                    .addComponent(labelImageDensityViewer)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-
-            densityGraphPane.setMaximumSize(new java.awt.Dimension(475, 404));
-            densityGraphPane.setMinimumSize(new java.awt.Dimension(475, 404));
-            densityGraphPane.setPreferredSize(new java.awt.Dimension(475, 404));
-
-            javax.swing.GroupLayout densityGraphPaneLayout = new javax.swing.GroupLayout(densityGraphPane);
-            densityGraphPane.setLayout(densityGraphPaneLayout);
-            densityGraphPaneLayout.setHorizontalGroup(
-                densityGraphPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 0, Short.MAX_VALUE)
-            );
-            densityGraphPaneLayout.setVerticalGroup(
-                densityGraphPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 404, Short.MAX_VALUE)
-            );
-
-            densitySlider.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-            densitySlider.setValue(0);
-            densitySlider.setFocusable(false);
-            densitySlider.setMaximumSize(new java.awt.Dimension(475, 40));
-            densitySlider.setMinimumSize(new java.awt.Dimension(475, 23));
-            densitySlider.setPreferredSize(new java.awt.Dimension(475, 23));
-            densitySlider.setRequestFocusEnabled(false);
-            densitySlider.setVerifyInputWhenFocusTarget(false);
-            densitySlider.addChangeListener(new javax.swing.event.ChangeListener() {
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    densitySliderStateChanged(evt);
-                }
-            });
-
-            javax.swing.GroupLayout densityViewerLayout = new javax.swing.GroupLayout(densityViewer.getContentPane());
-            densityViewer.getContentPane().setLayout(densityViewerLayout);
-            densityViewerLayout.setHorizontalGroup(
-                densityViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(densityViewerLayout.createSequentialGroup()
-                    .addGap(26, 26, 26)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                    .addGroup(densityViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(densityGraphPane, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(densitySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(19, 19, 19))
-            );
-            densityViewerLayout.setVerticalGroup(
-                densityViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(densityViewerLayout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addGroup(densityViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(densityGraphPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(densitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 11, Short.MAX_VALUE))
-            );
-
-            densityViewer.setLocationRelativeTo(null);
-
             setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
             setTitle("Томографический комплекс 1.0 НИЯУ МИФИ");
             setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1391,7 +1299,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonSaveSinogram.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
             toolbarModellingImage.add(buttonSaveSinogram);
 
-            buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+            buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save2.png"))); // NOI18N
             buttonSaveReconstructModelling.setActionCommand("Сохранить<br> реконструкцию");
             buttonSaveReconstructModelling.setEnabled(false);
             buttonSaveReconstructModelling.setFocusPainted(false);
@@ -1982,38 +1890,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     }//GEN-LAST:event_buttonDensityViewerActionPerformed
 
-    private void densitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_densitySliderStateChanged
-        // TODO add your handling code here:
-
-        int lineSlise = densitySlider.getValue();
-        int maxSlider = densitySlider.getMaximum();
-
-        if (jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Томограф")) {
-            int scaleLineSlise = (int) ((300 * lineSlise) / maxSlider);
-            scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
-            BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, scaleLineSlise);
-            ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
-            labelImageDensityViewer.setIcon(null);
-            labelImageDensityViewer.setIcon(icon);
-            densityGraphPane.removeAll();
-            densityGraphPane.add(DensityAnalizator.generateDensityGraph(arrayReconstructedImage.get(sliderImage.getValue()), lineSlise), BorderLayout.CENTER);
-            densityGraphPane.validate();
-        } else {
-            int scaleLineSlise = (int) ((300 * lineSlise) / maxSlider);
-            scaleReconstructImage = DensityAnalizator.scaleImage(reconstructImage, 300, 300, Color.white);
-            BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, scaleLineSlise);
-            ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
-            labelImageDensityViewer.setIcon(null);
-            labelImageDensityViewer.setIcon(icon);
-            densityGraphPane.removeAll();
-            densityGraphPane.add(DensityAnalizator.generateDensityGraph(reconstructImage, lineSlise), BorderLayout.CENTER);
-            densityGraphPane.validate();
-        }
-
-//        densityGraphPane.setLayout(new java.awt.BorderLayout());
-
-    }//GEN-LAST:event_densitySliderStateChanged
-
     private void coloringTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloringTomographActionPerformed
         // TODO add your handling code here:
         if (coloringTomograph.isSelected()) {
@@ -2067,23 +1943,23 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonDensityViewerTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerTomographActionPerformed
         // TODO add your handling code here:
-        densityViewer.setVisible(true);
-
-        scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
-        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, 0);
-        ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
-        labelImageDensityViewer.setIcon(icon);
-
-        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
-        int initialLineSlise = densitySourseArray.length / 2;
-        densitySlider.setMaximum(densitySourseArray.length - 1);
-        densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
-        densitySlider.setPaintLabels(true);
-        densitySlider.setPaintTicks(true);
-
-        densityGraphPane.setLayout(new java.awt.BorderLayout());
-        densityGraphPane.add(DensityAnalizator.generateDensityGraph(arrayReconstructedImage.get(sliderImage.getValue()), initialLineSlise), BorderLayout.CENTER);
-        densityGraphPane.validate();
+//        densityViewer.setVisible(true);
+//
+//        scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
+//        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, 0);
+//        ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
+//        labelImageDensityViewer.setIcon(icon);
+//
+//        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
+//        int initialLineSlise = densitySourseArray.length / 2;
+//        densitySlider.setMaximum(densitySourseArray.length - 1);
+//        densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
+//        densitySlider.setPaintLabels(true);
+//        densitySlider.setPaintTicks(true);
+//
+//        densityGraphPane.setLayout(new java.awt.BorderLayout());
+//        densityGraphPane.add(DensityAnalizator.generateDensityGraph(arrayReconstructedImage.get(sliderImage.getValue()), initialLineSlise), BorderLayout.CENTER);
+//        densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
 
 
@@ -2119,9 +1995,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.ButtonGroup colorGroupTomograph;
     private javax.swing.JPanel colorPanelTomograph;
     private javax.swing.JCheckBox coloringTomograph;
-    private javax.swing.JPanel densityGraphPane;
-    private javax.swing.JSlider densitySlider;
-    private javax.swing.JDialog densityViewer;
     private javax.swing.JDialog dialogFilterChooser;
     private javax.swing.JDialog dialogNameAsker;
     private javax.swing.JDialog dialogProgressBar;
@@ -2153,7 +2026,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2168,7 +2040,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel labelImage1;
     private javax.swing.JLabel labelImage2;
     private javax.swing.JLabel labelImage3;
-    private javax.swing.JLabel labelImageDensityViewer;
     private javax.swing.JLabel labelReconstructSize;
     private javax.swing.JLabel labelReconstruction;
     private javax.swing.JLabel labelStepsize;

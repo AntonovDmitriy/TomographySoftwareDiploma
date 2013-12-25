@@ -4,8 +4,22 @@
  */
 package com.antonov.tomographysoftwarediploma.viewSwing;
 
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JViewport;
+import javax.swing.event.MouseInputListener;
 
 /**
  *
@@ -16,6 +30,10 @@ public class ImageViewerPane extends javax.swing.JFrame {
     /**
      * Creates new form ImageViewer
      */
+//    double scale = 1.0;
+    private Point point;
+    private BufferedImage initialImage;
+
     public ImageViewerPane() {
         initComponents();
     }
@@ -23,6 +41,8 @@ public class ImageViewerPane extends javax.swing.JFrame {
     ImageViewerPane(BufferedImage image) {
         initComponents();
         this.image.setIcon(new ImageIcon(image));
+        this.initialImage = image;
+        initListeners();
     }
 
     /**
@@ -112,8 +132,110 @@ public class ImageViewerPane extends javax.swing.JFrame {
         });
 
     }
+
+    public BufferedImage aspectZoom(double scale) {
+
+        Icon icon = image.getIcon();
+        double origWidth = icon.getIconWidth(), origHeight = icon.getIconHeight();
+//        double cutWidth = origWidth / scale, cutHeight = origHeight / scale;
+//
+//        int upperLeftX = (int) Math.round(focus.getX() - cutWidth / 2.0), upperLeftY = (int) Math.round(focus.getY() - cutHeight / 2.0);
+//        int bottomRightX = (int) Math.ceil(focus.getX() + cutWidth / 2.0), bottomRightY = (int) Math.ceil(focus.getY() + cutHeight / 2.0);
+//
+//        if (upperLeftX < 0) {
+//            upperLeftX = 0;
+//        }
+//        if (upperLeftY < 0) {
+//            upperLeftY = 0;
+//        }
+//        if (bottomRightX > origWidth) {
+//            int a = upperLeftX;
+//            upperLeftX = upperLeftX - (int) (bottomRightX - origWidth);
+//            bottomRightX = (int) Math.ceil(upperLeftX + cutWidth);
+//        }
+//        if (bottomRightY > origHeight) {
+//            int a = upperLeftY;
+//            upperLeftY = upperLeftY - (int) (bottomRightY - origHeight);
+//            bottomRightY = (int) Math.ceil(upperLeftY + cutHeight);
+//        }
+//
+//        BufferedImage croppedImage = image.getSubimage(upperLeftX, upperLeftY, ((int) cutWidth == 0 ? 1 : (int) cutWidth), ((int) cutHeight == 0 ? 1 : (int) cutHeight));
+//
+//        AffineTransform transform = new AffineTransform();
+//        transform.setToScale(origWidth / cutWidth, origHeight / cutHeight);
+//        AffineTransformOp tOper = new AffineTransformOp(transform, AffineTransformOp.TYPE_BICUBIC);
+//
+//        BufferedImage zoomedImage = tOper.filter(croppedImage, null);
+
+        int newImageWidth = (new Double(origWidth * scale)).intValue();
+        int newImageHeight = (new Double(origHeight * scale)).intValue();
+        BufferedImage resizedImage = new BufferedImage(newImageWidth, newImageHeight, initialImage.getType());
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(initialImage, 0, 0, newImageWidth, newImageHeight, null);
+        g.dispose();
+        return resizedImage;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel image;
     private javax.swing.JScrollPane imagePanel;
     // End of variables declaration//GEN-END:variables
+
+    private void initListeners() {
+
+        image.addMouseWheelListener(new MouseWheelListener() {
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int notches = e.getWheelRotation();
+                Point p = e.getPoint();
+                if (notches < 0) {
+                    image.setIcon(new ImageIcon(aspectZoom(1.1)));
+                    imagePanel.getViewport().setViewPosition(p);
+                } else {
+                    image.setIcon(new ImageIcon(aspectZoom(0.9)));
+                    imagePanel.getViewport().setViewPosition(p);
+                }
+            }
+        });
+
+        image.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                point = e.getPoint();
+            }
+
+        });
+        image.addMouseMotionListener(new Dragger());
+        
+    }
+
+    class Dragger extends MouseAdapter implements MouseMotionListener {
+
+        public Point startPt;
+
+        public void mouseMoved(MouseEvent me) {
+        }
+
+        public void mouseDragged(MouseEvent me) {
+            
+            JViewport viewPort = imagePanel.getViewport();
+            Point scrollPosition = viewPort.getViewPosition();
+
+            int dx = me.getX() - point.x;
+            int dy = me.getY() - point.y;
+
+            scrollPosition.x += dx;
+            scrollPosition.y += dy;
+
+            viewPort.setViewPosition(scrollPosition);
+            point = me.getPoint();
+        }
+
+        public void mousePressed(MouseEvent me) {
+            startPt = me.getPoint();
+        }
+        
+        
+    }
 }
