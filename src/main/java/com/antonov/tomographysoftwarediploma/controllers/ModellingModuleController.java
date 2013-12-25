@@ -11,7 +11,6 @@ import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -148,12 +147,24 @@ public class ModellingModuleController extends Controller {
     }
 
     public void saveModellingSinogram(File file, String desc) {
-        
+
         super.tomograph.modellingModule.saveSinogram(file, desc);
     }
 
     public void saveModellingReconstruction(File file, String desc) {
-        
+
         super.tomograph.modellingModule.saveReconstruction(file, desc);
+    }
+
+    public void showSinogram() {
+        if (!super.view.isSinogramImageEmpty()) {
+            super.tomograph.modellingModule.showSinogram();
+        }
+    }
+
+    public void showReconstructionModelling() {
+        if (!super.view.isReconstructionModellingEmpty()) {
+            super.tomograph.modellingModule.showReconstruction();
+        }
     }
 }

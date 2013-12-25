@@ -17,11 +17,11 @@ import java.util.Map;
 public interface ITomographView {
 
     public void initClosingOperations();
-    
+
     public void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames);
-    
+
     public void initModelList();
-    
+
     public void setModellingController(ModellingModuleController controller);
 
     public void setHardwareController(HardwareModuleController controller);
@@ -31,20 +31,24 @@ public interface ITomographView {
     public void setCurrentModellingImage(BufferedImage image);
 
     public void setSinogramImage(BufferedImage image);
-    
+
     public void clearResultModelling();
 
     public void disableModellingControls();
 
     public void enableReconControls();
-    
+
     public void initListeners();
-    
+
     public void startCalculating();
-    
+
     public void stopCalculating();
-    
+
     public void showInternalErrorMessage(String messageError);
-    
+
     public void showWarningMessage(String messageWarning);
+
+    public boolean isSinogramImageEmpty();
+
+    public boolean isReconstructionModellingEmpty();
 }

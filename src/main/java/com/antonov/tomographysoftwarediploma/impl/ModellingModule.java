@@ -506,4 +506,15 @@ public class ModellingModule implements IProjDataSaver {
         }
     }
 
+    public void showSinogram() {
+
+        firePropertyChange("showSinogram", null, sinogramImage);
+        logger.trace("Sinogram is showing in viewer");
+    }
+
+    public void showReconstruction() {
+        firePropertyChange("showReconstructionModelling", null, coloredReconstructionImage);
+        logger.trace("Reconstruction modelling is showing in viewer");
+    }
+
 }

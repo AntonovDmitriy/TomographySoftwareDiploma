@@ -5,8 +5,6 @@
 package com.antonov.tomographysoftwarediploma.viewSwing;
 
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,6 +18,11 @@ public class ImageViewerPane extends javax.swing.JFrame {
      */
     public ImageViewerPane() {
         initComponents();
+    }
+
+    ImageViewerPane(BufferedImage image) {
+        initComponents();
+        this.image.setIcon(new ImageIcon(image));
     }
 
     /**
@@ -37,9 +40,11 @@ public class ImageViewerPane extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
 
+        imagePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         image.setToolTipText("");
-        image.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        image.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         image.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         image.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
@@ -68,7 +73,7 @@ public class ImageViewerPane extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         image.getIcon();
-        
+
     }//GEN-LAST:event_imageMouseWheelMoved
 
     /**
@@ -102,11 +107,10 @@ public class ImageViewerPane extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ImageViewerPane().setVisible(true);
-                
+
             }
         });
-        
- 
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel image;

@@ -843,9 +843,6 @@
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReconstructActionPerformed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="1" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="0" anchor="17" weightX="0.0" weightY="0.0"/>
@@ -1085,9 +1082,6 @@
                                     <Property name="horizontalAlignment" type="int" value="0"/>
                                     <Property name="autoscrolls" type="boolean" value="true"/>
                                   </Properties>
-                                  <Events>
-                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelImage2MouseClicked"/>
-                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1115,9 +1109,6 @@
                                     <Property name="horizontalTextPosition" type="int" value="0"/>
                                     <Property name="verticalTextPosition" type="int" value="3"/>
                                   </Properties>
-                                  <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveSinogramActionPerformed"/>
-                                  </Events>
                                 </Component>
                                 <Component class="javax.swing.JButton" name="buttonSaveReconstructModelling">
                                   <Properties>
@@ -1131,9 +1122,6 @@
                                     <Property name="horizontalTextPosition" type="int" value="0"/>
                                     <Property name="verticalTextPosition" type="int" value="3"/>
                                   </Properties>
-                                  <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveReconstructModellingActionPerformed"/>
-                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1366,12 +1354,12 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="labelimage3">
+                <Component class="javax.swing.JLabel" name="labelImage3">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelimage3MouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelImage3MouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
