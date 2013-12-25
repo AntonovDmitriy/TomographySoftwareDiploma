@@ -95,8 +95,8 @@ public class DensityAnalizatorPane extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         densitySlider = new javax.swing.JSlider();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1100, 600));
         setType(java.awt.Window.Type.UTILITY);
 
         jSplitPane1.setResizeWeight(0.4);
