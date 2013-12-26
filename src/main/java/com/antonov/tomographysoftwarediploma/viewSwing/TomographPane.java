@@ -3,19 +3,15 @@ package com.antonov.tomographysoftwarediploma.viewSwing;
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.LUTFunctions;
-import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -39,7 +35,6 @@ import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -332,15 +327,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "stopReconstructionSinogram":
                         stopCalculating();
                         break;
-                    case "showSinogram":
-                        startViewer((BufferedImage) evt.getNewValue());
-                        break;
-                    case "showReconstructionModelling":
-                        startViewer((BufferedImage) evt.getNewValue());
-                        break;
-                    case "showDensityAnalizator":
-                        startDensityAnalizator((BufferedImage) evt.getNewValue());
-                        break;
                 }
             }
         };
@@ -558,27 +544,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 if (e.getClickCount() == 2) {
                     modellingModuleController.showReconstructionModelling();
                 }
-            }
-        });
-    }
-
-    public void startViewer(final BufferedImage image) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ImageViewerPane viewer = new ImageViewerPane(image);
-                viewer.setVisible(true);
-            }
-        });
-    }
-
-    private void startDensityAnalizator(final BufferedImage image) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DensityAnalizatorPane vi = new DensityAnalizatorPane(image);
-                vi.setVisible(true);
             }
         });
     }

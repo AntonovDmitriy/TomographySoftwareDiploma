@@ -7,9 +7,12 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.viewSwing.DensityAnalizatorPane;
+import com.antonov.tomographysoftwarediploma.viewSwing.ImageViewerPane;
 import com.antonov.tomographysoftwarediploma.viewSwing.TomographPane;
 import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
 import java.awt.Frame;
+import java.awt.image.BufferedImage;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javax.swing.UIManager;
@@ -29,7 +32,7 @@ public class AppLaunch {
 
         initLAF();
         internationalize();
-    
+
         Tomograph model = new Tomograph();
         ITomographView view = new TomographPane();
 
@@ -78,5 +81,27 @@ public class AppLaunch {
             logger.error("Error occured while setting look and feel");
         }
 
+    }
+
+    public static void showImageViewer(final BufferedImage image) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ImageViewerPane viewer = new ImageViewerPane(image);
+                viewer.setVisible(true);
+            }
+        });
+    }
+
+    static void showDensityAnalizator(final BufferedImage image) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DensityAnalizatorPane vi = new DensityAnalizatorPane(image);
+                vi.setVisible(true);
+            }
+        });
     }
 }

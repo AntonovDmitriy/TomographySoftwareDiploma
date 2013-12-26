@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.antonov.tomographysoftwarediploma.viewSwing;
+package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import java.awt.Color;

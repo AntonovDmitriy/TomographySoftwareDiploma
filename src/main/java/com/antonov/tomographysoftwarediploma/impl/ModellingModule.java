@@ -15,7 +15,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,7 +22,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +36,7 @@ public class ModellingModule implements IProjDataSaver {
     private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
     private ModellingModuleController controller;
     private Properties tomographProperty;
-
+    private Tomograph tomograph;
     private Map<String, BufferedImage> imageSamplesMapWithNames = new HashMap<>(); //Map for storage images for modelling
 
     //Parameters of modelling
@@ -60,6 +58,11 @@ public class ModellingModule implements IProjDataSaver {
 
     private BufferedImage coloredReconstructionImage;
     private ColorFunctionNamesEnum currentColorName;
+
+    ModellingModule(Tomograph tomograph, Properties p) {
+        this.tomograph = tomograph;
+        init(p);
+    }
 
     public void setController(ModellingModuleController controller) {
         this.controller = controller;
@@ -86,6 +89,12 @@ public class ModellingModule implements IProjDataSaver {
 
     public ModellingModule(Properties p) {
 
+        init(p);
+
+    }
+
+    private void init(Properties p) {
+
         if (p != null) {
             this.tomographProperty = p;
             initInterpolations();
@@ -96,7 +105,6 @@ public class ModellingModule implements IProjDataSaver {
         } else {
             logger.warn("Properties file is null");
         }
-
     }
 
     private void initInterpolations() {
@@ -507,18 +515,17 @@ public class ModellingModule implements IProjDataSaver {
     }
 
     public void showSinogram() {
-
-        firePropertyChange("showSinogram", null, sinogramImage);
+        tomograph.showViewer(sinogramImage);
         logger.trace("Sinogram is showing in viewer");
     }
 
     public void showReconstruction() {
-        firePropertyChange("showReconstructionModelling", null, coloredReconstructionImage);
+        tomograph.showViewer(coloredReconstructionImage);
         logger.trace("Reconstruction modelling is showing in viewer");
     }
 
     public void showDensityAnalizator() {
-        firePropertyChange("showDensityAnalizator", null, coloredReconstructionImage);
+        tomograph.showDensityAnalizator(coloredReconstructionImage);
         logger.trace("density analizator is opened");
     }
 

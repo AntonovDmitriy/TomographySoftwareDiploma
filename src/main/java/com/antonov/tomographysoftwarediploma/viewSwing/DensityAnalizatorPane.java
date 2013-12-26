@@ -5,6 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.viewSwing;
 
+import com.antonov.tomographysoftwarediploma.impl.DensityAnalizator;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import java.awt.BorderLayout;
 import java.awt.Color;

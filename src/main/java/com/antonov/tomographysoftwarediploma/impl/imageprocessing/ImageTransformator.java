@@ -3,6 +3,7 @@ package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Utils;
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.Filterer;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
@@ -19,6 +20,7 @@ import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
 
 public class ImageTransformator {
 
@@ -702,5 +704,16 @@ public class ImageTransformator {
 
         BufferedImage img = new BufferedImage(colorModel, wraster, false, null);
         return img;
+    }
+
+    public static BufferedImage aspectZoom(BufferedImage initialImage, double scale, int origWidth, int origHeight, int type) {
+
+        int newImageWidth = (new Double(origWidth * scale)).intValue();
+        int newImageHeight = (new Double(origHeight * scale)).intValue();
+        BufferedImage resizedImage = new BufferedImage(newImageWidth, newImageHeight, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(initialImage, 0, 0, newImageWidth, newImageHeight, null);
+        g.dispose();
+        return resizedImage;
     }
 }

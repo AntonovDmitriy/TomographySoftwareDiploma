@@ -7,6 +7,7 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,7 +32,7 @@ public class Tomograph {
 
     public Tomograph() {
         initTomographProperty();
-        this.modellingModule = new ModellingModule(tomographProperty);
+        this.modellingModule = new ModellingModule(this, tomographProperty);
     }
 
     public void setModellingController(ModellingModuleController controller) {
@@ -60,6 +61,15 @@ public class Tomograph {
     public void exitApplication() {
         logger.info("=======Stop TomographySoftware 1.0.0 application=======");
         System.exit(0);//cierra aplicacion
+    }
+
+    void showViewer(BufferedImage image) {
+        AppLaunch.showImageViewer(image);
+    }
+
+    void showDensityAnalizator(BufferedImage image) {
+        
+        AppLaunch.showDensityAnalizator(image);
     }
 
 }
