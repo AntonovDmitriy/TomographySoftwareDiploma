@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,11 +42,10 @@ public class ModellingModule implements IProjDataSaver {
     private Integer scans;
     private Integer stepSize;
     private PInterpolation regimeSinogramInterpolation;
-    private Set<PInterpolation> setInterpolation;
 
     //Parameters of reconstruction
     private Integer sizeReconstruction;
-    private Set<String> setFilterName;
+   
     private String currentFilter;
     private PInterpolation regimeReconstructionInterpolation;
 
@@ -97,38 +95,13 @@ public class ModellingModule implements IProjDataSaver {
 
         if (p != null) {
             this.tomographProperty = p;
-            initInterpolations();
-            initFilterNames();
+            
             initSamplesMapImage();
             initParamModelling();
 
         } else {
             logger.warn("Properties file is null");
         }
-    }
-
-    private void initInterpolations() {
-
-        setInterpolation = new HashSet<>();
-        PInterpolation pojo = new PInterpolation();
-        pojo.setValue(SinogramCreator.REGIME_LINEAR_ITERPOLATION);
-        pojo.setNameInteprolation(bundle.getString("LINEAR_INTERPOLATION"));
-        setInterpolation.add(pojo);
-
-        pojo = new PInterpolation();
-        pojo.setValue(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION);
-        pojo.setNameInteprolation(bundle.getString("NEAREST_NEIGHBOUR_INTERPOLATION"));
-        setInterpolation.add(pojo);
-    }
-
-    public void initFilterNames() {
-        setFilterName = new TreeSet<>();
-        setFilterName.add("ramp");
-        setFilterName.add("shepplogan");
-        setFilterName.add("hamming");
-        setFilterName.add("hann");
-        setFilterName.add("blackman");
-        setFilterName.add("none");
     }
 
     private void initSamplesMapImage() {
@@ -165,11 +138,11 @@ public class ModellingModule implements IProjDataSaver {
         controller.setModellingImages(imageSamplesMapWithNames);
         firePropertyChange("scans", null, scans);
         firePropertyChange("stepsize", null, stepSize);
-        firePropertyChange("regimeInterpolationModel", null, setInterpolation);
+        firePropertyChange("regimeInterpolationModel", null, tomograph.setInterpolation);
         firePropertyChange("regimeSinogramInterpolation", null, regimeSinogramInterpolation);
         firePropertyChange("regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
         firePropertyChange("sizeReconstruction", null, sizeReconstruction);
-        firePropertyChange("filterSet", null, setFilterName);
+        firePropertyChange("filterSet", null, tomograph.setFilterName);
         firePropertyChange("filterModel", null, currentFilter);
         firePropertyChange("colorModelModelling", null, ColorFunctionNamesEnum.class);
         firePropertyChange("currentColorModelModelling", null, currentColorName);
@@ -226,7 +199,7 @@ public class ModellingModule implements IProjDataSaver {
                     && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
                 throw new NumberFormatException("Regime of sinogram interpolation has invalid value " + regimeInterpolationFromProperty);
             } else {
-                for (PInterpolation pojoInterpolation : setInterpolation) {
+                for (PInterpolation pojoInterpolation : tomograph.setInterpolation) {
                     if (pojoInterpolation.getValue().equals(regimeInterpolationFromProperty)) {
                         regimeSinogramInterpolation = pojoInterpolation;
                         break;
@@ -247,7 +220,7 @@ public class ModellingModule implements IProjDataSaver {
                     && !regimeInterpolationFromProperty.equals(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION)) {
                 throw new NumberFormatException("Regime of reconstruction interpolation has invalid value " + regimeInterpolationFromProperty);
             } else {
-                for (PInterpolation pojoInterpolation : setInterpolation) {
+                for (PInterpolation pojoInterpolation : tomograph.setInterpolation) {
                     if (pojoInterpolation.getValue().equals(regimeInterpolationFromProperty)) {
                         regimeReconstructionInterpolation = pojoInterpolation;
                         break;
@@ -264,7 +237,7 @@ public class ModellingModule implements IProjDataSaver {
 
         try {
             String filteringFromProperty = tomographProperty.getProperty("FILTERING_MODELLING");
-            if (!setFilterName.contains(filteringFromProperty)) {
+            if (!tomograph.setFilterName.contains(filteringFromProperty)) {
                 throw new NumberFormatException("Filter name has invalid value " + filteringFromProperty);
             } else {
                 currentFilter = filteringFromProperty;
@@ -278,7 +251,7 @@ public class ModellingModule implements IProjDataSaver {
     private void initColoring() {
 
         String coloringFromProperty = tomographProperty.getProperty("COLORING_MODELLING");
-        if (isColoringEnumContainsColorName(coloringFromProperty)) {
+        if (tomograph.isColoringEnumContainsColorName(coloringFromProperty)) {
             currentColorName = ColorFunctionNamesEnum.valueOf(coloringFromProperty);
             logger.info("coloring name model = " + coloringFromProperty);
         } else {
@@ -478,16 +451,6 @@ public class ModellingModule implements IProjDataSaver {
         this.coloredReconstructionImage = colorImage;
         logger.trace("current colored image has been changed");
         firePropertyChange("colorImageModelling", null, coloredReconstructionImage);
-    }
-
-    private boolean isColoringEnumContainsColorName(String coloringFromProperty) {
-
-        for (ColorFunctionNamesEnum color : ColorFunctionNamesEnum.values()) {
-            if (color.toString().equals(coloringFromProperty)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void saveSinogram(File file, String desc) {

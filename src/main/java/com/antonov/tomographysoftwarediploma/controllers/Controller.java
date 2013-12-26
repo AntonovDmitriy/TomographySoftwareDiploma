@@ -29,4 +29,5 @@ public abstract class Controller {
 
     public abstract void addPropertyChangeListenerToModel(PropertyChangeListener p);
 
+    
 }

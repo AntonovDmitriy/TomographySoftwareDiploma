@@ -7,11 +7,17 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.SinogramCreator;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,15 +30,23 @@ public class Tomograph {
     private static Logger logger = LoggerFactory.getLogger(Tomograph.class);
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
-
+    
     private static final String TOMOGRAPH_CONF_PATH = "conf/tomograph.conf";
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
     private Properties tomographProperty = new Properties();
 
     public ModellingModule modellingModule;
+    public HardwareModule hardwareModule;
+
+    public Set<String> setFilterName;
+    public Set<PInterpolation> setInterpolation;
 
     public Tomograph() {
         initTomographProperty();
+        initInterpolations();
+        initFilterNames();
         this.modellingModule = new ModellingModule(this, tomographProperty);
+        this.hardwareModule = new HardwareModule(this, tomographProperty);
     }
 
     public void setModellingController(ModellingModuleController controller) {
@@ -56,6 +70,7 @@ public class Tomograph {
 
     public void prepareViews() {
         modellingModule.prepareView();
+        hardwareModule.prepareView();
     }
 
     public void exitApplication() {
@@ -68,8 +83,41 @@ public class Tomograph {
     }
 
     void showDensityAnalizator(BufferedImage image) {
-        
+
         AppLaunch.showDensityAnalizator(image);
     }
 
+    public void initFilterNames() {
+        setFilterName = new TreeSet<>();
+        setFilterName.add("ramp");
+        setFilterName.add("shepplogan");
+        setFilterName.add("hamming");
+        setFilterName.add("hann");
+        setFilterName.add("blackman");
+        setFilterName.add("none");
+    }
+
+    public void initInterpolations() {
+
+        setInterpolation = new HashSet<>();
+        PInterpolation pojo = new PInterpolation();
+        pojo.setValue(SinogramCreator.REGIME_LINEAR_ITERPOLATION);
+        pojo.setNameInteprolation(bundle.getString("LINEAR_INTERPOLATION"));
+        setInterpolation.add(pojo);
+
+        pojo = new PInterpolation();
+        pojo.setValue(SinogramCreator.REGIME_NEAREST_NEIGHBOUR_INTERPOLATION);
+        pojo.setNameInteprolation(bundle.getString("NEAREST_NEIGHBOUR_INTERPOLATION"));
+        setInterpolation.add(pojo);
+    }
+
+    public boolean isColoringEnumContainsColorName(String coloringFromProperty) {
+
+        for (ColorFunctionNamesEnum color : ColorFunctionNamesEnum.values()) {
+            if (color.toString().equals(coloringFromProperty)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
