@@ -477,6 +477,38 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 modellingModuleController.setSizeReconstruction(edSizeReconstruction.getText());
             }
         });
+
+        edScansTomograph.addFocusListener(new FocusLostListener() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                hardwareModuleController.setScans(edScansTomograph.getText(), TomographPane.this);
+            }
+        });
+        
+        edStepSizeTomograph.addFocusListener(new FocusLostListener() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                hardwareModuleController.setStepSize(edStepSizeTomograph.getText(), TomographPane.this);
+            }
+        });
+        
+        edMoving.addFocusListener(new FocusLostListener() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                hardwareModuleController.setMoving(edMoving.getText(), TomographPane.this);
+            }
+        });
+        
+        edSizeReconTomograph.addFocusListener(new FocusLostListener() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                hardwareModuleController.setSizeReconstruction(edSizeReconTomograph.getText(), TomographPane.this);
+            }
+        });
     }
 
     private void setCbInterpolation(Set setInterpolation) {
