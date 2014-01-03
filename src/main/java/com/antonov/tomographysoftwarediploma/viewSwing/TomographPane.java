@@ -490,7 +490,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             @Override
             public void focusLost(FocusEvent e) {
-                hardwareModuleController.setStepSize(edStepSizeTomograph.getText(), TomographPane.this);
+                hardwareModuleController.setStepSize(edStepSizeTomograph.getText());
             }
         });
         
@@ -506,7 +506,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             @Override
             public void focusLost(FocusEvent e) {
-                hardwareModuleController.setSizeReconstruction(edSizeReconTomograph.getText(), TomographPane.this);
+                hardwareModuleController.setSizeReconstruction(edSizeReconTomograph.getText());
             }
         });
     }
@@ -707,10 +707,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         panelReconstuctTomographData = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         edSizeReconTomograph = new javax.swing.JTextField();
+        jSplitPane3 = new javax.swing.JSplitPane();
         panelResultTomograph = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         labelImage3 = new javax.swing.JLabel();
         sliderImage = new javax.swing.JSlider();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -1556,6 +1558,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             Tomograph.add(panelControlsTomograph, gridBagConstraints);
 
+            jSplitPane3.setResizeWeight(0.2);
+
             panelResultTomograph.setLayout(new java.awt.GridBagLayout());
 
             labelImage3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1591,14 +1595,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
             panelResultTomograph.add(sliderImage, gridBagConstraints);
 
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 2;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            Tomograph.add(panelResultTomograph, gridBagConstraints);
+            jSplitPane3.setRightComponent(panelResultTomograph);
+
+            jPanel1.setLayout(new java.awt.GridBagLayout());
+
+            jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 402));
 
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
@@ -1614,14 +1615,25 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             jScrollPane2.setViewportView(jTable1);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.weightx = 1.0;
+            gridBagConstraints.weighty = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            jPanel1.add(jScrollPane2, gridBagConstraints);
+
+            jSplitPane3.setLeftComponent(jPanel1);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-            gridBagConstraints.ipadx = 300;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.weightx = 1.0;
             gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-            Tomograph.add(jScrollPane2, gridBagConstraints);
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            Tomograph.add(jSplitPane3, gridBagConstraints);
 
             jTabbedPane1.addTab("Томограф", Tomograph);
 
@@ -2010,6 +2022,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2017,6 +2030,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelDetectors;
