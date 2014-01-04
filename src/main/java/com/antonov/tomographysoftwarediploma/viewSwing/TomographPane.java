@@ -1180,6 +1180,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
             paneControl.add(paneParamModelling, gridBagConstraints);
 
+            buttonSinogram.setBackground(new java.awt.Color(0, 51, 153));
             buttonSinogram.setText("Синограмма");
             buttonSinogram.setDefaultCapable(false);
             buttonSinogram.setEnabled(false);
@@ -1192,6 +1193,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonSinogram, gridBagConstraints);
 
+            buttonDensityViewer.setBackground(new java.awt.Color(0, 51, 153));
             buttonDensityViewer.setText(bundle.getString("LABEL_DENSANALYSE")); // NOI18N
             buttonDensityViewer.setEnabled(false);
             buttonDensityViewer.setFocusPainted(false);
@@ -1208,6 +1210,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonDensityViewer, gridBagConstraints);
 
+            buttonReconstruct.setBackground(new java.awt.Color(0, 51, 153));
             buttonReconstruct.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
             buttonReconstruct.setDefaultCapable(false);
             buttonReconstruct.setEnabled(false);
@@ -1515,6 +1518,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             panelCalculateTomograph.setLayout(new java.awt.GridBagLayout());
 
+            buttonOpenProjData.setBackground(new java.awt.Color(0, 51, 153));
             buttonOpenProjData.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
             buttonOpenProjData.setFocusPainted(false);
             buttonOpenProjData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1567,6 +1571,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             panelCalculateTomograph.add(buttonStart, gridBagConstraints);
 
+            buttonDensityViewerTomograph.setBackground(new java.awt.Color(0, 51, 153));
             buttonDensityViewerTomograph.setText(bundle.getString("DENS_ANALIZATOR")); // NOI18N
             buttonDensityViewerTomograph.setEnabled(false);
             buttonDensityViewerTomograph.setFocusPainted(false);
