@@ -57,7 +57,7 @@ public class HardwareModuleController extends Controller {
 
     }
 
-        public void setMoving(String movingString, Component comp) {
+    public void setMoving(String movingString, Component comp) {
         try {
             int moving = checkAndGetInt(movingString);
             super.tomograph.hardwareModule.setMoving(moving);
@@ -67,7 +67,7 @@ public class HardwareModuleController extends Controller {
         }
 
     }
-    
+
     public void setStepSize(String stepSizeString) {
         try {
             int stepSize = checkAndGetInt(stepSizeString);
@@ -135,5 +135,16 @@ public class HardwareModuleController extends Controller {
     }
 
     public void showDensityAnalizator() {
+    }
+
+    public void setReconstructionInterpolationTomograph(Object selectedItem) {
+        try {
+
+            PInterpolation pojoInterpolation = (PInterpolation) selectedItem;
+            super.tomograph.hardwareModule.setReconstructionRegimeInterpolation(pojoInterpolation);
+        } catch (ClassCastException ex) {
+            firePropertyChange("PARAMETER_VALUE_WARNING", null, " " + ex.getMessage());
+        }
+
     }
 }

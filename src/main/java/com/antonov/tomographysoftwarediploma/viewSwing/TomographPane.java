@@ -346,6 +346,24 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "hardware_sizeReconstruction":
                         edSizeReconTomograph.setText(((Integer) evt.getNewValue()).toString());
                         break;
+                    case "hardware_regimeInterpolationModel":
+                        setCbInterpolationTomograph((Set) evt.getNewValue());
+                        break;
+                    case "hardware_regimeReconstructionInterpolation":
+                        cbReconstructionInterpolationTomograph.setSelectedItem(evt.getNewValue());
+                        break;
+                    case "hardware_filterSet":
+                        setCbFilteringModelTomograph((Set) evt.getNewValue());
+                        break;
+                    case "hardware_filter":
+                        cbFilteringModelTomograph.setSelectedItem(evt.getNewValue());
+                        break;
+                    case "hardware_colorModel":
+                        setCbColoringTomograph();
+                        break;
+                    case "hardware_currentColorModelling":
+                        cbColoringTomograph.setSelectedItem(evt.getNewValue());
+                        break;
                 }
             }
         };
@@ -452,6 +470,21 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         });
     }
 
+    private void setCbInterpolationTomograph(Set setInterpolation) {
+
+        cbReconstructionInterpolationTomograph.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
+    }
+
+    private void setCbFilteringModelTomograph(Set setFilter) {
+
+        cbFilteringModelTomograph.setModel(new DefaultComboBoxModel(setFilter.toArray()));
+    }
+
+    private void setCbColoringTomograph() {
+
+        cbColoringTomograph.setModel(new DefaultComboBoxModel(ColorFunctionNamesEnum.values()));
+    }
+
     private void initTextFields() {
 
         edScansModel.addFocusListener(new FocusLostListener() {
@@ -485,7 +518,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 hardwareModuleController.setScans(edScansTomograph.getText(), TomographPane.this);
             }
         });
-        
+
         edStepSizeTomograph.addFocusListener(new FocusLostListener() {
 
             @Override
@@ -493,7 +526,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 hardwareModuleController.setStepSize(edStepSizeTomograph.getText());
             }
         });
-        
+
         edMoving.addFocusListener(new FocusLostListener() {
 
             @Override
@@ -501,7 +534,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 hardwareModuleController.setMoving(edMoving.getText(), TomographPane.this);
             }
         });
-        
+
         edSizeReconTomograph.addFocusListener(new FocusLostListener() {
 
             @Override
@@ -576,6 +609,30 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setColoringName((ColorFunctionNamesEnum) cbColoringModel.getSelectedItem());
+            }
+        });
+
+        cbReconstructionInterpolationTomograph.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hardwareModuleController.setReconstructionInterpolationTomograph(cbReconstructionInterpolationTomograph.getSelectedItem());
+            }
+        });
+
+        cbFilteringModelTomograph.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hardwareModuleController.setFilterModel(cbFilteringModelTomograph.getSelectedItem());
+            }
+        });
+
+        cbColoringTomograph.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hardwareModuleController.setColoringName((ColorFunctionNamesEnum) cbColoringTomograph.getSelectedItem());
             }
         });
     }
@@ -707,6 +764,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         panelReconstuctTomographData = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         edSizeReconTomograph = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        cbFilteringModelTomograph = new javax.swing.JComboBox();
+        jLabel17 = new javax.swing.JLabel();
+        cbReconstructionInterpolationTomograph = new javax.swing.JComboBox();
+        jLabel18 = new javax.swing.JLabel();
+        cbColoringTomograph = new javax.swing.JComboBox();
         jSplitPane3 = new javax.swing.JSplitPane();
         panelResultTomograph = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1397,8 +1460,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
-            gridBagConstraints.ipadx = 54;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipadx = 30;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.weightx = 1.0;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             panelScanData.add(edScansTomograph, gridBagConstraints);
 
@@ -1441,7 +1506,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.gridy = 0;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
             panelControlsTomograph.add(panelScanData, gridBagConstraints);
 
             panelCalculateTomograph.setLayout(new java.awt.GridBagLayout());
@@ -1518,8 +1583,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
             panelControlsTomograph.add(panelCalculateTomograph, gridBagConstraints);
 
             panelReconstuctTomographData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
@@ -1537,17 +1603,66 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
-            gridBagConstraints.ipadx = 54;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipadx = 30;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.weightx = 1.0;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
             panelReconstuctTomographData.add(edSizeReconTomograph, gridBagConstraints);
+
+            jLabel16.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            panelReconstuctTomographData.add(jLabel16, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            panelReconstuctTomographData.add(cbFilteringModelTomograph, gridBagConstraints);
+
+            jLabel17.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            panelReconstuctTomographData.add(jLabel17, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            panelReconstuctTomographData.add(cbReconstructionInterpolationTomograph, gridBagConstraints);
+
+            jLabel18.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 5;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            panelReconstuctTomographData.add(jLabel18, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 6;
+            gridBagConstraints.gridwidth = 2;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            panelReconstuctTomographData.add(cbColoringTomograph, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
             panelControlsTomograph.add(panelReconstuctTomographData, gridBagConstraints);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1555,7 +1670,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.gridy = 0;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
             Tomograph.add(panelControlsTomograph, gridBagConstraints);
 
             jSplitPane3.setResizeWeight(0.2);
@@ -1632,7 +1747,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
             Tomograph.add(jSplitPane3, gridBagConstraints);
 
             jTabbedPane1.addTab("Томограф", Tomograph);
@@ -1642,66 +1757,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             pack();
         }// </editor-fold>//GEN-END:initComponents
-
-    private void buttonSaveReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructTomographActionPerformed
-        // TODO add your handling code here:
-//        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-//            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
-//            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-//            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
-//
-//            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-//            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-//
-//            saveFile(bi, name, filterImageDesc);
-//
-//        }
-    }//GEN-LAST:event_buttonSaveReconstructTomographActionPerformed
-
-    private void buttonOpenProjDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenProjDataActionPerformed
-        // TODO add your handling code here:
-        dialogProjDataChooser.setVisible(true);
-        try {
-            buttonSaveReconstructTomograph.setEnabled(false);
-
-            Class.forName("com.mysql.jdbc.Driver");
-            while (tableProjData.getRowCount() > 0) {
-                ((DefaultTableModel) tableProjData.getModel()).removeRow(0);
-            }
-
-            DefaultTableModel model = (DefaultTableModel) tableProjData.getModel();
-            Properties props = new Properties();
-            props.put("useUnicode", "true");
-            props.put("characterEncoding", "UTF-8");
-
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
-                    + "user=root&password=ProL1ant", props);
-
-            Statement statement = connect.createStatement();
-
-            String SQL = "select * from project_data";
-            ResultSet rs = statement.executeQuery(SQL);
-            String n = "", e = "", k1 = "";
-            while (rs.next()) {
-
-                Object[] data = {rs.getString("DATE"), rs.getString("NAME"), rs.getString("DESCRIPTION")};
-                model.addRow(data);
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_buttonOpenProjDataActionPerformed
-
-    private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
-        // TODO add your handling code here:
-        buttonSaveReconstructTomograph.setEnabled(false);
-        labelImage3.setIcon(null);
-        dialogNameAsker.setVisible(true);
-
-    }//GEN-LAST:event_buttonStartActionPerformed
 
     private void labelImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImage1MouseClicked
         // TODO add your handling code here:
@@ -1943,24 +1998,82 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void buttonDensityViewerTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerTomographActionPerformed
         // TODO add your handling code here:
-//        densityViewer.setVisible(true);
-//
-//        scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
-//        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, 0);
-//        ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
-//        labelImageDensityViewer.setIcon(icon);
-//
-//        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
-//        int initialLineSlise = densitySourseArray.length / 2;
-//        densitySlider.setMaximum(densitySourseArray.length - 1);
-//        densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
-//        densitySlider.setPaintLabels(true);
-//        densitySlider.setPaintTicks(true);
-//
-//        densityGraphPane.setLayout(new java.awt.BorderLayout());
-//        densityGraphPane.add(DensityAnalizator.generateDensityGraph(arrayReconstructedImage.get(sliderImage.getValue()), initialLineSlise), BorderLayout.CENTER);
-//        densityGraphPane.validate();
+        //        densityViewer.setVisible(true);
+        //
+        //        scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
+        //        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, 0);
+        //        ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
+        //        labelImageDensityViewer.setIcon(icon);
+        //
+        //        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
+        //        int initialLineSlise = densitySourseArray.length / 2;
+        //        densitySlider.setMaximum(densitySourseArray.length - 1);
+        //        densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
+        //        densitySlider.setPaintLabels(true);
+        //        densitySlider.setPaintTicks(true);
+        //
+        //        densityGraphPane.setLayout(new java.awt.BorderLayout());
+        //        densityGraphPane.add(DensityAnalizator.generateDensityGraph(arrayReconstructedImage.get(sliderImage.getValue()), initialLineSlise), BorderLayout.CENTER);
+        //        densityGraphPane.validate();
     }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
+
+    private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
+        // TODO add your handling code here:
+        buttonSaveReconstructTomograph.setEnabled(false);
+        labelImage3.setIcon(null);
+        dialogNameAsker.setVisible(true);
+    }//GEN-LAST:event_buttonStartActionPerformed
+
+    private void buttonSaveReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructTomographActionPerformed
+        // TODO add your handling code here:
+        //        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
+            //            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
+            //            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
+            //            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
+            //
+            //            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
+            //            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
+            //
+            //            saveFile(bi, name, filterImageDesc);
+            //
+            //        }
+    }//GEN-LAST:event_buttonSaveReconstructTomographActionPerformed
+
+    private void buttonOpenProjDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenProjDataActionPerformed
+        // TODO add your handling code here:
+        dialogProjDataChooser.setVisible(true);
+        try {
+            buttonSaveReconstructTomograph.setEnabled(false);
+
+            Class.forName("com.mysql.jdbc.Driver");
+            while (tableProjData.getRowCount() > 0) {
+                ((DefaultTableModel) tableProjData.getModel()).removeRow(0);
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tableProjData.getModel();
+            Properties props = new Properties();
+            props.put("useUnicode", "true");
+            props.put("characterEncoding", "UTF-8");
+
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
+                + "user=root&password=ProL1ant", props);
+
+            Statement statement = connect.createStatement();
+
+            String SQL = "select * from project_data";
+            ResultSet rs = statement.executeQuery(SQL);
+            String n = "", e = "", k1 = "";
+            while (rs.next()) {
+
+                Object[] data = {rs.getString("DATE"), rs.getString("NAME"), rs.getString("DESCRIPTION")};
+                model.addRow(data);
+            }
+        } catch (SQLException ex) {
+            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonOpenProjDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1984,8 +2097,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonSinogram;
     private javax.swing.JButton buttonStart;
     private javax.swing.JComboBox cbColoringModel;
+    private javax.swing.JComboBox cbColoringTomograph;
     private javax.swing.JComboBox cbFilteringModel;
+    private javax.swing.JComboBox cbFilteringModelTomograph;
     private javax.swing.JComboBox cbReconstructionInterpolation;
+    private javax.swing.JComboBox cbReconstructionInterpolationTomograph;
     private javax.swing.JComboBox cbSinogramInterpolation;
     private javax.swing.ButtonGroup colorGroupTomograph;
     private javax.swing.JDialog dialogFilterChooser;
@@ -2015,6 +2131,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

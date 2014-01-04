@@ -181,14 +181,13 @@ public class HardwareModule {
         firePropertyChange("hardware_stepsize", null, stepSize);
         firePropertyChange("hardware_moving", null, stepSize);
         firePropertyChange("hardware_sizeReconstruction", null, sizeReconstruction);
-//        firePropertyChange("regimeInterpolationModel", null, setInterpolation);
-//        firePropertyChange("regimeSinogramInterpolation", null, regimeSinogramInterpolation);
-//        firePropertyChange("regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
-
-//        firePropertyChange("filterSet", null, tomograph.setFilterName);
-//        firePropertyChange("filterModel", null, currentFilter);
-//        firePropertyChange("colorModelModelling", null, ColorFunctionNamesEnum.class);
-//        firePropertyChange("currentColorModelModelling", null, currentColorName);
+        firePropertyChange("hardware_regimeInterpolationModel", null, tomograph.setInterpolation);
+        firePropertyChange("hardware_regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
+        firePropertyChange("hardware_filterSet", null, tomograph.setFilterName);
+        firePropertyChange("hardware_filter", null, currentFilter);
+        firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);        
+        firePropertyChange("hardware_currentColorModelling", null, currentColorName);
+        
         logger.info("Views are prepared");
     }
 
@@ -258,7 +257,7 @@ public class HardwareModule {
         ColorFunctionNamesEnum oldCurrentColorName = this.currentColorName;
         this.currentColorName = colorName;
 
-        logger.trace("Value of currentColorName now is " + currentColorName
+        logger.trace("Value of tomograph_currentColorName now is " + currentColorName
                 + ". Old value was " + oldCurrentColorName);
 
         if (currentReconstructionImage != null) {
