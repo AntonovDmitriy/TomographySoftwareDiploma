@@ -24,7 +24,7 @@ public class SinogramCreator extends ModellingImageCalculator {
 
         double[][] projectionData = new double[rotates][scans];
         Utils.fillZeroMatrix(projectionData);
-        
+
         double scaleImageToSinogramRatio = calculateImageScaleRatio(pixInitialImage, this.scans);
 
         double[] minusCosTab = Utils.getRowOfFunctionIncrementalValues("-cos", START_ROTATION_ANGLE, FINISH_ROTATION_ANGLE, this.stepSize);
@@ -105,16 +105,16 @@ public class SinogramCreator extends ModellingImageCalculator {
                 - Math.ceil(a * x + b));
 
         if (y >= -Xcenter && y + 1 < Xcenter) {
-            if(isAngleInFirstOrFourthSection)
-            val += (1 - weight)
-                    * pixInitialImage[(y + Ycenter)][(x + Xcenter)]
-                    + weight
-                    * pixInitialImage[(y + Ycenter)][(x + Xcenter)];
-            else{
-                            val += (1 - weight)
-                    * pixInitialImage[(x + Ycenter)][(y + Xcenter)]
-                    + weight
-                    * pixInitialImage[(x + Ycenter)][(y + Xcenter)];
+            if (isAngleInFirstOrFourthSection) {
+                val += (1 - weight)
+                        * pixInitialImage[(y + Ycenter)][(x + Xcenter)]
+                        + weight
+                        * pixInitialImage[(y + Ycenter)][(x + Xcenter)];
+            } else {
+                val += (1 - weight)
+                        * pixInitialImage[(x + Ycenter)][(y + Xcenter)]
+                        + weight
+                        * pixInitialImage[(x + Ycenter)][(y + Xcenter)];
             }
         }
         return val;
@@ -125,6 +125,24 @@ public class SinogramCreator extends ModellingImageCalculator {
         return Math.abs(minusCosTab[view]) > cosOf45Degrees;
     }
 
+    public double[][] createProjectionData(BufferedImage sourceImage) throws ImageWrongValueException {
+
+        super.setInitialImage(sourceImage);
+        if (sourceImage != null && scans != 0 && stepSize != 0) {
+
+            String regimeInteprolation = "linear";
+
+            double[][] pixInitialImage = Utils.getDoubleRevertedArrayPixelsFromBufImg(sourceImage);
+            logger.trace("Array of pixel values of source image has been created");
+            double[][] projectionData = generateProjectionData(pixInitialImage, regimeInteprolation);
+            projectionData = Utils.normalize2DArray(projectionData, 0, 1);
+
+            return projectionData;
+        } else {
+            throw new MissingFormatArgumentException("Parameters of modelling are emptry or incorrect");
+        }
+
+    }
 
     public BufferedImage createSinogram(IProjDataSaver model, BufferedImage sourceImage, String regimeInteprolation) throws NumberWrongValueException, ImageWrongValueException {
         super.setInitialImage(sourceImage);

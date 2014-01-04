@@ -18,8 +18,6 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.Enumeration;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -361,8 +359,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "hardware_currentColorModelling":
                         cbColoringTomograph.setSelectedItem(evt.getNewValue());
                         break;
-                    case "hardware_disableTomographContols":
+                    case "hardware_disableTomographControls":
                         disableTomographControls();
+                        break;
+                    case "hardware_startScanning":
+                        startCalculating();
+                        break;
+                    case "hardware_stopScanning":
+                        stopCalculating();
                         break;
                 }
             }
@@ -477,17 +481,23 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
 
-        buttonCanselSetName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dialogNameAsker.setVisible(false);
-            }
-        });
-
         buttonOkSetName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hardwareModuleController.startScanning(edFileName.getText(),edFileDescription.getText());
+                    }
+                }).start();
+            }
+        });
+
+        buttonCanselSetName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialogNameAsker.setVisible(false);
             }
         });
     }
@@ -726,8 +736,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         filterGroupTomograph = new javax.swing.ButtonGroup();
         dialogNameAsker = new javax.swing.JDialog();
         jLabel8 = new javax.swing.JLabel();
-        textFielsName = new javax.swing.JTextField();
-        textFielsDescription = new javax.swing.JTextField();
+        edFileName = new javax.swing.JTextField();
+        edFileDescription = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         buttonOkSetName = new javax.swing.JButton();
@@ -1043,6 +1053,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             jLabel10.setText("Название");
 
             buttonOkSetName.setText("OK");
+            buttonOkSetName.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonOkSetNameActionPerformed(evt);
+                }
+            });
 
             buttonCanselSetName.setText("Отмена");
 
@@ -1064,8 +1079,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel10)
                                 .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(textFielsDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textFielsName, javax.swing.GroupLayout.Alignment.LEADING)))
+                                    .addComponent(edFileDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edFileName, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addGap(28, 28, 28))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
                             .addComponent(jLabel8)
@@ -1079,11 +1094,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jLabel10)
                     .addGap(8, 8, 8)
-                    .addComponent(textFielsName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jLabel9)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(textFielsDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edFileDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(26, 26, 26)
                     .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buttonOkSetName)
@@ -1236,7 +1251,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 3;
-            gridBagConstraints.ipadx = 8;
+            gridBagConstraints.ipadx = 6;
             gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
@@ -1916,6 +1931,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 //        }
     }//GEN-LAST:event_buttonOkFilterTomographActionPerformed
 
+    private void buttonOkSetNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkSetNameActionPerformed
+        // TODO add your handling code here:
+        //-------------------Check data ReconstuctionImgSize 
+
+    }//GEN-LAST:event_buttonOkSetNameActionPerformed
+
     private void labelImage3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImage3MouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2 && labelImage3.getIcon() != null) {
@@ -2078,6 +2099,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JDialog dialogNameAsker;
     private javax.swing.JDialog dialogProgressBar;
     private javax.swing.JDialog dialogProjDataChooser;
+    private javax.swing.JTextField edFileDescription;
+    private javax.swing.JTextField edFileName;
     private javax.swing.JTextField edMoving;
     private javax.swing.JTextField edScansModel;
     private javax.swing.JTextField edScansTomograph;
@@ -2148,8 +2171,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JFileChooser saveFileChooser;
     private javax.swing.JSlider sliderImage;
     private javax.swing.JTable tableProjData;
-    private javax.swing.JTextField textFielsDescription;
-    private javax.swing.JTextField textFielsName;
     private javax.swing.JToolBar toolbarModellingImage;
     private javax.swing.JToolBar toolbarSourceImage;
     // End of variables declaration//GEN-END:variables

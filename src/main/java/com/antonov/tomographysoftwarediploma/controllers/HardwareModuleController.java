@@ -147,4 +147,12 @@ public class HardwareModuleController extends Controller {
         }
 
     }
+
+    public void startScanning(String fileName, String fileDesc) {
+        if(fileName==null || fileName.isEmpty())
+             firePropertyChange("PARAMETER_VALUE_WARNING", null, " " + bundle.getString("ERROR_BAD_FILE_NAME"));
+        else{
+            super.tomograph.hardwareModule.startScanning(fileName, fileDesc);
+        }
+    }
 }

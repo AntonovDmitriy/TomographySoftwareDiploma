@@ -6,6 +6,8 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
+import com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.SinogramCreator;
@@ -185,9 +187,9 @@ public class HardwareModule {
         firePropertyChange("hardware_regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
         firePropertyChange("hardware_filterSet", null, tomograph.setFilterName);
         firePropertyChange("hardware_filter", null, currentFilter);
-        firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);        
+        firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);
         firePropertyChange("hardware_currentColorModelling", null, currentColorName);
-        
+
         logger.info("Views are prepared");
     }
 
@@ -272,5 +274,29 @@ public class HardwareModule {
         this.coloredReconstructionImage = colorImage;
         logger.trace("current tomograph colored image has been changed");
         firePropertyChange("hardware_colorImageModelling", null, coloredReconstructionImage);
+    }
+
+    public void startScanning(String fileName, String fileDesctiption) {
+
+        if (scans == null || stepSize == null || moving == null) {
+            firePropertyChange("ERROR", null, bundle.getString("ERROR_SCAN_PARAMETERS"));
+        } else {
+            try {
+                logger.trace("Scanning is starting");
+                firePropertyChange("hardware_disableTomographControls", null, null);
+                firePropertyChange("hardware_startScanning", null, null);
+
+                //This methos emulates scanning. In future there will be method starting real scanning
+                ScanningEmulator.emulateScanning(fileName, fileDesctiption, scans, stepSize, tomographProperty, new TomographDaoImpl());
+
+                firePropertyChange("hardware_enableTomographControls", null, null);
+                firePropertyChange("hardware_stopScanning", null, null);
+                logger.trace("Scanning is finishing");
+            } catch (Throwable ex) {
+                logger.error("Internal error during scanning ", ex);
+                firePropertyChange("INTERNAL_ERROR", null, "Internal error scanning");
+            }
+        }
+
     }
 }

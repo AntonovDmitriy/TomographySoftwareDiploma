@@ -77,45 +77,6 @@ public class DbModule {
 
     }
 
-    public static void setProjDataSet(String name, String description, int scans, int stepSize) {
-
-        int views = (int) 180/stepSize;
-
-        List<Object> projArrayList = new ArrayList<Object>();
-        String path = "C:\\Users\\Antonov\\Desktop\\Images\\Stack";
-//            int countFiles = new File(path).listFiles().length;
-        File folder = new File(path);
-        File[] listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                try {
-                    BufferedImage img = ImageIO.read(file);
-                    double[][] entry = com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator.createProjectionData(img,views,scans,stepSize);
-                    projArrayList.add(entry);
-                } catch (IOException e) {
-                }
-            }
-        }
-        try {
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
-                    + "user=root&password=ProL1ant", props);
-
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-
-            PreparedStatement pstmt = connect.prepareStatement(WRITE_OBJECT_SQL);
-            pstmt.setString(1, dateFormat.format(calendar.getTime()).toString());
-            pstmt.setString(2, name);
-            pstmt.setString(3, description);
-            pstmt.setObject(4, projArrayList);
-            pstmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public static void main(String[] args) {
 
         //       String SQL = "INSERT INTO project_data (DATE, NAME,DESCRIPTION) VALUES('2.05.2013', 'proj1','Проекционные данные 2')";

@@ -8,6 +8,8 @@ package com.antonov.tomographysoftwarediploma.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 
 /**
@@ -17,8 +19,22 @@ import javax.imageio.ImageIO;
 public class ReaderWriterData {
 
     public static BufferedImage getImageFromFileSystem(File file) throws IOException {
-        
+
         return ImageIO.read(file);
+    }
+
+    public static List<BufferedImage> getAllImagesFromFileSystem(File pathTo) throws IOException {
+
+        List<BufferedImage> result = new ArrayList<>();
+        File[] listOfFiles = pathTo.listFiles();
+
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                BufferedImage img = ImageIO.read(file);
+                result.add(img);
+            }
+        }
+        return result;
     }
 
     public static void saveImageToFileSystem(BufferedImage image, File file, String filterImageDesc) throws IOException {
@@ -40,7 +56,7 @@ public class ReaderWriterData {
         } else if (filterImageDesc.equals("All Files")) {
             format = "";
         }
-        
+
         ImageIO.write(image, format, new File(name));
 
     }

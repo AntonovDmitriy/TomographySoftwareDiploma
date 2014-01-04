@@ -33,12 +33,19 @@ public class ImageTransformerFacade {
         return image;
     }
 
-    public static BufferedImage createSinogram(IProjDataSaver model, BufferedImage initialImage, int views, int stepSize, String regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
+    public static BufferedImage createSinogram(IProjDataSaver model, BufferedImage initialImage, int scans, int stepSize, String regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
 
         SinogramCreator sinogramCreator = new SinogramCreator();
-        sinogramCreator.setDataModelling(views, stepSize);
+        sinogramCreator.setDataModelling(scans, stepSize);
         BufferedImage sinogram = sinogramCreator.createSinogram(model, initialImage, regimeInterpolation);
         return sinogram;
+    }
+
+    public static double[][] createProjectionDataFromImage(BufferedImage initialImage, int scans, int stepSize) throws NumberWrongValueException, ImageWrongValueException {
+
+        SinogramCreator sinogramCreator = new SinogramCreator();
+        sinogramCreator.setDataModelling(scans, stepSize);
+        return sinogramCreator.createProjectionData(initialImage);
     }
 
     public static BufferedImage reconstructModellingSinogram(BufferedImage sinogram, int scans, int stepSize, int sizeOfReconstruction, String filterName) throws NumberWrongValueException, ImageWrongValueException {
