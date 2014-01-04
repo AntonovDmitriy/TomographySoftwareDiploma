@@ -1436,7 +1436,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+            gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
             Model.add(jSplitPane1, gridBagConstraints);
 
             jTabbedPane1.addTab("Модель", Model);
