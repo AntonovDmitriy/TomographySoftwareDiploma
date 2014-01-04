@@ -1187,6 +1187,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
+            gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonSinogram, gridBagConstraints);
@@ -1202,6 +1203,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
+            gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonDensityViewer, gridBagConstraints);
@@ -1213,6 +1215,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 3;
+            gridBagConstraints.ipadx = 8;
+            gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneControl.add(buttonReconstruct, gridBagConstraints);
@@ -1576,6 +1580,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             panelCalculateTomograph.add(buttonDensityViewerTomograph, gridBagConstraints);
