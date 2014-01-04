@@ -53,6 +53,7 @@ public class ImageTransformerFacade {
     }
 
     public static BufferedImage reconstructProjectionData(double[][] projectionData, int scans, int stepSize, int sizeOfReconstruction, String filterName, String regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
+        
         Reconstructor reconstructor = new Reconstructor();
         reconstructor.setDataModelling(scans, stepSize);
         reconstructor.setDataReconstruction(sizeOfReconstruction, filterName);

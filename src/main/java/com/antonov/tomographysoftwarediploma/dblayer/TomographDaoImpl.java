@@ -29,6 +29,7 @@ public class TomographDaoImpl implements ITomographDao {
     @Override
     public void insertProjectionData(List<Object> projectionDataList) {
 
+        int i = 2;
 //        try {
 //            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
 //                    + "user=root&password=ProL1ant");
