@@ -48,5 +48,4 @@ public class TomographDaoImpl implements ITomographDao {
 //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
-
 }
