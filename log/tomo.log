@@ -7822,3 +7822,46 @@ com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageWrongValueExcept
 2014-01-05 20:17:44 TRACE ModellingModule:262 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
 2014-01-05 20:17:44 INFO  ModellingModule:193 - Views are prepared
 2014-01-05 20:17:51 INFO  Tomograph:77 - =======Stop TomographySoftware 1.0.0 application=======
+2014-01-09 10:22:23 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-09 10:22:23 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-09 10:22:23 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-09 10:22:23 TRACE ModellingModule:117 - Reading image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-09 10:22:23 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-09 10:22:23 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-09 10:22:23 TRACE ModellingModule:123 - Image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-09 10:22:23 TRACE ModellingModule:117 - Reading image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-09 10:22:23 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-09 10:22:23 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-09 10:22:23 TRACE ModellingModule:123 - Image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-09 10:22:23 TRACE ModellingModule:117 - Reading image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-09 10:22:23 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-09 10:22:23 TRACE Tomograph:27 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-09 10:22:23 TRACE ModellingModule:123 - Image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-09 10:22:23 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-09 10:22:23 INFO  ModellingModule:169 - scans = 400
+2014-01-09 10:22:23 INFO  ModellingModule:179 - stepsize = 1
+2014-01-09 10:22:23 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-09 10:22:23 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-09 10:22:23 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-09 10:22:23 INFO  ModellingModule:245 - current filtering model = none
+2014-01-09 10:22:23 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-09 10:22:23 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-09 10:22:23 INFO  ModellingModule:69 - Reading initial hardware module parameters
+2014-01-09 10:22:23 INFO  ModellingModule:84 - tomograph_scans = 400
+2014-01-09 10:22:23 INFO  ModellingModule:94 - tomograph_stepsize = 1
+2014-01-09 10:22:23 INFO  ModellingModule:115 - regimeReconstructionInterpolation = Линейная
+2014-01-09 10:22:23 INFO  ModellingModule:125 - tomograph_sizeReconstruction = 600
+2014-01-09 10:22:23 INFO  ModellingModule:140 - current filtering tomograph = none
+2014-01-09 10:22:23 INFO  ModellingModule:151 - coloring name tomograph = hue_grb_0
+2014-01-09 10:22:23 INFO  ModellingModule:160 - TOMOGRAPH_MOVING = 1
+2014-01-09 10:22:23 INFO  ModellingModule:77 - Initial hardware module parameters have been read
+2014-01-09 10:22:24 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-09 10:22:24 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-09 10:22:24 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-09 10:22:24 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-09 10:22:24 INFO  ModellingModule:149 - Views are prepared
+2014-01-09 10:22:24 TRACE ModellingModule:249 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-09 10:22:24 TRACE ModellingModule:239 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-09 10:22:24 TRACE ModellingModule:262 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-09 10:22:24 INFO  ModellingModule:193 - Views are prepared
+2014-01-09 10:25:57 INFO  Tomograph:77 - =======Stop TomographySoftware 1.0.0 application=======
