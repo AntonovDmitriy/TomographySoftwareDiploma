@@ -30,7 +30,7 @@ public class AppLaunch {
 
     public static void main(String[] args) {
 
-//        initLAF();
+        initLAF();
         internationalize();
 
         Tomograph model = new Tomograph();

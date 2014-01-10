@@ -5,6 +5,8 @@
  */
 package com.antonov.tomographysoftwarediploma.dblayer;
 
+import com.jcraft.jsch.JSchException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,6 +15,6 @@ import java.util.List;
  */
 public interface ITomographDao {
 
-    public void insertProjectionData(List<Object> projectionDataList);
+    public void insertProjectionData(String name, String description,List<Object> projectionDataList) throws JSchException, SQLException,EmptyOrNullParameterException;
 
 }

@@ -11,6 +11,7 @@ import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransform
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageWrongValueException;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.NumberWrongValueException;
 import com.antonov.tomographysoftwarediploma.viewSwing.TomographPane;
+import com.jcraft.jsch.JSchException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class ScanningEmulator {
 
     public static Logger logger = LoggerFactory.getLogger(ScanningEmulator.class);
 
-    public static void emulateScanning(String name, String description, int scans, int stepSize, Properties tomographProperties, ITomographDao dao) throws IOException, NumberWrongValueException, ImageWrongValueException {
+    public static void emulateScanning(String name, String description, int scans, int stepSize, Properties tomographProperties, ITomographDao dao) throws IOException, NumberWrongValueException, ImageWrongValueException, JSchException, SQLException {
 
         logger.trace("Scanning is in emulator regime");
         String path = tomographProperties.getProperty("PATH_SCANNING_EMULATOR_IMAGES_PATH");
@@ -55,7 +56,7 @@ public class ScanningEmulator {
 
             }
             
-            dao.insertProjectionData(projArrayList);
+            dao.insertProjectionData(name, description, projArrayList);
         }
     }
 

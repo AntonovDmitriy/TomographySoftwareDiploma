@@ -287,7 +287,7 @@ public class HardwareModule {
                 firePropertyChange("hardware_startScanning", null, null);
 
                 //This methos emulates scanning. In future there will be method starting real scanning
-                ScanningEmulator.emulateScanning(fileName, fileDesctiption, scans, stepSize, tomographProperty, new TomographDaoImpl());
+                ScanningEmulator.emulateScanning(fileName, fileDesctiption, scans, stepSize, tomographProperty, new TomographDaoImpl(tomographProperty));
 
                 firePropertyChange("hardware_enableTomographControls", null, null);
                 firePropertyChange("hardware_stopScanning", null, null);
