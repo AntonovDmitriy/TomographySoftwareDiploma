@@ -5,9 +5,6 @@
  */
 package com.antonov.tomographysoftwarediploma.dblayer;
 
-import com.antonov.tomographysoftwarediploma.impl.ScanningEmulator;
-import com.antonov.tomographysoftwarediploma.viewSwing.TomographPane;
-import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -19,13 +16,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,14 +28,16 @@ import org.slf4j.LoggerFactory;
  */
 public class TomographDaoImpl implements ITomographDao {
 
-    private static String SQL_INSERT_PROJECTION_DATA = "INSERT INTO project_data (DATE, NAME,DESCRIPTION,PROJECT_ARRAY) VALUES(?, ?,?,?)";
-    
+    private static String SQL_INSERT_SET_PROJECTION_DATA = "INSERT INTO set_projection_data (PDNAME,PDDESCR) VALUES (?,?)";
+    private static String SQL_INSERT_PROJECTION_DATA = "INSERT INTO projection_data (DATA,ID_SET) VALUES (?,?)";
+    private static final String SQL_SELECT_ALL_SET_PROJECTION_DATA = "SELECT * FROM set_projection_data";
+
     private static final String READ_OBJECT_SQL = "SELECT PROJECT_ARRAY FROM project_data WHERE NAME = ?";
 
     private static final String SSH_CONNECTION = "528d18a4e0b8cdb068000071@app-helloweb.rhcloud.com";
-    private static final String DB_URL = "jdbc:mysql://localhost:1234/mysql?"
-                + "user=adminR8QufFz&password=a3ZixG3aDcJG";
-    
+    private static final String DB_URL = "jdbc:mysql://localhost:1234/Tomo?"
+            + "user=adminR8QufFz&password=a3ZixG3aDcJG";
+
     private Properties properties;
     public static Logger logger = LoggerFactory.getLogger(TomographDaoImpl.class);
 
@@ -58,37 +53,16 @@ public class TomographDaoImpl implements ITomographDao {
     @Override
     public void insertProjectionData(String fileName, String description, List<Object> projectionDataList) throws JSchException, SQLException, EmptyOrNullParameterException {
         logger.trace("Reading dbParameters");
-        readInitialDbParameters();
-//        try {
-//            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
-//                    + "user=root&password=ProL1ant");
-//
-//            Calendar calendar = Calendar.getInstance();
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//
-//            PreparedStatement pstmt = connect.prepareStatement(SQL_INSERT_PROJECTION_DATA);
-//            pstmt.setString(1, dateFormat.format(calendar.getTime()).toString());
-//            pstmt.setString(2, name);
-//            pstmt.setString(3, description);
-//            pstmt.setObject(4, projArrayList);
-//            pstmt.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-
-        Session session = getSession(pathToPrivateKey, dbHost, localPort, remotePort);
+        Session session = getSession();
         insertProjectionDataToDb(fileName, description, projectionDataList, session);
 
     }
 
-//    public static void main(String[] args) throws JSchException, SQLException {
-//
-//        TomographDaoImpl t = new TomographDaoImpl();
-//        t.insertProjectionData(null);
-//    }
-    private Session getSession(String pathToPrivateKey, String dbHost, int localPort, int remotePort) throws JSchException {
+    private Session getSession() throws JSchException, EmptyOrNullParameterException {
+        logger.info("Trying to connect database through ssh........");
+        long start = System.currentTimeMillis();
+        
+        readInitialDbParameters();
 
         JSch jsch = new JSch();
         jsch.addIdentity((new File(pathToPrivateKey)).getAbsolutePath());
@@ -105,6 +79,9 @@ public class TomographDaoImpl implements ITomographDao {
         session.setUserInfo(ui);
         session.connect();
         session.setPortForwardingL(localPort, dbHost, remotePort);
+        long finish = System.currentTimeMillis();
+        long result = finish - start;
+        logger.info("Connection to database successfully created. " + result + " sec.");
         return session;
     }
 
@@ -152,16 +129,78 @@ public class TomographDaoImpl implements ITomographDao {
     }
 
     private void insertProjectionDataToDb(String fileName, String description, List<Object> projectionDataList, Session session) throws SQLException {
+        ResultSet rs = null;
+        try (Connection connect = DriverManager.getConnection(DB_URL);
+                PreparedStatement psSet = connect.prepareStatement(SQL_INSERT_SET_PROJECTION_DATA, PreparedStatement.RETURN_GENERATED_KEYS);
+                PreparedStatement psProjectData = connect.prepareStatement(SQL_INSERT_PROJECTION_DATA)) {
 
-        Connection connect = DriverManager.getConnection(DB_URL);
+            psSet.setString(1, fileName);
+            psSet.setString(2, description);
+            psSet.executeUpdate();
 
-        Statement st = connect.createStatement();
-        st.execute("INSERT INTO  `Tomo`.`test` (\n"
-                + "`id` ,\n"
-                + "`name`\n"
-                + ")\n"
-                + "VALUES (\n"
-                + "'2',  'second'\n"
-                + ");");
+            logger.trace("Entry of set have been inserted " + fileName + " " + description);
+
+            int setGeneratedIndex = 8;
+            rs = psSet.getGeneratedKeys();
+
+            if (rs.next()) {
+                setGeneratedIndex = rs.getInt(1);
+            }
+            logger.trace("Primary key of set is " + setGeneratedIndex);
+
+            for (Object entry : projectionDataList) {
+                psProjectData.setObject(1, entry);
+                psProjectData.setInt(2, setGeneratedIndex);
+                psProjectData.addBatch();
+            }
+
+            psProjectData.executeBatch();
+//            connect.commit();
+            logger.info("All projection data have been inserted");
+        } finally {
+
+            if (rs != null) {
+                rs.close();
+            }
+            session.disconnect();
+        }
+    }
+
+    @Override
+    public List<PSetProjectionData> selectAllSetProjectionData() throws JSchException, SQLException, EmptyOrNullParameterException {
+        Session session = getSession();
+        return selectAllSetProjectionDataFromDb(session);
+    }
+
+    private List<PSetProjectionData> selectAllSetProjectionDataFromDb(Session session) throws SQLException {
+
+        logger.info("Querying sets projection data from db......");
+        long start = System.currentTimeMillis();
+        List<PSetProjectionData> result = new ArrayList<PSetProjectionData>();
+
+        ResultSet rs = null;
+        try (Connection connect = DriverManager.getConnection(DB_URL);
+                Statement st = connect.createStatement()) {
+
+            rs = st.executeQuery(SQL_SELECT_ALL_SET_PROJECTION_DATA);
+
+            while (rs.next()) {
+                PSetProjectionData entry = new PSetProjectionData();
+                entry.setID(rs.getInt("ID"));
+                entry.setPDNAME(rs.getString("PDNAME"));
+                entry.setPDDESCR(rs.getString("PDDESCR"));
+                result.add(entry);
+            }
+        } finally {
+
+            if (rs != null) {
+                rs.close();
+            }
+            session.disconnect();
+        }
+        long finish = System.currentTimeMillis();
+        long resultTime = finish - start;
+        logger.info("Projection data sets have been loaded. " + resultTime + " sec");
+        return result;
     }
 }

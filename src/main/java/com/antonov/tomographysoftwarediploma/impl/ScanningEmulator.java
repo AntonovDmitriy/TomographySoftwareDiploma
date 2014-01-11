@@ -38,12 +38,12 @@ public class ScanningEmulator {
 
     public static Logger logger = LoggerFactory.getLogger(ScanningEmulator.class);
 
-    public static void emulateScanning(String name, String description, int scans, int stepSize, Properties tomographProperties, ITomographDao dao) throws IOException, NumberWrongValueException, ImageWrongValueException, JSchException, SQLException, EmptyOrNullParameterException {
+    public static List<Object> emulateScanning(int scans, int stepSize, Properties tomographProperties) throws IOException,NumberWrongValueException, ImageWrongValueException{
 
         logger.trace("Scanning is in emulator regime");
         String path = tomographProperties.getProperty("PATH_SCANNING_EMULATOR_IMAGES_PATH");
         List<Object> projArrayList = new ArrayList<>();
-
+//
         File folder = new File(path);
         logger.trace("Trying to read images from folder");
 
@@ -56,8 +56,7 @@ public class ScanningEmulator {
                 projArrayList.add(projectionData);
 
             }
-            
-            dao.insertProjectionData(name, description, projArrayList);
+            return projArrayList;
         }
     }
 

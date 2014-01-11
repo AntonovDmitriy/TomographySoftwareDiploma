@@ -33,7 +33,7 @@ public class ModellingImageCalculator {
 
     public static final int AREA_SCANNING_IN_DEGREES = 180;
 
-    public void setDataModelling(int scans, int stepSize) throws NumberWrongValueException, ImageWrongValueException {
+    public void setDataModelling(int scans, int stepSize) throws NumberWrongValueException {
 
         checkScans(scans);
         logger.trace("scans value is correct " + scans);

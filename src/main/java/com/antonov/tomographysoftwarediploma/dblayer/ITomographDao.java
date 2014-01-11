@@ -17,4 +17,5 @@ public interface ITomographDao {
 
     public void insertProjectionData(String name, String description,List<Object> projectionDataList) throws JSchException, SQLException,EmptyOrNullParameterException;
 
+    public List<PSetProjectionData> selectAllSetProjectionData() throws JSchException, SQLException,EmptyOrNullParameterException;
 }

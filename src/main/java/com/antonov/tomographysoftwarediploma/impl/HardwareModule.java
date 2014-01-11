@@ -7,16 +7,27 @@ package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
+import com.antonov.tomographysoftwarediploma.dblayer.EmptyOrNullParameterException;
+import com.antonov.tomographysoftwarediploma.dblayer.ITomographDao;
+import com.antonov.tomographysoftwarediploma.dblayer.PSetProjectionData;
 import com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageWrongValueException;
+import com.antonov.tomographysoftwarediploma.impl.imageprocessing.NumberWrongValueException;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.SinogramCreator;
+import com.jcraft.jsch.JSchException;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +39,7 @@ public class HardwareModule {
 
     private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
+    private static final Logger logger = LoggerFactory.getLogger(HardwareModule.class);
     private HardwareModuleController controller;
     private Properties tomographProperty;
     private Tomograph tomograph;
@@ -48,6 +59,8 @@ public class HardwareModule {
     private BufferedImage currentReconstructionImage;
     private BufferedImage coloredReconstructionImage;
 
+    private List<PSetProjectionData> listProjectionData = new ArrayList<>();
+    
     public HardwareModule(Tomograph tomograph, Properties p) {
         this.tomograph = tomograph;
         init(p);
@@ -58,7 +71,7 @@ public class HardwareModule {
         if (p != null) {
             this.tomographProperty = p;
             initParamScanning();
-
+            initProjectionDataList();
         } else {
             logger.warn("Properties file is null");
         }
@@ -189,7 +202,11 @@ public class HardwareModule {
         firePropertyChange("hardware_filter", null, currentFilter);
         firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);
         firePropertyChange("hardware_currentColorModelling", null, currentColorName);
-
+        if(this.listProjectionData!=null && !this.listProjectionData.isEmpty())
+            firePropertyChange("hardware_setProjectionData", null, listProjectionData);
+        else{
+            firePropertyChange("hardware_disableAllTomographControls", null, null);
+        }
         logger.info("Views are prepared");
     }
 
@@ -282,21 +299,65 @@ public class HardwareModule {
             firePropertyChange("ERROR", null, bundle.getString("ERROR_SCAN_PARAMETERS"));
         } else {
             try {
-                logger.trace("Scanning is starting");
                 firePropertyChange("hardware_disableTomographControls", null, null);
                 firePropertyChange("hardware_startScanning", null, null);
 
-                //This methos emulates scanning. In future there will be method starting real scanning
-                ScanningEmulator.emulateScanning(fileName, fileDesctiption, scans, stepSize, tomographProperty, new TomographDaoImpl(tomographProperty));
-
+                List<Object> listProjectionData = getProjectionData();
+                insertProjectionDataToDb(fileName, fileDesctiption, listProjectionData);
                 firePropertyChange("hardware_enableTomographControls", null, null);
                 firePropertyChange("hardware_stopScanning", null, null);
-                logger.trace("Scanning is finishing");
-            } catch (Throwable ex) {
-                logger.error("Internal error during scanning ", ex);
-                firePropertyChange("INTERNAL_ERROR", null, "Internal error scanning");
+            } catch (IOException ex) {
+                logger.error("Error while reading image file ", ex);
+                firePropertyChange("ERROR", null, bundle.getString("ERROR_IO_READING"));
+            } catch (NumberWrongValueException ex) {
+                logger.error("Error while generating projection data ", ex);
+                firePropertyChange("ERROR", null, bundle.getString("ERROR_SCAN_PARAMETERS"));
+            } catch (ImageWrongValueException ex) {
+                logger.error("Error while generating projection data ", ex);
+                firePropertyChange("ERROR", null, bundle.getString("ERROR_IO_READING"));
+            } catch (JSchException ex) {
+                logger.error("Error while creating ssh connection ", ex);
+                firePropertyChange("ERROR", null, bundle.getString("ERROR_SSH_CONNECTION"));
+            } catch (SQLException ex) {
+                logger.error("Data base error ", ex);
+                firePropertyChange("ERROR", null, bundle.getString("ERROR_DB"));
+            } catch (EmptyOrNullParameterException ex) {
+                firePropertyChange("ERROR", null, bundle.getString("ERROR_DB_CONFIGURATION"));
             }
         }
 
+    }
+
+    private List<Object> getProjectionData() throws IOException, NumberWrongValueException, ImageWrongValueException {
+        ;
+
+        logger.trace("Scanning is starting");
+        long start = System.currentTimeMillis();
+        //This methos emulates scanning. In future there will be method starting real scanning
+        List<Object> listProjectionData = ScanningEmulator.emulateScanning(scans, stepSize, tomographProperty);
+        long finish = System.currentTimeMillis();
+        long result = finish - start;
+        logger.trace("Scanning is finishing " + result + " sec");
+        return listProjectionData;
+    }
+
+    private void insertProjectionDataToDb(String fileName, String fileDescr, List<Object> listProjectionData) throws JSchException, SQLException, EmptyOrNullParameterException {
+
+        logger.trace("Start db insert of projection data set");
+        long start = System.currentTimeMillis();
+        ITomographDao dao = new TomographDaoImpl(tomographProperty);
+        dao.insertProjectionData(fileName, fileDescr, listProjectionData);
+        long finish = System.currentTimeMillis();
+        long result = finish - start;
+        logger.trace("Finish db insert of projection data set " + result + " sec");
+    }
+
+    private void initProjectionDataList() {
+        try {
+            TomographDaoImpl dao = new TomographDaoImpl(tomographProperty);
+            this.listProjectionData = dao.selectAllSetProjectionData();
+        } catch (Throwable ex) {
+            logger.error("Error getting set projection data from db",ex);
+        }
     }
 }
