@@ -5,6 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.impl;
 
+import com.antonov.tomographysoftwarediploma.dblayer.EmptyOrNullParameterException;
 import com.antonov.tomographysoftwarediploma.dblayer.ITomographDao;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade;
@@ -37,7 +38,7 @@ public class ScanningEmulator {
 
     public static Logger logger = LoggerFactory.getLogger(ScanningEmulator.class);
 
-    public static void emulateScanning(String name, String description, int scans, int stepSize, Properties tomographProperties, ITomographDao dao) throws IOException, NumberWrongValueException, ImageWrongValueException, JSchException, SQLException {
+    public static void emulateScanning(String name, String description, int scans, int stepSize, Properties tomographProperties, ITomographDao dao) throws IOException, NumberWrongValueException, ImageWrongValueException, JSchException, SQLException, EmptyOrNullParameterException {
 
         logger.trace("Scanning is in emulator regime");
         String path = tomographProperties.getProperty("PATH_SCANNING_EMULATOR_IMAGES_PATH");
