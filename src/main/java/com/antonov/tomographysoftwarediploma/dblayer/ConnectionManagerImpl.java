@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +45,14 @@ public class ConnectionManagerImpl implements IConnectionManager {
     @Override
     public Connection getConnection() {
 
+        try {
+            if (this.connectionDb.isClosed()) {
+                connect();
+            }
+        } catch (Exception ex) {
+        }
         return this.connectionDb;
+
     }
 
     @Override

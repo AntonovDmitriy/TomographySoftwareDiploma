@@ -5,13 +5,8 @@
  */
 package com.antonov.tomographysoftwarediploma.dblayer;
 
-import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-import com.jcraft.jsch.UserInfo;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,7 +46,7 @@ public class TomographDaoImpl implements ITomographDao {
     private void insertProjectionDataToDb(String fileName, String description, List<Object> projectionDataList) throws SQLException {
         ResultSet rs = null;
         Connection connect = this.connectionManager.getConnection();
-
+        
         try (
                 PreparedStatement psSet = connect.prepareStatement(SQL_INSERT_SET_PROJECTION_DATA, PreparedStatement.RETURN_GENERATED_KEYS);
                 PreparedStatement psProjectData = connect.prepareStatement(SQL_INSERT_PROJECTION_DATA)) {
@@ -123,5 +118,4 @@ public class TomographDaoImpl implements ITomographDao {
         logger.info("Projection data sets have been loaded. " + resultTime + " sec");
         return result;
     }
-
 }
