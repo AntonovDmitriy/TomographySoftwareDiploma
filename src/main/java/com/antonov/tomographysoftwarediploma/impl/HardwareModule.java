@@ -6,8 +6,10 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
+import com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl;
 import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
 import com.antonov.tomographysoftwarediploma.dblayer.EmptyOrNullParameterException;
+import com.antonov.tomographysoftwarediploma.dblayer.IConnectionManager;
 import com.antonov.tomographysoftwarediploma.dblayer.ITomographDao;
 import com.antonov.tomographysoftwarediploma.dblayer.PSetProjectionData;
 import com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl;
@@ -60,7 +62,8 @@ public class HardwareModule {
     private BufferedImage coloredReconstructionImage;
 
     private List<PSetProjectionData> listProjectionData = new ArrayList<>();
-    
+    private IConnectionManager connectionManager;
+
     public HardwareModule(Tomograph tomograph, Properties p) {
         this.tomograph = tomograph;
         init(p);
@@ -70,6 +73,7 @@ public class HardwareModule {
 
         if (p != null) {
             this.tomographProperty = p;
+            initConnectionManager();
             initParamScanning();
             initProjectionDataList();
         } else {
@@ -202,9 +206,9 @@ public class HardwareModule {
         firePropertyChange("hardware_filter", null, currentFilter);
         firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);
         firePropertyChange("hardware_currentColorModelling", null, currentColorName);
-        if(this.listProjectionData!=null && !this.listProjectionData.isEmpty())
+        if (this.listProjectionData != null && !this.listProjectionData.isEmpty()) {
             firePropertyChange("hardware_setProjectionData", null, listProjectionData);
-        else{
+        } else {
             firePropertyChange("hardware_disableAllTomographControls", null, null);
         }
         logger.info("Views are prepared");
@@ -304,6 +308,8 @@ public class HardwareModule {
 
                 List<Object> listProjectionData = getProjectionData();
                 insertProjectionDataToDb(fileName, fileDesctiption, listProjectionData);
+                this.listProjectionData = selectAllProjectData();
+                firePropertyChange("hardware_setProjectionData", null, this.listProjectionData);
                 firePropertyChange("hardware_enableTomographControls", null, null);
                 firePropertyChange("hardware_stopScanning", null, null);
             } catch (IOException ex) {
@@ -345,7 +351,7 @@ public class HardwareModule {
 
         logger.trace("Start db insert of projection data set");
         long start = System.currentTimeMillis();
-        ITomographDao dao = new TomographDaoImpl(tomographProperty);
+        ITomographDao dao = new TomographDaoImpl(tomographProperty, connectionManager);
         dao.insertProjectionData(fileName, fileDescr, listProjectionData);
         long finish = System.currentTimeMillis();
         long result = finish - start;
@@ -354,10 +360,29 @@ public class HardwareModule {
 
     private void initProjectionDataList() {
         try {
-            TomographDaoImpl dao = new TomographDaoImpl(tomographProperty);
+            TomographDaoImpl dao = new TomographDaoImpl(tomographProperty, connectionManager);
             this.listProjectionData = dao.selectAllSetProjectionData();
         } catch (Throwable ex) {
-            logger.error("Error getting set projection data from db",ex);
+            logger.error("Error getting set projection data from db", ex);
         }
+    }
+
+    private List<PSetProjectionData> selectAllProjectData() throws JSchException, SQLException, EmptyOrNullParameterException {
+
+        TomographDaoImpl dao = new TomographDaoImpl(tomographProperty, connectionManager);
+        return dao.selectAllSetProjectionData();
+    }
+
+    private void initConnectionManager() {
+        this.connectionManager = new ConnectionManagerImpl(tomographProperty);
+        try {
+            connectionManager.connect();
+        } catch (Exception ex) {
+            logger.error("Error while creating ssh or db connection ", ex);
+        }
+    }
+
+    public IConnectionManager getConnectionManager() {
+        return this.connectionManager;
     }
 }

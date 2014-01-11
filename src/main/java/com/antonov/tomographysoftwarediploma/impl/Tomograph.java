@@ -30,7 +30,7 @@ public class Tomograph {
     private static Logger logger = LoggerFactory.getLogger(Tomograph.class);
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
-    
+
     private static final String TOMOGRAPH_CONF_PATH = "conf/tomograph.conf";
     private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
     private Properties tomographProperty = new Properties();
@@ -74,6 +74,7 @@ public class Tomograph {
     }
 
     public void exitApplication() {
+        hardwareModule.getConnectionManager().disconnect();
         logger.info("=======Stop TomographySoftware 1.0.0 application=======");
         System.exit(0);//cierra aplicacion
     }

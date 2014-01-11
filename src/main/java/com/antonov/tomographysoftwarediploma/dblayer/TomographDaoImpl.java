@@ -32,105 +32,27 @@ public class TomographDaoImpl implements ITomographDao {
     private static String SQL_INSERT_PROJECTION_DATA = "INSERT INTO projection_data (DATA,ID_SET) VALUES (?,?)";
     private static final String SQL_SELECT_ALL_SET_PROJECTION_DATA = "SELECT * FROM set_projection_data";
 
-    private static final String READ_OBJECT_SQL = "SELECT PROJECT_ARRAY FROM project_data WHERE NAME = ?";
-
-    private static final String SSH_CONNECTION = "528d18a4e0b8cdb068000071@app-helloweb.rhcloud.com";
-    private static final String DB_URL = "jdbc:mysql://localhost:1234/Tomo?"
-            + "user=adminR8QufFz&password=a3ZixG3aDcJG";
-
     private Properties properties;
+    private IConnectionManager connectionManager;
+
     public static Logger logger = LoggerFactory.getLogger(TomographDaoImpl.class);
 
-    private String pathToPrivateKey;
-    private String dbHost;
-    private int localPort;
-    private int remotePort;
-
-    public TomographDaoImpl(Properties p) {
+    public TomographDaoImpl(Properties p, IConnectionManager connectionManager) {
         this.properties = p;
+        this.connectionManager = connectionManager;
     }
 
     @Override
     public void insertProjectionData(String fileName, String description, List<Object> projectionDataList) throws JSchException, SQLException, EmptyOrNullParameterException {
-        logger.trace("Reading dbParameters");
-        Session session = getSession();
-        insertProjectionDataToDb(fileName, description, projectionDataList, session);
 
+        insertProjectionDataToDb(fileName, description, projectionDataList);
     }
 
-    private Session getSession() throws JSchException, EmptyOrNullParameterException {
-        logger.info("Trying to connect database through ssh........");
-        long start = System.currentTimeMillis();
-        
-        readInitialDbParameters();
-
-        JSch jsch = new JSch();
-        jsch.addIdentity((new File(pathToPrivateKey)).getAbsolutePath());
-
-        String host = SSH_CONNECTION;
-
-        String user = host.substring(0, host.indexOf('@'));
-        host = host.substring(host.indexOf('@') + 1);
-
-        Session session = jsch.getSession(user, host, 22);
-
-        UserInfo ui = new TomoUserInfo();
-
-        session.setUserInfo(ui);
-        session.connect();
-        session.setPortForwardingL(localPort, dbHost, remotePort);
-        long finish = System.currentTimeMillis();
-        long result = finish - start;
-        logger.info("Connection to database successfully created. " + result + " sec.");
-        return session;
-    }
-
-    private void readInitialDbParameters() throws EmptyOrNullParameterException {
-
-        String pathToPrivateKey = properties.getProperty("SSH_PRIVATE_KEY_PATH");
-        if (pathToPrivateKey != null && !pathToPrivateKey.isEmpty()) {
-            logger.trace("SSH_PRIVATE_KEY_PATH " + pathToPrivateKey);
-            this.pathToPrivateKey = pathToPrivateKey;
-        } else {
-            logger.warn("Error while reading SSH_PRIVATE_KEY_PATH. It is null or empty");
-            throw new EmptyOrNullParameterException("Error while reading SSH_PRIVATE_KEY_PATH. It is null or empty");
-        }
-
-        String dbHost = properties.getProperty("DB_HOST");
-        if (dbHost != null && !dbHost.isEmpty()) {
-            logger.trace("DB_HOST " + dbHost);
-            this.dbHost = dbHost;
-        } else {
-            logger.warn("Error while reading DB_HOST. It is null or empty");
-            throw new EmptyOrNullParameterException("Error while reading DB_HOST. It is null or empty");
-        }
-
-        String localPortString = properties.getProperty("PORT_LOCAL");
-        if (localPortString != null && !localPortString.isEmpty()) {
-            int localPort = Integer.parseInt(localPortString);
-
-            logger.trace("PORT_LOCAL " + localPort);
-            this.localPort = localPort;
-        } else {
-            logger.warn("Error while reading PORT_LOCAL. It is null or empty");
-            throw new EmptyOrNullParameterException("Error while reading PORT_LOCAL. It is null or empty");
-        }
-
-        String remotePortString = properties.getProperty("PORT_REMOTE");
-        if (remotePortString != null && !remotePortString.isEmpty()) {
-            int remotePort = Integer.parseInt(remotePortString);
-
-            logger.trace("PORT_REMOTE " + remotePort);
-            this.remotePort = remotePort;
-        } else {
-            logger.warn("Error while reading PORT_REMOTE. It is null or empty");
-            throw new EmptyOrNullParameterException("Error while reading PORT_REMOTE. It is null or empty");
-        }
-    }
-
-    private void insertProjectionDataToDb(String fileName, String description, List<Object> projectionDataList, Session session) throws SQLException {
+    private void insertProjectionDataToDb(String fileName, String description, List<Object> projectionDataList) throws SQLException {
         ResultSet rs = null;
-        try (Connection connect = DriverManager.getConnection(DB_URL);
+        Connection connect = this.connectionManager.getConnection();
+
+        try (
                 PreparedStatement psSet = connect.prepareStatement(SQL_INSERT_SET_PROJECTION_DATA, PreparedStatement.RETURN_GENERATED_KEYS);
                 PreparedStatement psProjectData = connect.prepareStatement(SQL_INSERT_PROJECTION_DATA)) {
 
@@ -162,24 +84,23 @@ public class TomographDaoImpl implements ITomographDao {
             if (rs != null) {
                 rs.close();
             }
-            session.disconnect();
         }
     }
 
     @Override
     public List<PSetProjectionData> selectAllSetProjectionData() throws JSchException, SQLException, EmptyOrNullParameterException {
-        Session session = getSession();
-        return selectAllSetProjectionDataFromDb(session);
+        return selectAllSetProjectionDataFromDb();
     }
 
-    private List<PSetProjectionData> selectAllSetProjectionDataFromDb(Session session) throws SQLException {
+    private List<PSetProjectionData> selectAllSetProjectionDataFromDb() throws SQLException {
 
         logger.info("Querying sets projection data from db......");
         long start = System.currentTimeMillis();
         List<PSetProjectionData> result = new ArrayList<PSetProjectionData>();
 
         ResultSet rs = null;
-        try (Connection connect = DriverManager.getConnection(DB_URL);
+        Connection connect = this.connectionManager.getConnection();
+        try (
                 Statement st = connect.createStatement()) {
 
             rs = st.executeQuery(SQL_SELECT_ALL_SET_PROJECTION_DATA);
@@ -196,11 +117,11 @@ public class TomographDaoImpl implements ITomographDao {
             if (rs != null) {
                 rs.close();
             }
-            session.disconnect();
         }
         long finish = System.currentTimeMillis();
         long resultTime = finish - start;
         logger.info("Projection data sets have been loaded. " + resultTime + " sec");
         return result;
     }
+
 }

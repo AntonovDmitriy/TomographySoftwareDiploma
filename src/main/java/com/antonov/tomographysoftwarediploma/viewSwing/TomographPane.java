@@ -501,7 +501,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonOkSetName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                dialogNameAsker.setVisible(false);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -1785,12 +1785,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ID}"));
             columnBinding.setColumnName("ID");
             columnBinding.setColumnClass(Integer.class);
+            columnBinding.setEditable(false);
             columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${PDNAME}"));
             columnBinding.setColumnName("PDNAME");
             columnBinding.setColumnClass(String.class);
+            columnBinding.setEditable(false);
             columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${PDDESCR}"));
             columnBinding.setColumnName("PDDESCR");
             columnBinding.setColumnClass(String.class);
+            columnBinding.setEditable(false);
             bindingGroup.addBinding(jTableBinding);
             jTableBinding.bind();
             jScrollPane2.setViewportView(jTable1);
