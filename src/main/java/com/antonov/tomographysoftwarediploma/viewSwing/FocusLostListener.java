@@ -17,10 +17,12 @@ public class FocusLostListener implements FocusListener{
 
     @Override
     public void focusGained(FocusEvent e) {
+        
     }
 
     @Override
     public void focusLost(FocusEvent e) {
+        
     }
     
 }
