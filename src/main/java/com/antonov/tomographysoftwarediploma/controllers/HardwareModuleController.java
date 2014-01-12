@@ -132,10 +132,12 @@ public class HardwareModuleController extends Controller {
 
     }
 
-    public void showReconstructionModelling() {
+    public void showReconstruction() {
+        super.tomograph.hardwareModule.showReconstruction();
     }
 
     public void showDensityAnalizator() {
+        super.tomograph.hardwareModule.showDensityAnalizator();
     }
 
     public void setReconstructionInterpolationTomograph(Object selectedItem) {

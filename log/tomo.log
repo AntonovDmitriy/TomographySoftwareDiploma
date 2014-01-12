@@ -8072,3 +8072,729 @@ java.lang.NullPointerException
 2014-01-13 00:19:10 INFO  HardwareModule:224 - Hardware recon controls are disabled
 2014-01-13 00:19:11 INFO  ConnectionManagerImpl:71 - ConnectionManager state : disconnected
 2014-01-13 00:19:11 INFO  Tomograph:78 - =======Stop TomographySoftware 1.0.0 application=======
+2014-01-13 00:28:04 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-13 00:28:04 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-13 00:28:04 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-13 00:28:04 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-13 00:28:04 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 00:28:04 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 00:28:05 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-13 00:28:05 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-13 00:28:05 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 00:28:05 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 00:28:05 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-13 00:28:05 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-13 00:28:05 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 00:28:05 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 00:28:05 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-13 00:28:05 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-13 00:28:05 INFO  ModellingModule:169 - scans = 400
+2014-01-13 00:28:05 INFO  ModellingModule:179 - stepsize = 1
+2014-01-13 00:28:05 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-13 00:28:05 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-13 00:28:05 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-13 00:28:05 INFO  ModellingModule:245 - current filtering model = none
+2014-01-13 00:28:05 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-13 00:28:05 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-13 00:28:05 INFO  ConnectionManagerImpl:83 - Trying to create ssh connection........
+2014-01-13 00:28:05 TRACE ConnectionManagerImpl:115 - SSH_PRIVATE_KEY_PATH conf/antonovPrivateKey.ppk
+2014-01-13 00:28:05 TRACE ConnectionManagerImpl:124 - DB_HOST 127.5.228.130
+2014-01-13 00:28:05 TRACE ConnectionManagerImpl:135 - PORT_LOCAL 1234
+2014-01-13 00:28:05 TRACE ConnectionManagerImpl:146 - PORT_REMOTE 3306
+2014-01-13 00:28:08 INFO  ConnectionManagerImpl:107 - SSH Connection successfully created. 3189 sec.
+2014-01-13 00:28:10 INFO  ConnectionManagerImpl:79 - ConnectionManager state : connected
+2014-01-13 00:28:10 INFO  HardwareModule:87 - Reading initial hardware module parameters
+2014-01-13 00:28:10 INFO  HardwareModule:102 - tomograph_scans = 400
+2014-01-13 00:28:10 INFO  HardwareModule:112 - tomograph_stepsize = 1
+2014-01-13 00:28:10 INFO  HardwareModule:133 - regimeReconstructionInterpolation = Линейная
+2014-01-13 00:28:10 INFO  HardwareModule:143 - tomograph_sizeReconstruction = 600
+2014-01-13 00:28:10 INFO  HardwareModule:158 - current filtering tomograph = none
+2014-01-13 00:28:10 INFO  HardwareModule:169 - coloring name tomograph = hue_grb_0
+2014-01-13 00:28:10 INFO  HardwareModule:178 - TOMOGRAPH_MOVING = 1
+2014-01-13 00:28:10 INFO  HardwareModule:95 - Initial hardware module parameters have been read
+2014-01-13 00:28:10 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 00:28:10 INFO  TomographDaoImpl:123 - Projection data sets have been loaded. 182 sec
+2014-01-13 00:28:12 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-13 00:28:12 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-13 00:28:12 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-13 00:28:12 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 00:28:12 INFO  ModellingModule:149 - Views are prepared
+2014-01-13 00:28:12 TRACE HardwareModule:271 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-13 00:28:12 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-13 00:28:13 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 00:28:13 INFO  HardwareModule:215 - Views are prepared
+2014-01-13 00:28:24 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is hamming. Old value was none
+2014-01-13 00:28:25 TRACE HardwareModule:392 - Reconstruction of selected set of projection dataa is starting
+2014-01-13 00:28:25 INFO  TomographDaoImpl:131 - Querying set projection data from db......
+2014-01-13 00:28:27 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 1
+2014-01-13 00:28:29 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 2
+2014-01-13 00:28:31 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 3
+2014-01-13 00:28:33 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 4
+2014-01-13 00:28:35 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 5
+2014-01-13 00:28:37 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 6
+2014-01-13 00:28:39 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 7
+2014-01-13 00:28:40 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 8
+2014-01-13 00:28:42 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 9
+2014-01-13 00:28:43 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 10
+2014-01-13 00:28:45 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 11
+2014-01-13 00:28:47 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 12
+2014-01-13 00:28:48 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 13
+2014-01-13 00:28:50 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 14
+2014-01-13 00:28:51 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 15
+2014-01-13 00:28:52 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 16
+2014-01-13 00:28:53 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 17
+2014-01-13 00:28:55 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 18
+2014-01-13 00:28:56 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 19
+2014-01-13 00:28:57 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 20
+2014-01-13 00:28:59 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 21
+2014-01-13 00:28:59 INFO  TomographDaoImpl:165 - Projection data set have been loaded. 33663 sec
+2014-01-13 00:28:59 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:28:59 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:28:59 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:28:59 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:04 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:04 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:04 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:04 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 1. All is 21
+2014-01-13 00:29:04 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:04 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:04 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:04 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:09 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:09 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:09 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:09 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 2. All is 21
+2014-01-13 00:29:09 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:09 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:09 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:09 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:13 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:13 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:13 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:13 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 3. All is 21
+2014-01-13 00:29:13 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:13 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:13 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:13 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:19 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:19 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:19 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:19 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 4. All is 21
+2014-01-13 00:29:19 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:19 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:19 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:19 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:23 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:24 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:24 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:24 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 5. All is 21
+2014-01-13 00:29:24 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:24 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:24 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:24 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:28 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:28 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:28 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:28 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 6. All is 21
+2014-01-13 00:29:28 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:28 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:28 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:28 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:33 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:33 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:33 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:33 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 7. All is 21
+2014-01-13 00:29:33 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:33 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:33 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:33 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:37 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:37 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:37 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:37 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 8. All is 21
+2014-01-13 00:29:37 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:37 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:37 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:37 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:42 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:42 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:42 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:42 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 9. All is 21
+2014-01-13 00:29:42 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:42 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:42 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:42 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:47 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:47 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:47 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:47 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 10. All is 21
+2014-01-13 00:29:47 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:47 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:47 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:47 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:52 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:52 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:52 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:52 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 11. All is 21
+2014-01-13 00:29:52 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:52 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:52 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:52 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:29:57 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:29:57 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:29:57 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:29:57 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 12. All is 21
+2014-01-13 00:29:57 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:29:57 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:29:57 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:29:57 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:01 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:01 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:01 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:01 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 13. All is 21
+2014-01-13 00:30:01 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:01 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:01 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:02 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:06 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:06 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:06 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:06 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 14. All is 21
+2014-01-13 00:30:06 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:06 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:06 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:06 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:11 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:11 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:11 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:11 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 15. All is 21
+2014-01-13 00:30:11 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:11 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:11 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:11 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:16 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:16 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:16 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:16 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 16. All is 21
+2014-01-13 00:30:16 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:16 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:16 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:16 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:20 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:20 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:20 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:20 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 17. All is 21
+2014-01-13 00:30:20 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:20 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:20 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:20 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:25 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:25 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:25 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:25 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 18. All is 21
+2014-01-13 00:30:25 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:25 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:25 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:25 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:30 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:30 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:30 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:30 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 19. All is 21
+2014-01-13 00:30:30 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:30 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:30 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:30 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:34 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:34 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:34 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:34 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 20. All is 21
+2014-01-13 00:30:34 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:30:34 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:30:34 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:30:34 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:30:38 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:30:39 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:30:39 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:30:39 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 21. All is 21
+2014-01-13 00:30:39 TRACE HardwareModule:405 - Reconstruction of selected set of projection data is finishied
+2014-01-13 00:30:56 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:31:15 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:31:48 TRACE HardwareModule:438 - density analizator is opened
+2014-01-13 00:32:50 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_rgb_0. Old value was hue_grb_0
+2014-01-13 00:32:52 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is red_green_saw_4. Old value was hue_rgb_0
+2014-01-13 00:32:54 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is random_256. Old value was red_green_saw_4
+2014-01-13 00:32:56 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is gray4levels. Old value was random_256
+2014-01-13 00:33:00 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is gray128levels. Old value was gray4levels
+2014-01-13 00:33:03 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:33:09 TRACE HardwareModule:438 - density analizator is opened
+2014-01-13 00:55:44 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:55:53 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:56:07 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:56:51 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:56:59 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is gray16levels. Old value was gray128levels
+2014-01-13 00:57:05 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is none. Old value was gray16levels
+2014-01-13 00:57:07 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 00:57:29 TRACE HardwareModule:438 - density analizator is opened
+2014-01-13 00:57:45 INFO  ModellingModule:265 - Current modelling image changes on With_deffect
+2014-01-13 00:57:45 INFO  ModellingModule:272 - Current modelling image changes on display
+2014-01-13 00:57:45 INFO  ModellingModule:274 - Result modelling is clear
+2014-01-13 00:57:45 INFO  ModellingModule:276 - Result reconstruction is clear
+2014-01-13 00:57:45 INFO  ModellingModule:278 - Modelling controls are disabled
+2014-01-13 00:57:46 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 00:57:46 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 00:57:46 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 00:57:46 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 00:57:46 TRACE ModellingModule:397 - Sinogram creating is starting
+2014-01-13 00:57:46 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:57:46 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:57:46 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2014-01-13 00:57:46 TRACE SinogramCreator:156 - Array of pixel values of source image has been created
+2014-01-13 00:57:49 TRACE SinogramCreator:159 - Projection data has been created and saved to model
+2014-01-13 00:57:49 TRACE SinogramCreator:166 - Short row projection data has been created
+2014-01-13 00:57:49 TRACE SinogramCreator:170 - Sinogram image is created
+2014-01-13 00:57:49 TRACE SinogramCreator:172 - Sinogram inage has been performed for screaning
+2014-01-13 00:57:49 TRACE ModellingModule:286 - Sinogram image is changed
+2014-01-13 00:57:49 INFO  ModellingModule:288 - Result reconstruction is clear
+2014-01-13 00:57:49 TRACE ModellingModule:403 - Recon controls are enabled
+2014-01-13 00:57:49 TRACE ModellingModule:405 - Sinogram createing is finishing
+2014-01-13 00:57:49 TRACE ModellingModule:415 - Reconstruction of modelling sinogram is starting
+2014-01-13 00:57:49 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:57:49 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:57:49 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:57:49 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:57:54 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:57:54 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:57:54 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:57:54 TRACE ModellingModule:450 - Colored image has been created
+2014-01-13 00:57:54 TRACE ModellingModule:452 - current colored image has been changed
+2014-01-13 00:57:54 TRACE ModellingModule:420 - Coloring model controls are enabled
+2014-01-13 00:57:54 TRACE ModellingModule:422 - Reconstruction of modelling sinogram is finishied
+2014-01-13 00:57:56 TRACE ModellingModule:389 - Value of currentFilter now is hann. Old value was none
+2014-01-13 00:57:56 TRACE ModellingModule:415 - Reconstruction of modelling sinogram is starting
+2014-01-13 00:57:56 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 00:57:56 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 00:57:56 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 00:57:56 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 00:58:01 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 00:58:01 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 00:58:01 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 00:58:01 TRACE ModellingModule:450 - Colored image has been created
+2014-01-13 00:58:01 TRACE ModellingModule:452 - current colored image has been changed
+2014-01-13 00:58:01 TRACE ModellingModule:420 - Coloring model controls are enabled
+2014-01-13 00:58:01 TRACE ModellingModule:422 - Reconstruction of modelling sinogram is finishied
+2014-01-13 00:58:07 TRACE ModellingModule:439 - Value of currentColorName now is red. Old value was hue_grb_0
+2014-01-13 00:58:07 TRACE ModellingModule:450 - Colored image has been created
+2014-01-13 00:58:07 TRACE ModellingModule:452 - current colored image has been changed
+2014-01-13 00:58:08 TRACE ModellingModule:492 - density analizator is opened
+2014-01-13 00:58:30 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 00:58:30 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 00:58:30 TRACE HardwareModule:438 - density analizator is opened
+2014-01-13 00:59:42 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is green_blue_saw_8. Old value was none
+2014-01-13 00:59:45 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is random_8. Old value was green_blue_saw_8
+2014-01-13 01:00:19 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 01:01:56 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-13 01:01:57 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-13 01:01:57 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-13 01:01:57 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-13 01:01:57 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:01:57 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:01:57 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-13 01:01:57 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-13 01:01:57 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:01:57 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:01:57 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-13 01:01:57 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-13 01:01:57 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:01:57 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:01:57 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-13 01:01:57 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-13 01:01:57 INFO  ModellingModule:169 - scans = 400
+2014-01-13 01:01:57 INFO  ModellingModule:179 - stepsize = 1
+2014-01-13 01:01:57 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-13 01:01:57 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-13 01:01:57 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-13 01:01:57 INFO  ModellingModule:245 - current filtering model = none
+2014-01-13 01:01:57 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-13 01:01:57 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-13 01:01:57 INFO  ConnectionManagerImpl:83 - Trying to create ssh connection........
+2014-01-13 01:01:57 TRACE ConnectionManagerImpl:115 - SSH_PRIVATE_KEY_PATH conf/antonovPrivateKey.ppk
+2014-01-13 01:01:57 TRACE ConnectionManagerImpl:124 - DB_HOST 127.5.228.130
+2014-01-13 01:01:57 TRACE ConnectionManagerImpl:135 - PORT_LOCAL 1234
+2014-01-13 01:01:57 TRACE ConnectionManagerImpl:146 - PORT_REMOTE 3306
+2014-01-13 01:02:00 ERROR HardwareModule:382 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:1234 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158)
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1825)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1806)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1787)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1770)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:104)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:77)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:380)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:77)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:70)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:49)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(DualStackPlainSocketImpl.java:106)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:376)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:190)
+	at java.net.ServerSocket.bind(ServerSocket.java:376)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150)
+	... 12 more
+2014-01-13 01:02:00 INFO  HardwareModule:87 - Reading initial hardware module parameters
+2014-01-13 01:02:00 INFO  HardwareModule:102 - tomograph_scans = 400
+2014-01-13 01:02:00 INFO  HardwareModule:112 - tomograph_stepsize = 1
+2014-01-13 01:02:00 INFO  HardwareModule:133 - regimeReconstructionInterpolation = Линейная
+2014-01-13 01:02:00 INFO  HardwareModule:143 - tomograph_sizeReconstruction = 600
+2014-01-13 01:02:00 INFO  HardwareModule:158 - current filtering tomograph = none
+2014-01-13 01:02:00 INFO  HardwareModule:169 - coloring name tomograph = hue_grb_0
+2014-01-13 01:02:00 INFO  HardwareModule:178 - TOMOGRAPH_MOVING = 1
+2014-01-13 01:02:00 INFO  HardwareModule:95 - Initial hardware module parameters have been read
+2014-01-13 01:02:00 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 01:02:00 ERROR HardwareModule:367 - Error getting set projection data from db
+java.lang.NullPointerException
+	at com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.selectAllSetProjectionDataFromDb(TomographDaoImpl.java:104)
+	at com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.selectAllSetProjectionData(TomographDaoImpl.java:92)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initProjectionDataList(HardwareModule.java:365)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:79)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:70)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:49)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2014-01-13 01:02:02 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-13 01:02:02 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-13 01:02:02 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-13 01:02:02 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:02:02 INFO  ModellingModule:149 - Views are prepared
+2014-01-13 01:02:02 TRACE HardwareModule:271 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-13 01:02:02 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-13 01:02:02 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:02:02 INFO  HardwareModule:215 - Views are prepared
+2014-01-13 01:02:21 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-13 01:02:21 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-13 01:02:21 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-13 01:02:21 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-13 01:02:21 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:02:21 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:02:21 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-13 01:02:21 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-13 01:02:21 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:02:21 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:02:21 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-13 01:02:21 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-13 01:02:21 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:02:21 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:02:21 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-13 01:02:21 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-13 01:02:21 INFO  ModellingModule:169 - scans = 400
+2014-01-13 01:02:21 INFO  ModellingModule:179 - stepsize = 1
+2014-01-13 01:02:21 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-13 01:02:21 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-13 01:02:21 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-13 01:02:21 INFO  ModellingModule:245 - current filtering model = none
+2014-01-13 01:02:21 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-13 01:02:22 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-13 01:02:22 INFO  ConnectionManagerImpl:83 - Trying to create ssh connection........
+2014-01-13 01:02:22 TRACE ConnectionManagerImpl:115 - SSH_PRIVATE_KEY_PATH conf/antonovPrivateKey.ppk
+2014-01-13 01:02:22 TRACE ConnectionManagerImpl:124 - DB_HOST 127.5.228.130
+2014-01-13 01:02:22 TRACE ConnectionManagerImpl:135 - PORT_LOCAL 1234
+2014-01-13 01:02:22 TRACE ConnectionManagerImpl:146 - PORT_REMOTE 3306
+2014-01-13 01:02:24 ERROR HardwareModule:382 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: PortForwardingL: local port 127.0.0.1:1234 cannot be bound.
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:158)
+	at com.jcraft.jsch.PortWatcher.addPort(PortWatcher.java:110)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1825)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1806)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1787)
+	at com.jcraft.jsch.Session.setPortForwardingL(Session.java:1770)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:104)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:77)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:380)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:77)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:70)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:49)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+Caused by: java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(DualStackPlainSocketImpl.java:106)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:376)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:190)
+	at java.net.ServerSocket.bind(ServerSocket.java:376)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at com.jcraft.jsch.PortWatcher.<init>(PortWatcher.java:150)
+	... 12 more
+2014-01-13 01:02:24 INFO  HardwareModule:87 - Reading initial hardware module parameters
+2014-01-13 01:02:24 INFO  HardwareModule:102 - tomograph_scans = 400
+2014-01-13 01:02:24 INFO  HardwareModule:112 - tomograph_stepsize = 1
+2014-01-13 01:02:24 INFO  HardwareModule:133 - regimeReconstructionInterpolation = Линейная
+2014-01-13 01:02:24 INFO  HardwareModule:143 - tomograph_sizeReconstruction = 600
+2014-01-13 01:02:24 INFO  HardwareModule:158 - current filtering tomograph = none
+2014-01-13 01:02:24 INFO  HardwareModule:169 - coloring name tomograph = hue_grb_0
+2014-01-13 01:02:24 INFO  HardwareModule:178 - TOMOGRAPH_MOVING = 1
+2014-01-13 01:02:24 INFO  HardwareModule:95 - Initial hardware module parameters have been read
+2014-01-13 01:02:24 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 01:02:24 ERROR HardwareModule:367 - Error getting set projection data from db
+java.lang.NullPointerException
+	at com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.selectAllSetProjectionDataFromDb(TomographDaoImpl.java:104)
+	at com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.selectAllSetProjectionData(TomographDaoImpl.java:92)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initProjectionDataList(HardwareModule.java:365)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:79)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:70)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:49)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2014-01-13 01:02:27 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-13 01:02:27 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-13 01:02:27 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-13 01:02:27 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:02:27 INFO  ModellingModule:149 - Views are prepared
+2014-01-13 01:02:27 TRACE HardwareModule:271 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-13 01:02:27 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-13 01:02:27 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:02:27 INFO  HardwareModule:215 - Views are prepared
+2014-01-13 01:02:55 INFO  ConnectionManagerImpl:71 - ConnectionManager state : disconnected
+2014-01-13 01:02:55 INFO  Tomograph:78 - =======Stop TomographySoftware 1.0.0 application=======
+2014-01-13 01:03:43 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-13 01:03:44 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-13 01:03:44 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-13 01:03:44 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-13 01:03:44 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:03:44 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:03:44 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-13 01:03:44 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-13 01:03:44 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:03:44 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:03:44 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-13 01:03:44 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-13 01:03:44 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:03:44 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:03:44 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-13 01:03:44 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-13 01:03:44 INFO  ModellingModule:169 - scans = 400
+2014-01-13 01:03:44 INFO  ModellingModule:179 - stepsize = 1
+2014-01-13 01:03:44 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-13 01:03:44 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-13 01:03:44 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-13 01:03:44 INFO  ModellingModule:245 - current filtering model = none
+2014-01-13 01:03:44 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-13 01:03:44 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-13 01:03:44 INFO  ConnectionManagerImpl:83 - Trying to create ssh connection........
+2014-01-13 01:03:44 TRACE ConnectionManagerImpl:115 - SSH_PRIVATE_KEY_PATH conf/antonovPrivateKey.ppk
+2014-01-13 01:03:44 TRACE ConnectionManagerImpl:124 - DB_HOST 127.5.228.130
+2014-01-13 01:03:44 TRACE ConnectionManagerImpl:135 - PORT_LOCAL 1234
+2014-01-13 01:03:44 TRACE ConnectionManagerImpl:146 - PORT_REMOTE 3306
+2014-01-13 01:03:47 INFO  ConnectionManagerImpl:107 - SSH Connection successfully created. 2854 sec.
+2014-01-13 01:03:49 INFO  ConnectionManagerImpl:79 - ConnectionManager state : connected
+2014-01-13 01:03:49 INFO  HardwareModule:87 - Reading initial hardware module parameters
+2014-01-13 01:03:49 INFO  HardwareModule:102 - tomograph_scans = 400
+2014-01-13 01:03:49 INFO  HardwareModule:112 - tomograph_stepsize = 1
+2014-01-13 01:03:49 INFO  HardwareModule:133 - regimeReconstructionInterpolation = Линейная
+2014-01-13 01:03:49 INFO  HardwareModule:143 - tomograph_sizeReconstruction = 600
+2014-01-13 01:03:49 INFO  HardwareModule:158 - current filtering tomograph = none
+2014-01-13 01:03:49 INFO  HardwareModule:169 - coloring name tomograph = hue_grb_0
+2014-01-13 01:03:49 INFO  HardwareModule:178 - TOMOGRAPH_MOVING = 1
+2014-01-13 01:03:49 INFO  HardwareModule:95 - Initial hardware module parameters have been read
+2014-01-13 01:03:49 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 01:03:49 INFO  TomographDaoImpl:123 - Projection data sets have been loaded. 181 sec
+2014-01-13 01:03:52 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-13 01:03:52 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-13 01:03:52 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-13 01:03:52 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:03:52 INFO  ModellingModule:149 - Views are prepared
+2014-01-13 01:03:52 TRACE HardwareModule:271 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-13 01:03:52 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-13 01:03:52 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:03:52 INFO  HardwareModule:215 - Views are prepared
+2014-01-13 01:04:06 INFO  ConnectionManagerImpl:71 - ConnectionManager state : disconnected
+2014-01-13 01:04:06 INFO  Tomograph:78 - =======Stop TomographySoftware 1.0.0 application=======
+2014-01-13 01:04:37 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-13 01:04:38 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-13 01:04:38 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-13 01:04:38 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-13 01:04:38 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:04:38 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:04:38 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-13 01:04:38 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-13 01:04:38 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:04:38 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:04:38 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-13 01:04:38 TRACE ModellingModule:117 - Reading image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-13 01:04:38 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 01:04:38 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:04:38 TRACE ModellingModule:123 - Image file D:\NetbeansProjects\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-13 01:04:38 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-13 01:04:38 INFO  ModellingModule:169 - scans = 400
+2014-01-13 01:04:38 INFO  ModellingModule:179 - stepsize = 1
+2014-01-13 01:04:38 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-13 01:04:38 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-13 01:04:38 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-13 01:04:38 INFO  ModellingModule:245 - current filtering model = none
+2014-01-13 01:04:38 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-13 01:04:38 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-13 01:04:38 INFO  ConnectionManagerImpl:83 - Trying to create ssh connection........
+2014-01-13 01:04:38 TRACE ConnectionManagerImpl:115 - SSH_PRIVATE_KEY_PATH conf/antonovPrivateKey.ppk
+2014-01-13 01:04:38 TRACE ConnectionManagerImpl:124 - DB_HOST 127.5.228.130
+2014-01-13 01:04:38 TRACE ConnectionManagerImpl:135 - PORT_LOCAL 1234
+2014-01-13 01:04:38 TRACE ConnectionManagerImpl:146 - PORT_REMOTE 3306
+2014-01-13 01:04:41 INFO  ConnectionManagerImpl:107 - SSH Connection successfully created. 3023 sec.
+2014-01-13 01:04:43 INFO  ConnectionManagerImpl:79 - ConnectionManager state : connected
+2014-01-13 01:04:43 INFO  HardwareModule:87 - Reading initial hardware module parameters
+2014-01-13 01:04:43 INFO  HardwareModule:102 - tomograph_scans = 400
+2014-01-13 01:04:43 INFO  HardwareModule:112 - tomograph_stepsize = 1
+2014-01-13 01:04:43 INFO  HardwareModule:133 - regimeReconstructionInterpolation = Линейная
+2014-01-13 01:04:43 INFO  HardwareModule:143 - tomograph_sizeReconstruction = 600
+2014-01-13 01:04:43 INFO  HardwareModule:158 - current filtering tomograph = none
+2014-01-13 01:04:43 INFO  HardwareModule:169 - coloring name tomograph = hue_grb_0
+2014-01-13 01:04:43 INFO  HardwareModule:178 - TOMOGRAPH_MOVING = 1
+2014-01-13 01:04:43 INFO  HardwareModule:95 - Initial hardware module parameters have been read
+2014-01-13 01:04:43 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 01:04:43 INFO  TomographDaoImpl:123 - Projection data sets have been loaded. 186 sec
+2014-01-13 01:04:45 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-13 01:04:45 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-13 01:04:45 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-13 01:04:45 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:04:45 INFO  ModellingModule:149 - Views are prepared
+2014-01-13 01:04:45 TRACE HardwareModule:271 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-13 01:04:45 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-13 01:04:45 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 01:04:45 INFO  HardwareModule:215 - Views are prepared
+2014-01-13 01:05:01 TRACE HardwareModule:341 - Scanning is starting
+2014-01-13 01:05:01 TRACE ScanningEmulator:43 - Scanning is in emulator regime
+2014-01-13 01:05:01 TRACE ScanningEmulator:48 - Trying to read images from folder
+2014-01-13 01:05:01 TRACE ScanningEmulator:52 - File is readed
+2014-01-13 01:05:01 TRACE ScanningEmulator:53 - Trying to create projection data
+2014-01-13 01:05:01 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:05:01 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:01 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:01 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2014-01-13 01:05:01 TRACE SinogramCreator:137 - Array of pixel values of source image has been created
+2014-01-13 01:05:05 TRACE ScanningEmulator:56 - Projection data has been created
+2014-01-13 01:05:05 TRACE ScanningEmulator:52 - File is readed
+2014-01-13 01:05:05 TRACE ScanningEmulator:53 - Trying to create projection data
+2014-01-13 01:05:05 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:05:05 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:05 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:05 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2014-01-13 01:05:05 TRACE SinogramCreator:137 - Array of pixel values of source image has been created
+2014-01-13 01:05:09 TRACE ScanningEmulator:56 - Projection data has been created
+2014-01-13 01:05:09 TRACE ScanningEmulator:52 - File is readed
+2014-01-13 01:05:09 TRACE ScanningEmulator:53 - Trying to create projection data
+2014-01-13 01:05:09 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:05:09 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:09 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:09 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2014-01-13 01:05:09 TRACE SinogramCreator:137 - Array of pixel values of source image has been created
+2014-01-13 01:05:13 TRACE ScanningEmulator:56 - Projection data has been created
+2014-01-13 01:05:13 TRACE ScanningEmulator:52 - File is readed
+2014-01-13 01:05:13 TRACE ScanningEmulator:53 - Trying to create projection data
+2014-01-13 01:05:13 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 01:05:13 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:13 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:13 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2014-01-13 01:05:13 TRACE SinogramCreator:137 - Array of pixel values of source image has been created
+2014-01-13 01:05:17 TRACE ScanningEmulator:56 - Projection data has been created
+2014-01-13 01:05:17 TRACE HardwareModule:347 - Scanning is finishing 15677 sec
+2014-01-13 01:05:17 TRACE HardwareModule:353 - Start db insert of projection data set
+2014-01-13 01:05:17 TRACE TomographDaoImpl:63 - Entry of set have been inserted head 37-40 400 1 1
+2014-01-13 01:05:17 TRACE TomographDaoImpl:71 - Primary key of set is 29
+2014-01-13 01:05:31 INFO  TomographDaoImpl:81 - All projection data have been inserted
+2014-01-13 01:05:31 TRACE HardwareModule:359 - Finish db insert of projection data set 13585 sec
+2014-01-13 01:05:31 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 01:05:31 INFO  TomographDaoImpl:123 - Projection data sets have been loaded. 144 sec
+2014-01-13 01:05:38 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is blackman. Old value was none
+2014-01-13 01:05:40 TRACE HardwareModule:392 - Reconstruction of selected set of projection dataa is starting
+2014-01-13 01:05:40 INFO  TomographDaoImpl:131 - Querying set projection data from db......
+2014-01-13 01:05:42 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 1
+2014-01-13 01:05:43 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 2
+2014-01-13 01:05:44 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 3
+2014-01-13 01:05:46 TRACE TomographDaoImpl:153 - Amount of downloaded project data sets 4
+2014-01-13 01:05:46 INFO  TomographDaoImpl:165 - Projection data set have been loaded. 5942 sec
+2014-01-13 01:05:46 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:46 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:46 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 01:05:46 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 01:05:50 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 01:05:50 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 01:05:51 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 01:05:51 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 1. All is 4
+2014-01-13 01:05:51 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:51 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:51 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 01:05:51 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 01:05:55 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 01:05:55 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 01:05:55 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 01:05:55 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 2. All is 4
+2014-01-13 01:05:55 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:05:55 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:05:55 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 01:05:55 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 01:05:59 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 01:06:00 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 01:06:00 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 01:06:00 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 3. All is 4
+2014-01-13 01:06:00 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2014-01-13 01:06:00 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2014-01-13 01:06:00 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2014-01-13 01:06:00 TRACE Reconstructor:117 - Projection data is filtered
+2014-01-13 01:06:04 TRACE Reconstructor:119 - Reconstructed data is created
+2014-01-13 01:06:04 TRACE Reconstructor:121 - Reconstructed image is created
+2014-01-13 01:06:04 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2014-01-13 01:06:04 TRACE ImageTransformerFacade:136 - Amount of reconstructed image 4. All is 4
+2014-01-13 01:06:04 TRACE HardwareModule:405 - Reconstruction of selected set of projection data is finishied
+2014-01-13 01:06:16 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is none. Old value was hue_grb_0
+2014-01-13 01:06:24 TRACE HardwareModule:432 - Reconstruction from hardware module is showing in viewer
+2014-01-13 01:07:28 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:07:28 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:07:28 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:07:28 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:07:30 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:07:30 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:07:37 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:07:37 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:07:37 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:07:37 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:08:08 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:08:08 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:08:08 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:08:08 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:08:11 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:08:11 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:08:16 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:08:16 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:08:16 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:08:16 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:08:22 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:08:22 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:08:27 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:08:27 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:08:27 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:08:27 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:08:31 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:08:31 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:08:34 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:08:34 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:08:34 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:08:34 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:08:58 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:08:58 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:09:00 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:09:00 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:09:00 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:09:00 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:09:01 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:09:01 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:09:01 TRACE HardwareModule:438 - density analizator is opened
+2014-01-13 01:09:20 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is green_blue_saw_8. Old value was none
+2014-01-13 01:09:22 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is random_8. Old value was green_blue_saw_8
+2014-01-13 01:09:24 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is red_green_saw_4. Old value was random_8
+2014-01-13 01:09:36 TRACE ModellingModule:323 - Value of scans now is 400. Old value was 400
+2014-01-13 01:09:36 INFO  ModellingModule:325 - Result modelling is clear
+2014-01-13 01:09:36 INFO  ModellingModule:327 - Result reconstruction is clear
+2014-01-13 01:09:36 INFO  ModellingModule:329 - Modelling controls are disabled
+2014-01-13 01:09:45 TRACE HardwareModule:222 - Value of tomograph_scans now is 400. Old value was 400
+2014-01-13 01:09:45 INFO  HardwareModule:224 - Hardware recon controls are disabled
+2014-01-13 01:09:46 INFO  ConnectionManagerImpl:71 - ConnectionManager state : disconnected
+2014-01-13 01:09:46 INFO  Tomograph:78 - =======Stop TomographySoftware 1.0.0 application=======

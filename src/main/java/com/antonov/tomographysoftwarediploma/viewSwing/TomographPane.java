@@ -550,6 +550,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             }
         });
+
+        buttonDensityViewerTomograph.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hardwareModuleController.showDensityAnalizator();
+            }
+        });
     }
 
     private void disableTomographControls() {
@@ -743,6 +750,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     modellingModuleController.showReconstructionModelling();
+                }
+            }
+        });
+
+        labelReconstructionTomograph.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    hardwareModuleController.showReconstruction();
                 }
             }
         });
@@ -2042,16 +2059,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void labelReconstructionTomographMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReconstructionTomographMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2 && labelReconstructionTomograph.getIcon() != null) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    ImageViewerPane viewer = new ImageViewerPane();
-                    viewer.setVisible(true);
-                    viewer.image.setIcon(labelReconstructionTomograph.getIcon());
-                }
-            });
-
-        }
+//        if (evt.getClickCount() == 2 && labelReconstructionTomograph.getIcon() != null) {
+//            java.awt.EventQueue.invokeLater(new Runnable() {
+//                public void run() {
+//                    ImageViewerPane viewer = new ImageViewerPane();
+//                    viewer.setVisible(true);
+//                    viewer.image.setIcon(labelReconstructionTomograph.getIcon());
+//                }
+//            });
+//
+//        }
     }//GEN-LAST:event_labelReconstructionTomographMouseClicked
 
     private void buttonDensityViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerActionPerformed

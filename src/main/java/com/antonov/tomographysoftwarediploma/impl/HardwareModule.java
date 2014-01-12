@@ -421,8 +421,20 @@ public class HardwareModule {
     }
 
     public void setCurrentReconstructedImage(int value) {
-        
+
         BufferedImage image = listReconstructedImages.get(value);
         setCurrentReconstructionImage(image);
+    }
+
+    public void showReconstruction() {
+
+        tomograph.showViewer(coloredReconstructionImage);
+        logger.trace("Reconstruction from hardware module is showing in viewer");
+    }
+
+    public void showDensityAnalizator() {
+
+        tomograph.showDensityAnalizator(coloredReconstructionImage);
+        logger.trace("density analizator is opened");
     }
 }
