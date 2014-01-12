@@ -51,6 +51,7 @@ public class ScanningEmulator {
 
                 logger.trace("File is readed");
                 logger.trace("Trying to create projection data");
+                image = ImageTransformerFacade.prepareImage(image);
                 double[][] projectionData = ImageTransformerFacade.createProjectionDataFromImage(image, scans, stepSize);
                 logger.trace("Projection data has been created");
                 projArrayList.add(projectionData);

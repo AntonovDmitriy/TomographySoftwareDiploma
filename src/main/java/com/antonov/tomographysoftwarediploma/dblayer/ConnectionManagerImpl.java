@@ -62,9 +62,13 @@ public class ConnectionManagerImpl implements IConnectionManager {
 
     @Override
     public void disconnect() {
-
+        
+        try {
+            this.connectionDb.close();
+        } catch (SQLException ex) {
+        }
         this.sessionSSH.disconnect();
-        logger.info("ConnectionManager state : connected");
+        logger.info("ConnectionManager state : disconnected");
     }
 
     @Override

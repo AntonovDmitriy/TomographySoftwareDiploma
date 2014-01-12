@@ -414,7 +414,7 @@ public class ModellingModule implements IProjDataSaver {
         try {
             logger.trace("Reconstruction of modelling sinogram is starting");
             firePropertyChange("startReconstructionSinogram", null, null);
-            BufferedImage reconstruction = ImageTransformerFacade.reconstructProjectionData(projectionDataOfModelling, scans, stepSize, sizeReconstruction, currentFilter, "linear");
+            BufferedImage reconstruction = ImageTransformerFacade.reconstructProjectionData(projectionDataOfModelling, scans, stepSize, sizeReconstruction, currentFilter, regimeReconstructionInterpolation.getValue());
             setReconstructionOfSinogramImage(reconstruction);
             firePropertyChange("enableAfterReconstructControls", null, null);
             logger.trace("Coloring model controls are enabled");

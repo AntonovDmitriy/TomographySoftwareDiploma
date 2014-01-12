@@ -5,11 +5,13 @@
  */
 package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
-import com.antonov.tomographysoftwarediploma.impl.Tomograph;
+import static com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.logger;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.WritableRaster;
+import java.util.ArrayList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +21,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ImageTransformerFacade {
 
-    private static Logger logger = LoggerFactory.getLogger(Tomograph.class);
+    private static Logger logger = LoggerFactory.getLogger(ImageTransformerFacade.class);
 
     public static BufferedImage prepareImage(BufferedImage image) {
 
@@ -53,7 +55,7 @@ public class ImageTransformerFacade {
     }
 
     public static BufferedImage reconstructProjectionData(double[][] projectionData, int scans, int stepSize, int sizeOfReconstruction, String filterName, String regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
-        
+
         Reconstructor reconstructor = new Reconstructor();
         reconstructor.setDataModelling(scans, stepSize);
         reconstructor.setDataReconstruction(sizeOfReconstruction, filterName);
@@ -120,5 +122,20 @@ public class ImageTransformerFacade {
         } else {
             return ColoredStation.doColorOnImage(image, nameColor);
         }
+    }
+
+    public static List<BufferedImage> recontructProjectionDataSet(List<Object> setProjectionData, int scans, int stepSize, int sizeOfReconstruction, String filterName, String regimeInterpolation) throws NumberWrongValueException, ImageWrongValueException {
+
+        List<BufferedImage> result = new ArrayList<>();
+        int countImages = 1;
+        int amountImages = setProjectionData.size();
+        for (Object entry : setProjectionData) {
+            double[][] projectionData = (double[][]) entry;
+            BufferedImage image = reconstructProjectionData(projectionData, scans, stepSize, sizeOfReconstruction, filterName, regimeInterpolation);
+            result.add(image);
+            logger.trace("Amount of reconstructed image " + countImages + ". All is " + amountImages);
+            countImages++;
+        }
+        return result;
     }
 }

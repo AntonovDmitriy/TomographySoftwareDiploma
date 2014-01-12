@@ -6,7 +6,9 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,5 +61,29 @@ public class ReaderWriterData {
 
         ImageIO.write(image, format, new File(name));
 
+    }
+
+    public static void writeDoubleArrayToTextFile(double[][] array, String nameFile) {
+
+        BufferedWriter writer = null;
+        try {
+            File file = new File(nameFile);
+
+            writer = new BufferedWriter(new FileWriter(file));
+            for (double[] row : array) {
+                writer.write("\n");
+                for (double entry : row) {
+                    writer.write(entry + " ");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
     }
 }

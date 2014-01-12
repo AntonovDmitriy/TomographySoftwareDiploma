@@ -63,6 +63,7 @@ public class HardwareModule {
 
     private List<PSetProjectionData> listProjectionData = new ArrayList<>();
     private IConnectionManager connectionManager;
+    private List<BufferedImage> listReconstructedImages;
 
     public HardwareModule(Tomograph tomograph, Properties p) {
         this.tomograph = tomograph;
@@ -209,7 +210,7 @@ public class HardwareModule {
         if (this.listProjectionData != null && !this.listProjectionData.isEmpty()) {
             firePropertyChange("hardware_setProjectionData", null, listProjectionData);
         } else {
-            firePropertyChange("hardware_disableAllTomographControls", null, null);
+//            firePropertyChange("hardware_disableAllTomographControls", null, null);
         }
         logger.info("Views are prepared");
     }
@@ -291,10 +292,10 @@ public class HardwareModule {
     private void doColoringToReconstructedImage() {
 
         BufferedImage colorImage = ImageTransformerFacade.doColorOnImage(currentReconstructionImage, currentColorName);
-        logger.trace("Colored image has been created");
+//        logger.trace("Colored image has been created");
         this.coloredReconstructionImage = colorImage;
-        logger.trace("current tomograph colored image has been changed");
-        firePropertyChange("hardware_colorImageModelling", null, coloredReconstructionImage);
+//        logger.trace("current tomograph colored image has been changed");
+        firePropertyChange("hardware_currentReconstructedImageTomograph", null, coloredReconstructionImage);
     }
 
     public void startScanning(String fileName, String fileDesctiption) {
@@ -384,5 +385,44 @@ public class HardwareModule {
 
     public IConnectionManager getConnectionManager() {
         return this.connectionManager;
+    }
+
+    public void reconstructProjectionData(PSetProjectionData selectedSet) {
+        try {
+            logger.trace("Reconstruction of selected set of projection dataa is starting");
+            firePropertyChange("hardware_startReconstruction", null, null);
+
+            ITomographDao dao = new TomographDaoImpl(tomographProperty, connectionManager);
+
+            List<Object> setProjectionData = dao.getSetProjectionData(selectedSet);
+            List<BufferedImage> listReconstructedImages = ImageTransformerFacade.recontructProjectionDataSet(setProjectionData, scans, stepSize, sizeReconstruction, currentFilter, regimeReconstructionInterpolation.getValue());
+            this.listReconstructedImages = listReconstructedImages;
+
+            setCurrentReconstructionImage(this.listReconstructedImages.get(0));
+            firePropertyChange("hardware_amountReconstructedImages", null, this.listReconstructedImages.size() - 1);
+            firePropertyChange("hardware_enableAfterReconstructControls", null, null);
+            firePropertyChange("hardware_stopReconstruction", null, null);
+            logger.trace("Reconstruction of selected set of projection data is finishied");
+
+        } catch (Throwable ex) {
+            logger.error("Internal error during reconstruction of set projection data ", ex);
+            firePropertyChange("INTERNAL_ERROR", null, "Internal error during reconstruction sinogram");
+        }
+    }
+
+    public void setCurrentReconstructionImage(BufferedImage image) {
+        this.currentReconstructionImage = image;
+        firePropertyChange("hardware_currentReconstructedImage", null, null);
+//        logger.trace("Current reconstructed image is changed"); there was too big
+
+        if (currentColorName != null) {
+            doColoringToReconstructedImage();
+        }
+    }
+
+    public void setCurrentReconstructedImage(int value) {
+        
+        BufferedImage image = listReconstructedImages.get(value);
+        setCurrentReconstructionImage(image);
     }
 }

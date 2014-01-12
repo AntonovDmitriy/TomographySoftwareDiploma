@@ -8,6 +8,7 @@ package com.antonov.tomographysoftwarediploma.dblayer;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *

@@ -6,6 +6,7 @@
 package com.antonov.tomographysoftwarediploma.dblayer;
 
 import com.jcraft.jsch.JSchException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import java.util.List;
  */
 public interface ITomographDao {
 
-    public void insertProjectionData(String name, String description,List<Object> projectionDataList) throws JSchException, SQLException,EmptyOrNullParameterException;
+    public void insertProjectionData(String name, String description, List<Object> projectionDataList) throws JSchException, SQLException, EmptyOrNullParameterException;
 
-    public List<PSetProjectionData> selectAllSetProjectionData() throws JSchException, SQLException,EmptyOrNullParameterException;
+    public List<PSetProjectionData> selectAllSetProjectionData() throws JSchException, SQLException, EmptyOrNullParameterException;
+
+    public List<Object> getSetProjectionData(PSetProjectionData pojo) throws JSchException, SQLException, EmptyOrNullParameterException, IOException, ClassNotFoundException;
 }

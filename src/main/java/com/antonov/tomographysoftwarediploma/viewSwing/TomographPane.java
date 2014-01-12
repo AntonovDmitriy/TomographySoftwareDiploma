@@ -34,34 +34,36 @@ import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TomographPane extends javax.swing.JFrame implements ITomographView {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(TomographPane.class);
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
     private final ResourceBundle bundle = ResourceBundle.getBundle(
             "bundle_Rus");
-    
+
     public static final List<String> modelNames = new ArrayList<>(); // For modelling images names
 
     private List<BufferedImage> arrayReconstructedImage = new ArrayList<>();
-    
+
     ImageTransformator sinogramCreator = new ImageTransformator();
     String nameOfProjData;
-    
+
     public List<PSetProjectionData> listProjData = ObservableCollections.observableList(new ArrayList<PSetProjectionData>());
-    
+
     public List<PSetProjectionData> getListProjData() {
         return listProjData;
     }
-    
+
     public TomographPane() {
-        
+
         initComponents();
         initClosingOperations();
         initButtons();
@@ -69,11 +71,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         initTextFields();
         initComboBoxes();
         initImageAreas();
+        initSlider();
     }
-    
+
     @Override
     public void initClosingOperations() {
-        
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -84,29 +87,29 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
     }
-    
+
     @Override
     public void setModellingController(ModellingModuleController controller) {
         this.modellingModuleController = controller;
     }
-    
+
     @Override
     public void setHardwareController(HardwareModuleController controller) {
         this.hardwareModuleController = controller;
     }
-    
+
     @Override
     public void setModellingImages(Map<String, BufferedImage> imageSamplesMapWithNames) {
-        
+
         fillModelNames(imageSamplesMapWithNames);
         initModelList();
     }
-    
+
     @Override
     public void fillModelNames(Map<String, BufferedImage> imageSamplesMapWithNames) {
-        
+
         if (!imageSamplesMapWithNames.isEmpty()) {
-            
+
             for (String name : imageSamplesMapWithNames.keySet()) {
                 modelNames.add(name);
             }
@@ -114,25 +117,25 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             logger.warn("Map of modelling images is empty ");
         }
     }
-    
+
     @Override
     public void initModelList() {
-        
+
         modelList.setModel(new javax.swing.AbstractListModel() {
-            
+
             @Override
             public int getSize() {
                 return modelNames.size();
             }
-            
+
             @Override
             public Object getElementAt(int i) {
                 return modelNames.get(i);
             }
         });
-        
+
         modelList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            
+
             @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 if (evt.getValueIsAdjusting()) {
@@ -142,74 +145,74 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
     }
-    
+
     @Override
     public void clearResultModelling() {
-        
+
         labelImage2.setIcon(null);
     }
-    
+
     public void clearResultReconstruction() {
         labelReconstruction.setIcon(null);
     }
-    
+
     @Override
     public void disableModellingControls() {
-        
+
         buttonSaveSinogram.setEnabled(false);
         buttonSaveReconstructModelling.setEnabled(false);
         buttonSinogram.setEnabled(true);
-        
+
         disableReconControls();
         disableAfterReconstrucionControls();
     }
-    
+
     public void disableReconControls() {
-        
+
         buttonReconstruct.setEnabled(false);
     }
-    
+
     @Override
     public void enableReconControls() {
-        
+
         buttonReconstruct.setEnabled(true);
         buttonSaveSinogram.setEnabled(true);
     }
-    
+
     public void enableAfterReconstructControls() {
         buttonDensityViewer.setEnabled(true);
         cbColoringModel.setEnabled(true);
         buttonSaveReconstructModelling.setEnabled(true);
     }
-    
+
     public void disableAfterReconstrucionControls() {
-        
+
         buttonDensityViewer.setEnabled(false);
         cbColoringModel.setEnabled(false);
         buttonSaveReconstructModelling.setEnabled(false);
     }
-    
+
     @Override
     public void setCurrentModellingImage(BufferedImage image) {
-        
+
         ImageIcon icon = new ImageIcon(image);
         labelImage1.setIcon(icon);
     }
-    
+
     @Override
     public void setSinogramImage(BufferedImage image) {
-        
+
         ImageIcon icon = new ImageIcon(image);
         labelImage2.setIcon(icon);
-        
+
     }
-    
+
     private void setReconstructionImage(BufferedImage image) {
-        
+
         ImageIcon icon = new ImageIcon(image);
         labelReconstruction.setIcon(icon);
     }
-    
+
     @Override
     public void initListeners() {
         PropertyChangeListener errorListener = new PropertyChangeListener() {
@@ -227,9 +230,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         break;
                 }
             }
-            
+
         };
-        
+
         PropertyChangeListener imagesListener = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -252,7 +255,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         };
-        
+
         PropertyChangeListener paramsModellingListener = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -296,9 +299,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         };
-        
+
         PropertyChangeListener otherStuffListener = new PropertyChangeListener() {
-            
+
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 switch (evt.getPropertyName()) {
@@ -332,7 +335,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         };
-        
+
         PropertyChangeListener paramsHardwareListener = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -384,38 +387,53 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "hardware_disableAllTomographControls":
                         disableAllTomographControls();
                         break;
+                    case "hardware_enableAfterReconstructControls":
+                        enableAfterReconnstructTomographControls();
+                        break;
+                    case "hardware_currentReconstructedImageTomograph":
+                        setReconstructionTomographImage((BufferedImage) evt.getNewValue());
+                        break;
+                    case "hardware_startReconstruction":
+                        startCalculating();
+                        break;
+                    case "hardware_stopReconstruction":
+                        stopCalculating();
+                        break;
+                    case "hardware_amountReconstructedImages":
+                        setSliderParameters((Integer) evt.getNewValue());
+                        break;
                 }
             }
-            
+
         };
-        
+
         modellingModuleController.addPropertyChangeListenerToModel(paramsModellingListener);
         modellingModuleController.addPropertyChangeListenerToModel(imagesListener);
         modellingModuleController.addPropertyChangeListenerToModel(otherStuffListener);
         modellingModuleController.addPropertyChangeListenerToModel(errorListener);
-        
+
         modellingModuleController.addPropertyChangeListener(errorListener);
         modellingModuleController.addPropertyChangeListener(paramsModellingListener);
-        
+
         hardwareModuleController.addPropertyChangeListenerToModel(errorListener);
         hardwareModuleController.addPropertyChangeListenerToModel(paramsHardwareListener);
         hardwareModuleController.addPropertyChangeListener(errorListener);
     }
-    
+
     @Override
     public void startCalculating() {
-        
+
         dialogProgressBar.setVisible(true);
         progressBar.setIndeterminate(true);
-        
+
     }
-    
+
     @Override
     public void stopCalculating() {
         progressBar.setIndeterminate(false);
         dialogProgressBar.setVisible(false);
     }
-    
+
     private void initToolBars() {
         buttonOpenFile.setToolTipText(bundle.getString("TIP_OPEN_MODELLING_IMAGE"));
         buttonOpenFile.addActionListener(new ActionListener() {
@@ -427,12 +445,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-        
+
         buttonSaveSinogram.setToolTipText(bundle.getString("TIP_SAVE_SINOGRAM_IMAGE"));
         buttonSaveSinogram.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 if (saveFileChooser.showSaveDialog(TomographPane.this) == JFileChooser.APPROVE_OPTION) {
                     File file = saveFileChooser.getSelectedFile();
                     String desc = saveFileChooser.getFileFilter().getDescription();
@@ -440,12 +458,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-        
+
         buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructModelling.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 if (saveFileChooser.showSaveDialog(TomographPane.this) == JFileChooser.APPROVE_OPTION) {
                     File file = saveFileChooser.getSelectedFile();
                     String desc = saveFileChooser.getFileFilter().getDescription();
@@ -454,13 +472,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
     }
-    
+
     private void initButtons() {
-        
+
         buttonSinogram.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -469,11 +487,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }).start();
             }
         });
-        
+
         buttonReconstruct.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -482,14 +500,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }).start();
             }
         });
-        
+
         buttonDensityViewer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.showDensityAnalizator();
             }
         });
-        
+
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -497,7 +515,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 dialogNameAsker.setVisible(true);
             }
         });
-        
+
         buttonOkSetName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -510,192 +528,207 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }).start();
             }
         });
-        
+
         buttonCanselSetName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialogNameAsker.setVisible(false);
             }
         });
+
+        buttonReconstructTomograph.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRowNum = tableSetProjData.getSelectedRow();
+                final PSetProjectionData selectedSet = listProjData.get(selectedRowNum);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hardwareModuleController.reconstructProjectionData(selectedSet);
+                    }
+                }).start();
+
+            }
+        });
     }
-    
+
     private void disableTomographControls() {
-        
+
         buttonSaveReconstructTomograph.setEnabled(false);
-        labelImage3.setIcon(null);
+        labelReconstructionTomograph.setIcon(null);
     }
-    
+
     private void setCbInterpolationTomograph(Set setInterpolation) {
-        
+
         cbReconstructionInterpolationTomograph.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
     }
-    
+
     private void setCbFilteringModelTomograph(Set setFilter) {
-        
+
         cbFilteringModelTomograph.setModel(new DefaultComboBoxModel(setFilter.toArray()));
     }
-    
+
     private void setCbColoringTomograph() {
-        
+
         cbColoringTomograph.setModel(new DefaultComboBoxModel(ColorFunctionNamesEnum.values()));
     }
-    
+
     private void initTextFields() {
-        
+
         edScansModel.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 modellingModuleController.setScans(edScansModel.getText(), TomographPane.this);
             }
         });
-        
+
         edStepsizeModel.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 modellingModuleController.setStepSize(edStepsizeModel.getText());
             }
         });
-        
+
         edSizeReconstruction.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 modellingModuleController.setSizeReconstruction(edSizeReconstruction.getText());
             }
         });
-        
+
         edScansTomograph.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 hardwareModuleController.setScans(edScansTomograph.getText(), TomographPane.this);
             }
         });
-        
+
         edStepSizeTomograph.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 hardwareModuleController.setStepSize(edStepSizeTomograph.getText());
             }
         });
-        
+
         edMoving.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 hardwareModuleController.setMoving(edMoving.getText(), TomographPane.this);
             }
         });
-        
+
         edSizeReconTomograph.addFocusListener(new FocusLostListener() {
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 hardwareModuleController.setSizeReconstruction(edSizeReconTomograph.getText());
             }
         });
     }
-    
+
     private void setCbInterpolation(Set setInterpolation) {
-        
+
         cbSinogramInterpolation.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
         cbReconstructionInterpolation.setModel(new DefaultComboBoxModel(setInterpolation.toArray()));
     }
-    
+
     private void setCbFilteringModel(Set setFilter) {
         cbFilteringModel.setModel(new DefaultComboBoxModel(setFilter.toArray()));
     }
-    
+
     private void setCbColoring() {
-        
+
         cbColoringModel.setModel(new DefaultComboBoxModel(ColorFunctionNamesEnum.values()));
     }
-    
+
     @Override
     public void showInternalErrorMessage(String messageError) {
-        
+
         stopCalculating();
         JOptionPane.showMessageDialog(this, bundle.getString("INTERNAL_ERROR") + ". " + messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
-    
+
     @Override
     public void showWarningMessage(String messageWarning) {
-        
+
         JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
     }
-    
+
     private void showErrorMessage(String messageError) {
-        
+
         stopCalculating();
         JOptionPane.showMessageDialog(this, messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void initComboBoxes() {
-        
+
         cbSinogramInterpolation.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setSinogramInterpolation(cbSinogramInterpolation.getSelectedItem());
             }
         });
-        
+
         cbReconstructionInterpolation.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setReconstructionInterpolation(cbReconstructionInterpolation.getSelectedItem());
             }
         });
-        
+
         cbFilteringModel.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setFilterModel(cbFilteringModel.getSelectedItem());
             }
         });
-        
+
         cbColoringModel.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 modellingModuleController.setColoringName((ColorFunctionNamesEnum) cbColoringModel.getSelectedItem());
             }
         });
-        
+
         cbReconstructionInterpolationTomograph.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 hardwareModuleController.setReconstructionInterpolationTomograph(cbReconstructionInterpolationTomograph.getSelectedItem());
             }
         });
-        
+
         cbFilteringModelTomograph.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 hardwareModuleController.setFilterModel(cbFilteringModelTomograph.getSelectedItem());
             }
         });
-        
+
         cbColoringTomograph.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 hardwareModuleController.setColoringName((ColorFunctionNamesEnum) cbColoringTomograph.getSelectedItem());
             }
         });
     }
-    
+
     private void initImageAreas() {
-        
+
         labelImage2.addMouseListener(new MouseAdapter() {
-            
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -703,9 +736,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-        
+
         labelReconstruction.addMouseListener(new MouseAdapter() {
-            
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -714,21 +747,50 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
     }
-    
+
+    private void initSlider() {
+        sliderImage.setMinorTickSpacing(1);
+        sliderImage.setPaintTicks(true);
+        sliderImage.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int value = sliderImage.getValue();
+                hardwareModuleController.setCurrentReconstructedImage(value);
+            }
+        });
+    }
+
     @Override
     public boolean isSinogramImageEmpty() {
         return labelImage2.getIcon() == null;
     }
-    
+
     @Override
     public boolean isReconstructionModellingEmpty() {
         return labelReconstruction.getIcon() == null;
     }
-    
+
     private void disableAllTomographControls() {
-        
+
         buttonStart.setEnabled(false);
-        buttonOpenProjData.setEnabled(false);
+        buttonReconstructTomograph.setEnabled(false);
+    }
+
+    private void enableAfterReconnstructTomographControls() {
+        buttonDensityViewerTomograph.setEnabled(true);
+        sliderImage.setEnabled(true);
+    }
+
+    private void setReconstructionTomographImage(BufferedImage image) {
+
+        ImageIcon icon = new ImageIcon(image);
+        labelReconstructionTomograph.setIcon(icon);
+    }
+
+    private void setSliderParameters(int size) {
+
+        sliderImage.setMaximum(size);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -819,7 +881,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jLabel3 = new javax.swing.JLabel();
         edMoving = new javax.swing.JTextField();
         panelCalculateTomograph = new javax.swing.JPanel();
-        buttonOpenProjData = new javax.swing.JButton();
+        buttonReconstructTomograph = new javax.swing.JButton();
         buttonSaveReconstructTomograph = new javax.swing.JButton();
         buttonStart = new javax.swing.JButton();
         buttonDensityViewerTomograph = new javax.swing.JButton();
@@ -835,11 +897,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jSplitPane3 = new javax.swing.JSplitPane();
         panelResultTomograph = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        labelImage3 = new javax.swing.JLabel();
+        labelReconstructionTomograph = new javax.swing.JLabel();
         sliderImage = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableSetProjData = new javax.swing.JTable();
 
         dialogProgressBar.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         dialogProgressBar.setAlwaysOnTop(true);
@@ -1575,13 +1637,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             panelCalculateTomograph.setLayout(new java.awt.GridBagLayout());
 
-            buttonOpenProjData.setBackground(new java.awt.Color(0, 51, 153));
-            buttonOpenProjData.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
-            buttonOpenProjData.setFocusPainted(false);
-            buttonOpenProjData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            buttonOpenProjData.addActionListener(new java.awt.event.ActionListener() {
+            buttonReconstructTomograph.setBackground(new java.awt.Color(0, 51, 153));
+            buttonReconstructTomograph.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
+            buttonReconstructTomograph.setFocusPainted(false);
+            buttonReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            buttonReconstructTomograph.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonOpenProjDataActionPerformed(evt);
+                    buttonReconstructTomographActionPerformed(evt);
                 }
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1592,7 +1654,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.ipady = 8;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelCalculateTomograph.add(buttonOpenProjData, gridBagConstraints);
+            panelCalculateTomograph.add(buttonReconstructTomograph, gridBagConstraints);
 
             buttonSaveReconstructTomograph.setActionCommand("Сохранить<br> реконструкцию");
             buttonSaveReconstructTomograph.setEnabled(false);
@@ -1739,13 +1801,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             panelResultTomograph.setLayout(new java.awt.GridBagLayout());
 
-            labelImage3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelImage3.addMouseListener(new java.awt.event.MouseAdapter() {
+            labelReconstructionTomograph.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            labelReconstructionTomograph.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    labelImage3MouseClicked(evt);
+                    labelReconstructionTomographMouseClicked(evt);
                 }
             });
-            jScrollPane1.setViewportView(labelImage3);
+            jScrollPane1.setViewportView(labelReconstructionTomograph);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
@@ -1758,6 +1820,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             panelResultTomograph.add(jScrollPane1, gridBagConstraints);
 
             sliderImage.setValue(0);
+            sliderImage.setEnabled(false);
+            sliderImage.setFocusable(false);
             sliderImage.addChangeListener(new javax.swing.event.ChangeListener() {
                 public void stateChanged(javax.swing.event.ChangeEvent evt) {
                     sliderImageStateChanged(evt);
@@ -1778,10 +1842,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 402));
 
-            jTable1.setFocusable(false);
+            tableSetProjData.setFocusable(false);
 
             org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${listProjData}");
-            org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTable1);
+            org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, tableSetProjData);
             org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ID}"));
             columnBinding.setColumnName("ID");
             columnBinding.setColumnClass(Integer.class);
@@ -1796,12 +1860,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             columnBinding.setEditable(false);
             bindingGroup.addBinding(jTableBinding);
             jTableBinding.bind();
-            jScrollPane2.setViewportView(jTable1);
-            if (jTable1.getColumnModel().getColumnCount() > 0) {
-                jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-                jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-                jTable1.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("LABEL_NAME")); // NOI18N
-                jTable1.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("LABEL_DESCR")); // NOI18N
+            jScrollPane2.setViewportView(tableSetProjData);
+            if (tableSetProjData.getColumnModel().getColumnCount() > 0) {
+                tableSetProjData.getColumnModel().getColumn(0).setPreferredWidth(50);
+                tableSetProjData.getColumnModel().getColumn(0).setMaxWidth(50);
+                tableSetProjData.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("LABEL_NAME")); // NOI18N
+                tableSetProjData.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("LABEL_DESCR")); // NOI18N
             }
 
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1843,10 +1907,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     ImageViewerPane viewer = new ImageViewerPane();
                     viewer.setVisible(true);
                     viewer.image.setIcon(labelImage1.getIcon());
-                    
+
                 }
             });
-            
+
         }
     }//GEN-LAST:event_labelImage1MouseClicked
 
@@ -1862,11 +1926,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private void buttonProjDataOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataOkActionPerformed
         // TODO add your handling code here:
         if (tableProjData.getSelectedRow() > -1) {
-            
+
             nameOfProjData = tableProjData.getValueAt(tableProjData.getSelectedRow(), 1).toString();
             dialogProjDataChooser.setVisible(false);
             dialogFilterChooser.setVisible(true);
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Не выбран набор проеционных данных", "Ошибка", 0);
         }
@@ -1876,9 +1940,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private void sliderImageStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderImageStateChanged
         // TODO add your handling code here:
 
-        int value = sliderImage.getValue();
-        ImageIcon icon = new ImageIcon(arrayReconstructedImage.get(value));
-        labelImage3.setIcon(icon);
+//        int value = sliderImage.getValue();
+//        ImageIcon icon = new ImageIcon(arrayReconstructedImage.get(value));
+//        labelReconstructionTomograph.setIcon(icon);
 
     }//GEN-LAST:event_sliderImageStateChanged
 
@@ -1976,19 +2040,19 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     }//GEN-LAST:event_buttonOkSetNameActionPerformed
 
-    private void labelImage3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImage3MouseClicked
+    private void labelReconstructionTomographMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReconstructionTomographMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2 && labelImage3.getIcon() != null) {
+        if (evt.getClickCount() == 2 && labelReconstructionTomograph.getIcon() != null) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     ImageViewerPane viewer = new ImageViewerPane();
                     viewer.setVisible(true);
-                    viewer.image.setIcon(labelImage3.getIcon());
+                    viewer.image.setIcon(labelReconstructionTomograph.getIcon());
                 }
             });
-            
+
         }
-    }//GEN-LAST:event_labelImage3MouseClicked
+    }//GEN-LAST:event_labelReconstructionTomographMouseClicked
 
     private void buttonDensityViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerActionPerformed
 
@@ -2069,41 +2133,41 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         //        }
     }//GEN-LAST:event_buttonSaveReconstructTomographActionPerformed
 
-    private void buttonOpenProjDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenProjDataActionPerformed
+    private void buttonReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReconstructTomographActionPerformed
         // TODO add your handling code here:
-        dialogProjDataChooser.setVisible(true);
-        try {
-            buttonSaveReconstructTomograph.setEnabled(false);
-            
-            Class.forName("com.mysql.jdbc.Driver");
-            while (tableProjData.getRowCount() > 0) {
-                ((DefaultTableModel) tableProjData.getModel()).removeRow(0);
-            }
-            
-            DefaultTableModel model = (DefaultTableModel) tableProjData.getModel();
-            Properties props = new Properties();
-            props.put("useUnicode", "true");
-            props.put("characterEncoding", "UTF-8");
-            
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
-                    + "user=root&password=ProL1ant", props);
-            
-            Statement statement = connect.createStatement();
-            
-            String SQL = "select * from project_data";
-            ResultSet rs = statement.executeQuery(SQL);
-            String n = "", e = "", k1 = "";
-            while (rs.next()) {
-                
-                Object[] data = {rs.getString("DATE"), rs.getString("NAME"), rs.getString("DESCRIPTION")};
-                model.addRow(data);
-            }
-        } catch (SQLException ex) {
-            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_buttonOpenProjDataActionPerformed
+//        dialogProjDataChooser.setVisible(true);
+//        try {
+//            buttonSaveReconstructTomograph.setEnabled(false);
+//
+//            Class.forName("com.mysql.jdbc.Driver");
+//            while (tableProjData.getRowCount() > 0) {
+//                ((DefaultTableModel) tableProjData.getModel()).removeRow(0);
+//            }
+//
+//            DefaultTableModel model = (DefaultTableModel) tableProjData.getModel();
+//            Properties props = new Properties();
+//            props.put("useUnicode", "true");
+//            props.put("characterEncoding", "UTF-8");
+//
+//            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
+//                    + "user=root&password=ProL1ant", props);
+//
+//            Statement statement = connect.createStatement();
+//
+//            String SQL = "select * from project_data";
+//            ResultSet rs = statement.executeQuery(SQL);
+//            String n = "", e = "", k1 = "";
+//            while (rs.next()) {
+//
+//                Object[] data = {rs.getString("DATE"), rs.getString("NAME"), rs.getString("DESCRIPTION")};
+//                model.addRow(data);
+//            }
+//        } catch (SQLException ex) {
+//            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_buttonReconstructTomographActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2116,11 +2180,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonOkFilterTomograph;
     private javax.swing.JButton buttonOkSetName;
     private javax.swing.JButton buttonOpenFile;
-    private javax.swing.JButton buttonOpenProjData;
     private javax.swing.JButton buttonProjDataCancel;
     private javax.swing.JButton buttonProjDataOk;
     private javax.swing.JButton buttonProjDataOpenFile;
     private javax.swing.JButton buttonReconstruct;
+    private javax.swing.JButton buttonReconstructTomograph;
     private javax.swing.JButton buttonSaveReconstructModelling;
     private javax.swing.JButton buttonSaveReconstructTomograph;
     private javax.swing.JButton buttonSaveSinogram;
@@ -2183,13 +2247,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelDetectors;
     private javax.swing.JLabel labelImage1;
     private javax.swing.JLabel labelImage2;
-    private javax.swing.JLabel labelImage3;
     private javax.swing.JLabel labelReconstructSize;
     private javax.swing.JLabel labelReconstruction;
+    private javax.swing.JLabel labelReconstructionTomograph;
     private javax.swing.JLabel labelStepsize;
     private javax.swing.JList modelList;
     private javax.swing.JPanel modelPanel;
@@ -2210,6 +2273,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JFileChooser saveFileChooser;
     private javax.swing.JSlider sliderImage;
     private javax.swing.JTable tableProjData;
+    private javax.swing.JTable tableSetProjData;
     private javax.swing.JToolBar toolbarModellingImage;
     private javax.swing.JToolBar toolbarSourceImage;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

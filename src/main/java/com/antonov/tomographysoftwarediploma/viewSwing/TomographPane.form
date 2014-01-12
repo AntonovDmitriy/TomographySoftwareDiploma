@@ -1155,7 +1155,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="buttonOpenProjData">
+                    <Component class="javax.swing.JButton" name="buttonReconstructTomograph">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="99" green="33" red="0" type="rgb"/>
@@ -1167,7 +1167,7 @@
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOpenProjDataActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReconstructTomographActionPerformed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1376,12 +1376,12 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="labelImage3">
+                        <Component class="javax.swing.JLabel" name="labelReconstructionTomograph">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelImage3MouseClicked"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelReconstructionTomographMouseClicked"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -1389,6 +1389,8 @@
                     <Component class="javax.swing.JSlider" name="sliderImage">
                       <Properties>
                         <Property name="value" type="int" value="0"/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderImageStateChanged"/>
@@ -1427,7 +1429,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable1">
+                        <Component class="javax.swing.JTable" name="tableSetProjData">
                           <Properties>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
@@ -1458,7 +1460,7 @@
                             </Property>
                           </Properties>
                           <BindingProperties>
-                            <BindingProperty name="elements" source="Form" sourcePath="${listProjData}" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
+                            <BindingProperty name="elements" source="Form" sourcePath="${listProjData}" target="tableSetProjData" targetPath="elements" updateStrategy="0" immediately="true">
                               <Subbinding sourcePath="${ID}">
                                 <BindingParameter name="NAME" value="ID"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>

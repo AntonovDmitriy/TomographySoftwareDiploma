@@ -5,6 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.controllers;
 
+import com.antonov.tomographysoftwarediploma.dblayer.PSetProjectionData;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.impl.PInterpolation;
 import com.antonov.tomographysoftwarediploma.impl.Tomograph;
@@ -154,5 +155,13 @@ public class HardwareModuleController extends Controller {
         else{
             super.tomograph.hardwareModule.startScanning(fileName, fileDesc);
         }
+    }
+
+    public void reconstructProjectionData(PSetProjectionData selectedSet) {
+        super.tomograph.hardwareModule.reconstructProjectionData(selectedSet);
+    }
+
+    public void setCurrentReconstructedImage(int value) {
+        this.tomograph.hardwareModule.setCurrentReconstructedImage(value);
     }
 }

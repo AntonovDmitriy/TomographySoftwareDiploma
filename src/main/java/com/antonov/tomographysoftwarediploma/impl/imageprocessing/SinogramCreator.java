@@ -5,6 +5,7 @@
  */
 package com.antonov.tomographysoftwarediploma.impl.imageprocessing;
 
+import com.antonov.tomographysoftwarediploma.impl.ReaderWriterData;
 import static com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformerFacade.PerformWindowing;
 import java.awt.image.BufferedImage;
 import java.util.MissingFormatArgumentException;
@@ -136,7 +137,8 @@ public class SinogramCreator extends ModellingImageCalculator {
             logger.trace("Array of pixel values of source image has been created");
             double[][] projectionData = generateProjectionData(pixInitialImage, regimeInteprolation);
             projectionData = Utils.normalize2DArray(projectionData, 0, 1);
-
+            
+//            ReaderWriterData.writeDoubleArrayToTextFile(projectionData, "arrayTomograph.txt"); for debug
             return projectionData;
         } else {
             throw new MissingFormatArgumentException("Parameters of modelling are emptry or incorrect");
@@ -156,7 +158,9 @@ public class SinogramCreator extends ModellingImageCalculator {
 
             logger.trace("Projection data has been created and saved to model");
             projectionData = Utils.normalize2DArray(projectionData, 0, 1);
-
+            
+//            ReaderWriterData.writeDoubleArrayToTextFile(projectionData, "arrayModel.txt"); for debug
+            
             model.setProjectionData(projectionData);
             short[] pixelshortArray = Utils.getShortRowFromProjectionData(projectionData);
             logger.trace("Short row projection data has been created");
