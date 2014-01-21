@@ -8870,3 +8870,4 @@ java.lang.NullPointerException
 2014-01-13 10:08:01 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
 2014-01-13 10:08:01 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
 2014-01-13 10:08:01 INFO  HardwareModule:215 - Views are prepared
+2014-01-21 18:22:48 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======

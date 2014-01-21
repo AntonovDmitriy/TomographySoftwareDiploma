@@ -86,4 +86,8 @@ public class ReaderWriterData {
             }
         }
     }
+
+    static void isFolderExists(String javaSecurityFolder) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -124,10 +124,17 @@ public class Tomograph {
     }
 
     private void initRequiredSshConnectionFilesToSystem() {
+        String javaHome = System.getProperty("java.home");
+        String javaSecurityFolder = javaHome + "/lib/security";
+        
+        ReaderWriterData.isFolderExists(javaSecurityFolder);
+        
         String javaVersion = System.getProperty("java.version");
-        if(javaVersion.contains("1.7")){
-            
+        if (javaVersion.contains("1.7")) {
+            int a = 0;
+        } else if (javaVersion.contains("1.6")) {
+            int a = 0;
         }
-                
+
     }
 }
