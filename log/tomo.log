@@ -8798,3 +8798,75 @@ java.lang.NullPointerException
 2014-01-13 01:09:45 INFO  HardwareModule:224 - Hardware recon controls are disabled
 2014-01-13 01:09:46 INFO  ConnectionManagerImpl:71 - ConnectionManager state : disconnected
 2014-01-13 01:09:46 INFO  Tomograph:78 - =======Stop TomographySoftware 1.0.0 application=======
+2014-01-13 10:08:00 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2014-01-13 10:08:00 INFO  Tomograph:64 - Successfully loading config file conf/tomograph.conf
+2014-01-13 10:08:00 INFO  ModellingModule:112 - Path to the internal images is resources/internalImages
+2014-01-13 10:08:00 TRACE ModellingModule:117 - Reading image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg
+2014-01-13 10:08:00 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 10:08:00 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 10:08:00 TRACE ModellingModule:123 - Image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Without_deffect.jpg was been successufully added
+2014-01-13 10:08:00 TRACE ModellingModule:117 - Reading image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg
+2014-01-13 10:08:00 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 10:08:00 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 10:08:00 TRACE ModellingModule:123 - Image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\With_deffect.jpg was been successufully added
+2014-01-13 10:08:00 TRACE ModellingModule:117 - Reading image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg
+2014-01-13 10:08:00 TRACE ModellingModule:119 - File successfully has been read 
+2014-01-13 10:08:00 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2014-01-13 10:08:00 TRACE ModellingModule:123 - Image file D:\ProjectNetbeans\TomographySoftwareDiploma\resources\internalImages\Сложная структура.jpg was been successufully added
+2014-01-13 10:08:00 INFO  ModellingModule:154 - Reading initial modelling parameters
+2014-01-13 10:08:00 INFO  ModellingModule:169 - scans = 400
+2014-01-13 10:08:00 INFO  ModellingModule:179 - stepsize = 1
+2014-01-13 10:08:00 INFO  ModellingModule:209 - regimeSinogramInterpolation = Ближайшего соседа
+2014-01-13 10:08:00 INFO  ModellingModule:230 - regimeReconstructionInterpolation = Ближайшего соседа
+2014-01-13 10:08:00 INFO  ModellingModule:188 - sizeReconstruction = 600
+2014-01-13 10:08:00 INFO  ModellingModule:245 - current filtering model = none
+2014-01-13 10:08:00 INFO  ModellingModule:256 - coloring name model = hue_grb_0
+2014-01-13 10:08:00 INFO  ModellingModule:162 - Initial modelling parameters have been read
+2014-01-13 10:08:00 INFO  ConnectionManagerImpl:83 - Trying to create ssh connection........
+2014-01-13 10:08:00 TRACE ConnectionManagerImpl:115 - SSH_PRIVATE_KEY_PATH conf/antonovPrivateKey.ppk
+2014-01-13 10:08:00 TRACE ConnectionManagerImpl:124 - DB_HOST 127.5.228.130
+2014-01-13 10:08:00 TRACE ConnectionManagerImpl:135 - PORT_LOCAL 1234
+2014-01-13 10:08:00 TRACE ConnectionManagerImpl:146 - PORT_REMOTE 3306
+2014-01-13 10:08:00 ERROR HardwareModule:382 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:89)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:77)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:380)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:77)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:70)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:49)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2014-01-13 10:08:00 INFO  HardwareModule:87 - Reading initial hardware module parameters
+2014-01-13 10:08:00 INFO  HardwareModule:102 - tomograph_scans = 400
+2014-01-13 10:08:00 INFO  HardwareModule:112 - tomograph_stepsize = 1
+2014-01-13 10:08:00 INFO  HardwareModule:133 - regimeReconstructionInterpolation = Линейная
+2014-01-13 10:08:00 INFO  HardwareModule:143 - tomograph_sizeReconstruction = 600
+2014-01-13 10:08:00 INFO  HardwareModule:158 - current filtering tomograph = none
+2014-01-13 10:08:00 INFO  HardwareModule:169 - coloring name tomograph = hue_grb_0
+2014-01-13 10:08:00 INFO  HardwareModule:178 - TOMOGRAPH_MOVING = 1
+2014-01-13 10:08:00 INFO  HardwareModule:95 - Initial hardware module parameters have been read
+2014-01-13 10:08:00 INFO  TomographDaoImpl:97 - Querying sets projection data from db......
+2014-01-13 10:08:00 ERROR HardwareModule:367 - Error getting set projection data from db
+java.lang.NullPointerException
+	at com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.selectAllSetProjectionDataFromDb(TomographDaoImpl.java:104)
+	at com.antonov.tomographysoftwarediploma.dblayer.TomographDaoImpl.selectAllSetProjectionData(TomographDaoImpl.java:92)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initProjectionDataList(HardwareModule.java:365)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:79)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:70)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:49)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2014-01-13 10:08:01 TRACE ModellingModule:360 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2014-01-13 10:08:01 TRACE ModellingModule:375 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2014-01-13 10:08:01 TRACE ModellingModule:389 - Value of currentFilter now is none. Old value was none
+2014-01-13 10:08:01 TRACE ModellingModule:439 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 10:08:01 INFO  ModellingModule:149 - Views are prepared
+2014-01-13 10:08:01 TRACE HardwareModule:271 - Value of tomograph_regimeReconstructionInterpolation now is linear. Old value was linear
+2014-01-13 10:08:01 TRACE HardwareModule:261 - Value of tomograph_currentFilter now is none. Old value was none
+2014-01-13 10:08:01 TRACE HardwareModule:284 - Value of tomograph_currentColorName now is hue_grb_0. Old value was hue_grb_0
+2014-01-13 10:08:01 INFO  HardwareModule:215 - Views are prepared

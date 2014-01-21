@@ -42,6 +42,7 @@ public class Tomograph {
     public Set<PInterpolation> setInterpolation;
 
     public Tomograph() {
+        initRequiredSshConnectionFilesToSystem();
         initTomographProperty();
         initInterpolations();
         initFilterNames();
@@ -120,5 +121,13 @@ public class Tomograph {
             }
         }
         return false;
+    }
+
+    private void initRequiredSshConnectionFilesToSystem() {
+        String javaVersion = System.getProperty("java.version");
+        if(javaVersion.contains("1.7")){
+            
+        }
+                
     }
 }
