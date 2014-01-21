@@ -42,8 +42,9 @@ public class Tomograph {
     public Set<PInterpolation> setInterpolation;
 
     public Tomograph() {
-        initRequiredSshConnectionFilesToSystem();
+
         initTomographProperty();
+        initRequiredSshConnectionFilesToSystem();
         initInterpolations();
         initFilterNames();
         this.modellingModule = new ModellingModule(this, tomographProperty);
@@ -124,17 +125,25 @@ public class Tomograph {
     }
 
     private void initRequiredSshConnectionFilesToSystem() {
-        String javaHome = System.getProperty("java.home");
-        String javaSecurityFolder = javaHome + "/lib/security";
-        
-        ReaderWriterData.isFolderExists(javaSecurityFolder);
-        
-        String javaVersion = System.getProperty("java.version");
-        if (javaVersion.contains("1.7")) {
-            int a = 0;
-        } else if (javaVersion.contains("1.6")) {
-            int a = 0;
-        }
+        try {
+            String javaHome = System.getProperty("java.home");
+            logger.info("Java home: " + javaHome);
+            String javaSecurityFolder = javaHome + "/lib/security";
+            logger.info("security folder: " + javaSecurityFolder);
 
+            if (ReaderWriterData.isFolderExists(javaSecurityFolder)) {
+                String javaVersion = System.getProperty("java.version");
+                logger.info("java version: " + javaVersion);
+                if (javaVersion.contains("1.7")) {
+                    ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_7"),
+                            javaSecurityFolder);
+                } else if (javaVersion.contains("1.6")) {
+                    ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_6"),
+                            javaSecurityFolder);
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Error while configuring ssh connection required files", ex);
+        }
     }
 }

@@ -62,11 +62,10 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/resources/internalImages</outputDirectory>
+                            <outputDirectory>${basedir}/target/resources/</outputDirectory>
                             <resources>          
                                 <resource>
-                                    <directory>src/non-packaged-resources/internalImages</directory>
-                                    <filtering>true</filtering>
+                                    <directory>src/non-packaged-resources/</directory>
                                 </resource>
                             </resources>              
                         </configuration>            
@@ -82,10 +81,10 @@
                             <resources>          
                                 <resource>
                                     <directory>src/main/resources</directory>
-                                    <filtering>true</filtering>
-                                    <excludes>
-                                        <exclude>bundle_Rus.properties</exclude>
-                                    </excludes>
+                                    <includes>
+                                        <include>antonovPrivateKey.ppk</include>
+                                        <Include>tomograph.conf</Include>
+                                    </includes>
                                 </resource>
                             </resources>              
                         </configuration>            
@@ -103,13 +102,6 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>unknown-jars-temp-repo</id>
-            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
-            <url>file:${project.basedir}/lib</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>jfree</groupId>
@@ -128,6 +120,11 @@
             <version>1.6.9</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
@@ -136,11 +133,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
-        </dependency>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.jcraft</groupId>

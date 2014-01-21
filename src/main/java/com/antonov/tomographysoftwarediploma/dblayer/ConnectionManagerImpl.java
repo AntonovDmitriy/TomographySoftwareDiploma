@@ -86,6 +86,7 @@ public class ConnectionManagerImpl implements IConnectionManager {
         readInitialDbParameters();
 
         JSch jsch = new JSch();
+        logger.info((new File(pathToPrivateKey)).getAbsolutePath());
         jsch.addIdentity((new File(pathToPrivateKey)).getAbsolutePath());
 
         String host = SSH_CONNECTION;

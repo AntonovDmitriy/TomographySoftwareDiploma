@@ -8,11 +8,15 @@ package com.antonov.tomographysoftwarediploma.impl;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -87,7 +91,40 @@ public class ReaderWriterData {
         }
     }
 
-    static void isFolderExists(String javaSecurityFolder) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    static boolean isFolderExists(String javaSecurityFolder) {
+        File file = new File(javaSecurityFolder);
+        return file.isDirectory();
+
+    }
+
+    static void copyFilesFromTo(String fromFolder, String toFolder) throws IOException {
+        File[] listFiles = (new File(fromFolder)).listFiles();
+        for (File file : listFiles) {
+
+            File newFile = new File(toFolder + "/" + file.getName());
+            copyFile(file, newFile);
+        }
+    }
+
+    public static void copyFile(File sourceFile, File destFile) throws IOException {
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
+
+        FileChannel source = null;
+        FileChannel destination = null;
+
+        try {
+            source = new FileInputStream(sourceFile).getChannel();
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        } finally {
+            if (source != null) {
+                source.close();
+            }
+            if (destination != null) {
+                destination.close();
+            }
+        }
     }
 }
