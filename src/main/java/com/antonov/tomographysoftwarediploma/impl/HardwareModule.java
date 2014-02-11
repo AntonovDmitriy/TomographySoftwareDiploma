@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
  */
 public class HardwareModule {
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle_Rus");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private static final Logger logger = LoggerFactory.getLogger(HardwareModule.class);
     private HardwareModuleController controller;
@@ -375,8 +375,9 @@ public class HardwareModule {
     }
 
     private void initConnectionManager() {
-        this.connectionManager = new ConnectionManagerImpl(tomographProperty);
         try {
+            this.connectionManager = new ConnectionManagerImpl(tomographProperty);
+
             connectionManager.connect();
         } catch (Exception ex) {
             logger.error("Error while creating ssh or db connection ", ex);

@@ -1,8 +1,6 @@
 package com.antonov.tomographysoftwarediploma.viewSwing;
 
-import com.antonov.tomographysoftwarediploma.dblayer.DbModule;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ImageTransformator;
-import com.antonov.tomographysoftwarediploma.impl.imageprocessing.LUTFunctions;
 import com.antonov.tomographysoftwarediploma.controllers.HardwareModuleController;
 import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
@@ -20,15 +18,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import javax.swing.ImageIcon;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
@@ -36,7 +28,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +38,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
     private final ResourceBundle bundle = ResourceBundle.getBundle(
-            "bundle_Rus");
+            "conf/bundle_Rus");
 
     public static final List<String> modelNames = new ArrayList<>(); // For modelling images names
 
@@ -1149,7 +1140,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             dialogNameAsker.setResizable(false);
 
             jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("bundle_Rus"); // NOI18N
+            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle_Rus"); // NOI18N
             jLabel8.setText(bundle.getString("TITLE_NAME_ASKER")); // NOI18N
 
             jLabel9.setText(bundle.getString("LABEL_DESCR")); // NOI18N
@@ -1456,7 +1447,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             toolbarSourceImage.setRollover(true);
 
-            buttonOpenFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/open.png"))); // NOI18N
+            buttonOpenFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
             buttonOpenFile.setFocusPainted(false);
             buttonOpenFile.setFocusable(false);
             buttonOpenFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1516,7 +1507,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             toolbarModellingImage.setRollover(true);
 
-            buttonSaveSinogram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+            buttonSaveSinogram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
             buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
             buttonSaveSinogram.setEnabled(false);
             buttonSaveSinogram.setFocusPainted(false);
@@ -1525,7 +1516,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonSaveSinogram.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
             toolbarModellingImage.add(buttonSaveSinogram);
 
-            buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save2.png"))); // NOI18N
+            buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save2.png"))); // NOI18N
             buttonSaveReconstructModelling.setActionCommand("Сохранить<br> реконструкцию");
             buttonSaveReconstructModelling.setEnabled(false);
             buttonSaveReconstructModelling.setFocusPainted(false);

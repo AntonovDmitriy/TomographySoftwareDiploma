@@ -6,15 +6,32 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 
@@ -126,5 +143,130 @@ public class ReaderWriterData {
                 destination.close();
             }
         }
+    }
+
+    public void copyJarFolder(String jarName, String folderName, String destination) throws IOException {
+
+        ZipFile z = new ZipFile(jarName);
+        Enumeration entries = z.entries();
+
+        while (entries.hasMoreElements()) {
+            ZipEntry entry = (ZipEntry) entries.nextElement();
+
+            if (entry.getName().contains(folderName) && entry.isDirectory() == false) {
+                String[] path = entry.getName().split("/");
+                String nameOfFile = path[path.length - 1];
+                String destFileName = destination + "/" + nameOfFile;
+                File fileDest = new File(destFileName);
+                copyFromJar(entry.getName(), fileDest);
+            }
+        }
+    }
+
+    private boolean copyFromJar(String sResource, File fDest) {
+        if (sResource == null || fDest == null) {
+            return false;
+        }
+
+        InputStream is = null;
+        OutputStream os = null;
+
+        try {
+            int nLen = 0;
+            is = getClass().getClassLoader().getResourceAsStream(sResource);
+            if (is == null) {
+
+                throw new IOException("Error copying from jar"
+                        + "(" + sResource + " to " + fDest.getPath() + ")");
+            }
+
+            os = new FileOutputStream(fDest);
+            byte[] bBuffer = new byte[1024];
+            while ((nLen = is.read(bBuffer)) > 0) {
+                os.write(bBuffer, 0, nLen);
+            }
+            os.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException eError) {
+                eError.printStackTrace();
+            }
+        }
+        return fDest.exists();
+    }
+
+    public String getStringResource(String name) throws IOException {
+        String result = null;
+        Object resource = getObjectResource(name);
+        if (resource != null) {
+            result = (String) resource;
+        }
+        return result;
+
+    }
+
+    public Object getObjectResource(String name) throws IOException {
+        System.out.println(name);
+        Object result = null;
+        URL urlFile = getClass().getClassLoader().getResource(name);
+
+        Object resource = urlFile.getContent();
+        if (resource != null) {
+            result = resource;
+        }
+        return result;
+
+    }
+
+    public List<File> getListFilesFromJarFolder(String folderName) throws IOException {
+        ZipFile z = new ZipFile(getNameOfCurrentJar());
+        Enumeration entries = z.entries();
+        List<File> resultList = new ArrayList<>();
+        while (entries.hasMoreElements()) {
+            ZipEntry entry = (ZipEntry) entries.nextElement();
+            if (entry.getName().contains(folderName) && entry.isDirectory() == false) {
+                resultList.add(new File(entry.getName()));
+            }
+        }
+        return resultList;
+    }
+
+    public String getNameOfCurrentJar() throws UnsupportedEncodingException {
+        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        String decodedPath = URLDecoder.decode(path, "UTF-8");
+        return decodedPath;
+    }
+
+    BufferedImage getImageResource(String path) throws IOException {
+        System.out.println(path);
+        path = path.replaceAll("\\\\", "/");
+        System.out.println(path);
+        InputStream is = getClass().getClassLoader().getResourceAsStream(path);
+        System.out.println(is.toString());
+        return ImageIO.read(is);
+    }
+
+    public void extractResourceToFile(String pathToPrivateKey) throws IOException {
+        ZipFile z = new ZipFile(getNameOfCurrentJar());
+        Enumeration entries = z.entries();
+
+        while (entries.hasMoreElements()) {
+            ZipEntry entry = (ZipEntry) entries.nextElement();
+
+            if (entry.getName().contains(pathToPrivateKey) && entry.isDirectory() == false) {
+                File fileDest = new File(pathToPrivateKey);
+                fileDest.getParentFile().mkdirs();
+                copyFromJar(entry.getName(), fileDest);
+            }
+        }
+
     }
 }

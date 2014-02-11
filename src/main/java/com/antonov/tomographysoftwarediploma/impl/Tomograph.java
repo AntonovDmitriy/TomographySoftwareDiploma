@@ -10,9 +10,13 @@ import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleControll
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.SinogramCreator;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -32,7 +36,7 @@ public class Tomograph {
     HardwareModuleController hardwareModuleController;
 
     private static final String TOMOGRAPH_CONF_PATH = "conf/tomograph.conf";
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
+    private static ResourceBundle bundle;
     private Properties tomographProperty = new Properties();
 
     public ModellingModule modellingModule;
@@ -45,6 +49,7 @@ public class Tomograph {
 
         initTomographProperty();
         initRequiredSshConnectionFilesToSystem();
+        initBundle();
         initInterpolations();
         initFilterNames();
         this.modellingModule = new ModellingModule(this, tomographProperty);
@@ -66,7 +71,12 @@ public class Tomograph {
             logger.info("Successfully loading config file " + TOMOGRAPH_CONF_PATH);
 
         } catch (IOException ex) {
-            logger.warn("Can't load configuration file " + TOMOGRAPH_CONF_PATH, ex);
+            try (InputStream ist = getClass().getClassLoader().getResourceAsStream(TOMOGRAPH_CONF_PATH)) {
+                tomographProperty.load(ist);
+            } catch (IOException e) {
+                logger.warn("Can't load configuration file " + TOMOGRAPH_CONF_PATH, ex);
+            }
+
         }
     }
 
@@ -135,15 +145,52 @@ public class Tomograph {
                 String javaVersion = System.getProperty("java.version");
                 logger.info("java version: " + javaVersion);
                 if (javaVersion.contains("1.7")) {
-                    ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_7"),
-                            javaSecurityFolder);
+
+                    try {
+                        ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_7"),
+                                javaSecurityFolder);
+                    } catch (IOException | NullPointerException ex) {
+                        try {
+                            copySecurityFilesFromJar("jce7", javaSecurityFolder);
+                        } catch (IOException ex3) {
+                            copySecurityFilesFromTargetDirectory("target/classes/connectionFiles/jce7", javaSecurityFolder);
+                        }
+                    }
                 } else if (javaVersion.contains("1.6")) {
-                    ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_6"),
-                            javaSecurityFolder);
+                    try {
+                        ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_6"),
+                                javaSecurityFolder);
+                    } catch (IOException ex) {
+                        copySecurityFilesFromJar("jce6", javaSecurityFolder);
+                    }
                 }
             }
         } catch (Exception ex) {
             logger.error("Error while configuring ssh connection required files", ex);
+        }
+    }
+
+    private void copySecurityFilesFromJar(String nameOfFolder, String folderDestination) throws UnsupportedEncodingException, IOException {
+        ReaderWriterData reader = new ReaderWriterData();
+        String pathOfJar = reader.getNameOfCurrentJar();
+        reader.copyJarFolder(pathOfJar, nameOfFolder, folderDestination);
+    }
+
+    private void copySecurityFilesFromTargetDirectory(String nameOfFolder, String folderDestination) throws IOException {
+
+        ReaderWriterData.copyFilesFromTo(nameOfFolder, folderDestination);
+    }
+
+    private void initBundle() {
+        try {
+            bundle = ResourceBundle.getBundle("conf/bundle_Rus");
+        } catch (Exception ex1) {
+            try {
+                ReaderWriterData reader = new ReaderWriterData();
+                reader.getStringResource("conf/bundle_Rus");
+            } catch (Exception ex2) {
+                logger.error("Error while getting bundle", ex2);
+            }
         }
     }
 }

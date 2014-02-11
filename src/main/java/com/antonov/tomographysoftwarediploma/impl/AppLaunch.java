@@ -54,7 +54,7 @@ public class AppLaunch {
 //        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 //    }
     private static void internationalize() {
-        ResourceBundle b = ResourceBundle.getBundle("chooser_ru");
+        ResourceBundle b = ResourceBundle.getBundle("conf/chooser_ru");
         for (String s : b.keySet()) {
             UIManager.put(s, b.getString(s));
         }

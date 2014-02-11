@@ -5,11 +5,13 @@
  */
 package com.antonov.tomographysoftwarediploma.dblayer;
 
+import com.antonov.tomographysoftwarediploma.impl.ReaderWriterData;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -38,8 +40,10 @@ public class ConnectionManagerImpl implements IConnectionManager {
     private static final String DB_URL = "jdbc:mysql://localhost:1234/Tomo?"
             + "user=adminR8QufFz&password=a3ZixG3aDcJG";
 
-    public ConnectionManagerImpl(Properties properties) {
+    public ConnectionManagerImpl(Properties properties) throws IOException, EmptyOrNullParameterException {
         this.properties = properties;
+        readInitialDbParameters();
+        initConnectionFile();
     }
 
     @Override
@@ -83,10 +87,12 @@ public class ConnectionManagerImpl implements IConnectionManager {
         logger.info("Trying to create ssh connection........");
         long start = System.currentTimeMillis();
 
-        readInitialDbParameters();
+        
 
         JSch jsch = new JSch();
         logger.info((new File(pathToPrivateKey)).getAbsolutePath());
+        
+        
         jsch.addIdentity((new File(pathToPrivateKey)).getAbsolutePath());
 
         String host = SSH_CONNECTION;
@@ -163,5 +169,14 @@ public class ConnectionManagerImpl implements IConnectionManager {
         props.put("useUnicode", "true");
         props.put("characterEncoding", "Cp1251");
         return props;
+    }
+
+    private void initConnectionFile() throws IOException {
+        
+        File privateKey = new File(pathToPrivateKey);
+        if(!privateKey.exists()){
+            ReaderWriterData reader = new ReaderWriterData();
+            reader.extractResourceToFile(pathToPrivateKey);
+        }
     }
 }

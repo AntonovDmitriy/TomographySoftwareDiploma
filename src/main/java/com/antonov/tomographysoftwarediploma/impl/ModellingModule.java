@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ModellingModule implements IProjDataSaver {
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("bundle_Rus");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle_Rus");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
     private ModellingModuleController controller;
@@ -45,7 +45,7 @@ public class ModellingModule implements IProjDataSaver {
 
     //Parameters of reconstruction
     private Integer sizeReconstruction;
-   
+
     private String currentFilter;
     private PInterpolation regimeReconstructionInterpolation;
 
@@ -95,7 +95,7 @@ public class ModellingModule implements IProjDataSaver {
 
         if (p != null) {
             this.tomographProperty = p;
-            
+
             initSamplesMapImage();
             initParamModelling();
 
@@ -125,8 +125,22 @@ public class ModellingModule implements IProjDataSaver {
                         logger.info(imageFile.getAbsolutePath() + " is not file ");
                     }
                 }
-            } catch (IOException ex) {
-                logger.warn("Error during downloading internal images ", ex);
+            } catch (IOException | NullPointerException ex) {
+                try {
+                    String pathToImages = tomographProperty.getProperty("PATH_MODELLING_IMAGES");
+                    ReaderWriterData reader = new ReaderWriterData();
+
+                    for (File imageFile : reader.getListFilesFromJarFolder(pathToImages)) {
+                        BufferedImage image = reader.getImageResource(imageFile.getPath());
+                        logger.trace("File successfully has been read ");
+                        String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];
+                        image = ImageTransformerFacade.prepareImage(image);
+                        imageSamplesMapWithNames.put(imageNameWithoutExt, image);
+                        logger.trace("Image file " + imageFile.getAbsolutePath() + " was been successufully added");
+                    }
+                } catch (Exception ex2) {
+                    logger.error("error while getting sample images ", ex2);
+                }
             }
         } else {
             logger.warn("Path for internal images for modelling is empty or null");

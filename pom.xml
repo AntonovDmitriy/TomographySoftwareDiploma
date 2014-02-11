@@ -13,13 +13,76 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <profiles>
+        <profile>
+            <id>standalone</id>
+            <properties>
+                <libPath>${project.build.directory}</libPath>
+                <classPathPref></classPathPref>
+            </properties>
+        </profile>
+        <profile>
+            <id>installed</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <libPath>${project.build.directory}/lib/</libPath>
+                <classPathPref>lib/</classPathPref>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.5</version>
+                        <executions>
+                            <execution>
+                                <id>copy_internal_images</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/</outputDirectory>
+                                    <resources>          
+                                        <resource>
+                                            <directory>src/non-packaged-resources/</directory>
+                                        </resource>
+                                    </resources>              
+                                </configuration>            
+                            </execution>
+                            <!--                    <execution>
+                                <id>copy-config</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/conf</outputDirectory>
+                                    <resources>          
+                                        <resource>
+                                            <directory>src/main/resources</directory>
+                                            <includes>
+                                                <include>antonovPrivateKey.ppk</include>
+                                                <Include>tomograph.conf</Include>
+                                            </includes>
+                                        </resource>
+                                    </resources>              
+                                </configuration>            
+                            </execution>-->
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <plugin> 
                 <groupId>org.apache.maven.plugins</groupId> 
                 <artifactId>maven-dependency-plugin</artifactId> 
                 <configuration> 
-                    <outputDirectory>${project.build.directory}/lib/</outputDirectory> 
+                    <outputDirectory>${libPath}</outputDirectory> 
                     <overWriteReleases>false</overWriteReleases> 
                     <overWriteSnapshots>false</overWriteSnapshots> 
                     <overWriteIfNewer>true</overWriteIfNewer>
@@ -41,7 +104,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathPrefix>${classPathPref}</classpathPrefix>
                             <classpathLayoutType>simple</classpathLayoutType>
                             <mainClass>com.antonov.tomographysoftwarediploma.impl.AppLaunch</mainClass>
                         </manifest>
@@ -50,46 +113,6 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.5</version>
-                <executions>
-                    <execution>
-                        <id>copy_internal_images</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/resources/</outputDirectory>
-                            <resources>          
-                                <resource>
-                                    <directory>src/non-packaged-resources/</directory>
-                                </resource>
-                            </resources>              
-                        </configuration>            
-                    </execution>
-                    <execution>
-                        <id>copy-config</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/conf</outputDirectory>
-                            <resources>          
-                                <resource>
-                                    <directory>src/main/resources</directory>
-                                    <includes>
-                                        <include>antonovPrivateKey.ppk</include>
-                                        <Include>tomograph.conf</Include>
-                                    </includes>
-                                </resource>
-                            </resources>              
-                        </configuration>            
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
