@@ -22,7 +22,7 @@
             </properties>
             <build>
                 <plugins>
-                                        <plugin>
+                    <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <version>2.6</version>
                         <executions>
@@ -58,7 +58,7 @@
                                 <configuration>
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <jnlpFileName>tomo</jnlpFileName>
-                                    <!--<codeBase>${codeBase}</codeBase>-->
+                                    <!--<codeBase>http://localhost:8080/TOMO/</codeBase>-->
                                     <title>tomo</title>
                                     <vendor>MEPHI</vendor>
                                     <!--<iconHref>kredit.jpg</iconHref>-->

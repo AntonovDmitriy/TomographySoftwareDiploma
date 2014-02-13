@@ -53,7 +53,7 @@ public class ScanningEmulator {
         } catch (IOException | NullPointerException ex) {
             ReaderWriterData reader = new ReaderWriterData();
             List<BufferedImage> listImages = new ArrayList<>();
-            List<File> listFiles = reader.getListFilesFromJarFolder(path);
+            List<File> listFiles = reader.getListFilesFromJarFolder(path,tomographProperties);
             for (File file : listFiles) {
                 BufferedImage image = reader.getImageResource(file.getPath());
                 listImages.add(image);
