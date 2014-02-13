@@ -153,11 +153,15 @@ public class ReaderWriterData {
     }
 
     static void downloadFileAndWriteToTempFolder(String urlString, String fileName) throws IOException {
+        
+        File destFile = new File(fileName);
+        destFile.getParentFile().mkdirs();
+        destFile.createNewFile();
         BufferedInputStream in = null;
         FileOutputStream fout = null;
         try {
             in = new BufferedInputStream(new URL(urlString).openStream());
-            fout = new FileOutputStream(fileName);
+            fout = new FileOutputStream(destFile);
 
             byte data[] = new byte[1024];
             int count;
