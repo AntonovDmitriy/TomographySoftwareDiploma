@@ -66,7 +66,7 @@ public class ConnectionManagerImpl implements IConnectionManager {
 
     @Override
     public void disconnect() {
-        
+
         try {
             this.connectionDb.close();
         } catch (SQLException ex) {
@@ -87,12 +87,9 @@ public class ConnectionManagerImpl implements IConnectionManager {
         logger.info("Trying to create ssh connection........");
         long start = System.currentTimeMillis();
 
-        
-
         JSch jsch = new JSch();
         logger.info((new File(pathToPrivateKey)).getAbsolutePath());
-        
-        
+
         jsch.addIdentity((new File(pathToPrivateKey)).getAbsolutePath());
 
         String host = SSH_CONNECTION;
@@ -172,11 +169,11 @@ public class ConnectionManagerImpl implements IConnectionManager {
     }
 
     private void initConnectionFile() throws IOException {
-        
+
         File privateKey = new File(pathToPrivateKey);
-        if(!privateKey.exists()){
+        if (!privateKey.exists()) {
             ReaderWriterData reader = new ReaderWriterData();
-            reader.extractResourceToFile(pathToPrivateKey);
+            reader.extractResourceToFile(pathToPrivateKey, properties);
         }
     }
 }

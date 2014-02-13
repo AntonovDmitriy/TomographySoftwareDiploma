@@ -6,7 +6,9 @@
 package com.antonov.tomographysoftwarediploma.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;
@@ -19,21 +21,26 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -145,6 +152,32 @@ public class ReaderWriterData {
         }
     }
 
+    static void downloadFileAndWriteToTempFolder(String urlString, String fileName) throws IOException {
+        
+        File destFile = new File(fileName);
+        destFile.getParentFile().mkdirs();
+        destFile.createNewFile();
+        BufferedInputStream in = null;
+        FileOutputStream fout = null;
+        try {
+            in = new BufferedInputStream(new URL(urlString).openStream());
+            fout = new FileOutputStream(destFile);
+
+            byte data[] = new byte[1024];
+            int count;
+            while ((count = in.read(data, 0, 1024)) != -1) {
+                fout.write(data, 0, count);
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            if (fout != null) {
+                fout.close();
+            }
+        }
+    }
+
     public void copyJarFolder(String jarName, String folderName, String destination) throws IOException {
 
         ZipFile z = new ZipFile(jarName);
@@ -226,8 +259,8 @@ public class ReaderWriterData {
 
     }
 
-    public List<File> getListFilesFromJarFolder(String folderName) throws IOException {
-        ZipFile z = new ZipFile(getNameOfCurrentJar());
+    public List<File> getListFilesFromJarFolder(String folderName, Properties p) throws IOException {
+        ZipFile z = new ZipFile(getNameOfCurrentJar(p));
         Enumeration entries = z.entries();
         List<File> resultList = new ArrayList<>();
         while (entries.hasMoreElements()) {
@@ -239,8 +272,13 @@ public class ReaderWriterData {
         return resultList;
     }
 
-    public String getNameOfCurrentJar() throws UnsupportedEncodingException {
-        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+//    public String getNameOfCurrentJar() throws UnsupportedEncodingException {
+//        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+//        String decodedPath = URLDecoder.decode(path, "UTF-8");
+//        return decodedPath;
+//    }
+    public String getNameOfCurrentJar(Properties p) throws UnsupportedEncodingException {
+        String path = p.getProperty("PATH_TO_MAIN_JAR");
         String decodedPath = URLDecoder.decode(path, "UTF-8");
         return decodedPath;
     }
@@ -254,8 +292,8 @@ public class ReaderWriterData {
         return ImageIO.read(is);
     }
 
-    public void extractResourceToFile(String pathToPrivateKey) throws IOException {
-        ZipFile z = new ZipFile(getNameOfCurrentJar());
+    public void extractResourceToFile(String pathToPrivateKey, Properties p) throws IOException {
+        ZipFile z = new ZipFile(getNameOfCurrentJar(p));
         Enumeration entries = z.entries();
 
         while (entries.hasMoreElements()) {

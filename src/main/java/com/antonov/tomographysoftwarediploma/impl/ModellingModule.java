@@ -130,7 +130,7 @@ public class ModellingModule implements IProjDataSaver {
                     String pathToImages = tomographProperty.getProperty("PATH_MODELLING_IMAGES");
                     ReaderWriterData reader = new ReaderWriterData();
 
-                    for (File imageFile : reader.getListFilesFromJarFolder(pathToImages)) {
+                    for (File imageFile : reader.getListFilesFromJarFolder(pathToImages, tomographProperty)) {
                         BufferedImage image = reader.getImageResource(imageFile.getPath());
                         logger.trace("File successfully has been read ");
                         String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];
