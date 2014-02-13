@@ -438,4 +438,9 @@ public class HardwareModule {
         tomograph.showDensityAnalizator(coloredReconstructionImage);
         logger.trace("density analizator is opened");
     }
+
+    public void saveReconstruction() {
+        
+        
+    }
 }

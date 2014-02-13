@@ -166,4 +166,8 @@ public class HardwareModuleController extends Controller {
     public void setCurrentReconstructedImage(int value) {
         this.tomograph.hardwareModule.setCurrentReconstructedImage(value);
     }
+
+    public void saveReconstruction() {
+        this.tomograph.hardwareModule.saveReconstruction();
+    }
 }

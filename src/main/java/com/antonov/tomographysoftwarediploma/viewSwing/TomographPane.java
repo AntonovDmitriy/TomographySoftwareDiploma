@@ -462,6 +462,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
+
+        buttonSaveReconstructTomograph.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hardwareModuleController.saveReconstruction();
+            }
+        });
     }
 
     private void initButtons() {
@@ -546,8 +553,20 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 hardwareModuleController.showDensityAnalizator();
+                        //        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
+                //            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
+                //            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
+                //            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
+                //
+                //            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
+                //            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
+                //
+                //            saveFile(bi, name, filterImageDesc);
+                //
+                //        }
             }
         });
+
     }
 
     private void disableTomographControls() {
@@ -890,7 +909,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         edMoving = new javax.swing.JTextField();
         panelCalculateTomograph = new javax.swing.JPanel();
         buttonReconstructTomograph = new javax.swing.JButton();
-        buttonSaveReconstructTomograph = new javax.swing.JButton();
         buttonStart = new javax.swing.JButton();
         buttonDensityViewerTomograph = new javax.swing.JButton();
         panelReconstuctTomographData = new javax.swing.JPanel();
@@ -907,6 +925,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jScrollPane1 = new javax.swing.JScrollPane();
         labelReconstructionTomograph = new javax.swing.JLabel();
         sliderImage = new javax.swing.JSlider();
+        toolBarTomograph = new javax.swing.JToolBar();
+        buttonSaveReconstructTomograph = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableSetProjData = new javax.swing.JTable();
@@ -1664,22 +1684,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             panelCalculateTomograph.add(buttonReconstructTomograph, gridBagConstraints);
 
-            buttonSaveReconstructTomograph.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveReconstructTomograph.setEnabled(false);
-            buttonSaveReconstructTomograph.setFocusPainted(false);
-            buttonSaveReconstructTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonSaveReconstructTomographActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.ipadx = 3;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelCalculateTomograph.add(buttonSaveReconstructTomograph, gridBagConstraints);
-
             buttonStart.setBackground(new java.awt.Color(0, 102, 0));
             buttonStart.setText("СТАРТ");
             buttonStart.setFocusPainted(false);
@@ -1819,7 +1823,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridy = 1;
             gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.weightx = 1.0;
@@ -1837,12 +1841,39 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
+            gridBagConstraints.gridy = 2;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.weightx = 1.0;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
             panelResultTomograph.add(sliderImage, gridBagConstraints);
+
+            toolBarTomograph.setRollover(true);
+
+            buttonSaveReconstructTomograph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
+            buttonSaveReconstructTomograph.setActionCommand("Сохранить<br> реконструкцию");
+            buttonSaveReconstructTomograph.setEnabled(false);
+            buttonSaveReconstructTomograph.setFocusPainted(false);
+            buttonSaveReconstructTomograph.setFocusable(false);
+            buttonSaveReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            buttonSaveReconstructTomograph.setMaximumSize(new java.awt.Dimension(28, 28));
+            buttonSaveReconstructTomograph.setMinimumSize(new java.awt.Dimension(28, 28));
+            buttonSaveReconstructTomograph.setPreferredSize(new java.awt.Dimension(28, 28));
+            buttonSaveReconstructTomograph.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            buttonSaveReconstructTomograph.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonSaveReconstructTomographActionPerformed(evt);
+                }
+            });
+            toolBarTomograph.add(buttonSaveReconstructTomograph);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+            gridBagConstraints.weightx = 1.0;
+            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+            panelResultTomograph.add(toolBarTomograph, gridBagConstraints);
 
             jSplitPane3.setRightComponent(panelResultTomograph);
 
@@ -2282,6 +2313,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JSlider sliderImage;
     private javax.swing.JTable tableProjData;
     private javax.swing.JTable tableSetProjData;
+    private javax.swing.JToolBar toolBarTomograph;
     private javax.swing.JToolBar toolbarModellingImage;
     private javax.swing.JToolBar toolbarSourceImage;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
