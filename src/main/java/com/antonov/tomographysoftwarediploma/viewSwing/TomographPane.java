@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -938,6 +939,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableSetProjData = new javax.swing.JTable();
+        menu = new javax.swing.JMenuBar();
+        menuSettings = new javax.swing.JMenu();
+        menuLanguage = new javax.swing.JMenu();
+        menuItemRussian = new javax.swing.JMenuItem();
+        menuItemEnglish = new javax.swing.JMenuItem();
+        menuHelp = new javax.swing.JMenu();
+        menuItemIndex = new javax.swing.JMenuItem();
+        menuItemAbout = new javax.swing.JMenuItem();
 
         dialogProgressBar.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         dialogProgressBar.setAlwaysOnTop(true);
@@ -1941,6 +1950,35 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
             jTabbedPane1.getAccessibleContext().setAccessibleName("Модель");
 
+            menu.add(Box.createHorizontalGlue());
+            menuSettings.setText(bundle.getString("MENU_SETTINGS")); // NOI18N
+
+            menuLanguage.setText(bundle.getString("MENU_LANGUAGE")); // NOI18N
+
+            menuItemRussian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rus_flag.png"))); // NOI18N
+            menuItemRussian.setText(bundle.getString("MENU_LANGUAGE_RUSSIAN")); // NOI18N
+            menuLanguage.add(menuItemRussian);
+
+            menuItemEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/us_flag.png"))); // NOI18N
+            menuItemEnglish.setText(bundle.getString("MENU_LANGUAGE_ENGLISH")); // NOI18N
+            menuLanguage.add(menuItemEnglish);
+
+            menuSettings.add(menuLanguage);
+
+            menu.add(menuSettings);
+
+            menuHelp.setText(bundle.getString("MENU_HELP")); // NOI18N
+
+            menuItemIndex.setText(bundle.getString("MENU_HELP_INDEX")); // NOI18N
+            menuHelp.add(menuItemIndex);
+
+            menuItemAbout.setText(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
+            menuHelp.add(menuItemAbout);
+
+            menu.add(menuHelp);
+
+            setJMenuBar(menu);
+
             bindingGroup.bind();
 
             pack();
@@ -2301,6 +2339,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel labelReconstruction;
     private javax.swing.JLabel labelReconstructionTomograph;
     private javax.swing.JLabel labelStepsize;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenuItem menuItemAbout;
+    private javax.swing.JMenuItem menuItemEnglish;
+    private javax.swing.JMenuItem menuItemIndex;
+    private javax.swing.JMenuItem menuItemRussian;
+    private javax.swing.JMenu menuLanguage;
+    private javax.swing.JMenu menuSettings;
     private javax.swing.JList modelList;
     private javax.swing.JPanel modelPanel;
     private javax.swing.JFileChooser openFileChooser;
