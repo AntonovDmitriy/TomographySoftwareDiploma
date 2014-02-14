@@ -462,11 +462,18 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-
+        
+        buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructTomograph.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hardwareModuleController.saveReconstruction();
+                if (saveFileChooser.showSaveDialog(TomographPane.this) == JFileChooser.APPROVE_OPTION) {
+                    File file = saveFileChooser.getSelectedFile();
+                    String desc = saveFileChooser.getFileFilter().getDescription();
+                    int indexSlider = sliderImage.getValue();
+                     hardwareModuleController.saveReconstruction(file,desc,indexSlider);
+                }
+               
             }
         });
     }
@@ -553,7 +560,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 hardwareModuleController.showDensityAnalizator();
-                        //        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
+                //        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
                 //            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
                 //            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
                 //            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
@@ -807,6 +814,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private void enableAfterReconnstructTomographControls() {
         buttonDensityViewerTomograph.setEnabled(true);
         sliderImage.setEnabled(true);
+        buttonSaveReconstructTomograph.setEnabled(true);
     }
 
     private void setReconstructionTomographImage(BufferedImage image) {

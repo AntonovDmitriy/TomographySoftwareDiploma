@@ -22,6 +22,7 @@ import com.jcraft.jsch.JSchException;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -439,8 +440,14 @@ public class HardwareModule {
         logger.trace("density analizator is opened");
     }
 
-    public void saveReconstruction() {
-        
-        
+    public void saveReconstruction(File file, String desc, int indexSlider) {
+        try {
+            logger.trace("Reconstrucion image is being saved (" + file.getAbsolutePath() + " " + desc + ")..");
+            ReaderWriterData.saveImageToFileSystem(coloredReconstructionImage, file, desc);
+            logger.trace("Reconstrucion image has been saved..");
+        } catch (IOException ex) {
+            logger.error("Error while saving reconstrucion image with name " + file.getAbsolutePath(), ex);
+            firePropertyChange("ERROR", null, "Error while saving reconstrucion image " + file.getAbsolutePath());
+        }
     }
 }
