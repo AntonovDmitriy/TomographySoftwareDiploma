@@ -29,7 +29,7 @@ public class HardwareModuleController extends Controller {
     public static final int AREA_SCANNING_IN_DEGREES = 180;
     private static Logger logger = LoggerFactory.getLogger(ModellingModuleController.class);
     private final ResourceBundle bundle = ResourceBundle.getBundle(
-            "conf/bundle_Rus");
+            "conf/bundle");
 
     public HardwareModuleController(Tomograph tomograph, ITomographView view) {
         super(tomograph, view);

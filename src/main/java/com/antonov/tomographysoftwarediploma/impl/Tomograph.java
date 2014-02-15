@@ -186,11 +186,11 @@ public class Tomograph {
     
     private void initBundle() {
         try {
-            bundle = ResourceBundle.getBundle("conf/bundle_Rus");
+            bundle = ResourceBundle.getBundle("conf/bundle");
         } catch (Exception ex1) {
             try {
                 ReaderWriterData reader = new ReaderWriterData();
-                reader.getStringResource("conf/bundle_Rus");
+                reader.getStringResource("conf/bundle");
             } catch (Exception ex2) {
                 logger.error("Error while getting bundle", ex2);
             }

@@ -26,7 +26,7 @@ public class DensityAnalizator {
     
     public static ChartPanel generateDensityGraph(BufferedImage densitySourse, int lineOfSlise) {
         ResourceBundle bundle = ResourceBundle.getBundle(
-            "conf/bundle_Rus");
+            "conf/bundle");
         //      BufferedImage inverseReconstructImage = ImageTransformator.getColorLutImage(densitySourse, LUTFunctions.invGray());
         double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(densitySourse);
         double[][] densityInverseArray = new double[densitySourseArray.length][densitySourseArray.length];

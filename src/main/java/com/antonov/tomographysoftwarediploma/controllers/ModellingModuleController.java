@@ -24,7 +24,7 @@ public class ModellingModuleController extends Controller {
 
     private static Logger logger = LoggerFactory.getLogger(ModellingModuleController.class);
     private final ResourceBundle bundle = ResourceBundle.getBundle(
-            "conf/bundle_Rus");
+            "conf/bundle");
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 

@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class HardwareModule {
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle_Rus");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private static final Logger logger = LoggerFactory.getLogger(HardwareModule.class);
     private HardwareModuleController controller;

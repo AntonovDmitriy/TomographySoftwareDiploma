@@ -39,7 +39,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     ModellingModuleController modellingModuleController;
     HardwareModuleController hardwareModuleController;
     private final ResourceBundle bundle = ResourceBundle.getBundle(
-            "conf/bundle_Rus");
+            "conf/bundle");
 
     public static final List<String> modelNames = new ArrayList<>(); // For modelling images names
 
@@ -464,7 +464,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             }
         });
         
-        buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
+        buttonSaveReconstructTomograph.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructTomograph.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1177,7 +1177,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             dialogNameAsker.setResizable(false);
 
             jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle_Rus"); // NOI18N
+            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle"); // NOI18N
             jLabel8.setText(bundle.getString("TITLE_NAME_ASKER")); // NOI18N
 
             jLabel9.setText(bundle.getString("LABEL_DESCR")); // NOI18N
@@ -1241,7 +1241,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             dialogNameAsker.setLocationRelativeTo(null);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-            setTitle("Томографический комплекс 1.0 НИЯУ МИФИ");
+            setTitle(bundle.getString("TITLE_MAIN")); // NOI18N
             setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
             setPreferredSize(new java.awt.Dimension(1000, 600));
 
@@ -1345,13 +1345,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             paneControl.add(paneParamModelling, gridBagConstraints);
 
             buttonSinogram.setBackground(new java.awt.Color(0, 51, 153));
-            buttonSinogram.setText("Синограмма");
+            buttonSinogram.setText(bundle.getString("LABEL_SINOGRAM")); // NOI18N
             buttonSinogram.setDefaultCapable(false);
             buttonSinogram.setEnabled(false);
             buttonSinogram.setFocusPainted(false);
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
@@ -1369,6 +1370,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.ipady = 10;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
@@ -1448,6 +1450,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             paneParamReconstruct.add(jLabel15, gridBagConstraints);
 
@@ -1610,7 +1613,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
             Model.add(jSplitPane1, gridBagConstraints);
 
-            jTabbedPane1.addTab("Модель", Model);
+            jTabbedPane1.addTab(bundle.getString("LABEL_MODEL"), Model); // NOI18N
 
             Tomograph.setLayout(new java.awt.GridBagLayout());
 
@@ -1702,7 +1705,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             panelCalculateTomograph.add(buttonReconstructTomograph, gridBagConstraints);
 
             buttonStart.setBackground(new java.awt.Color(0, 102, 0));
-            buttonStart.setText("СТАРТ");
+            buttonStart.setText(bundle.getString("LABEL_START")); // NOI18N
             buttonStart.setFocusPainted(false);
             buttonStart.setLabel(bundle.getString("LABEL_START")); // NOI18N
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1799,6 +1802,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
             gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
             panelReconstuctTomographData.add(jLabel18, gridBagConstraints);
 
@@ -1945,7 +1949,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
             Tomograph.add(jSplitPane3, gridBagConstraints);
 
-            jTabbedPane1.addTab("Томограф", Tomograph);
+            jTabbedPane1.addTab(bundle.getString("LABEL_TOMOGRAPH"), Tomograph); // NOI18N
 
             getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
             jTabbedPane1.getAccessibleContext().setAccessibleName("Модель");
