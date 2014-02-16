@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.swing.plaf.PanelUI;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -59,10 +61,10 @@ public class DensityAnalizator {
                         false);
         
         ChartPanel cp = new ChartPanel(chart);
+        
         chart.getXYPlot().getRenderer().setSeriesPaint(0, Color.yellow);
         chart.setBackgroundPaint(Color.black);
         chart.getXYPlot().setBackgroundPaint(Color.black);
-        
         chart.getXYPlot().getDomainAxis().setTickLabelPaint(Color.white);
         chart.getXYPlot().getRangeAxis().setTickLabelPaint(Color.white);
          
