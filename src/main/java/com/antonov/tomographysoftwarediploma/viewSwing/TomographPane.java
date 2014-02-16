@@ -29,12 +29,8 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -569,17 +565,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 hardwareModuleController.showDensityAnalizator();
-                //        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-                //            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
-                //            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-                //            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
-                //
-                //            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-                //            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-                //
-                //            saveFile(bi, name, filterImageDesc);
-                //
-                //        }
             }
         });
 
@@ -854,54 +839,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 setLocale(new Locale("ru"), TomographPane.this);
-//                UIManager.getDefaults().setDefaultLocale(Locale.ENGLISH);
             }
         });
     }
 
     public void setLocale(Locale locale, final Window... windows) {
-//        System.out.println(getLocale().getLanguage());
         Locale.setDefault(locale);
         initComponentsLabel();
-//        System.setProperty("user.language", locale.getLanguage());
-//        System.setProperty("user.country", locale.getCountry());
-//        System.setProperty("user.variant", locale.getVariant());
-//        try {
-//            /*
-//             * Force setting of a new instance of the current LAF.
-//             */
-//            UIManager.setLookAndFeel(UIManager.getLookAndFeel().getClass()
-//                    .getName());
-//            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle");
-////            labelDetectors.setText(bundle.getString(nameOfProjData));
-//            System.out.println(getLocale().getLanguage());
-//            System.out.println(bundle.getLocale().getLanguage());
-//            System.out.println(UIManager.getDefaults().getDefaultLocale().getLanguage());
-//            UIManager.getDefaults().setDefaultLocale(Locale.ENGLISH);
-//            System.out.println(UIManager.getDefaults().getDefaultLocale().getLanguage());
-//
-//            setLocale(Locale.ENGLISH);
-//            System.out.println(getLocale().getLanguage());
-//
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (UnsupportedLookAndFeelException e) {
-//            e.printStackTrace();
-//        }
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-
-//                for (Window window : windows) {
-//                    SwingUtilities.updateComponentTreeUI(window);
-//                }
-            }
-        });
     }
 
     public void initComponentsLabel() {
@@ -1412,11 +1356,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             labelImage1.setAutoscrolls(true);
-            labelImage1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    labelImage1MouseClicked(evt);
-                }
-            });
             image1.setViewportView(labelImage1);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1870,60 +1809,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             pack();
         }// </editor-fold>//GEN-END:initComponents
-
-    private void labelImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImage1MouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2 && labelImage1.getIcon() != null) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    ImageViewerPane viewer = new ImageViewerPane();
-                    viewer.setVisible(true);
-                    viewer.image.setIcon(labelImage1.getIcon());
-
-                }
-            });
-
-        }
-    }//GEN-LAST:event_labelImage1MouseClicked
-
-    private void color1TomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1TomographActionPerformed
-//        // TODO add your handling code here:
-//        if (color1Tomograph.isSelected()) {
-//            reconstructColorImage = ImageTransformator.getColorLutImage(arrayReconstructedImage.get(sliderImage.getValue()), LUTFunctions.sin_rbg());
-//            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-//            labelImage3.setIcon(icon2);
-//        }
-    }//GEN-LAST:event_color1TomographActionPerformed
-
-    private void color2TomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color2TomographActionPerformed
-//        // TODO add your handling code here:
-//        if (color2Tomograph.isSelected()) {
-//            reconstructColorImage = ImageTransformator.getColorLutImage(arrayReconstructedImage.get(sliderImage.getValue()), LUTFunctions.green_blue_saw_2());
-//            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-//            labelImage3.setIcon(icon2);
-//        }
-    }//GEN-LAST:event_color2TomographActionPerformed
-
-    private void color4TomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color4TomographActionPerformed
-//        // TODO add your handling code here:
-//        if (color4Tomograph.isSelected()) {
-//            reconstructColorImage = ImageTransformator.getColorLutImage(arrayReconstructedImage.get(sliderImage.getValue()), LUTFunctions.invGray());
-//            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-//            labelImage3.setIcon(icon2);
-//        }
-    }//GEN-LAST:event_color4TomographActionPerformed
-
-    private void color3TomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color3TomographActionPerformed
-        // TODO add your handling code here:
-//        if (color3Tomograph.isSelected()) {
-//            reconstructColorImage = ImageTransformator.getColorLutImage(arrayReconstructedImage.get(sliderImage.getValue()), LUTFunctions.red_blue_saw_2());
-//            ImageIcon icon2 = new ImageIcon(reconstructColorImage);
-//            labelImage3.setIcon(icon2);
-    }//GEN-LAST:event_color3TomographActionPerformed
-//    }
-    private void buttonDensityViewer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewer1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonDensityViewer1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
