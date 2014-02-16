@@ -937,6 +937,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         menuLanguage.setText(bundle.getString("MENU_LANGUAGE")); // NOI18N
         menuItemRussian.setText(bundle.getString("MENU_LANGUAGE_RUSSIAN")); // NOI18N
         menuItemEnglish.setText(bundle.getString("MENU_LANGUAGE_ENGLISH")); // NOI18N
+        buttonCanselSetName.setText(bundle.getString("LABEL_CANCEL")); // NOI18N
         menuHelp.setText(bundle.getString("MENU_HELP")); // NOI18N
         menuItemIndex.setText(bundle.getString("MENU_HELP_INDEX")); // NOI18N
         menuItemAbout.setText(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
@@ -954,7 +955,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveSinogram.setToolTipText(bundle.getString("TIP_SAVE_SINOGRAM_IMAGE"));
         buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructTomograph.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
-        
+
         modellingModuleController.reloadBundle();
         hardwareModuleController.reloadBundle();
     }
@@ -1321,7 +1322,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             });
 
-            buttonCanselSetName.setText("Отмена");
+            buttonCanselSetName.setText(bundle.getString("LABEL_CANCEL")); // NOI18N
 
             javax.swing.GroupLayout dialogNameAskerLayout = new javax.swing.GroupLayout(dialogNameAsker.getContentPane());
             dialogNameAsker.getContentPane().setLayout(dialogNameAskerLayout);
@@ -1336,24 +1337,20 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
                     .addContainerGap(30, Short.MAX_VALUE)
                     .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
-                            .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel10)
-                                .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(edFileDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(edFileName, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGap(28, 28, 28))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(19, 19, 19))))
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)
+                        .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(edFileDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edFileName, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGap(28, 28, 28))
             );
             dialogNameAskerLayout.setVerticalGroup(
                 dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dialogNameAskerLayout.createSequentialGroup()
-                    .addGap(22, 22, 22)
+                    .addGap(27, 27, 27)
                     .addComponent(jLabel8)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel10)
                     .addGap(8, 8, 8)
                     .addComponent(edFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

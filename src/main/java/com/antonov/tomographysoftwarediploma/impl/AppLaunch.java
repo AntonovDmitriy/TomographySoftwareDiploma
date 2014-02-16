@@ -31,7 +31,7 @@ public class AppLaunch {
     public static void main(String[] args) {
 
         initLAF();
-        internationalize();
+//        internationalize();
 
         Tomograph model = new Tomograph();
         ITomographView view = new TomographPane();
