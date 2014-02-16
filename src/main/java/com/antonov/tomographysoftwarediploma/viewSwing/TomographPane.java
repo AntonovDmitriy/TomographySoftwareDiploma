@@ -6,6 +6,7 @@ import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import com.antonov.tomographysoftwarediploma.dblayer.PSetProjectionData;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -20,6 +21,7 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -27,8 +29,12 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +63,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     public TomographPane() {
 
         initComponents();
+        initMenuItem();
         initClosingOperations();
         initButtons();
         initToolBars();
@@ -72,6 +79,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
                 int i = JOptionPane.showConfirmDialog(null, bundle.getString("CONFIRMATION_EXIT"), "", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     modellingModuleController.exitApplication();
@@ -463,7 +471,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 }
             }
         });
-        
+
         buttonSaveReconstructTomograph.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructTomograph.addActionListener(new ActionListener() {
             @Override
@@ -472,9 +480,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     File file = saveFileChooser.getSelectedFile();
                     String desc = saveFileChooser.getFileFilter().getDescription();
                     int indexSlider = sliderImage.getValue();
-                     hardwareModuleController.saveReconstruction(file,desc,indexSlider);
+                    hardwareModuleController.saveReconstruction(file, desc, indexSlider);
                 }
-               
+
             }
         });
     }
@@ -676,18 +684,20 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     public void showInternalErrorMessage(String messageError) {
 
         stopCalculating();
+        ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
         JOptionPane.showMessageDialog(this, bundle.getString("INTERNAL_ERROR") + ". " + messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
     public void showWarningMessage(String messageWarning) {
-
+        ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
         JOptionPane.showMessageDialog(this, messageWarning + ". ", bundle.getString("WARNING"), JOptionPane.WARNING_MESSAGE);
     }
 
     private void showErrorMessage(String messageError) {
 
         stopCalculating();
+        ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
         JOptionPane.showMessageDialog(this, messageError, bundle.getString("ERROR"), JOptionPane.ERROR_MESSAGE);
     }
 
@@ -827,6 +837,126 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private void setSliderParameters(int size) {
 
         sliderImage.setMaximum(size);
+    }
+
+    private void initMenuItem() {
+
+        menuItemEnglish.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setLocale(Locale.ENGLISH, TomographPane.this);
+//                UIManager.getDefaults().setDefaultLocale(Locale.ENGLISH);
+            }
+        });
+        menuItemRussian.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setLocale(new Locale("ru"), TomographPane.this);
+//                UIManager.getDefaults().setDefaultLocale(Locale.ENGLISH);
+            }
+        });
+    }
+
+    public void setLocale(Locale locale, final Window... windows) {
+//        System.out.println(getLocale().getLanguage());
+        Locale.setDefault(locale);
+        initComponentsLabel();
+//        System.setProperty("user.language", locale.getLanguage());
+//        System.setProperty("user.country", locale.getCountry());
+//        System.setProperty("user.variant", locale.getVariant());
+//        try {
+//            /*
+//             * Force setting of a new instance of the current LAF.
+//             */
+//            UIManager.setLookAndFeel(UIManager.getLookAndFeel().getClass()
+//                    .getName());
+//            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle");
+////            labelDetectors.setText(bundle.getString(nameOfProjData));
+//            System.out.println(getLocale().getLanguage());
+//            System.out.println(bundle.getLocale().getLanguage());
+//            System.out.println(UIManager.getDefaults().getDefaultLocale().getLanguage());
+//            UIManager.getDefaults().setDefaultLocale(Locale.ENGLISH);
+//            System.out.println(UIManager.getDefaults().getDefaultLocale().getLanguage());
+//
+//            setLocale(Locale.ENGLISH);
+//            System.out.println(getLocale().getLanguage());
+//
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (UnsupportedLookAndFeelException e) {
+//            e.printStackTrace();
+//        }
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+
+//                for (Window window : windows) {
+//                    SwingUtilities.updateComponentTreeUI(window);
+//                }
+            }
+        });
+    }
+
+    public void initComponentsLabel() {
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle");
+        jLabel8.setText(bundle.getString("TITLE_NAME_ASKER")); // NOI18N
+        jLabel9.setText(bundle.getString("LABEL_DESCR")); // NOI18N
+        jLabel10.setText(bundle.getString("LABEL_NAME")); // NOI18N
+        setTitle(bundle.getString("TITLE_MAIN")); // NOI18N
+        labelDetectors.setText(bundle.getString("LABEL_SCANS")); // NOI18N
+        labelStepsize.setText(bundle.getString("LABEL_STEPSIZE")); // NOI18N
+        jLabel13.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+        buttonSinogram.setText(bundle.getString("LABEL_SINOGRAM")); // NOI18N
+        buttonDensityViewer.setText(bundle.getString("LABEL_DENSANALYSE")); // NOI18N
+        buttonReconstruct.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
+        labelReconstructSize.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
+        jLabel12.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
+        jLabel14.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+        jLabel15.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+        jLabel1.setText(bundle.getString("LABEL_SCANS")); // NOI18N
+        jLabel2.setText(bundle.getString("LABEL_STEPSIZE_TOMOGRAPH")); // NOI18N
+        jLabel3.setText(bundle.getString("LABEL_STEPMOVING")); // NOI18N
+        buttonReconstructTomograph.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
+        buttonStart.setText(bundle.getString("LABEL_START")); // NOI18N
+        buttonStart.setLabel(bundle.getString("LABEL_START")); // NOI18N
+        buttonDensityViewerTomograph.setText(bundle.getString("DENS_ANALIZATOR")); // NOI18N
+        jLabel6.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
+        jLabel16.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
+        jLabel17.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+        jLabel18.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+        tableSetProjData.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("LABEL_NAME")); // NOI18N
+        tableSetProjData.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("LABEL_DESCR")); // NOI18N
+        menuSettings.setText(bundle.getString("MENU_SETTINGS")); // NOI18N
+        menuLanguage.setText(bundle.getString("MENU_LANGUAGE")); // NOI18N
+        menuItemRussian.setText(bundle.getString("MENU_LANGUAGE_RUSSIAN")); // NOI18N
+        menuItemEnglish.setText(bundle.getString("MENU_LANGUAGE_ENGLISH")); // NOI18N
+        menuHelp.setText(bundle.getString("MENU_HELP")); // NOI18N
+        menuItemIndex.setText(bundle.getString("MENU_HELP_INDEX")); // NOI18N
+        menuItemAbout.setText(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
+
+        modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LIST_MODEL_TITLE"))); // NOI18N
+        paneParamModelling.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING")));
+        paneParamReconstruct.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
+        panelScanData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANEL_SCANNING_PARAMETERS"))); // NOI18N
+        panelReconstuctTomographData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
+
+        jTabbedPane1.setTitleAt(0, bundle.getString("LABEL_MODEL"));
+        jTabbedPane1.setTitleAt(1, bundle.getString("LABEL_TOMOGRAPH"));
+
+        buttonOpenFile.setToolTipText(bundle.getString("TIP_OPEN_MODELLING_IMAGE"));
+        buttonSaveSinogram.setToolTipText(bundle.getString("TIP_SAVE_SINOGRAM_IMAGE"));
+        buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
+        buttonSaveReconstructTomograph.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
+        
+        modellingModuleController.reloadBundle();
+        hardwareModuleController.reloadBundle();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

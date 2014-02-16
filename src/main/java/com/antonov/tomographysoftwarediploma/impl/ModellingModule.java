@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ModellingModule implements IProjDataSaver {
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
+    private static ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private static final Logger logger = LoggerFactory.getLogger(ModellingModule.class);
     private ModellingModuleController controller;
@@ -504,6 +504,11 @@ public class ModellingModule implements IProjDataSaver {
     public void showDensityAnalizator() {
         tomograph.showDensityAnalizator(coloredReconstructionImage);
         logger.trace("density analizator is opened");
+    }
+
+    public void reloadBundle() {
+        bundle = ResourceBundle.getBundle(
+                "conf/bundle");
     }
 
 }

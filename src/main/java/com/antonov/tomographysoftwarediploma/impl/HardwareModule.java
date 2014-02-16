@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class HardwareModule {
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
+    private  ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private static final Logger logger = LoggerFactory.getLogger(HardwareModule.class);
     private HardwareModuleController controller;
@@ -449,5 +449,11 @@ public class HardwareModule {
             logger.error("Error while saving reconstrucion image with name " + file.getAbsolutePath(), ex);
             firePropertyChange("ERROR", null, "Error while saving reconstrucion image " + file.getAbsolutePath());
         }
+    }
+
+    public void reloadBundle() {
+
+        bundle = ResourceBundle.getBundle(
+                "conf/bundle");
     }
 }

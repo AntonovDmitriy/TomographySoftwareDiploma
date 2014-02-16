@@ -23,7 +23,7 @@ public class ModellingModuleController extends Controller {
     public static final int AREA_SCANNING_IN_DEGREES = 180;
 
     private static Logger logger = LoggerFactory.getLogger(ModellingModuleController.class);
-    private final ResourceBundle bundle = ResourceBundle.getBundle(
+    private ResourceBundle bundle = ResourceBundle.getBundle(
             "conf/bundle");
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
@@ -172,5 +172,11 @@ public class ModellingModuleController extends Controller {
         if (!super.view.isReconstructionModellingEmpty()) {
             super.tomograph.modellingModule.showDensityAnalizator();
         }
+    }
+
+    public void reloadBundle() {
+        bundle = ResourceBundle.getBundle(
+                "conf/bundle");
+        super.tomograph.modellingModule.reloadBundle();
     }
 }
