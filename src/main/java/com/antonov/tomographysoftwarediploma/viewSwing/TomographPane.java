@@ -970,24 +970,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         progressBar = new javax.swing.JProgressBar();
         openFileChooser = new javax.swing.JFileChooser();
         saveFileChooser = new javax.swing.JFileChooser();
-        dialogProjDataChooser = new javax.swing.JDialog();
-        jLabel5 = new javax.swing.JLabel();
-        buttonProjDataOk = new javax.swing.JButton();
-        buttonProjDataCancel = new javax.swing.JButton();
-        buttonProjDataOpenFile = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tableProjData = new javax.swing.JTable();
-        dialogFilterChooser = new javax.swing.JDialog();
-        jLabel7 = new javax.swing.JLabel();
-        filteringTomograph = new javax.swing.JCheckBox();
-        filterRampTomograph = new javax.swing.JRadioButton();
-        filterShepploganTomograph = new javax.swing.JRadioButton();
-        filterHammingTomograph = new javax.swing.JRadioButton();
-        filterHannTomograph = new javax.swing.JRadioButton();
-        filterCosineTomograph = new javax.swing.JRadioButton();
-        filterBlackManTomograph = new javax.swing.JRadioButton();
-        buttonOkFilterTomograph = new javax.swing.JButton();
-        filterGroupTomograph = new javax.swing.ButtonGroup();
         dialogNameAsker = new javax.swing.JDialog();
         jLabel8 = new javax.swing.JLabel();
         edFileName = new javax.swing.JTextField();
@@ -996,7 +978,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jLabel10 = new javax.swing.JLabel();
         buttonOkSetName = new javax.swing.JButton();
         buttonCanselSetName = new javax.swing.JButton();
-        colorGroupTomograph = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Model = new javax.swing.JPanel();
         paneControl = new javax.swing.JPanel();
@@ -1115,193 +1096,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             saveFileChooser.setFileFilter(new FileNameExtensionFilter("PNG File", "png"));
             saveFileChooser.setFileFilter(new FileNameExtensionFilter("BMP File", "bmp"));
 
-            dialogProjDataChooser.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-            dialogProjDataChooser.setAlwaysOnTop(true);
-            dialogProjDataChooser.setAutoRequestFocus(false);
-            dialogProjDataChooser.setMinimumSize(new java.awt.Dimension(560, 301));
-            dialogProjDataChooser.setResizable(false);
-
-            jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            jLabel5.setText("Выберите набор проекционных данных");
-
-            buttonProjDataOk.setText("ОК");
-            buttonProjDataOk.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonProjDataOkActionPerformed(evt);
-                }
-            });
-
-            buttonProjDataCancel.setText("Отмена");
-            buttonProjDataCancel.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonProjDataCancelActionPerformed(evt);
-                }
-            });
-
-            buttonProjDataOpenFile.setText("Открыть из файла");
-            buttonProjDataOpenFile.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonProjDataOpenFileActionPerformed(evt);
-                }
-            });
-
-            tableProjData.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null}
-                },
-                new String [] {
-                    "Дата", "Название", "Дополнительно"
-                }
-            ) {
-                Class[] types = new Class [] {
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class
-                };
-                boolean[] canEdit = new boolean [] {
-                    false, false, false
-                };
-
-                public Class getColumnClass(int columnIndex) {
-                    return types [columnIndex];
-                }
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
-            tableProjData.setDragEnabled(true);
-            tableProjData.setFocusable(false);
-            jScrollPane3.setViewportView(tableProjData);
-
-            javax.swing.GroupLayout dialogProjDataChooserLayout = new javax.swing.GroupLayout(dialogProjDataChooser.getContentPane());
-            dialogProjDataChooser.getContentPane().setLayout(dialogProjDataChooserLayout);
-            dialogProjDataChooserLayout.setHorizontalGroup(
-                dialogProjDataChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogProjDataChooserLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(buttonProjDataOk, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonProjDataCancel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonProjDataOpenFile)
-                    .addGap(129, 129, 129))
-                .addGroup(dialogProjDataChooserLayout.createSequentialGroup()
-                    .addGap(143, 143, 143)
-                    .addComponent(jLabel5)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogProjDataChooserLayout.createSequentialGroup()
-                    .addContainerGap(35, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(31, 31, 31))
-            );
-            dialogProjDataChooserLayout.setVerticalGroup(
-                dialogProjDataChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dialogProjDataChooserLayout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addComponent(jLabel5)
-                    .addGap(18, 18, 18)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                    .addGroup(dialogProjDataChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonProjDataOk)
-                        .addComponent(buttonProjDataCancel)
-                        .addComponent(buttonProjDataOpenFile))
-                    .addGap(24, 24, 24))
-            );
-
-            dialogProjDataChooser.setLocationRelativeTo(null);
-
-            dialogFilterChooser.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-            dialogFilterChooser.setAlwaysOnTop(true);
-            dialogFilterChooser.setMinimumSize(new java.awt.Dimension(296, 297));
-            dialogFilterChooser.setModal(true);
-            dialogFilterChooser.setResizable(false);
-
-            jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            jLabel7.setText("Выберите фильтр реконструкции");
-
-            filteringTomograph.setText("Без фильтра");
-            filteringTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    filteringTomographActionPerformed(evt);
-                }
-            });
-
-            filterGroupTomograph.add(filterRampTomograph);
-            filterRampTomograph.setText("ramp");
-
-            filterGroupTomograph.add(filterShepploganTomograph);
-            filterShepploganTomograph.setText("shepplogan");
-
-            filterGroupTomograph.add(filterHammingTomograph);
-            filterHammingTomograph.setText("hamming");
-
-            filterGroupTomograph.add(filterHannTomograph);
-            filterHannTomograph.setText("hann");
-
-            filterGroupTomograph.add(filterCosineTomograph);
-            filterCosineTomograph.setText("cosine");
-
-            filterGroupTomograph.add(filterBlackManTomograph);
-            filterBlackManTomograph.setText("blackman");
-
-            buttonOkFilterTomograph.setText("OK");
-            buttonOkFilterTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonOkFilterTomographActionPerformed(evt);
-                }
-            });
-
-            javax.swing.GroupLayout dialogFilterChooserLayout = new javax.swing.GroupLayout(dialogFilterChooser.getContentPane());
-            dialogFilterChooser.getContentPane().setLayout(dialogFilterChooserLayout);
-            dialogFilterChooserLayout.setHorizontalGroup(
-                dialogFilterChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dialogFilterChooserLayout.createSequentialGroup()
-                    .addGroup(dialogFilterChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(dialogFilterChooserLayout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(jLabel7))
-                        .addGroup(dialogFilterChooserLayout.createSequentialGroup()
-                            .addGap(101, 101, 101)
-                            .addGroup(dialogFilterChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(filterRampTomograph)
-                                .addComponent(filteringTomograph)
-                                .addComponent(filterHammingTomograph)
-                                .addComponent(filterHannTomograph)
-                                .addComponent(filterCosineTomograph)
-                                .addComponent(filterBlackManTomograph)
-                                .addComponent(filterShepploganTomograph)
-                                .addComponent(buttonOkFilterTomograph, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(301, Short.MAX_VALUE))
-            );
-            dialogFilterChooserLayout.setVerticalGroup(
-                dialogFilterChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dialogFilterChooserLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel7)
-                    .addGap(18, 18, 18)
-                    .addComponent(filteringTomograph)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(filterRampTomograph)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(filterShepploganTomograph)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterHammingTomograph)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(filterHannTomograph)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(filterCosineTomograph)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(filterBlackManTomograph)
-                    .addGap(18, 18, 18)
-                    .addComponent(buttonOkFilterTomograph)
-                    .addContainerGap(41, Short.MAX_VALUE))
-            );
-
-            dialogFilterChooser.setLocationRelativeTo(null);
-
             dialogNameAsker.setMinimumSize(new java.awt.Dimension(427, 245));
             dialogNameAsker.setResizable(false);
 
@@ -1313,11 +1107,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             jLabel10.setText(bundle.getString("LABEL_NAME")); // NOI18N
 
             buttonOkSetName.setText("OK");
-            buttonOkSetName.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonOkSetNameActionPerformed(evt);
-                }
-            });
 
             buttonCanselSetName.setText(bundle.getString("LABEL_CANCEL")); // NOI18N
 
@@ -1486,11 +1275,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonDensityViewer.setText(bundle.getString("LABEL_DENSANALYSE")); // NOI18N
             buttonDensityViewer.setEnabled(false);
             buttonDensityViewer.setFocusPainted(false);
-            buttonDensityViewer.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonDensityViewerActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
@@ -1813,11 +1597,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonReconstructTomograph.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
             buttonReconstructTomograph.setFocusPainted(false);
             buttonReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            buttonReconstructTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonReconstructTomographActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 0;
@@ -1846,11 +1625,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonDensityViewerTomograph.setEnabled(false);
             buttonDensityViewerTomograph.setFocusPainted(false);
             buttonDensityViewerTomograph.setHideActionText(true);
-            buttonDensityViewerTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonDensityViewerTomographActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
@@ -1959,11 +1733,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             panelResultTomograph.setLayout(new java.awt.GridBagLayout());
 
             labelReconstructionTomograph.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelReconstructionTomograph.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    labelReconstructionTomographMouseClicked(evt);
-                }
-            });
             jScrollPane1.setViewportView(labelReconstructionTomograph);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1979,11 +1748,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             sliderImage.setValue(0);
             sliderImage.setEnabled(false);
             sliderImage.setFocusable(false);
-            sliderImage.addChangeListener(new javax.swing.event.ChangeListener() {
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    sliderImageStateChanged(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 2;
@@ -2005,11 +1769,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             buttonSaveReconstructTomograph.setMinimumSize(new java.awt.Dimension(28, 28));
             buttonSaveReconstructTomograph.setPreferredSize(new java.awt.Dimension(28, 28));
             buttonSaveReconstructTomograph.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            buttonSaveReconstructTomograph.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonSaveReconstructTomographActionPerformed(evt);
-                }
-            });
             toolBarTomograph.add(buttonSaveReconstructTomograph);
 
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2127,150 +1886,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         }
     }//GEN-LAST:event_labelImage1MouseClicked
 
-    private void buttonProjDataOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataOpenFileActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonProjDataOpenFileActionPerformed
-
-    private void buttonProjDataCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataCancelActionPerformed
-        // TODO add your handling code here:
-        dialogProjDataChooser.setVisible(false);
-    }//GEN-LAST:event_buttonProjDataCancelActionPerformed
-
-    private void buttonProjDataOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProjDataOkActionPerformed
-        // TODO add your handling code here:
-        if (tableProjData.getSelectedRow() > -1) {
-
-            nameOfProjData = tableProjData.getValueAt(tableProjData.getSelectedRow(), 1).toString();
-            dialogProjDataChooser.setVisible(false);
-            dialogFilterChooser.setVisible(true);
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Не выбран набор проеционных данных", "Ошибка", 0);
-        }
-
-    }//GEN-LAST:event_buttonProjDataOkActionPerformed
-
-    private void sliderImageStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderImageStateChanged
-        // TODO add your handling code here:
-
-//        int value = sliderImage.getValue();
-//        ImageIcon icon = new ImageIcon(arrayReconstructedImage.get(value));
-//        labelReconstructionTomograph.setIcon(icon);
-
-    }//GEN-LAST:event_sliderImageStateChanged
-
-    private void filteringTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filteringTomographActionPerformed
-        // TODO add your handling code here:
-        if (filteringTomograph.isSelected()) {
-            filterGroupTomograph.clearSelection();
-            filterRampTomograph.setEnabled(false);
-            filterShepploganTomograph.setEnabled(false);
-            filterHammingTomograph.setEnabled(false);
-            filterHannTomograph.setEnabled(false);
-            filterCosineTomograph.setEnabled(false);
-            filterBlackManTomograph.setEnabled(false);
-        } else {
-            filterRampTomograph.setEnabled(true);
-            filterShepploganTomograph.setEnabled(true);
-            filterHammingTomograph.setEnabled(true);
-            filterHannTomograph.setEnabled(true);
-            filterCosineTomograph.setEnabled(true);
-            filterBlackManTomograph.setEnabled(true);
-        }
-    }//GEN-LAST:event_filteringTomographActionPerformed
-
-    private void buttonOkFilterTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkFilterTomographActionPerformed
-        // TODO add your handling code here:
-//        String filterName = "";
-//        boolean filteringTomographBool = false;
-//
-//        //-------------------Check data ReconstuctionImgSize 
-//        boolean correctData = false;
-//        try {
-//            Integer.parseInt(outputImgSizeTomograph.getText());
-//            correctData = true;
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Некорректные данные размера рекострукции. Введите целое числовое значение", "Ошибка", 0);
-//            dialogFilterChooser.setVisible(false);
-//        }
-//
-//        if (correctData) {
-//            //---------------------Check enable any filter options
-//            boolean isFilterSelected = false;
-//
-//            for (Enumeration<AbstractButton> buttons = filterGroupTomograph.getElements(); buttons.hasMoreElements();) {
-//                AbstractButton button = buttons.nextElement();
-//                if (button.isSelected()) {
-//                    isFilterSelected = true;
-//                    filterName = button.getText();
-//                    filteringTomographBool = true;
-//                }
-//            }
-//
-//            if (isFilterSelected || filteringTomograph.isSelected()) {
-//                //   java.awt.Toolkit.getDefaultToolkit().beep();
-//                dialogFilterChooser.setVisible(false);
-//
-//                dialogProgressBar.setVisible(true);
-//                progressBar.setIndeterminate(true);
-//
-//                final String filterNameThread = filterName;
-//                final boolean filteringTomographBoolThread = filteringTomographBool;
-//
-//                Thread threadReconstructTomograph = new Thread(new Runnable() {
-//                    public void run() //Этот метод будет выполняться в побочном потоке
-//                    {
-//
-//                        arrayReconstructedImage = ImageTransformator.createArrayReconstructedImage(nameOfProjData, Integer.parseInt(outputImgSizeTomograph.getText()), filteringTomographBoolThread, filterNameThread, Integer.parseInt(scansTomograph.getText()), Integer.parseInt(stepSizeTomograph.getText()));
-//                        ImageIcon icon = new ImageIcon(arrayReconstructedImage.get(0));
-//                        labelImage3.setIcon(icon);
-//
-//                        //------------Dealing with Slider
-//                        sliderImage.setMaximum(arrayReconstructedImage.size() - 1);
-//                        sliderImage.setMinorTickSpacing(1);
-//                        sliderImage.setPaintTicks(true);
-//                        buttonSaveReconstructTomograph.setEnabled(true);
-//
-//                        progressBar.setIndeterminate(false);
-//                        dialogProgressBar.setVisible(false);
-//
-//                    }
-//                });
-//                threadReconstructTomograph.start();	//Запуск потока
-//
-//                coloringTomograph.setEnabled(true);
-//                buttonDensityViewerTomograph.setEnabled(true);
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Установите параметры фильтрации", "Внимание", 1);
-//            }
-//
-//        }
-    }//GEN-LAST:event_buttonOkFilterTomographActionPerformed
-
-    private void buttonOkSetNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkSetNameActionPerformed
-        // TODO add your handling code here:
-        //-------------------Check data ReconstuctionImgSize 
-
-    }//GEN-LAST:event_buttonOkSetNameActionPerformed
-
-    private void labelReconstructionTomographMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelReconstructionTomographMouseClicked
-        // TODO add your handling code here:
-//        if (evt.getClickCount() == 2 && labelReconstructionTomograph.getIcon() != null) {
-//            java.awt.EventQueue.invokeLater(new Runnable() {
-//                public void run() {
-//                    ImageViewerPane viewer = new ImageViewerPane();
-//                    viewer.setVisible(true);
-//                    viewer.image.setIcon(labelReconstructionTomograph.getIcon());
-//                }
-//            });
-//
-//        }
-    }//GEN-LAST:event_labelReconstructionTomographMouseClicked
-
-    private void buttonDensityViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerActionPerformed
-
-    }//GEN-LAST:event_buttonDensityViewerActionPerformed
-
     private void color1TomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1TomographActionPerformed
 //        // TODO add your handling code here:
 //        if (color1Tomograph.isSelected()) {
@@ -2310,78 +1925,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonDensityViewer1ActionPerformed
 
-    private void buttonDensityViewerTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDensityViewerTomographActionPerformed
-        // TODO add your handling code here:
-        //        densityViewer.setVisible(true);
-        //
-        //        scaleReconstructImage = DensityAnalizator.scaleImage(arrayReconstructedImage.get(sliderImage.getValue()), 300, 300, Color.white);
-        //        BufferedImage scaleReconstructImageLine = DensityAnalizator.generateCursorOnImage(scaleReconstructImage, 0);
-        //        ImageIcon icon = new ImageIcon(scaleReconstructImageLine);
-        //        labelImageDensityViewer.setIcon(icon);
-        //
-        //        double[][] densitySourseArray = Utils.getDoubleRevertedArrayPixelsFromBufImg(arrayReconstructedImage.get(sliderImage.getValue()));
-        //        int initialLineSlise = densitySourseArray.length / 2;
-        //        densitySlider.setMaximum(densitySourseArray.length - 1);
-        //        densitySlider.setMajorTickSpacing(densitySourseArray.length / 10);
-        //        densitySlider.setPaintLabels(true);
-        //        densitySlider.setPaintTicks(true);
-        //
-        //        densityGraphPane.setLayout(new java.awt.BorderLayout());
-        //        densityGraphPane.add(DensityAnalizator.generateDensityGraph(arrayReconstructedImage.get(sliderImage.getValue()), initialLineSlise), BorderLayout.CENTER);
-        //        densityGraphPane.validate();
-    }//GEN-LAST:event_buttonDensityViewerTomographActionPerformed
-
-    private void buttonSaveReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveReconstructTomographActionPerformed
-        // TODO add your handling code here:
-        //        if (saveFileChooser.showSaveDialog(this) == saveFileChooser.APPROVE_OPTION) {
-        //            ImageIcon icon = (ImageIcon) labelimage3.getIcon();
-        //            BufferedImage bi = (BufferedImage) ((Image) icon.getImage());
-        //            // BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_BYTE_ARGB);
-        //
-        //            String name = saveFileChooser.getSelectedFile().getAbsolutePath();
-        //            String filterImageDesc = saveFileChooser.getFileFilter().getDescription();
-        //
-        //            saveFile(bi, name, filterImageDesc);
-        //
-        //        }
-    }//GEN-LAST:event_buttonSaveReconstructTomographActionPerformed
-
-    private void buttonReconstructTomographActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReconstructTomographActionPerformed
-        // TODO add your handling code here:
-//        dialogProjDataChooser.setVisible(true);
-//        try {
-//            buttonSaveReconstructTomograph.setEnabled(false);
-//
-//            Class.forName("com.mysql.jdbc.Driver");
-//            while (tableProjData.getRowCount() > 0) {
-//                ((DefaultTableModel) tableProjData.getModel()).removeRow(0);
-//            }
-//
-//            DefaultTableModel model = (DefaultTableModel) tableProjData.getModel();
-//            Properties props = new Properties();
-//            props.put("useUnicode", "true");
-//            props.put("characterEncoding", "UTF-8");
-//
-//            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/testing?"
-//                    + "user=root&password=ProL1ant", props);
-//
-//            Statement statement = connect.createStatement();
-//
-//            String SQL = "select * from project_data";
-//            ResultSet rs = statement.executeQuery(SQL);
-//            String n = "", e = "", k1 = "";
-//            while (rs.next()) {
-//
-//                Object[] data = {rs.getString("DATE"), rs.getString("NAME"), rs.getString("DESCRIPTION")};
-//                model.addRow(data);
-//            }
-//        } catch (SQLException ex) {
-//            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            //            Logger.getLogger(TomographPane.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_buttonReconstructTomographActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Image2;
@@ -2390,12 +1933,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JButton buttonCanselSetName;
     private javax.swing.JButton buttonDensityViewer;
     private javax.swing.JButton buttonDensityViewerTomograph;
-    private javax.swing.JButton buttonOkFilterTomograph;
     private javax.swing.JButton buttonOkSetName;
     private javax.swing.JButton buttonOpenFile;
-    private javax.swing.JButton buttonProjDataCancel;
-    private javax.swing.JButton buttonProjDataOk;
-    private javax.swing.JButton buttonProjDataOpenFile;
     private javax.swing.JButton buttonReconstruct;
     private javax.swing.JButton buttonReconstructTomograph;
     private javax.swing.JButton buttonSaveReconstructModelling;
@@ -2410,11 +1949,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JComboBox cbReconstructionInterpolation;
     private javax.swing.JComboBox cbReconstructionInterpolationTomograph;
     private javax.swing.JComboBox cbSinogramInterpolation;
-    private javax.swing.ButtonGroup colorGroupTomograph;
-    private javax.swing.JDialog dialogFilterChooser;
     private javax.swing.JDialog dialogNameAsker;
     private javax.swing.JDialog dialogProgressBar;
-    private javax.swing.JDialog dialogProjDataChooser;
     private javax.swing.JTextField edFileDescription;
     private javax.swing.JTextField edFileName;
     private javax.swing.JTextField edMoving;
@@ -2424,14 +1960,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JTextField edSizeReconstruction;
     private javax.swing.JTextField edStepSizeTomograph;
     private javax.swing.JTextField edStepsizeModel;
-    private javax.swing.JRadioButton filterBlackManTomograph;
-    private javax.swing.JRadioButton filterCosineTomograph;
-    private javax.swing.ButtonGroup filterGroupTomograph;
-    private javax.swing.JRadioButton filterHammingTomograph;
-    private javax.swing.JRadioButton filterHannTomograph;
-    private javax.swing.JRadioButton filterRampTomograph;
-    private javax.swing.JRadioButton filterShepploganTomograph;
-    private javax.swing.JCheckBox filteringTomograph;
     private javax.swing.JScrollPane image1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2445,15 +1973,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSplitPane jSplitPane1;
@@ -2493,7 +2018,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JFileChooser saveFileChooser;
     private javax.swing.JSlider sliderImage;
-    private javax.swing.JTable tableProjData;
     private javax.swing.JTable tableSetProjData;
     private javax.swing.JToolBar toolBarTomograph;
     private javax.swing.JToolBar toolbarModellingImage;
