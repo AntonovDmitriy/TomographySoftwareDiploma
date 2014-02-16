@@ -58,10 +58,10 @@
                                 <configuration>
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <jnlpFileName>tomo</jnlpFileName>
-                                    <!--<codeBase>http://localhost:8080/TOMO/</codeBase>-->
+                                    <codeBase>http://app-helloweb.rhcloud.com/</codeBase>
                                     <title>tomo</title>
                                     <vendor>MEPHI</vendor>
-                                    <!--<iconHref>kredit.jpg</iconHref>-->
+                                    <iconHref>splash.jpg</iconHref>
                                     <mainJarName>TomographySoftwareDiploma-${version}.jar</mainJarName>
                                     <mainClass>com.antonov.tomographysoftwarediploma.impl.AppLaunch</mainClass>
                                     <!--<copyTo>${copyTo}</copyTo>-->
@@ -164,6 +164,7 @@
                         </manifest>
                         <manifestEntries>
                             <Version>${buildNumber}</Version>
+                            <SplashScreen-Image>icons/splash.jpg</SplashScreen-Image>
                         </manifestEntries>
                     </archive>
                 </configuration>

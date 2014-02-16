@@ -931,6 +931,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jLabel16.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
         jLabel17.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
         jLabel18.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+        jLabel11.setText(bundle.getString("LABEL_CALCULATE")); // NOI18N
         tableSetProjData.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("LABEL_NAME")); // NOI18N
         tableSetProjData.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("LABEL_DESCR")); // NOI18N
         menuSettings.setText(bundle.getString("MENU_SETTINGS")); // NOI18N
@@ -1083,29 +1084,26 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         dialogProgressBar.setAlwaysOnTop(true);
         dialogProgressBar.setMinimumSize(new java.awt.Dimension(409, 99));
         dialogProgressBar.setResizable(false);
+        dialogProgressBar.getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel11.setText("Идет процесс вычисления, пожалуйста подождите");
-
-        javax.swing.GroupLayout dialogProgressBarLayout = new javax.swing.GroupLayout(dialogProgressBar.getContentPane());
-        dialogProgressBar.getContentPane().setLayout(dialogProgressBarLayout);
-        dialogProgressBarLayout.setHorizontalGroup(
-            dialogProgressBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dialogProgressBarLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(dialogProgressBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(629, Short.MAX_VALUE))
-        );
-        dialogProgressBarLayout.setVerticalGroup(
-            dialogProgressBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dialogProgressBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(588, Short.MAX_VALUE))
-        );
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle"); // NOI18N
+        jLabel11.setText(bundle.getString("LABEL_CALCULATE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 38;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        dialogProgressBar.getContentPane().add(jLabel11, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 136;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        dialogProgressBar.getContentPane().add(progressBar, gridBagConstraints);
 
         dialogProgressBar.setLocationRelativeTo(null);
 
@@ -1308,7 +1306,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             dialogNameAsker.setResizable(false);
 
             jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("conf/bundle"); // NOI18N
             jLabel8.setText(bundle.getString("TITLE_NAME_ASKER")); // NOI18N
 
             jLabel9.setText(bundle.getString("LABEL_DESCR")); // NOI18N
