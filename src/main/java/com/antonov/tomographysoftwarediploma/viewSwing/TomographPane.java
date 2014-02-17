@@ -398,9 +398,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     case "hardware_amountReconstructedImages":
                         setSliderParameters((Integer) evt.getNewValue());
                         break;
+                    case "hardware_disableModule":
+                        disableHardwareModuleControls((Exception)evt.getNewValue());
+                        break;
                 }
             }
-
         };
 
         modellingModuleController.addPropertyChangeListenerToModel(paramsModellingListener);
@@ -428,6 +430,12 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     public void stopCalculating() {
         progressBar.setIndeterminate(false);
         dialogProgressBar.setVisible(false);
+    }
+
+    private void disableHardwareModuleControls(Exception ex) {
+        
+        jTabbedPane1.setEnabledAt(1, false);
+        showErrorMessage(ex.getMessage());
     }
 
     private void initToolBars() {

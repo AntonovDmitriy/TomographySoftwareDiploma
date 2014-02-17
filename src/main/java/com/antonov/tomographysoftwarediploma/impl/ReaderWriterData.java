@@ -153,7 +153,7 @@ public class ReaderWriterData {
     }
 
     static void downloadFileAndWriteToTempFolder(String urlString, String fileName) throws IOException {
-        
+
         File destFile = new File(fileName);
         destFile.getParentFile().mkdirs();
         destFile.createNewFile();
@@ -237,12 +237,22 @@ public class ReaderWriterData {
     }
 
     public String getStringResource(String name) throws IOException {
-        String result = null;
-        Object resource = getObjectResource(name);
-        if (resource != null) {
-            result = (String) resource;
+        InputStreamReader reader = null;
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(name)) {
+
+            reader = new InputStreamReader(is);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuffer.append(line);
+                stringBuffer.append("\n");
+            }
+
+            return stringBuffer.toString();
+        } finally {
+            reader.close();
         }
-        return result;
 
     }
 

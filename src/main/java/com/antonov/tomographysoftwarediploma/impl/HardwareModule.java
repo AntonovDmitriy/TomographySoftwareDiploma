@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class HardwareModule {
 
-    private  ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
+    private ResourceBundle bundle = ResourceBundle.getBundle("conf/bundle");
     public PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
     private static final Logger logger = LoggerFactory.getLogger(HardwareModule.class);
     private HardwareModuleController controller;
@@ -66,9 +66,14 @@ public class HardwareModule {
     private IConnectionManager connectionManager;
     private List<BufferedImage> listReconstructedImages;
 
-    public HardwareModule(Tomograph tomograph, Properties p) {
+    private Exception startModuleException;
+
+    HardwareModule(Tomograph tomograph, Properties tomographProperty, NotAvaliableStartModuleException startModuleException) {
         this.tomograph = tomograph;
-        init(p);
+        this.startModuleException = startModuleException;
+        if (startModuleException == null) {
+            init(tomographProperty);
+        }
     }
 
     private void init(Properties p) {
@@ -77,9 +82,12 @@ public class HardwareModule {
             this.tomographProperty = p;
             initConnectionManager();
             initParamScanning();
-            initProjectionDataList();
+            if (startModuleException == null) {
+                initProjectionDataList();
+            }
         } else {
             logger.warn("Properties file is null");
+            tomograph.exitApplication();
         }
     }
 
@@ -198,22 +206,27 @@ public class HardwareModule {
 
     public void prepareView() {
 
-        firePropertyChange("hardware_scans", null, scans);
-        firePropertyChange("hardware_stepsize", null, stepSize);
-        firePropertyChange("hardware_moving", null, stepSize);
-        firePropertyChange("hardware_sizeReconstruction", null, sizeReconstruction);
-        firePropertyChange("hardware_regimeInterpolationModel", null, tomograph.setInterpolation);
-        firePropertyChange("hardware_regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
-        firePropertyChange("hardware_filterSet", null, tomograph.setFilterName);
-        firePropertyChange("hardware_filter", null, currentFilter);
-        firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);
-        firePropertyChange("hardware_currentColorModelling", null, currentColorName);
-        if (this.listProjectionData != null && !this.listProjectionData.isEmpty()) {
-            firePropertyChange("hardware_setProjectionData", null, listProjectionData);
-        } else {
+        if (startModuleException == null) {
+            firePropertyChange("hardware_scans", null, scans);
+            firePropertyChange("hardware_stepsize", null, stepSize);
+            firePropertyChange("hardware_moving", null, stepSize);
+            firePropertyChange("hardware_sizeReconstruction", null, sizeReconstruction);
+            firePropertyChange("hardware_regimeInterpolationModel", null, tomograph.setInterpolation);
+            firePropertyChange("hardware_regimeReconstructionInterpolation", null, regimeReconstructionInterpolation);
+            firePropertyChange("hardware_filterSet", null, tomograph.setFilterName);
+            firePropertyChange("hardware_filter", null, currentFilter);
+            firePropertyChange("hardware_colorModel", null, ColorFunctionNamesEnum.class);
+            firePropertyChange("hardware_currentColorModelling", null, currentColorName);
+            if (this.listProjectionData != null && !this.listProjectionData.isEmpty()) {
+                firePropertyChange("hardware_setProjectionData", null, listProjectionData);
+            } else {
 //            firePropertyChange("hardware_disableAllTomographControls", null, null);
+            }
+        } else {
+            firePropertyChange("hardware_disableModule", null, startModuleException);
         }
         logger.info("Views are prepared");
+
     }
 
     public void setScans(int scans) {
@@ -382,6 +395,7 @@ public class HardwareModule {
             connectionManager.connect();
         } catch (Exception ex) {
             logger.error("Error while creating ssh or db connection ", ex);
+            this.startModuleException = new NotAvaliableStartModuleException(bundle.getString("ERROR_START_CONNECTION"));
         }
     }
 

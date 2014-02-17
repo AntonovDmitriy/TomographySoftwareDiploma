@@ -15,10 +15,11 @@
     </properties>
     <profiles>
         <profile>
-            <id>standalone</id>
+            <id>webstart</id>
             <properties>
                 <libPath>${project.build.directory}</libPath>
                 <classPathPref></classPathPref>
+                <startMode>webstart</startMode>
             </properties>
             <build>
                 <plugins>
@@ -83,6 +84,7 @@
             <properties>
                 <libPath>${project.build.directory}/lib/</libPath>
                 <classPathPref>lib/</classPathPref>
+                <startMode>installed</startMode>
             </properties>
             <build>
                 <plugins>
@@ -165,6 +167,7 @@
                         <manifestEntries>
                             <Version>${buildNumber}</Version>
                             <SplashScreen-Image>icons/splash.jpg</SplashScreen-Image>
+                            <Start_mode>${startMode}</Start_mode>
                         </manifestEntries>
                     </archive>
                 </configuration>

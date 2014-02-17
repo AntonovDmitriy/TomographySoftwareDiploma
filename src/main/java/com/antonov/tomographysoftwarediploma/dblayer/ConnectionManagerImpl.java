@@ -36,6 +36,8 @@ public class ConnectionManagerImpl implements IConnectionManager {
     private int remotePort;
     public static Logger logger = LoggerFactory.getLogger(ConnectionManagerImpl.class);
 
+    private boolean isConnected = false;
+
     private static final String SSH_CONNECTION = "528d18a4e0b8cdb068000071@app-helloweb.rhcloud.com";
     private static final String DB_URL = "jdbc:mysql://localhost:1234/Tomo?"
             + "user=adminR8QufFz&password=a3ZixG3aDcJG";
@@ -81,6 +83,7 @@ public class ConnectionManagerImpl implements IConnectionManager {
         createSSHSession();
         createDbConnection();
         logger.info("ConnectionManager state : connected");
+        this.isConnected = true;
     }
 
     private void createSSHSession() throws JSchException, EmptyOrNullParameterException, Exception {
@@ -175,5 +178,11 @@ public class ConnectionManagerImpl implements IConnectionManager {
             ReaderWriterData reader = new ReaderWriterData();
             reader.extractResourceToFile(pathToPrivateKey, properties);
         }
+    }
+
+    @Override
+    public boolean isConnected() {
+
+        return isConnected;
     }
 }

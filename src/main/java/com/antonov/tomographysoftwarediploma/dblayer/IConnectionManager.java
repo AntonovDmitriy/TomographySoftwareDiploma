@@ -23,4 +23,6 @@ public interface IConnectionManager {
     void disconnect();
     
     void connect() throws JSchException, EmptyOrNullParameterException, Exception;
+    
+    boolean isConnected();
 }
