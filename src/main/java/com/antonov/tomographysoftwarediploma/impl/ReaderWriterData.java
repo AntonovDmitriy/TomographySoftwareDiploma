@@ -269,8 +269,14 @@ public class ReaderWriterData {
 
     }
 
-    public List<File> getListFilesFromJarFolder(String folderName, Properties p) throws IOException {
-        ZipFile z = new ZipFile(getNameOfCurrentJar(p));
+    public List<File> getListFilesFromJarFolder(String folderName, Properties p, boolean isWebStart) throws IOException {
+        ZipFile z = null;
+        if (isWebStart) {
+            z = new ZipFile(getNameOfWebStartJar(p));
+        } else {
+            z = new ZipFile(getNameOfCurrentJar());
+        }
+
         Enumeration entries = z.entries();
         List<File> resultList = new ArrayList<>();
         while (entries.hasMoreElements()) {
@@ -282,12 +288,13 @@ public class ReaderWriterData {
         return resultList;
     }
 
-//    public String getNameOfCurrentJar() throws UnsupportedEncodingException {
-//        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-//        String decodedPath = URLDecoder.decode(path, "UTF-8");
-//        return decodedPath;
-//    }
-    public String getNameOfCurrentJar(Properties p) throws UnsupportedEncodingException {
+    public String getNameOfCurrentJar() throws UnsupportedEncodingException {
+        String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        String decodedPath = URLDecoder.decode(path, "UTF-8");
+        return decodedPath;
+    }
+
+    public String getNameOfWebStartJar(Properties p) throws UnsupportedEncodingException {
         String path = p.getProperty("PATH_TO_MAIN_JAR");
         String decodedPath = URLDecoder.decode(path, "UTF-8");
         return decodedPath;
@@ -302,8 +309,14 @@ public class ReaderWriterData {
         return ImageIO.read(is);
     }
 
-    public void extractResourceToFile(String pathToPrivateKey, Properties p) throws IOException {
-        ZipFile z = new ZipFile(getNameOfCurrentJar(p));
+    public void extractResourceToFile(String pathToPrivateKey, Properties p, boolean isWebStart) throws IOException {
+        ZipFile z = null;
+        if (isWebStart) {
+            z = new ZipFile(getNameOfCurrentJar());
+        } else {
+            z = new ZipFile(getNameOfWebStartJar(p));
+        }
+
         Enumeration entries = z.entries();
 
         while (entries.hasMoreElements()) {

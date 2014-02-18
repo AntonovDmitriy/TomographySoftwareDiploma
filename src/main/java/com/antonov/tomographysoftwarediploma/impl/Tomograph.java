@@ -258,7 +258,15 @@ public class Tomograph {
 
     private void copySecurityFilesFromJar(String nameOfFolder, String folderDestination) throws UnsupportedEncodingException, IOException {
         ReaderWriterData reader = new ReaderWriterData();
-        String pathOfJar = reader.getNameOfCurrentJar(tomographProperty);
+        String pathOfJar = "";
+        switch (startMode) {
+            case MODE_STANDALONE:
+                pathOfJar = getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+                break;
+            case MODE_WEBSTART:
+                pathOfJar = reader.getNameOfWebStartJar(tomographProperty);
+                break;
+        }
         reader.copyJarFolder(pathOfJar, nameOfFolder, folderDestination);
     }
 

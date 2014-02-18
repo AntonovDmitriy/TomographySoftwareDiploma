@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -130,7 +131,14 @@ public class ModellingModule implements IProjDataSaver {
                     String pathToImages = tomographProperty.getProperty("PATH_MODELLING_IMAGES");
                     ReaderWriterData reader = new ReaderWriterData();
 
-                    for (File imageFile : reader.getListFilesFromJarFolder(pathToImages, tomographProperty)) {
+                    List<File> listFiles = null;
+                    if (tomograph.startMode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)) {
+                        listFiles = reader.getListFilesFromJarFolder(pathToImages, tomographProperty, true);
+                    } else {
+                        listFiles = reader.getListFilesFromJarFolder(pathToImages, tomographProperty, false);
+                    }
+
+                    for (File imageFile : listFiles) {
                         BufferedImage image = reader.getImageResource(imageFile.getPath());
                         logger.trace("File successfully has been read ");
                         String imageNameWithoutExt = (imageFile.getName().split("\\."))[0];

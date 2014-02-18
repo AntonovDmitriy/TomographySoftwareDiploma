@@ -6,6 +6,7 @@
 package com.antonov.tomographysoftwarediploma.dblayer;
 
 import com.antonov.tomographysoftwarediploma.impl.ReaderWriterData;
+import com.antonov.tomographysoftwarediploma.impl.Tomograph;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -42,7 +43,10 @@ public class ConnectionManagerImpl implements IConnectionManager {
     private static final String DB_URL = "jdbc:mysql://localhost:1234/Tomo?"
             + "user=adminR8QufFz&password=a3ZixG3aDcJG";
 
-    public ConnectionManagerImpl(Properties properties) throws IOException, EmptyOrNullParameterException {
+    Tomograph.StartModeEnum mode;
+
+    public ConnectionManagerImpl(Properties properties, Tomograph.StartModeEnum mode) throws IOException, EmptyOrNullParameterException {
+        this.mode = mode;
         this.properties = properties;
         readInitialDbParameters();
         initConnectionFile();
@@ -176,7 +180,12 @@ public class ConnectionManagerImpl implements IConnectionManager {
         File privateKey = new File(pathToPrivateKey);
         if (!privateKey.exists()) {
             ReaderWriterData reader = new ReaderWriterData();
-            reader.extractResourceToFile(pathToPrivateKey, properties);
+            if(mode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)){
+            reader.extractResourceToFile(pathToPrivateKey, properties, true);
+        }
+            else{
+                 reader.extractResourceToFile(pathToPrivateKey, properties, true);
+            }
         }
     }
 

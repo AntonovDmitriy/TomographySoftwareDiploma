@@ -355,7 +355,8 @@ public class HardwareModule {
         logger.trace("Scanning is starting");
         long start = System.currentTimeMillis();
         //This methos emulates scanning. In future there will be method starting real scanning
-        List<Object> listProjectionData = ScanningEmulator.emulateScanning(scans, stepSize, tomographProperty);
+        List<Object> listProjectionData = ScanningEmulator.emulateScanning(scans, stepSize,
+                tomographProperty, tomograph.startMode.equals(Tomograph.StartModeEnum.MODE_WEBSTART));
         long finish = System.currentTimeMillis();
         long result = finish - start;
         logger.trace("Scanning is finishing " + result + " sec");
@@ -390,7 +391,7 @@ public class HardwareModule {
 
     private void initConnectionManager() {
         try {
-            this.connectionManager = new ConnectionManagerImpl(tomographProperty);
+            this.connectionManager = new ConnectionManagerImpl(tomographProperty, tomograph.startMode);
 
             connectionManager.connect();
         } catch (Exception ex) {

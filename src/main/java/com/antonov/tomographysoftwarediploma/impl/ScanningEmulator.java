@@ -38,7 +38,7 @@ public class ScanningEmulator {
 
     public static Logger logger = LoggerFactory.getLogger(ScanningEmulator.class);
 
-    public static List<Object> emulateScanning(int scans, int stepSize, Properties tomographProperties) throws IOException, NumberWrongValueException, ImageWrongValueException {
+    public static List<Object> emulateScanning(int scans, int stepSize, Properties tomographProperties, boolean isWebstart) throws IOException, NumberWrongValueException, ImageWrongValueException {
 
         logger.trace("Scanning is in emulator regime");
         String path = tomographProperties.getProperty("PATH_SCANNING_EMULATOR_IMAGES_PATH");
@@ -53,7 +53,7 @@ public class ScanningEmulator {
         } catch (IOException | NullPointerException ex) {
             ReaderWriterData reader = new ReaderWriterData();
             List<BufferedImage> listImages = new ArrayList<>();
-            List<File> listFiles = reader.getListFilesFromJarFolder(path,tomographProperties);
+            List<File> listFiles = reader.getListFilesFromJarFolder(path,tomographProperties,isWebstart);
             for (File file : listFiles) {
                 BufferedImage image = reader.getImageResource(file.getPath());
                 listImages.add(image);

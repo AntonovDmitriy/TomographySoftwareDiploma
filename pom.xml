@@ -77,6 +77,14 @@
             </build>
         </profile>
         <profile>
+            <id>standalone</id>
+            <properties>
+                <libPath>${project.build.directory}</libPath>
+                <classPathPref></classPathPref>
+                <startMode>standalone</startMode>
+            </properties>
+        </profile>
+        <profile>
             <id>installed</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -102,7 +110,7 @@
                                     <outputDirectory>${basedir}/target/</outputDirectory>
                                     <resources>          
                                         <resource>
-                                            <directory>src/non-packaged-resources/</directory>
+                                            <directory>src/main/resources/</directory>
                                         </resource>
                                     </resources>              
                                 </configuration>            
