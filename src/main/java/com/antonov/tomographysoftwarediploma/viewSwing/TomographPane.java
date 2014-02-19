@@ -6,6 +6,8 @@ import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import com.antonov.tomographysoftwarediploma.dblayer.PSetProjectionData;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
@@ -399,7 +404,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                         setSliderParameters((Integer) evt.getNewValue());
                         break;
                     case "hardware_disableModule":
-                        disableHardwareModuleControls((Exception)evt.getNewValue());
+                        disableHardwareModuleControls((Exception) evt.getNewValue());
                         break;
                 }
             }
@@ -433,7 +438,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     }
 
     private void disableHardwareModuleControls(Exception ex) {
-        
+
         jTabbedPane1.setEnabledAt(1, false);
         showErrorMessage(ex.getMessage());
     }
@@ -847,6 +852,28 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 setLocale(new Locale("ru"), TomographPane.this);
+            }
+        });
+
+        menuItemIndex.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String hsFile = "help/tomo.hs";
+                    HelpSet helpSet;
+                    HelpBroker helpBroker;
+                    ClassLoader cl = getClass().getClassLoader();
+                    URL url = HelpSet.findHelpSet(cl, hsFile);
+                    helpSet = new HelpSet(null, url);
+                    helpBroker = helpSet.createHelpBroker();
+                    helpBroker.setDisplayed(true);
+//                    Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//                    helpBroker.setSize(d);
+                } catch (Exception ex) {
+
+                }
+
             }
         });
     }

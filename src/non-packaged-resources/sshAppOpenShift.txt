@@ -1,0 +1,4 @@
+528d18a4e0b8cdb068000071@app-helloweb.rhcloud.com
+
+./app-root/runtime/repo/target/app/new.txt
+./app-root/runtime/repo/src/main/webapp/new.txt
