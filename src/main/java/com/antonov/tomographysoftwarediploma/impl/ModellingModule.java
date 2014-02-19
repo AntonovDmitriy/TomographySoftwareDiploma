@@ -341,26 +341,26 @@ public class ModellingModule implements IProjDataSaver {
     public void setScans(int scans) {
         Integer oldScans = this.scans;
         this.scans = scans;
-        firePropertyChange("clearResultModelling", null, null);
-        logger.trace("Value of scans now is " + scans + ". Old value was " + oldScans);
-        firePropertyChange("clearResultModelling", null, null);
-        logger.info("Result modelling is clear");
-        firePropertyChange("clearResultReconstruction", null, null);
-        logger.info("Result reconstruction is clear");
-        firePropertyChange("disableModellingControls", null, null);
-        logger.info("Modelling controls are disabled");
+//        firePropertyChange("clearResultModelling", null, null);
+//        logger.trace("Value of scans now is " + scans + ". Old value was " + oldScans);
+//        firePropertyChange("clearResultModelling", null, null);
+//        logger.info("Result modelling is clear");
+//        firePropertyChange("clearResultReconstruction", null, null);
+//        logger.info("Result reconstruction is clear");
+//        firePropertyChange("disableModellingControls", null, null);
+//        logger.info("Modelling controls are disabled");
     }
 
     public void setStepSize(int stepSize) {
         Integer oldStepSize = this.stepSize;
         this.stepSize = stepSize;
-        logger.trace("Value of stepSize now is " + stepSize + ". Old value was " + oldStepSize);
-        firePropertyChange("clearResultModelling", null, null);
-        logger.info("Result modelling is clear");
-        firePropertyChange("clearResultReconstruction", null, null);
-        logger.info("Result reconstruction is clear");
-        firePropertyChange("disableModellingControls", null, null);
-        logger.info("Modelling controls are disabled");
+//        logger.trace("Value of stepSize now is " + stepSize + ". Old value was " + oldStepSize);
+//        firePropertyChange("clearResultModelling", null, null);
+//        logger.info("Result modelling is clear");
+//        firePropertyChange("clearResultReconstruction", null, null);
+//        logger.info("Result reconstruction is clear");
+//        firePropertyChange("disableModellingControls", null, null);
+//        logger.info("Modelling controls are disabled");
     }
 
     public void setSizeReconstruction(int sizeReconstruction) {
