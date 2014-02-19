@@ -179,12 +179,12 @@ public class ReaderWriterData {
     }
 
     static void removeFilesWithFolder(String path) throws IOException {
-        
+
         File pathFile = new File(path);
         File parentDirectory = pathFile.getParentFile();
-        if(parentDirectory.exists()){
-             FileUtils.deleteDirectory(parentDirectory);
-        } 
+        if (parentDirectory.exists()) {
+            FileUtils.deleteDirectory(parentDirectory);
+        }
     }
 
     public void copyJarFolder(String jarName, String folderName, String destination) throws IOException {
@@ -321,9 +321,9 @@ public class ReaderWriterData {
     public void extractResourceToFile(String pathToPrivateKey, Properties p, boolean isWebStart) throws IOException {
         ZipFile z = null;
         if (isWebStart) {
-            z = new ZipFile(getNameOfCurrentJar());
-        } else {
             z = new ZipFile(getNameOfWebStartJar(p));
+        } else {
+            z = new ZipFile(getNameOfCurrentJar());
         }
 
         Enumeration entries = z.entries();
