@@ -178,6 +178,15 @@ public class ReaderWriterData {
         }
     }
 
+    static void removeFilesWithFolder(String path) throws IOException {
+        
+        File pathFile = new File(path);
+        File parentDirectory = pathFile.getParentFile();
+        if(parentDirectory.exists()){
+             FileUtils.deleteDirectory(parentDirectory);
+        } 
+    }
+
     public void copyJarFolder(String jarName, String folderName, String destination) throws IOException {
 
         ZipFile z = new ZipFile(jarName);
