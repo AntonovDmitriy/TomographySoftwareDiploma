@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.basic.BasicListUI;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -839,6 +841,14 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
     private void initMenuItem() {
 
+//        splashRu.addMouseListener(new MouseAdapter() {
+//
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+//                splashRu.setVisible(false);
+//            }
+//        });
         menuItemEnglish.addActionListener(new ActionListener() {
 
             @Override
@@ -873,6 +883,15 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                     showInternalErrorMessage("");
                 }
 
+            }
+        });
+
+        menuItemAbout.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                splashRu.setUndecorated(true);
+                jDialog1.setVisible(true);
             }
         });
     }
@@ -956,6 +975,9 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         jLabel10 = new javax.swing.JLabel();
         buttonOkSetName = new javax.swing.JButton();
         buttonCanselSetName = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jDialog1 = new javax.swing.JDialog();
+        jLabel5 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Model = new javax.swing.JPanel();
         paneControl = new javax.swing.JPanel();
@@ -1130,6 +1152,18 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             );
 
             dialogNameAsker.setLocationRelativeTo(null);
+
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+            jDialog1.setMinimumSize(new java.awt.Dimension(600, 430));
+            jDialog1.setPreferredSize(new java.awt.Dimension(600, 430));
+            jDialog1.setResizable(false);
+            jDialog1.setType(java.awt.Window.Type.POPUP);
+
+            jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/splash.jpg"))); // NOI18N
+            jDialog1.getContentPane().add(jLabel5, java.awt.BorderLayout.CENTER);
+
+            jDialog1.setLocationRelativeTo(null);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
             setTitle(bundle.getString("TITLE_MAIN")); // NOI18N
@@ -1880,6 +1914,8 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JTextField edStepSizeTomograph;
     private javax.swing.JTextField edStepsizeModel;
     private javax.swing.JScrollPane image1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1892,6 +1928,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
