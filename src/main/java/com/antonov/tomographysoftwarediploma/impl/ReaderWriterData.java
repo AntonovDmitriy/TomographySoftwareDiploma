@@ -182,7 +182,9 @@ public class ReaderWriterData {
 
         File pathFile = new File(path);
         File parentDirectory = pathFile.getParentFile();
-        if (parentDirectory.exists()) {
+        if (pathFile.isDirectory()) {
+            FileUtils.deleteDirectory(pathFile);
+        } else if (parentDirectory != null && parentDirectory.exists()) {
             FileUtils.deleteDirectory(parentDirectory);
         }
     }
@@ -318,7 +320,7 @@ public class ReaderWriterData {
         return ImageIO.read(is);
     }
 
-    public void extractResourceToFile(String pathToPrivateKey, Properties p, boolean isWebStart) throws IOException {
+    public void extractResourceToFile(String pathToPrivate, Properties p, boolean isWebStart, boolean isDirectory) throws IOException {
         ZipFile z = null;
         if (isWebStart) {
             z = new ZipFile(getNameOfWebStartJar(p));
@@ -331,12 +333,38 @@ public class ReaderWriterData {
         while (entries.hasMoreElements()) {
             ZipEntry entry = (ZipEntry) entries.nextElement();
 
-            if (entry.getName().contains(pathToPrivateKey) && entry.isDirectory() == false) {
-                File fileDest = new File(pathToPrivateKey);
+            if (entry.getName().contains(pathToPrivate) && entry.isDirectory() == false && isDirectory == false) {
+                File fileDest = new File(pathToPrivate);
+                fileDest.getParentFile().mkdirs();
+                copyFromJar(entry.getName(), fileDest);
+            } else if (entry.getName().contains(pathToPrivate) && entry.isDirectory() == false && isDirectory == true) {
+                File fileDest = new File(entry.getName());
                 fileDest.getParentFile().mkdirs();
                 copyFromJar(entry.getName(), fileDest);
             }
         }
 
     }
+
+//        public void extractResourceFolderToFolder(String pathToResourceFolder, Properties p, boolean isWebStart) throws IOException {
+//        ZipFile z = null;
+//        if (isWebStart) {
+//            z = new ZipFile(getNameOfWebStartJar(p));
+//        } else {
+//            z = new ZipFile(getNameOfCurrentJar());
+//        }
+//
+//        Enumeration entries = z.entries();
+//
+//        while (entries.hasMoreElements()) {
+//            ZipEntry entry = (ZipEntry) entries.nextElement();
+//
+//            if (entry.getName().contains(pathToResourceFolder) && entry.isDirectory() == true) {
+//                File fileDest = new File(pathToResourceFolder);
+//                fileDest.getParentFile().mkdirs();
+//                copyFromJar(entry.getName(), fileDest);
+//            }
+//        }
+//
+//    }
 }

@@ -52,9 +52,23 @@ public class Tomograph {
         if (startMode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)
                 || startMode.equals(Tomograph.StartModeEnum.MODE_STANDALONE)) {
             ReaderWriterData.removeFilesWithFolder(tomographProperty.getProperty("SSH_PRIVATE_KEY_PATH"));
+            ReaderWriterData.removeFilesWithFolder(tomographProperty.getProperty("PATH_TO_HELP"));
             if (startMode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)) {
                 ReaderWriterData.removeFilesWithFolder(tomographProperty.getProperty("PATH_TO_MAIN_JAR"));
             }
+        }
+    }
+
+    private void initHelpFiles() {
+        try {
+            ReaderWriterData writer = new ReaderWriterData();
+            if (startMode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)) {
+                writer.extractResourceToFile(tomographProperty.getProperty("PATH_TO_HELP"), tomographProperty, true, true);
+            } else if (startMode.equals(Tomograph.StartModeEnum.MODE_STANDALONE)) {
+                writer.extractResourceToFile(tomographProperty.getProperty("PATH_TO_HELP"), tomographProperty, false, true);
+            }
+        } catch (Exception ex) {
+            logger.error("Error where reading help files", ex);
         }
     }
 
@@ -88,6 +102,7 @@ public class Tomograph {
         initBundle();
         initInterpolations();
         initFilterNames();
+        initHelpFiles();
         this.modellingModule = new ModellingModule(this, tomographProperty);
         this.hardwareModule = new HardwareModule(this, tomographProperty, startModuleException);
     }

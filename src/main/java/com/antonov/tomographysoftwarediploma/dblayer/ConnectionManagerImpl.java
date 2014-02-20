@@ -181,9 +181,9 @@ public class ConnectionManagerImpl implements IConnectionManager {
         if (!privateKey.exists()) {
             ReaderWriterData reader = new ReaderWriterData();
             if (mode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)) {
-                reader.extractResourceToFile(pathToPrivateKey, properties, true);
+                reader.extractResourceToFile(pathToPrivateKey, properties, true,false);
             } else {
-                reader.extractResourceToFile(pathToPrivateKey, properties, false);
+                reader.extractResourceToFile(pathToPrivateKey, properties, false,false);
             }
         }
     }

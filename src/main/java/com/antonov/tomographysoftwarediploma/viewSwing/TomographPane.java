@@ -860,18 +860,17 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String hsFile = "help/tomo.hs";
-                    HelpSet helpSet;
-                    HelpBroker helpBroker;
+                    ResourceBundle bundle = ResourceBundle.getBundle(
+                            "conf/bundle");
+                    String hsFile = bundle.getString("hsFile");
                     ClassLoader cl = getClass().getClassLoader();
                     URL url = HelpSet.findHelpSet(cl, hsFile);
-                    helpSet = new HelpSet(null, url);
-                    helpBroker = helpSet.createHelpBroker();
+                    HelpSet helpSet = new HelpSet(null, url);
+                    HelpBroker helpBroker = helpSet.createHelpBroker();
                     helpBroker.setDisplayed(true);
-//                    Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-//                    helpBroker.setSize(d);
                 } catch (Exception ex) {
-
+                    logger.error("Help pane error", ex);
+                    showInternalErrorMessage("");
                 }
 
             }
