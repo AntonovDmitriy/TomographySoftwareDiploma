@@ -891,7 +891,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
             @Override
             public void actionPerformed(ActionEvent e) {
 //                splashRu.setUndecorated(true);
-                jDialog1.setVisible(true);
+                dialogAbout.setVisible(true);
             }
         });
     }
@@ -953,9 +953,11 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveSinogram.setToolTipText(bundle.getString("TIP_SAVE_SINOGRAM_IMAGE"));
         buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructTomograph.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
-
+        dialogAbout.setTitle(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
+        
         modellingModuleController.reloadBundle();
         hardwareModuleController.reloadBundle();
+        
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -976,7 +978,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonOkSetName = new javax.swing.JButton();
         buttonCanselSetName = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
-        jDialog1 = new javax.swing.JDialog();
+        dialogAbout = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Model = new javax.swing.JPanel();
@@ -1155,15 +1157,16 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
 
             jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-            jDialog1.setMinimumSize(new java.awt.Dimension(600, 430));
-            jDialog1.setPreferredSize(new java.awt.Dimension(600, 430));
-            jDialog1.setResizable(false);
-            jDialog1.setType(java.awt.Window.Type.POPUP);
+            dialogAbout.setTitle(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
+            dialogAbout.setMinimumSize(new java.awt.Dimension(600, 430));
+            dialogAbout.setPreferredSize(new java.awt.Dimension(600, 430));
+            dialogAbout.setResizable(false);
+            dialogAbout.setType(java.awt.Window.Type.POPUP);
 
             jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/splash.jpg"))); // NOI18N
-            jDialog1.getContentPane().add(jLabel5, java.awt.BorderLayout.CENTER);
+            dialogAbout.getContentPane().add(jLabel5, java.awt.BorderLayout.CENTER);
 
-            jDialog1.setLocationRelativeTo(null);
+            dialogAbout.setLocationRelativeTo(null);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
             setTitle(bundle.getString("TITLE_MAIN")); // NOI18N
@@ -1902,6 +1905,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JComboBox cbReconstructionInterpolation;
     private javax.swing.JComboBox cbReconstructionInterpolationTomograph;
     private javax.swing.JComboBox cbSinogramInterpolation;
+    private javax.swing.JDialog dialogAbout;
     private javax.swing.JDialog dialogNameAsker;
     private javax.swing.JDialog dialogProgressBar;
     private javax.swing.JTextField edFileDescription;
@@ -1915,7 +1919,6 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
     private javax.swing.JTextField edStepsizeModel;
     private javax.swing.JScrollPane image1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
