@@ -873,25 +873,13 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 try {
                     ResourceBundle bundle = ResourceBundle.getBundle(
                             "conf/bundle");
-                    logger.info("tadam");
                     String hsFile = bundle.getString("hsFile");
-                    logger.info(hsFile);
-                    
                     ClassLoader cl = getClass().getClassLoader();
-                    logger.info("tadam");
-                    
                     URL url = HelpSet.findHelpSet(cl, hsFile);
-                    logger.info(url.toString());
-                    
                     HelpSet helpSet = new HelpSet(null, url);
-                    logger.info("tadam");
-                    
                     HelpBroker helpBroker = helpSet.createHelpBroker();
-                    logger.info("tadam");
-                    
                     helpBroker.setDisplayed(true);
-                    logger.info("tadam");
-                    
+
                 } catch (Exception ex) {
                     logger.error("Help pane error", ex);
                     showInternalErrorMessage("");
@@ -968,10 +956,10 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         buttonSaveReconstructModelling.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         buttonSaveReconstructTomograph.setToolTipText(bundle.getString("TIP_SAVE_RECONSTRUCT_IMAGE"));
         dialogAbout.setTitle(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
-        
+
         modellingModuleController.reloadBundle();
         hardwareModuleController.reloadBundle();
-        
+
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
