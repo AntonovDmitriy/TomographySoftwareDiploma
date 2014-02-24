@@ -29,6 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeMap;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.swing.Box;
@@ -872,12 +873,25 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 try {
                     ResourceBundle bundle = ResourceBundle.getBundle(
                             "conf/bundle");
+                    logger.info("tadam");
                     String hsFile = bundle.getString("hsFile");
+                    logger.info(hsFile);
+                    
                     ClassLoader cl = getClass().getClassLoader();
+                    logger.info("tadam");
+                    
                     URL url = HelpSet.findHelpSet(cl, hsFile);
+                    logger.info(url.toString());
+                    
                     HelpSet helpSet = new HelpSet(null, url);
+                    logger.info("tadam");
+                    
                     HelpBroker helpBroker = helpSet.createHelpBroker();
+                    logger.info("tadam");
+                    
                     helpBroker.setDisplayed(true);
+                    logger.info("tadam");
+                    
                 } catch (Exception ex) {
                     logger.error("Help pane error", ex);
                     showInternalErrorMessage("");
