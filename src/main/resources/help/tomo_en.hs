@@ -2,29 +2,29 @@
   <!DOCTYPE helpset  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp HelpSet Version 2.0//EN" "../dtd/helpset_2_0.dtd">
   <helpset version="1.0">
     <!-- title -->
-    <title>Помощь!! ! HELP</title>
+    <title>Index</title>
  
     <!-- maps -->
     <maps>
       <homeID>top</homeID>
-      <mapref location="Map.jhm"/>
+      <mapref location="Map_en.jhm"/>
     </maps>
  
     <!-- views -->
     <view>
       <name>TOC</name>
-      <label>Содержание</label>
+      <label>Index</label>
       <type>javax.help.TOCView</type>
-      <data>toc.xml</data>
+      <data>toc_en.xml</data>
     </view>
 
 
 	
     <presentation default="true" displayviewimages="false">
-      <name>Главное окно</name>
+      <name>Window</name>
       <size width="900" height="400" />
       <location x="200" y="200" />
-      <title>Помощь</title>
+      <title>Help</title>
       <image>toplevelfolder</image>
       <toolbar>
         <helpaction>javax.help.BackAction</helpaction>
@@ -36,7 +36,7 @@
       </toolbar>
     </presentation>
     <presentation>
-      <name>другое</name>
+      <name>other</name>
       <size width="600" height="400" />
       <location x="200" y="200" />
       <title>Помощь</title>
