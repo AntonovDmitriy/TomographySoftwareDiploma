@@ -1,0 +1,299 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+h2
+	{mso-style-link:"Заголовок 2 Знак";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:normal;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Текст выноски Знак";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+span
+	{mso-style-name:"Заголовок 2 Знак";
+	mso-style-link:"Заголовок 2";
+	font-family:"Times New Roman","serif";}
+span.a
+	{mso-style-name:"Текст выноски Знак";
+	mso-style-link:"Текст выноски";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+.MsoPapDefault
+	{margin-bottom:10.0pt;
+	line-height:115%;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.55pt 2.0cm 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+@page WordSection2
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;}
+div.WordSection2
+	{page:WordSection2;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body bgcolor="#505050" lang=RU>
+
+<div class=WordSection1>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:18.0pt;line-height:
+150%;color:#EAEAEA'>Digital processing of the projection data</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;text-indent:35.4pt;line-height:150%'><span lang=EN-US style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'>Filtered back projection method involves
+the use of digital filters to received during the experiment or simulation
+projection data . Without applying them tomogram blurry and unsuitable for the
+study.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;text-indent:35.4pt;line-height:150%'><span lang=EN-US style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'>Implementation of digital processing
+(Fig. 8) is in a class ImageTransormator static method with the signature
+private static double [] [] filterStatic (double [] [] proj, int views, int
+scans, int stepsize, String filterName). The input signal is a two-dimensional
+array of projection data , the scanning conditions and name of the filter to
+apply to the projection data . In the method of static double [] filter1
+(String filtname, int scans, double cutoff) class Utils obtain filtration
+vector . The outer loop iterates line projection matrix by angle scanning.
+After selecting the line of projection data and the formation of the filtration
+of the vector to the line of projection data used direct Fourier transform, the
+result is multiplied by the filter vector. After that, the inverse Fourier
+transform [13] and filtered string is written to a new two-dimensional array ,
+the same size as the initial projection data array.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>The complex contains the following digital filters [14] :</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>1)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Ramp</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0cm;margin-bottom:
+.0001pt;text-align:justify;line-height:150%'><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span
+style='font-size:11.0pt;line-height:115%;font-family:"Calibri","sans-serif"'><img
+width=97 height=29 src="filtering_projection_data_en.files/image001.png"></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><i><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></i></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>2)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Shepp-Logan</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span
+style='font-size:11.0pt;line-height:115%;font-family:"Calibri","sans-serif"'><img
+width=196 height=82 src="filtering_projection_data_en.files/image002.png"></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>3)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>H</span><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>amming</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=409 height=61 src="filtering_projection_data_en.files/image003.png"></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>4)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Hann</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=308 height=61 src="filtering_projection_data_en.files/image004.png"></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>5)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Сosine</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=297 height=61 src="filtering_projection_data_en.files/image005.png"></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>6)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>BlackMan</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=624 height=114 src="filtering_projection_data_en.files/image006.png"></span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0cm;margin-bottom:
+.0001pt;text-align:justify;line-height:150%'><span lang=EN-US style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+</div>
+
+<span style='font-size:16.0pt;line-height:150%;font-family:"Times New Roman","serif";
+color:#EAEAEA'><br clear=all style='page-break-before:always'>
+</span>
+
+<div class=WordSection2>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'><img width=787 height=623 id="Рисунок 3"
+src="filtering_projection_data_en.files/image007.jpg"></span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0cm;margin-bottom:
+.0001pt;text-align:justify;line-height:150%'><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpLast align=center style='margin-bottom:0cm;
+margin-bottom:.0001pt;text-align:center;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Figure 8. The block
+diagram of the processing of projection data.</span></p>
+
+</div>
+
+</body>
+
+</html>

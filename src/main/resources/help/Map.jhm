@@ -4,4 +4,6 @@
   <map version="1.0">
     <mapID target="inverse_tomography_problem" url="Inverse_tomography_problem_ru.htm" />
 	<mapID target="transmission_parallel_tomography_ru" url="Transmission_parallel_tomography_ru.htm" />
+	<mapID target="filtering_projection_data_ru" url="filtering_projection_data_ru.htm" />
+
   </map>

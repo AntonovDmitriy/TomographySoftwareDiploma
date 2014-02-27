@@ -1,6 +1,9 @@
   <?xml version='1.0' encoding='ISO-8859-1' ?>
   <!DOCTYPE toc  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 2.0//EN" "../dtd/toc_2_0.dtd">
   <toc version="2.0">
+		<tocitem text="Filtered back projection method">
         <tocitem text="Solution of the inverse transmission tomography" target="inverse_tomography_problem" />
 		<tocitem text="Transmission tomography scan in parallel" target="transmission_parallel_tomography_en" />
+		<tocitem text="Digital processing of the projection data" target="filtering_projection_data_en" />
+		</tocitem>
   </toc>

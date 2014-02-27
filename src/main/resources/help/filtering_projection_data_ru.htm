@@ -1,0 +1,320 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+h2
+	{mso-style-link:"Заголовок 2 Знак";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:normal;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Текст выноски Знак";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	line-height:115%;
+	font-size:14.0pt;
+	font-family:"Times New Roman","serif";}
+span
+	{mso-style-name:"Заголовок 2 Знак";
+	mso-style-link:"Заголовок 2";
+	font-family:"Times New Roman","serif";}
+span.a
+	{mso-style-name:"Текст выноски Знак";
+	mso-style-link:"Текст выноски";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+.MsoPapDefault
+	{margin-bottom:10.0pt;
+	line-height:115%;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.55pt 2.0cm 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+@page WordSection2
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;}
+div.WordSection2
+	{page:WordSection2;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body bgcolor="#505050" lang=RU>
+
+<div class=WordSection1>
+
+<h2 style='margin:0cm;margin-bottom:.0001pt;text-align:justify;line-height:
+150%'><span style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Цифровая
+обработка проекционных данных</span></h2>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;text-indent:35.45pt;line-height:150%'><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>Метод отфильтрованных обратных проекций
+предполагает применение цифровых фильтров к полученным в ходе эксперимента или 
+моделирования проекционным данным. Без их применения томограмма получается
+размытой и непригодной для изучения.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>         Реализация цифровой обработки (рис. 8) находится в
+классе </span><span lang=EN-US style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>ImageTransormator</span><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'> </span><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>в статическом методе с сигнатурой private
+static double[][] filterStatic(double[][] proj, int views, int scans, int
+stepsize, String filterName). На вход поступает двумерный массив проекционных
+данных, условия сканирования и имя фильтра, который необходимо применить к
+проекционным данным. В</span><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'> </span><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>методе</span><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'> <span lang=EN-US>static double[] filter1(String filtname, int scans,
+double cutoff) </span></span><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>класса</span><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'> <span lang=EN-US>Utils </span></span><span style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'>получаем</span><span style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'> </span><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>фильтрационный</span><span style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'> </span><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>вектор</span><span lang=EN-US style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'>. </span><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>Внешний цикл перебирает строки проекционной
+матрицы по углу сканирования. После выбора строки проекционных данных и формирования
+фильтрационного вектора, к строке проекционных данных применяется прямое
+преобразование Фурье, полученный результат умножается на фильтрационный вектор.
+После этого производится обратное преобразование Фурье [13] и отфильтрованная
+строка записывается в новый двумерный массив, такой же по размеру как и
+начальный массив проекционных данных.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><u><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'><span style='text-decoration:none'>&nbsp;</span></span></u></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>         В комплексе присутствуют следующие цифровые фильтры [14]:</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>1)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Ramp</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0cm;margin-bottom:
+.0001pt;text-align:justify;line-height:150%'><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span
+style='font-size:11.0pt;line-height:115%;font-family:"Calibri","sans-serif"'><img
+width=97 height=29 src="filtering_projection_data_ru.files/image001.png"></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><i><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></i></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>2)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Shepp-Logan</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span
+style='font-size:11.0pt;line-height:115%;font-family:"Calibri","sans-serif"'><img
+width=196 height=82 src="filtering_projection_data_ru.files/image002.png"></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>3)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>H</span><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>amming</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=409 height=61 src="filtering_projection_data_ru.files/image003.png"></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>4)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Hann</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=308 height=61 src="filtering_projection_data_ru.files/image004.png"></span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span lang=EN-US
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>5)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Сosine</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span style='font-size:16.0pt;line-height:150%;
+color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=297 height=61 src="filtering_projection_data_ru.files/image005.png"></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;text-indent:-18.0pt;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>6)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+lang=EN-US style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>BlackMan</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:18.0pt;margin-bottom:.0001pt;text-align:justify;line-height:150%'><span
+style='font-size:14.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img
+width=624 height=114 src="filtering_projection_data_ru.files/image006.png"></span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0cm;margin-bottom:
+.0001pt;text-align:justify;line-height:150%'><span lang=EN-US style='font-size:
+16.0pt;line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span lang=EN-US style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+</div>
+
+<span style='font-size:16.0pt;line-height:150%;font-family:"Times New Roman","serif";
+color:#EAEAEA'><br clear=all style='page-break-before:always'>
+</span>
+
+<div class=WordSection2>
+
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:justify;line-height:150%'><span style='font-size:16.0pt;line-height:
+150%;color:#EAEAEA'><img width=787 height=623 id="Рисунок 3"
+src="filtering_projection_data_ru.files/image007.jpg"></span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0cm;margin-bottom:
+.0001pt;text-align:justify;line-height:150%'><span style='font-size:16.0pt;
+line-height:150%;color:#EAEAEA'>&nbsp;</span></p>
+
+<p class=MsoListParagraphCxSpLast align=center style='margin-bottom:0cm;
+margin-bottom:.0001pt;text-align:center;line-height:150%'><span
+style='font-size:16.0pt;line-height:150%;color:#EAEAEA'>Рисунок 8. Блок-схема
+обработки проекционных данных.</span></p>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;color:#EAEAEA'>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
