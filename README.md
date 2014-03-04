@@ -28,4 +28,4 @@ Thanks to the creators of the following library is free for non-commercial use a
 •       Slf4J http://www.slf4j.org/
 •       Project LearnCT https://code.google.com/p/learnct/
  
-The author emphasizes that the commercial use of the project is possible and it was created for educational purposes only. 
+The author emphasizes that the commercial use of the project is not possible and it was created for educational purposes only. 
