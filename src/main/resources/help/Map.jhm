@@ -5,5 +5,9 @@
     <mapID target="inverse_tomography_problem" url="Inverse_tomography_problem_ru.htm" />
 	<mapID target="transmission_parallel_tomography_ru" url="Transmission_parallel_tomography_ru.htm" />
 	<mapID target="filtering_projection_data_ru" url="filtering_projection_data_ru.htm" />
-
+	<mapID target="tab_model_ru" url="tab_model_ru.htm" />
+	<mapID target="tab_tomograph_ru" url="tab_tomograph_ru.htm" />
+	<mapID target="density_analyzer_ru" url="density_analyzer_ru.htm" />
+        <mapID target="intro_ru" url="intro_ru.htm" />
+        <mapID target="thanks_ru" url="thanks_ru.htm" />
   </map>

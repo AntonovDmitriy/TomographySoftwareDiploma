@@ -1,11 +1,20 @@
-  <?xml version='1.0' encoding='ISO-8859-1' ?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version='1.0' encoding='ISO-8859-1' ?> -->
+<!-- was: <?xml version='1.0' encoding='ISO-8859-1' ?> -->
   <!DOCTYPE toc  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 2.0//EN" "../dtd/toc_2_0.dtd">
-  <toc version="2.0">
-		<tocitem text="Метод фильтрованных обратных проекций">
+<toc version="2.0">
+    <tocitem text="О программе">
+        <tocitem text="Введение" target="intro_ru" />
+        <tocitem text="Благодарности" target="thanks_ru" />
+    </tocitem>
+    <tocitem text="Метод фильтрованных обратных проекций">
         <tocitem text="Решение обратной задачи компьютерной томографии" target="inverse_tomography_problem" />
-		<tocitem text="Трансмиссионная томография при параллельном сканировании" target="transmission_parallel_tomography_ru" />
-		<tocitem text="Цифровая обработка проекционных данных" target="filtering_projection_data_ru" />
-		</tocitem>
-		
-		
-  </toc>
+        <tocitem text="Трансмиссионная томография при параллельном сканировании" target="transmission_parallel_tomography_ru" />
+        <tocitem text="Цифровая обработка проекционных данных" target="filtering_projection_data_ru" />
+    </tocitem>
+    <tocitem text="Графический интерфейс пользователя">
+        <tocitem text="Вкладка модель" target="tab_model_ru" />
+        <tocitem text="Вкладка томограф" target="tab_tomograph_ru" />
+        <tocitem text="Анализатор плотности" target="density_analyzer_ru" />
+    </tocitem>
+</toc>
