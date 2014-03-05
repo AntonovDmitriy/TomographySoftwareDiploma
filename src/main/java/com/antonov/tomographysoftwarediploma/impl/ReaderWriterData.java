@@ -143,11 +143,15 @@ public class ReaderWriterData {
             destination = new FileOutputStream(destFile).getChannel();
             destination.transferFrom(source, 0, source.size());
         } finally {
-            if (source != null) {
-                source.close();
-            }
-            if (destination != null) {
-                destination.close();
+            try {
+                if (source != null) {
+                    source.close();
+                }
+                if (destination != null) {
+                    destination.close();
+                }
+            } catch (IOException ex) {
+                //NOP
             }
         }
     }
@@ -169,11 +173,15 @@ public class ReaderWriterData {
                 fout.write(data, 0, count);
             }
         } finally {
-            if (in != null) {
-                in.close();
-            }
-            if (fout != null) {
-                fout.close();
+            try {
+                if (in != null) {
+                    in.close();
+                }
+                if (fout != null) {
+                    fout.close();
+                }
+            } catch (IOException ex) {
+                //NOP
             }
         }
     }
@@ -231,7 +239,6 @@ public class ReaderWriterData {
             }
             os.flush();
         } catch (IOException ex) {
-            ex.printStackTrace();
         } finally {
             try {
                 if (is != null) {
@@ -241,7 +248,6 @@ public class ReaderWriterData {
                     os.close();
                 }
             } catch (IOException eError) {
-                eError.printStackTrace();
             }
         }
         return fDest.exists();
@@ -262,7 +268,11 @@ public class ReaderWriterData {
 
             return stringBuffer.toString();
         } finally {
-            reader.close();
+            try {
+                reader.close();
+            } catch (IOException ex) {
+                //NOP
+            }
         }
 
     }
