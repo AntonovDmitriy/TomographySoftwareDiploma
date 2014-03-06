@@ -16,7 +16,7 @@ If the user program have any questions for the author can write them at : mailto
 
 Acknowledgements
  
-For his guidance in the development process would like to thank Associate Professor of number 24 cts Yumasheva VI, 
+For his guidance in the development process would like to thank Associate Professor of number 24 cts Yumashev VI, 
 for their valuable comments and will support members of the department number 24 and Mishchenko AY, Miloserdin VY, 
 as well as constructive criticism Shalamova VY. 
 
