@@ -39,10 +39,6 @@ public class ConnectionManagerImpl implements IConnectionManager {
 
     private boolean isConnected = false;
 
-    private static final String SSH_CONNECTION = "528d18a4e0b8cdb068000071@app-helloweb.rhcloud.com";
-    private static final String DB_URL = "jdbc:mysql://localhost:1234/Tomo?"
-            + "user=adminR8QufFz&password=a3ZixG3aDcJG";
-
     Tomograph.StartModeEnum mode;
 
     public ConnectionManagerImpl(Properties properties, Tomograph.StartModeEnum mode) throws IOException, EmptyOrNullParameterException {
@@ -99,7 +95,7 @@ public class ConnectionManagerImpl implements IConnectionManager {
 
         jsch.addIdentity((new File(pathToPrivateKey)).getAbsolutePath());
 
-        String host = SSH_CONNECTION;
+        String host = properties.getProperty("SSH_CONNECTION");
 
         String user = host.substring(0, host.indexOf('@'));
         host = host.substring(host.indexOf('@') + 1);
@@ -164,7 +160,7 @@ public class ConnectionManagerImpl implements IConnectionManager {
 
     private void createDbConnection() throws SQLException {
 
-        Connection connect = DriverManager.getConnection(DB_URL, generatePropsForJdbcDriver());
+        Connection connect = DriverManager.getConnection(properties.getProperty("DB_CONNECTION"), generatePropsForJdbcDriver());
         this.connectionDb = connect;
     }
 
@@ -181,9 +177,9 @@ public class ConnectionManagerImpl implements IConnectionManager {
         if (!privateKey.exists()) {
             ReaderWriterData reader = new ReaderWriterData();
             if (mode.equals(Tomograph.StartModeEnum.MODE_WEBSTART)) {
-                reader.extractResourceToFile(pathToPrivateKey, properties, true,false);
+                reader.extractResourceToFile(pathToPrivateKey, properties, true, false);
             } else {
-                reader.extractResourceToFile(pathToPrivateKey, properties, false,false);
+                reader.extractResourceToFile(pathToPrivateKey, properties, false, false);
             }
         }
     }
