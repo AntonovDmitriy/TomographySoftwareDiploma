@@ -59,7 +59,7 @@
                                 <configuration>
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <jnlpFileName>tomo</jnlpFileName>
-                                    <codeBase>http://app-helloweb.rhcloud.com/</codeBase>
+                                    <codeBase>http://tomography-antonov.rhcloud.com/webstart</codeBase>
                                     <title>tomo</title>
                                     <vendor>MEPHI</vendor>
                                     <iconHref>splash.jpg</iconHref>
