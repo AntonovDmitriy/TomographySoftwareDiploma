@@ -32,7 +32,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Duser.language=ru -classpath %classpath ${packageClassName}</exec.args>
+                <exec.args>-Duser.language=ru -classpath %classpath com.antonov.tomographysoftwarediploma.impl.AppLaunch</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>

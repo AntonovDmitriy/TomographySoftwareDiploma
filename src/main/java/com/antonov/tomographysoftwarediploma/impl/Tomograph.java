@@ -245,6 +245,8 @@ public class Tomograph {
                     copySecurityFiles("7", javaSecurityFolder);
                 } else if (javaVersion.contains("1.6")) {
                     copySecurityFiles("6", javaSecurityFolder);
+                } else if (javaVersion.contains("1.8")) {
+                    copySecurityFiles("8", javaSecurityFolder);
                 }
             }
         } catch (Exception ex) {
@@ -263,6 +265,9 @@ public class Tomograph {
                 } else if (javaVersion.equals("6")) {
                     ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_6"),
                             javaSecurityFolder);
+                }else if (javaVersion.equals("8")) {
+                    ReaderWriterData.copyFilesFromTo(tomographProperty.getProperty("PATH_CONNECTION_POLICY_8"),
+                            javaSecurityFolder);
                 }
                 break;
             }
@@ -273,6 +278,8 @@ public class Tomograph {
                     break;
                 } else if (javaVersion.equals("6")) {
                     copySecurityFilesFromJar("jce6", javaSecurityFolder);
+                }else if (javaVersion.equals("8")) {
+                    copySecurityFilesFromJar("jce8", javaSecurityFolder);
                 }
             }
             case NONE:
@@ -280,6 +287,8 @@ public class Tomograph {
                     copySecurityFilesFromTargetDirectory("target/classes/connectionFiles/jce7", javaSecurityFolder);
                 } else if (javaVersion.equals("6")) {
                     copySecurityFilesFromTargetDirectory("target/classes/connectionFiles/jce6", javaSecurityFolder);
+                }else if (javaVersion.equals("8")) {
+                    copySecurityFilesFromTargetDirectory("target/classes/connectionFiles/jce8", javaSecurityFolder);
                 }
 
         }

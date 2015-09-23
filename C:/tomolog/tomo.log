@@ -1,0 +1,647 @@
+2015-09-23 22:32:33 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 22:32:34 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 22:32:34 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 22:32:34 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 22:32:34 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 22:32:34 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 22:32:34 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 22:32:34 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+2015-09-23 22:32:34 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 22:32:34 INFO  ModellingModule:191 - scans = 400
+2015-09-23 22:32:34 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 22:32:34 INFO  ModellingModule:231 - regimeSinogramInterpolation = Nearest-neighbor
+2015-09-23 22:32:34 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Nearest-neighbor
+2015-09-23 22:32:34 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 22:32:34 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 22:32:34 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 22:32:34 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 22:32:34 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 22:32:34 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 22:32:34 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 22:32:34 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 22:32:34 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 22:32:34 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 22:32:35 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+2015-09-23 22:32:35 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 22:32:35 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 22:32:35 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 22:32:35 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Linear
+2015-09-23 22:32:35 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 22:32:35 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 22:32:35 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 22:32:35 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 22:32:35 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 22:32:38 WARN  TomographPane:121 - Map of modelling images is empty 
+2015-09-23 22:32:38 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 22:32:38 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 22:32:38 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 22:32:38 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 22:32:38 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 22:32:42 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 22:34:21 INFO  ModellingModule:330 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/src/main/resources/internalImages/With_deffect.jpg is successfully opened
+2015-09-23 22:34:21 TRACE ImageTransformerFacade:29 - Type of image is TYPE_BYTE_INDEXED. Trying to make it gray
+2015-09-23 22:34:21 INFO  ModellingModule:332 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/src/main/resources/internalImages/With_deffect.jpg is prepared
+2015-09-23 22:34:21 INFO  ModellingModule:334 - Current modelling image changes on With_deffect.jpg
+2015-09-23 22:34:21 INFO  ModellingModule:294 - Current modelling image changes on display
+2015-09-23 22:34:21 INFO  ModellingModule:296 - Result modelling is clear
+2015-09-23 22:34:21 INFO  ModellingModule:298 - Result reconstruction is clear
+2015-09-23 22:34:21 INFO  ModellingModule:300 - Modelling controls are disabled
+2015-09-23 22:34:24 TRACE ModellingModule:419 - Sinogram creating is starting
+2015-09-23 22:34:24 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:34:24 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:34:24 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2015-09-23 22:34:24 TRACE SinogramCreator:156 - Array of pixel values of source image has been created
+2015-09-23 22:34:25 TRACE SinogramCreator:159 - Projection data has been created and saved to model
+2015-09-23 22:34:25 TRACE SinogramCreator:166 - Short row projection data has been created
+2015-09-23 22:34:25 TRACE SinogramCreator:170 - Sinogram image is created
+2015-09-23 22:34:25 TRACE SinogramCreator:172 - Sinogram inage has been performed for screaning
+2015-09-23 22:34:25 TRACE ModellingModule:308 - Sinogram image is changed
+2015-09-23 22:34:25 INFO  ModellingModule:310 - Result reconstruction is clear
+2015-09-23 22:34:25 TRACE ModellingModule:425 - Recon controls are enabled
+2015-09-23 22:34:25 TRACE ModellingModule:427 - Sinogram createing is finishing
+2015-09-23 22:34:28 TRACE ModellingModule:437 - Reconstruction of modelling sinogram is starting
+2015-09-23 22:34:28 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:34:28 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:34:28 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2015-09-23 22:34:28 TRACE Reconstructor:117 - Projection data is filtered
+2015-09-23 22:34:32 TRACE Reconstructor:119 - Reconstructed data is created
+2015-09-23 22:34:32 TRACE Reconstructor:121 - Reconstructed image is created
+2015-09-23 22:34:32 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2015-09-23 22:34:32 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:34:32 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:34:32 TRACE ModellingModule:442 - Coloring model controls are enabled
+2015-09-23 22:34:32 TRACE ModellingModule:444 - Reconstruction of modelling sinogram is finishied
+2015-09-23 22:34:34 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:34:43 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:35:04 TRACE ModellingModule:504 - Sinogram is showing in viewer
+2015-09-23 22:35:09 TRACE ModellingModule:514 - density analizator is opened
+2015-09-23 22:35:42 TRACE ModellingModule:461 - Value of currentColorName now is red_saw_2. Old value was hue_grb_0
+2015-09-23 22:35:42 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:35:42 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:35:44 TRACE ModellingModule:461 - Value of currentColorName now is red_blue_saw_8. Old value was red_saw_2
+2015-09-23 22:35:44 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:35:44 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:35:46 TRACE ModellingModule:461 - Value of currentColorName now is green_blue_saw_8. Old value was red_blue_saw_8
+2015-09-23 22:35:46 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:35:46 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:35:48 TRACE ModellingModule:437 - Reconstruction of modelling sinogram is starting
+2015-09-23 22:35:48 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:35:48 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:35:48 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2015-09-23 22:35:48 TRACE Reconstructor:117 - Projection data is filtered
+2015-09-23 22:35:51 TRACE Reconstructor:119 - Reconstructed data is created
+2015-09-23 22:35:51 TRACE Reconstructor:121 - Reconstructed image is created
+2015-09-23 22:35:51 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2015-09-23 22:35:51 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:35:51 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:35:51 TRACE ModellingModule:442 - Coloring model controls are enabled
+2015-09-23 22:35:51 TRACE ModellingModule:444 - Reconstruction of modelling sinogram is finishied
+2015-09-23 22:35:53 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:35:59 TRACE ModellingModule:461 - Value of currentColorName now is random_8. Old value was green_blue_saw_8
+2015-09-23 22:35:59 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:35:59 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:01 TRACE ModellingModule:461 - Value of currentColorName now is random_256. Old value was random_8
+2015-09-23 22:36:01 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:36:01 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:03 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:36:15 TRACE ModellingModule:461 - Value of currentColorName now is green. Old value was random_256
+2015-09-23 22:36:15 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:36:15 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:21 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is linear. Old value was nearest
+2015-09-23 22:36:23 TRACE ModellingModule:437 - Reconstruction of modelling sinogram is starting
+2015-09-23 22:36:23 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:36:23 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:36:23 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2015-09-23 22:36:23 TRACE Reconstructor:117 - Projection data is filtered
+2015-09-23 22:36:26 TRACE Reconstructor:119 - Reconstructed data is created
+2015-09-23 22:36:26 TRACE Reconstructor:121 - Reconstructed image is created
+2015-09-23 22:36:26 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2015-09-23 22:36:26 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:36:26 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:26 TRACE ModellingModule:442 - Coloring model controls are enabled
+2015-09-23 22:36:26 TRACE ModellingModule:444 - Reconstruction of modelling sinogram is finishied
+2015-09-23 22:36:28 TRACE ModellingModule:419 - Sinogram creating is starting
+2015-09-23 22:36:28 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:36:28 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:36:28 TRACE ModellingImageCalculator:53 - sourceImage is correct 
+2015-09-23 22:36:28 TRACE SinogramCreator:156 - Array of pixel values of source image has been created
+2015-09-23 22:36:29 TRACE SinogramCreator:159 - Projection data has been created and saved to model
+2015-09-23 22:36:29 TRACE SinogramCreator:166 - Short row projection data has been created
+2015-09-23 22:36:29 TRACE SinogramCreator:170 - Sinogram image is created
+2015-09-23 22:36:29 TRACE SinogramCreator:172 - Sinogram inage has been performed for screaning
+2015-09-23 22:36:29 TRACE ModellingModule:308 - Sinogram image is changed
+2015-09-23 22:36:29 INFO  ModellingModule:310 - Result reconstruction is clear
+2015-09-23 22:36:29 TRACE ModellingModule:425 - Recon controls are enabled
+2015-09-23 22:36:29 TRACE ModellingModule:427 - Sinogram createing is finishing
+2015-09-23 22:36:30 TRACE ModellingModule:437 - Reconstruction of modelling sinogram is starting
+2015-09-23 22:36:30 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:36:30 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:36:30 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2015-09-23 22:36:30 TRACE Reconstructor:117 - Projection data is filtered
+2015-09-23 22:36:33 TRACE Reconstructor:119 - Reconstructed data is created
+2015-09-23 22:36:33 TRACE Reconstructor:121 - Reconstructed image is created
+2015-09-23 22:36:33 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2015-09-23 22:36:33 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:36:33 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:33 TRACE ModellingModule:442 - Coloring model controls are enabled
+2015-09-23 22:36:33 TRACE ModellingModule:444 - Reconstruction of modelling sinogram is finishied
+2015-09-23 22:36:34 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:36:45 TRACE ModellingModule:411 - Value of currentFilter now is shepplogan. Old value was none
+2015-09-23 22:36:45 TRACE ModellingModule:437 - Reconstruction of modelling sinogram is starting
+2015-09-23 22:36:45 TRACE ModellingImageCalculator:39 - scans value is correct 400
+2015-09-23 22:36:45 TRACE ModellingImageCalculator:43 - stepSize value is correct 1
+2015-09-23 22:36:45 TRACE Reconstructor:36 - sizeOfReconstruction value is correct 600
+2015-09-23 22:36:45 TRACE Reconstructor:117 - Projection data is filtered
+2015-09-23 22:36:49 TRACE Reconstructor:119 - Reconstructed data is created
+2015-09-23 22:36:49 TRACE Reconstructor:121 - Reconstructed image is created
+2015-09-23 22:36:49 TRACE Reconstructor:123 - Reconstructed inage has been performed for screaning
+2015-09-23 22:36:49 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:36:49 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:49 TRACE ModellingModule:442 - Coloring model controls are enabled
+2015-09-23 22:36:49 TRACE ModellingModule:444 - Reconstruction of modelling sinogram is finishied
+2015-09-23 22:36:50 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:36:57 TRACE ModellingModule:461 - Value of currentColorName now is random_256. Old value was green
+2015-09-23 22:36:57 TRACE ModellingModule:472 - Colored image has been created
+2015-09-23 22:36:57 TRACE ModellingModule:474 - current colored image has been changed
+2015-09-23 22:36:59 TRACE ModellingModule:509 - Reconstruction modelling is showing in viewer
+2015-09-23 22:37:04 TRACE ModellingModule:514 - density analizator is opened
+2015-09-23 22:37:22 INFO  Tomograph:174 - Closing application
+2015-09-23 22:37:22 INFO  Tomograph:51 - removing temporary files
+2015-09-23 22:37:22 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:09:31 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:09:32 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:09:32 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:09:32 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:09:32 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:09:32 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:09:32 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 23:09:32 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:09:32 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 23:09:32 INFO  ModellingModule:191 - scans = 400
+2015-09-23 23:09:32 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 23:09:32 INFO  ModellingModule:231 - regimeSinogramInterpolation = Ближайшего соседа
+2015-09-23 23:09:32 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Ближайшего соседа
+2015-09-23 23:09:32 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 23:09:32 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 23:09:32 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 23:09:32 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 23:09:32 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:09:32 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 23:09:32 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 23:09:32 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 23:09:32 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 23:09:32 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:09:32 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:09:32 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 23:09:32 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 23:09:32 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 23:09:32 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Линейная
+2015-09-23 23:09:32 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 23:09:32 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 23:09:32 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 23:09:32 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 23:09:32 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 23:09:34 WARN  TomographPane:121 - Map of modelling images is empty 
+2015-09-23 23:09:34 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 23:09:34 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 23:09:34 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 23:09:34 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 23:09:34 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 23:09:36 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 23:09:51 INFO  Tomograph:174 - Closing application
+2015-09-23 23:09:51 INFO  Tomograph:51 - removing temporary files
+2015-09-23 23:09:51 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:16:28 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:16:29 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:16:29 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:16:29 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:16:29 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:16:29 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:16:29 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 23:16:29 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:16:29 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 23:16:29 INFO  ModellingModule:191 - scans = 400
+2015-09-23 23:16:29 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 23:16:29 INFO  ModellingModule:231 - regimeSinogramInterpolation = Ближайшего соседа
+2015-09-23 23:16:29 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Ближайшего соседа
+2015-09-23 23:16:29 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 23:16:29 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 23:16:29 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 23:16:29 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 23:16:29 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:16:29 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 23:16:29 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 23:16:29 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 23:16:29 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 23:16:29 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:16:30 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:16:30 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 23:16:30 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 23:16:30 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 23:16:30 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Линейная
+2015-09-23 23:16:30 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 23:16:30 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 23:16:30 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 23:16:30 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 23:16:30 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 23:16:31 WARN  TomographPane:116 - Map of modelling images is empty 
+2015-09-23 23:16:31 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 23:16:31 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 23:16:31 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 23:16:31 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 23:16:31 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 23:16:33 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 23:16:51 INFO  Tomograph:174 - Closing application
+2015-09-23 23:16:51 INFO  Tomograph:51 - removing temporary files
+2015-09-23 23:16:51 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:20:24 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:20:25 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:20:25 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:20:25 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:20:25 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:20:25 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:20:25 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 23:20:25 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:20:25 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 23:20:25 INFO  ModellingModule:191 - scans = 400
+2015-09-23 23:20:25 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 23:20:25 INFO  ModellingModule:231 - regimeSinogramInterpolation = Ближайшего соседа
+2015-09-23 23:20:25 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Ближайшего соседа
+2015-09-23 23:20:25 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 23:20:25 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 23:20:25 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 23:20:25 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 23:20:25 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:20:25 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 23:20:25 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 23:20:25 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 23:20:25 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 23:20:25 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:20:26 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:20:26 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 23:20:26 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 23:20:26 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 23:20:26 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Линейная
+2015-09-23 23:20:26 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 23:20:26 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 23:20:26 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 23:20:26 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 23:20:26 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 23:20:27 WARN  TomographPane:116 - Map of modelling images is empty 
+2015-09-23 23:20:27 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 23:20:27 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 23:20:27 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 23:20:27 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 23:20:27 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 23:20:28 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 23:20:38 INFO  Tomograph:174 - Closing application
+2015-09-23 23:20:38 INFO  Tomograph:51 - removing temporary files
+2015-09-23 23:20:38 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:21:55 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:21:55 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:21:55 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:21:55 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:21:55 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:21:55 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:21:55 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 23:21:55 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:21:55 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 23:21:55 INFO  ModellingModule:191 - scans = 400
+2015-09-23 23:21:55 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 23:21:55 INFO  ModellingModule:231 - regimeSinogramInterpolation = Ближайшего соседа
+2015-09-23 23:21:55 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Ближайшего соседа
+2015-09-23 23:21:55 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 23:21:55 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 23:21:55 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 23:21:55 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 23:21:55 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:21:55 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 23:21:55 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 23:21:55 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 23:21:55 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 23:21:55 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:21:56 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:21:56 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 23:21:56 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 23:21:56 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 23:21:56 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Линейная
+2015-09-23 23:21:56 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 23:21:56 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 23:21:56 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 23:21:56 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 23:21:56 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 23:21:57 WARN  TomographPane:116 - Map of modelling images is empty 
+2015-09-23 23:21:57 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 23:21:57 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 23:21:57 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 23:21:57 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 23:21:57 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 23:21:58 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 23:22:12 INFO  Tomograph:174 - Closing application
+2015-09-23 23:22:12 INFO  Tomograph:51 - removing temporary files
+2015-09-23 23:22:12 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:28:32 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:28:33 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:28:33 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:28:33 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:28:33 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:28:33 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:28:33 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 23:28:33 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:28:33 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 23:28:33 INFO  ModellingModule:191 - scans = 400
+2015-09-23 23:28:33 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 23:28:33 INFO  ModellingModule:231 - regimeSinogramInterpolation = Ближайшего соседа
+2015-09-23 23:28:33 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Ближайшего соседа
+2015-09-23 23:28:33 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 23:28:33 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 23:28:33 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 23:28:33 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 23:28:33 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:28:33 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 23:28:33 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 23:28:33 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 23:28:33 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 23:28:33 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:28:34 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:28:34 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 23:28:34 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 23:28:34 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 23:28:34 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Линейная
+2015-09-23 23:28:34 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 23:28:34 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 23:28:34 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 23:28:34 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 23:28:34 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 23:28:35 WARN  TomographPane:116 - Map of modelling images is empty 
+2015-09-23 23:28:35 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 23:28:35 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 23:28:35 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 23:28:35 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 23:28:35 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 23:28:37 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 23:30:20 TRACE ModellingModule:369 - Value of sizeReconstruction now is 600. Old value was 600
+2015-09-23 23:30:20 INFO  ModellingModule:371 - Result reconstruction is clear
+2015-09-23 23:30:20 INFO  ModellingModule:373 - After reconstruction controls are disabled
+2015-09-23 23:30:22 INFO  Tomograph:174 - Closing application
+2015-09-23 23:30:22 INFO  Tomograph:51 - removing temporary files
+2015-09-23 23:30:23 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:30:57 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:30:58 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:30:58 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:30:58 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:30:58 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:30:58 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:39:20 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:39:21 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:39:21 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:39:21 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:39:21 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:39:21 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:39:21 INFO  ModellingModule:113 - Path to the internal images is internalImages
+2015-09-23 23:39:21 ERROR ModellingModule:150 - error while getting sample images 
+java.io.FileNotFoundException: /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/target/classes (Is a directory)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:120)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.getListFilesFromJarFolder(ReaderWriterData.java:298)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.initSamplesMapImage(ModellingModule.java:138)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.init(ModellingModule.java:100)
+	at com.antonov.tomographysoftwarediploma.impl.ModellingModule.<init>(ModellingModule.java:63)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:106)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:39:21 INFO  ModellingModule:176 - Reading initial modelling parameters
+2015-09-23 23:39:21 INFO  ModellingModule:191 - scans = 400
+2015-09-23 23:39:21 INFO  ModellingModule:201 - stepsize = 1
+2015-09-23 23:39:21 INFO  ModellingModule:231 - regimeSinogramInterpolation = Ближайшего соседа
+2015-09-23 23:39:21 INFO  ModellingModule:252 - regimeReconstructionInterpolation = Ближайшего соседа
+2015-09-23 23:39:21 INFO  ModellingModule:210 - sizeReconstruction = 600
+2015-09-23 23:39:21 INFO  ModellingModule:267 - current filtering model = none
+2015-09-23 23:39:21 INFO  ModellingModule:278 - coloring name model = hue_grb_0
+2015-09-23 23:39:21 INFO  ModellingModule:184 - Initial modelling parameters have been read
+2015-09-23 23:39:21 TRACE ConnectionManagerImpl:122 - SSH_PRIVATE_KEY_PATH connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:39:21 TRACE ConnectionManagerImpl:131 - DB_HOST 127.4.19.130
+2015-09-23 23:39:21 TRACE ConnectionManagerImpl:142 - PORT_LOCAL 1234
+2015-09-23 23:39:21 TRACE ConnectionManagerImpl:153 - PORT_REMOTE 3306
+2015-09-23 23:39:21 INFO  ConnectionManagerImpl:90 - Trying to create ssh connection........
+2015-09-23 23:39:21 INFO  ConnectionManagerImpl:94 - /media/dmitriy/2A40B27640B24879/NetbeansProjects/TomographySoftwareDiploma/connectionFiles/antonovPrivateKey.ppk
+2015-09-23 23:39:21 ERROR HardwareModule:398 - Error while creating ssh or db connection 
+com.jcraft.jsch.JSchException: The cipher 'aes256-cbc' is required, but it is not available.
+	at com.jcraft.jsch.KeyPair.loadPPK(KeyPair.java:1017)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:590)
+	at com.jcraft.jsch.KeyPair.load(KeyPair.java:542)
+	at com.jcraft.jsch.IdentityFile.newInstance(IdentityFile.java:40)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:389)
+	at com.jcraft.jsch.JSch.addIdentity(JSch.java:349)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.createSSHSession(ConnectionManagerImpl.java:96)
+	at com.antonov.tomographysoftwarediploma.dblayer.ConnectionManagerImpl.connect(ConnectionManagerImpl.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.initConnectionManager(HardwareModule.java:396)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.init(HardwareModule.java:83)
+	at com.antonov.tomographysoftwarediploma.impl.HardwareModule.<init>(HardwareModule.java:75)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:107)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)
+2015-09-23 23:39:21 INFO  HardwareModule:96 - Reading initial hardware module parameters
+2015-09-23 23:39:21 INFO  HardwareModule:111 - tomograph_scans = 400
+2015-09-23 23:39:21 INFO  HardwareModule:121 - tomograph_stepsize = 1
+2015-09-23 23:39:21 INFO  HardwareModule:142 - regimeReconstructionInterpolation = Линейная
+2015-09-23 23:39:21 INFO  HardwareModule:152 - tomograph_sizeReconstruction = 600
+2015-09-23 23:39:21 INFO  HardwareModule:167 - current filtering tomograph = none
+2015-09-23 23:39:21 INFO  HardwareModule:178 - coloring name tomograph = hue_grb_0
+2015-09-23 23:39:21 INFO  HardwareModule:187 - TOMOGRAPH_MOVING = 1
+2015-09-23 23:39:21 INFO  HardwareModule:104 - Initial hardware module parameters have been read
+2015-09-23 23:39:23 WARN  TomographPane:116 - Map of modelling images is empty 
+2015-09-23 23:39:23 TRACE ModellingModule:382 - Value of regimeSinogramInterpolation now is nearest. Old value was nearest
+2015-09-23 23:39:23 TRACE ModellingModule:397 - Value of regimeReconstructionInterpolation now is nearest. Old value was nearest
+2015-09-23 23:39:23 TRACE ModellingModule:411 - Value of currentFilter now is none. Old value was none
+2015-09-23 23:39:23 TRACE ModellingModule:461 - Value of currentColorName now is hue_grb_0. Old value was hue_grb_0
+2015-09-23 23:39:23 INFO  ModellingModule:171 - Views are prepared
+2015-09-23 23:39:24 INFO  HardwareModule:228 - Views are prepared
+2015-09-23 23:43:20 INFO  Tomograph:174 - Closing application
+2015-09-23 23:43:20 INFO  Tomograph:51 - removing temporary files
+2015-09-23 23:43:20 INFO  Tomograph:183 - =======Stop TomographySoftware 1.0.0 application=======
+2015-09-23 23:49:03 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:49:04 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:49:04 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:49:04 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:49:04 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:49:04 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:50:17 INFO  AppLaunch:64 - =======Start TomographySoftware 1.0.0 application=======
+2015-09-23 23:50:18 ERROR Tomograph:159 - Error while getiing start mode from manifest
+2015-09-23 23:50:18 INFO  Tomograph:161 - Starting mode: none
+2015-09-23 23:50:18 INFO  Tomograph:237 - Java home: /data/jdk1.8.0_60/jre
+2015-09-23 23:50:18 INFO  Tomograph:239 - security folder: /data/jdk1.8.0_60/jre/lib/security
+2015-09-23 23:50:18 INFO  Tomograph:243 - java version: 1.8.0_60
+2015-09-23 23:50:18 ERROR Tomograph:253 - Error while configuring ssh connection required files
+java.io.FileNotFoundException: /data/jdk1.8.0_60/jre/lib/security/local_policy.jar (Permission denied)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.copyFile(ReaderWriterData.java:143)
+	at com.antonov.tomographysoftwarediploma.impl.ReaderWriterData.copyFilesFromTo(ReaderWriterData.java:129)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.copySecurityFilesFromTargetDirectory(Tomograph.java:308)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.copySecurityFiles(Tomograph.java:286)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.initRequiredSshConnectionFilesToSystem(Tomograph.java:249)
+	at com.antonov.tomographysoftwarediploma.impl.Tomograph.<init>(Tomograph.java:101)
+	at com.antonov.tomographysoftwarediploma.impl.AppLaunch.main(AppLaunch.java:36)

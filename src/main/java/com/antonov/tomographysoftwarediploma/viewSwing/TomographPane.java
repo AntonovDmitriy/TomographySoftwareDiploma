@@ -6,15 +6,12 @@ import com.antonov.tomographysoftwarediploma.impl.ITomographView;
 import com.antonov.tomographysoftwarediploma.controllers.ModellingModuleController;
 import com.antonov.tomographysoftwarediploma.dblayer.PSetProjectionData;
 import com.antonov.tomographysoftwarediploma.impl.imageprocessing.ColorFunctionNamesEnum;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -29,7 +26,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.TreeMap;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.swing.Box;
@@ -38,7 +34,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.basic.BasicListUI;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -896,6 +891,7 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
                 dialogAbout.setVisible(true);
             }
         });
+        menu.updateUI();
     }
 
     public void setLocale(Locale locale, final Window... windows) {
@@ -1095,793 +1091,792 @@ public class TomographPane extends javax.swing.JFrame implements ITomographView 
         openFileChooser.setFileFilter(new ImageFilter());
 
         saveFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-        saveFileChooser.setCurrentDirectory(new java.io.File("C:\\"));
-            saveFileChooser.setFileFilter(new FileNameExtensionFilter("JPEG File", "jpg"));
-            saveFileChooser.setFileFilter(new FileNameExtensionFilter("PNG File", "png"));
-            saveFileChooser.setFileFilter(new FileNameExtensionFilter("BMP File", "bmp"));
+        saveFileChooser.setCurrentDirectory(new java.io.File("/home/dmitriy/C:"));
+        saveFileChooser.setFileFilter(new FileNameExtensionFilter("JPEG File", "jpg"));
+        saveFileChooser.setFileFilter(new FileNameExtensionFilter("PNG File", "png"));
+        saveFileChooser.setFileFilter(new FileNameExtensionFilter("BMP File", "bmp"));
 
-            dialogNameAsker.setMinimumSize(new java.awt.Dimension(427, 245));
-            dialogNameAsker.setResizable(false);
+        dialogNameAsker.setMinimumSize(new java.awt.Dimension(427, 245));
+        dialogNameAsker.setResizable(false);
 
-            jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            jLabel8.setText(bundle.getString("TITLE_NAME_ASKER")); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText(bundle.getString("TITLE_NAME_ASKER")); // NOI18N
 
-            jLabel9.setText(bundle.getString("LABEL_DESCR")); // NOI18N
+        jLabel9.setText(bundle.getString("LABEL_DESCR")); // NOI18N
 
-            jLabel10.setText(bundle.getString("LABEL_NAME")); // NOI18N
+        jLabel10.setText(bundle.getString("LABEL_NAME")); // NOI18N
 
-            buttonOkSetName.setText("OK");
+        buttonOkSetName.setText("OK");
 
-            buttonCanselSetName.setText(bundle.getString("LABEL_CANCEL")); // NOI18N
+        buttonCanselSetName.setText(bundle.getString("LABEL_CANCEL")); // NOI18N
 
-            javax.swing.GroupLayout dialogNameAskerLayout = new javax.swing.GroupLayout(dialogNameAsker.getContentPane());
-            dialogNameAsker.getContentPane().setLayout(dialogNameAskerLayout);
-            dialogNameAskerLayout.setHorizontalGroup(
-                dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
-                    .addGap(128, 128, 128)
-                    .addComponent(buttonOkSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(buttonCanselSetName)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
-                    .addContainerGap(30, Short.MAX_VALUE)
-                    .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel10)
-                        .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(edFileDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edFileName, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGap(28, 28, 28))
-            );
-            dialogNameAskerLayout.setVerticalGroup(
-                dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dialogNameAskerLayout.createSequentialGroup()
-                    .addGap(27, 27, 27)
+        javax.swing.GroupLayout dialogNameAskerLayout = new javax.swing.GroupLayout(dialogNameAsker.getContentPane());
+        dialogNameAsker.getContentPane().setLayout(dialogNameAskerLayout);
+        dialogNameAskerLayout.setHorizontalGroup(
+            dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(buttonOkSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonCanselSetName)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNameAskerLayout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel10)
-                    .addGap(8, 8, 8)
-                    .addComponent(edFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jLabel9)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(edFileDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(26, 26, 26)
-                    .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonOkSetName)
-                        .addComponent(buttonCanselSetName))
-                    .addContainerGap(48, Short.MAX_VALUE))
-            );
-
-            dialogNameAsker.setLocationRelativeTo(null);
-
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-            dialogAbout.setTitle(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
-            dialogAbout.setMinimumSize(new java.awt.Dimension(600, 430));
-            dialogAbout.setPreferredSize(new java.awt.Dimension(600, 430));
-            dialogAbout.setResizable(false);
-            dialogAbout.setType(java.awt.Window.Type.POPUP);
-
-            jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/splash.jpg"))); // NOI18N
-            dialogAbout.getContentPane().add(jLabel5, java.awt.BorderLayout.CENTER);
-
-            dialogAbout.setLocationRelativeTo(null);
-
-            setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-            setTitle(bundle.getString("TITLE_MAIN")); // NOI18N
-            setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-            setPreferredSize(new java.awt.Dimension(1000, 600));
-
-            jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-            jTabbedPane1.setToolTipText("");
-            jTabbedPane1.setDoubleBuffered(true);
-
-            Model.setLayout(new java.awt.GridBagLayout());
-
-            paneControl.setLayout(new java.awt.GridBagLayout());
-
-            modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LIST_MODEL_TITLE"))); // NOI18N
-            modelPanel.setLayout(new java.awt.BorderLayout());
-
-            jScrollPane4.setMinimumSize(new java.awt.Dimension(100, 70));
-            jScrollPane4.setPreferredSize(new java.awt.Dimension(100, 70));
-
-            modelList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-            modelList.setFocusable(false);
-            modelList.setMaximumSize(new java.awt.Dimension(50, 0));
-            modelList.setPreferredSize(new java.awt.Dimension(50, 0));
-            jScrollPane4.setViewportView(modelList);
-
-            modelPanel.add(jScrollPane4, java.awt.BorderLayout.CENTER);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneControl.add(modelPanel, gridBagConstraints);
-
-            paneParamModelling.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
-            paneParamModelling.setLayout(new java.awt.GridBagLayout());
-
-            labelDetectors.setText(bundle.getString("LABEL_SCANS")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneParamModelling.add(labelDetectors, gridBagConstraints);
-
-            edScansModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            edScansModel.setToolTipText("");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 30;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneParamModelling.add(edScansModel, gridBagConstraints);
-
-            labelStepsize.setText(bundle.getString("LABEL_STEPSIZE")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneParamModelling.add(labelStepsize, gridBagConstraints);
-
-            edStepsizeModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            edStepsizeModel.setToolTipText("");
-            edStepsizeModel.setAutoscrolls(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneParamModelling.add(edStepsizeModel, gridBagConstraints);
-
-            jLabel13.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneParamModelling.add(jLabel13, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneParamModelling.add(cbSinogramInterpolation, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
-            paneControl.add(paneParamModelling, gridBagConstraints);
-
-            buttonSinogram.setBackground(new java.awt.Color(0, 51, 153));
-            buttonSinogram.setText(bundle.getString("LABEL_SINOGRAM")); // NOI18N
-            buttonSinogram.setDefaultCapable(false);
-            buttonSinogram.setEnabled(false);
-            buttonSinogram.setFocusPainted(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipady = 10;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(buttonSinogram, gridBagConstraints);
-
-            buttonDensityViewer.setBackground(new java.awt.Color(0, 51, 153));
-            buttonDensityViewer.setText(bundle.getString("LABEL_DENSANALYSE")); // NOI18N
-            buttonDensityViewer.setEnabled(false);
-            buttonDensityViewer.setFocusPainted(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipady = 10;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(buttonDensityViewer, gridBagConstraints);
-
-            buttonReconstruct.setBackground(new java.awt.Color(0, 51, 153));
-            buttonReconstruct.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
-            buttonReconstruct.setDefaultCapable(false);
-            buttonReconstruct.setEnabled(false);
-            buttonReconstruct.setFocusPainted(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.ipadx = 6;
-            gridBagConstraints.ipady = 10;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneControl.add(buttonReconstruct, gridBagConstraints);
-
-            paneParamReconstruct.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
-            paneParamReconstruct.setLayout(new java.awt.GridBagLayout());
-
-            labelReconstructSize.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-            paneParamReconstruct.add(labelReconstructSize, gridBagConstraints);
-
-            edSizeReconstruction.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            edSizeReconstruction.setToolTipText("");
-            edSizeReconstruction.setAutoscrolls(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 30;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            paneParamReconstruct.add(edSizeReconstruction, gridBagConstraints);
-
-            jLabel12.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneParamReconstruct.add(jLabel12, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneParamReconstruct.add(cbFilteringModel, gridBagConstraints);
-
-            jLabel14.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneParamReconstruct.add(jLabel14, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneParamReconstruct.add(cbReconstructionInterpolation, gridBagConstraints);
-
-            jLabel15.setText(bundle.getString("LABAL_COLORING")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            paneParamReconstruct.add(jLabel15, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 6;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneParamReconstruct.add(cbColoringModel, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
-            paneControl.add(paneParamReconstruct, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-            Model.add(paneControl, gridBagConstraints);
-
-            jSplitPane1.setResizeWeight(0.5);
-            jSplitPane1.setToolTipText("");
-
-            paneSourceImage.setLayout(new java.awt.GridBagLayout());
-
-            toolbarSourceImage.setRollover(true);
-
-            buttonOpenFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
-            buttonOpenFile.setFocusPainted(false);
-            buttonOpenFile.setFocusable(false);
-            buttonOpenFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            buttonOpenFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            toolbarSourceImage.add(buttonOpenFile);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            paneSourceImage.add(toolbarSourceImage, gridBagConstraints);
-
-            labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelImage1.setAutoscrolls(true);
-            image1.setViewportView(labelImage1);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            paneSourceImage.add(image1, gridBagConstraints);
-
-            jSplitPane1.setLeftComponent(paneSourceImage);
-
-            paneResultModelling.setLayout(new java.awt.GridBagLayout());
-
-            jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-            jSplitPane2.setResizeWeight(0.34);
-            jSplitPane2.setToolTipText("");
-
-            paneSinogram.setLayout(new java.awt.GridBagLayout());
-
-            labelImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            labelImage2.setAutoscrolls(true);
-            Image2.setViewportView(labelImage2);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-            paneSinogram.add(Image2, gridBagConstraints);
-
-            toolbarModellingImage.setRollover(true);
-
-            buttonSaveSinogram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
-            buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveSinogram.setEnabled(false);
-            buttonSaveSinogram.setFocusPainted(false);
-            buttonSaveSinogram.setFocusable(false);
-            buttonSaveSinogram.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            buttonSaveSinogram.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            toolbarModellingImage.add(buttonSaveSinogram);
-
-            buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save2.png"))); // NOI18N
-            buttonSaveReconstructModelling.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveReconstructModelling.setEnabled(false);
-            buttonSaveReconstructModelling.setFocusPainted(false);
-            buttonSaveReconstructModelling.setFocusable(false);
-            buttonSaveReconstructModelling.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            buttonSaveReconstructModelling.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            toolbarModellingImage.add(buttonSaveReconstructModelling);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-            paneSinogram.add(toolbarModellingImage, gridBagConstraints);
-
-            jSplitPane2.setTopComponent(paneSinogram);
-
-            paneReconstruct.setLayout(new java.awt.GridBagLayout());
-
-            labelReconstruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            jScrollPane5.setViewportView(labelReconstruction);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-            paneReconstruct.add(jScrollPane5, gridBagConstraints);
-
-            jSplitPane2.setBottomComponent(paneReconstruct);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-            paneResultModelling.add(jSplitPane2, gridBagConstraints);
-
-            jSplitPane1.setRightComponent(paneResultModelling);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
-            Model.add(jSplitPane1, gridBagConstraints);
-
-            jTabbedPane1.addTab(bundle.getString("LABEL_MODEL"), Model); // NOI18N
-
-            Tomograph.setLayout(new java.awt.GridBagLayout());
-
-            panelControlsTomograph.setLayout(new java.awt.GridBagLayout());
-
-            panelScanData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANEL_SCANNING_PARAMETERS"))); // NOI18N
-            panelScanData.setLayout(new java.awt.GridBagLayout());
-
-            jLabel1.setText(bundle.getString("LABEL_SCANS")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelScanData.add(jLabel1, gridBagConstraints);
-
-            edScansTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 30;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelScanData.add(edScansTomograph, gridBagConstraints);
-
-            edStepSizeTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelScanData.add(edStepSizeTomograph, gridBagConstraints);
-
-            jLabel2.setText(bundle.getString("LABEL_STEPSIZE_TOMOGRAPH")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelScanData.add(jLabel2, gridBagConstraints);
-
-            jLabel3.setText(bundle.getString("LABEL_STEPMOVING")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelScanData.add(jLabel3, gridBagConstraints);
-
-            edMoving.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            panelScanData.add(edMoving, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
-            panelControlsTomograph.add(panelScanData, gridBagConstraints);
-
-            panelCalculateTomograph.setLayout(new java.awt.GridBagLayout());
-
-            buttonReconstructTomograph.setBackground(new java.awt.Color(0, 51, 153));
-            buttonReconstructTomograph.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
-            buttonReconstructTomograph.setFocusPainted(false);
-            buttonReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.ipadx = 6;
-            gridBagConstraints.ipady = 8;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelCalculateTomograph.add(buttonReconstructTomograph, gridBagConstraints);
-
-            buttonStart.setBackground(new java.awt.Color(0, 102, 0));
-            buttonStart.setText(bundle.getString("LABEL_START")); // NOI18N
-            buttonStart.setFocusPainted(false);
-            buttonStart.setLabel(bundle.getString("LABEL_START")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.ipadx = 30;
-            gridBagConstraints.ipady = 10;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelCalculateTomograph.add(buttonStart, gridBagConstraints);
-
-            buttonDensityViewerTomograph.setBackground(new java.awt.Color(0, 51, 153));
-            buttonDensityViewerTomograph.setText(bundle.getString("DENS_ANALIZATOR")); // NOI18N
-            buttonDensityViewerTomograph.setEnabled(false);
-            buttonDensityViewerTomograph.setFocusPainted(false);
-            buttonDensityViewerTomograph.setHideActionText(true);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipady = 10;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelCalculateTomograph.add(buttonDensityViewerTomograph, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
-            panelControlsTomograph.add(panelCalculateTomograph, gridBagConstraints);
-
-            panelReconstuctTomographData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
-            panelReconstuctTomographData.setLayout(new java.awt.GridBagLayout());
-
-            jLabel6.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelReconstuctTomographData.add(jLabel6, gridBagConstraints);
-
-            edSizeReconTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 30;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelReconstuctTomographData.add(edSizeReconTomograph, gridBagConstraints);
-
-            jLabel16.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelReconstuctTomographData.add(jLabel16, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelReconstuctTomographData.add(cbFilteringModelTomograph, gridBagConstraints);
-
-            jLabel17.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelReconstuctTomographData.add(jLabel17, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelReconstuctTomographData.add(cbReconstructionInterpolationTomograph, gridBagConstraints);
-
-            jLabel18.setText(bundle.getString("LABAL_COLORING")); // NOI18N
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
-            panelReconstuctTomographData.add(jLabel18, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 6;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelReconstuctTomographData.add(cbColoringTomograph, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
-            panelControlsTomograph.add(panelReconstuctTomographData, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-            Tomograph.add(panelControlsTomograph, gridBagConstraints);
-
-            jSplitPane3.setResizeWeight(0.2);
-
-            panelResultTomograph.setLayout(new java.awt.GridBagLayout());
-
-            labelReconstructionTomograph.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            jScrollPane1.setViewportView(labelReconstructionTomograph);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelResultTomograph.add(jScrollPane1, gridBagConstraints);
-
-            sliderImage.setValue(0);
-            sliderImage.setEnabled(false);
-            sliderImage.setFocusable(false);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            panelResultTomograph.add(sliderImage, gridBagConstraints);
-
-            toolBarTomograph.setRollover(true);
-
-            buttonSaveReconstructTomograph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
-            buttonSaveReconstructTomograph.setActionCommand("Сохранить<br> реконструкцию");
-            buttonSaveReconstructTomograph.setEnabled(false);
-            buttonSaveReconstructTomograph.setFocusPainted(false);
-            buttonSaveReconstructTomograph.setFocusable(false);
-            buttonSaveReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            buttonSaveReconstructTomograph.setMaximumSize(new java.awt.Dimension(28, 28));
-            buttonSaveReconstructTomograph.setMinimumSize(new java.awt.Dimension(28, 28));
-            buttonSaveReconstructTomograph.setPreferredSize(new java.awt.Dimension(28, 28));
-            buttonSaveReconstructTomograph.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            toolBarTomograph.add(buttonSaveReconstructTomograph);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-            panelResultTomograph.add(toolBarTomograph, gridBagConstraints);
-
-            jSplitPane3.setRightComponent(panelResultTomograph);
-
-            jPanel1.setLayout(new java.awt.GridBagLayout());
-
-            jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 402));
-
-            tableSetProjData.setFocusable(false);
-
-            org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${listProjData}");
-            org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, tableSetProjData);
-            org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ID}"));
-            columnBinding.setColumnName("ID");
-            columnBinding.setColumnClass(Integer.class);
-            columnBinding.setEditable(false);
-            columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${PDNAME}"));
-            columnBinding.setColumnName("PDNAME");
-            columnBinding.setColumnClass(String.class);
-            columnBinding.setEditable(false);
-            columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${PDDESCR}"));
-            columnBinding.setColumnName("PDDESCR");
-            columnBinding.setColumnClass(String.class);
-            columnBinding.setEditable(false);
-            bindingGroup.addBinding(jTableBinding);
-            jTableBinding.bind();
-            jScrollPane2.setViewportView(tableSetProjData);
-            if (tableSetProjData.getColumnModel().getColumnCount() > 0) {
-                tableSetProjData.getColumnModel().getColumn(0).setPreferredWidth(50);
-                tableSetProjData.getColumnModel().getColumn(0).setMaxWidth(50);
-                tableSetProjData.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("LABEL_NAME")); // NOI18N
-                tableSetProjData.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("LABEL_DESCR")); // NOI18N
-            }
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-            jPanel1.add(jScrollPane2, gridBagConstraints);
-
-            jSplitPane3.setLeftComponent(jPanel1);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.weightx = 1.0;
-            gridBagConstraints.weighty = 1.0;
-            gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
-            Tomograph.add(jSplitPane3, gridBagConstraints);
-
-            jTabbedPane1.addTab(bundle.getString("LABEL_TOMOGRAPH"), Tomograph); // NOI18N
-
-            getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
-            jTabbedPane1.getAccessibleContext().setAccessibleName("Модель");
-
-            menu.add(Box.createHorizontalGlue());
-            menuSettings.setText(bundle.getString("MENU_SETTINGS")); // NOI18N
-
-            menuLanguage.setText(bundle.getString("MENU_LANGUAGE")); // NOI18N
-
-            menuItemRussian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rus_flag.png"))); // NOI18N
-            menuItemRussian.setText(bundle.getString("MENU_LANGUAGE_RUSSIAN")); // NOI18N
-            menuLanguage.add(menuItemRussian);
-
-            menuItemEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/us_flag.png"))); // NOI18N
-            menuItemEnglish.setText(bundle.getString("MENU_LANGUAGE_ENGLISH")); // NOI18N
-            menuLanguage.add(menuItemEnglish);
-
-            menuSettings.add(menuLanguage);
-
-            menu.add(menuSettings);
-
-            menuHelp.setText(bundle.getString("MENU_HELP")); // NOI18N
-
-            menuItemIndex.setText(bundle.getString("MENU_HELP_INDEX")); // NOI18N
-            menuHelp.add(menuItemIndex);
-
-            menuItemAbout.setText(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
-            menuHelp.add(menuItemAbout);
-
-            menu.add(menuHelp);
-
-            setJMenuBar(menu);
-
-            bindingGroup.bind();
-
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
+                    .addComponent(jLabel10)
+                    .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(edFileDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edFileName, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGap(28, 28, 28))
+        );
+        dialogNameAskerLayout.setVerticalGroup(
+            dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogNameAskerLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addGap(8, 8, 8)
+                .addComponent(edFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(edFileDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(dialogNameAskerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonOkSetName)
+                    .addComponent(buttonCanselSetName))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        dialogNameAsker.setLocationRelativeTo(null);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        dialogAbout.setTitle(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
+        dialogAbout.setMinimumSize(new java.awt.Dimension(600, 430));
+        dialogAbout.setResizable(false);
+        dialogAbout.setType(java.awt.Window.Type.POPUP);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/splash.jpg"))); // NOI18N
+        dialogAbout.getContentPane().add(jLabel5, java.awt.BorderLayout.CENTER);
+
+        dialogAbout.setLocationRelativeTo(null);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle(bundle.getString("TITLE_MAIN")); // NOI18N
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setToolTipText("");
+        jTabbedPane1.setDoubleBuffered(true);
+
+        Model.setLayout(new java.awt.GridBagLayout());
+
+        paneControl.setLayout(new java.awt.GridBagLayout());
+
+        modelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LIST_MODEL_TITLE"))); // NOI18N
+        modelPanel.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane4.setMinimumSize(new java.awt.Dimension(100, 70));
+        jScrollPane4.setPreferredSize(new java.awt.Dimension(100, 70));
+
+        modelList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        modelList.setFocusable(false);
+        modelList.setMaximumSize(new java.awt.Dimension(50, 0));
+        modelList.setPreferredSize(new java.awt.Dimension(50, 0));
+        jScrollPane4.setViewportView(modelList);
+
+        modelPanel.add(jScrollPane4, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneControl.add(modelPanel, gridBagConstraints);
+
+        paneParamModelling.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_MODELLING"))); // NOI18N
+        paneParamModelling.setLayout(new java.awt.GridBagLayout());
+
+        labelDetectors.setText(bundle.getString("LABEL_SCANS")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneParamModelling.add(labelDetectors, gridBagConstraints);
+
+        edScansModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edScansModel.setToolTipText("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneParamModelling.add(edScansModel, gridBagConstraints);
+
+        labelStepsize.setText(bundle.getString("LABEL_STEPSIZE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneParamModelling.add(labelStepsize, gridBagConstraints);
+
+        edStepsizeModel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edStepsizeModel.setToolTipText("");
+        edStepsizeModel.setAutoscrolls(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneParamModelling.add(edStepsizeModel, gridBagConstraints);
+
+        jLabel13.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneParamModelling.add(jLabel13, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneParamModelling.add(cbSinogramInterpolation, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
+        paneControl.add(paneParamModelling, gridBagConstraints);
+
+        buttonSinogram.setBackground(new java.awt.Color(0, 51, 153));
+        buttonSinogram.setText(bundle.getString("LABEL_SINOGRAM")); // NOI18N
+        buttonSinogram.setDefaultCapable(false);
+        buttonSinogram.setEnabled(false);
+        buttonSinogram.setFocusPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneControl.add(buttonSinogram, gridBagConstraints);
+
+        buttonDensityViewer.setBackground(new java.awt.Color(0, 51, 153));
+        buttonDensityViewer.setText(bundle.getString("LABEL_DENSANALYSE")); // NOI18N
+        buttonDensityViewer.setEnabled(false);
+        buttonDensityViewer.setFocusPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneControl.add(buttonDensityViewer, gridBagConstraints);
+
+        buttonReconstruct.setBackground(new java.awt.Color(0, 51, 153));
+        buttonReconstruct.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
+        buttonReconstruct.setDefaultCapable(false);
+        buttonReconstruct.setEnabled(false);
+        buttonReconstruct.setFocusPainted(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 6;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneControl.add(buttonReconstruct, gridBagConstraints);
+
+        paneParamReconstruct.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
+        paneParamReconstruct.setLayout(new java.awt.GridBagLayout());
+
+        labelReconstructSize.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+        paneParamReconstruct.add(labelReconstructSize, gridBagConstraints);
+
+        edSizeReconstruction.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edSizeReconstruction.setToolTipText("");
+        edSizeReconstruction.setAutoscrolls(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        paneParamReconstruct.add(edSizeReconstruction, gridBagConstraints);
+
+        jLabel12.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneParamReconstruct.add(jLabel12, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneParamReconstruct.add(cbFilteringModel, gridBagConstraints);
+
+        jLabel14.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneParamReconstruct.add(jLabel14, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneParamReconstruct.add(cbReconstructionInterpolation, gridBagConstraints);
+
+        jLabel15.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        paneParamReconstruct.add(jLabel15, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneParamReconstruct.add(cbColoringModel, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
+        paneControl.add(paneParamReconstruct, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+        Model.add(paneControl, gridBagConstraints);
+
+        jSplitPane1.setResizeWeight(0.5);
+        jSplitPane1.setToolTipText("");
+
+        paneSourceImage.setLayout(new java.awt.GridBagLayout());
+
+        toolbarSourceImage.setRollover(true);
+
+        buttonOpenFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/open.png"))); // NOI18N
+        buttonOpenFile.setFocusPainted(false);
+        buttonOpenFile.setFocusable(false);
+        buttonOpenFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonOpenFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarSourceImage.add(buttonOpenFile);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        paneSourceImage.add(toolbarSourceImage, gridBagConstraints);
+
+        labelImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelImage1.setAutoscrolls(true);
+        image1.setViewportView(labelImage1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        paneSourceImage.add(image1, gridBagConstraints);
+
+        jSplitPane1.setLeftComponent(paneSourceImage);
+
+        paneResultModelling.setLayout(new java.awt.GridBagLayout());
+
+        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane2.setResizeWeight(0.34);
+        jSplitPane2.setToolTipText("");
+
+        paneSinogram.setLayout(new java.awt.GridBagLayout());
+
+        labelImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelImage2.setAutoscrolls(true);
+        Image2.setViewportView(labelImage2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        paneSinogram.add(Image2, gridBagConstraints);
+
+        toolbarModellingImage.setRollover(true);
+
+        buttonSaveSinogram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
+        buttonSaveSinogram.setActionCommand("Сохранить<br> реконструкцию");
+        buttonSaveSinogram.setEnabled(false);
+        buttonSaveSinogram.setFocusPainted(false);
+        buttonSaveSinogram.setFocusable(false);
+        buttonSaveSinogram.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSaveSinogram.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarModellingImage.add(buttonSaveSinogram);
+
+        buttonSaveReconstructModelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save2.png"))); // NOI18N
+        buttonSaveReconstructModelling.setActionCommand("Сохранить<br> реконструкцию");
+        buttonSaveReconstructModelling.setEnabled(false);
+        buttonSaveReconstructModelling.setFocusPainted(false);
+        buttonSaveReconstructModelling.setFocusable(false);
+        buttonSaveReconstructModelling.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSaveReconstructModelling.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarModellingImage.add(buttonSaveReconstructModelling);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        paneSinogram.add(toolbarModellingImage, gridBagConstraints);
+
+        jSplitPane2.setTopComponent(paneSinogram);
+
+        paneReconstruct.setLayout(new java.awt.GridBagLayout());
+
+        labelReconstruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane5.setViewportView(labelReconstruction);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        paneReconstruct.add(jScrollPane5, gridBagConstraints);
+
+        jSplitPane2.setBottomComponent(paneReconstruct);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        paneResultModelling.add(jSplitPane2, gridBagConstraints);
+
+        jSplitPane1.setRightComponent(paneResultModelling);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
+        Model.add(jSplitPane1, gridBagConstraints);
+
+        jTabbedPane1.addTab(bundle.getString("LABEL_MODEL"), Model); // NOI18N
+
+        Tomograph.setLayout(new java.awt.GridBagLayout());
+
+        panelControlsTomograph.setLayout(new java.awt.GridBagLayout());
+
+        panelScanData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANEL_SCANNING_PARAMETERS"))); // NOI18N
+        panelScanData.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText(bundle.getString("LABEL_SCANS")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelScanData.add(jLabel1, gridBagConstraints);
+
+        edScansTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelScanData.add(edScansTomograph, gridBagConstraints);
+
+        edStepSizeTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelScanData.add(edStepSizeTomograph, gridBagConstraints);
+
+        jLabel2.setText(bundle.getString("LABEL_STEPSIZE_TOMOGRAPH")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelScanData.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setText(bundle.getString("LABEL_STEPMOVING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelScanData.add(jLabel3, gridBagConstraints);
+
+        edMoving.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelScanData.add(edMoving, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
+        panelControlsTomograph.add(panelScanData, gridBagConstraints);
+
+        panelCalculateTomograph.setLayout(new java.awt.GridBagLayout());
+
+        buttonReconstructTomograph.setBackground(new java.awt.Color(0, 51, 153));
+        buttonReconstructTomograph.setText(bundle.getString("LABEL_RECONSTRUCTION")); // NOI18N
+        buttonReconstructTomograph.setFocusPainted(false);
+        buttonReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 6;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelCalculateTomograph.add(buttonReconstructTomograph, gridBagConstraints);
+
+        buttonStart.setBackground(new java.awt.Color(0, 102, 0));
+        buttonStart.setText(bundle.getString("LABEL_START")); // NOI18N
+        buttonStart.setFocusPainted(false);
+        buttonStart.setLabel(bundle.getString("LABEL_START")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelCalculateTomograph.add(buttonStart, gridBagConstraints);
+
+        buttonDensityViewerTomograph.setBackground(new java.awt.Color(0, 51, 153));
+        buttonDensityViewerTomograph.setText(bundle.getString("DENS_ANALIZATOR")); // NOI18N
+        buttonDensityViewerTomograph.setEnabled(false);
+        buttonDensityViewerTomograph.setFocusPainted(false);
+        buttonDensityViewerTomograph.setHideActionText(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelCalculateTomograph.add(buttonDensityViewerTomograph, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
+        panelControlsTomograph.add(panelCalculateTomograph, gridBagConstraints);
+
+        panelReconstuctTomographData.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("PANE_PARAM_RECON"))); // NOI18N
+        panelReconstuctTomographData.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setText(bundle.getString("LABEL_SIZE_RECON")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelReconstuctTomographData.add(jLabel6, gridBagConstraints);
+
+        edSizeReconTomograph.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelReconstuctTomographData.add(edSizeReconTomograph, gridBagConstraints);
+
+        jLabel16.setText(bundle.getString("LABEL_FILTERING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelReconstuctTomographData.add(jLabel16, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelReconstuctTomographData.add(cbFilteringModelTomograph, gridBagConstraints);
+
+        jLabel17.setText(bundle.getString("LABEL_TYPE_INTERPOLATION")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelReconstuctTomographData.add(jLabel17, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelReconstuctTomographData.add(cbReconstructionInterpolationTomograph, gridBagConstraints);
+
+        jLabel18.setText(bundle.getString("LABAL_COLORING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelReconstuctTomographData.add(jLabel18, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelReconstuctTomographData.add(cbColoringTomograph, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 5);
+        panelControlsTomograph.add(panelReconstuctTomographData, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
+        Tomograph.add(panelControlsTomograph, gridBagConstraints);
+
+        jSplitPane3.setResizeWeight(0.2);
+
+        panelResultTomograph.setLayout(new java.awt.GridBagLayout());
+
+        labelReconstructionTomograph.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane1.setViewportView(labelReconstructionTomograph);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelResultTomograph.add(jScrollPane1, gridBagConstraints);
+
+        sliderImage.setValue(0);
+        sliderImage.setEnabled(false);
+        sliderImage.setFocusable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelResultTomograph.add(sliderImage, gridBagConstraints);
+
+        toolBarTomograph.setRollover(true);
+
+        buttonSaveReconstructTomograph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
+        buttonSaveReconstructTomograph.setActionCommand("Сохранить<br> реконструкцию");
+        buttonSaveReconstructTomograph.setEnabled(false);
+        buttonSaveReconstructTomograph.setFocusPainted(false);
+        buttonSaveReconstructTomograph.setFocusable(false);
+        buttonSaveReconstructTomograph.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSaveReconstructTomograph.setMaximumSize(new java.awt.Dimension(28, 28));
+        buttonSaveReconstructTomograph.setMinimumSize(new java.awt.Dimension(28, 28));
+        buttonSaveReconstructTomograph.setPreferredSize(new java.awt.Dimension(28, 28));
+        buttonSaveReconstructTomograph.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolBarTomograph.add(buttonSaveReconstructTomograph);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        panelResultTomograph.add(toolBarTomograph, gridBagConstraints);
+
+        jSplitPane3.setRightComponent(panelResultTomograph);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 402));
+
+        tableSetProjData.setFocusable(false);
+
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${listProjData}");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, tableSetProjData);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ID}"));
+        columnBinding.setColumnName("ID");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${PDNAME}"));
+        columnBinding.setColumnName("PDNAME");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${PDDESCR}"));
+        columnBinding.setColumnName("PDDESCR");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane2.setViewportView(tableSetProjData);
+        if (tableSetProjData.getColumnModel().getColumnCount() > 0) {
+            tableSetProjData.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableSetProjData.getColumnModel().getColumn(0).setMaxWidth(50);
+            tableSetProjData.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("LABEL_NAME")); // NOI18N
+            tableSetProjData.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("LABEL_DESCR")); // NOI18N
+        }
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel1.add(jScrollPane2, gridBagConstraints);
+
+        jSplitPane3.setLeftComponent(jPanel1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
+        Tomograph.add(jSplitPane3, gridBagConstraints);
+
+        jTabbedPane1.addTab(bundle.getString("LABEL_TOMOGRAPH"), Tomograph); // NOI18N
+
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Модель");
+
+        menu.add(Box.createHorizontalGlue());
+        menuSettings.setText(bundle.getString("MENU_SETTINGS")); // NOI18N
+
+        menuLanguage.setText(bundle.getString("MENU_LANGUAGE")); // NOI18N
+
+        menuItemRussian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rus_flag.png"))); // NOI18N
+        menuItemRussian.setText(bundle.getString("MENU_LANGUAGE_RUSSIAN")); // NOI18N
+        menuLanguage.add(menuItemRussian);
+
+        menuItemEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/us_flag.png"))); // NOI18N
+        menuItemEnglish.setText(bundle.getString("MENU_LANGUAGE_ENGLISH")); // NOI18N
+        menuLanguage.add(menuItemEnglish);
+
+        menuSettings.add(menuLanguage);
+
+        menu.add(menuSettings);
+
+        menuHelp.setText(bundle.getString("MENU_HELP")); // NOI18N
+
+        menuItemIndex.setText(bundle.getString("MENU_HELP_INDEX")); // NOI18N
+        menuHelp.add(menuItemIndex);
+
+        menuItemAbout.setText(bundle.getString("MENU_HELP_ABOUT")); // NOI18N
+        menuHelp.add(menuItemAbout);
+
+        menu.add(menuHelp);
+
+        setJMenuBar(menu);
+
+        bindingGroup.bind();
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
