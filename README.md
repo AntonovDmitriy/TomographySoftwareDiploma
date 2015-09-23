@@ -30,4 +30,4 @@ Thanks to the creators of the following library is free for non-commercial use a
  
 The author emphasizes that the commercial use of the project is not possible and it was created for educational purposes only. 
 
-WebStart of this project http://app-helloweb.rhcloud.com/
+WebStart of this project https://tomography-antonov.rhcloud.com/
